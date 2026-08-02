@@ -1,508 +1,303 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXA Creative | استوديو الإبداع والتسويق الرقمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-main: #0b0719;
-            --bg-card: rgba(23, 15, 48, 0.85);
-            --bg-glass: rgba(11, 7, 25, 0.9);
-            --text-main: #ffffff;
-            --text-muted: #b1a7d0;
-            --accent-purple: #7229e6;
-            --accent-purple-light: #a855f7;
-            --border-color: rgba(114, 41, 230, 0.35);
-            --shadow: 0 15px 35px rgba(114, 41, 230, 0.25);
-        }
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Menu, X, PenTool, Palette, Layers, Megaphone, Printer, Box, Sparkles, 
+  Monitor, ArrowLeft, ExternalLink, Eye, ZoomIn, Heart, ChevronDown, 
+  HelpCircle, MessageCircle, Star, CheckCircle, Send, Phone, Mail, MapPin 
+} from "lucide-react";
 
-        html.light {
-            --bg-main: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-glass: rgba(255, 255, 255, 0.9);
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --accent-purple: #6d28d9;
-            --accent-purple-light: #7c3aed; /* لون أغمق وأوضح في الوضع الفاتح */
-            --border-color: rgba(109, 40, 217, 0.2);
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
+// ==========================================
+// 1. NEXA LOGO COMPONENT
+// ==========================================
+function NexaLogo({ size = 48 }: { size?: number }) {
+  return (
+    <div 
+      className="rounded-full bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center font-black text-white shadow-lg shadow-purple-500/30 overflow-hidden flex-shrink-0"
+      style={{ width: size, height: size, fontSize: size * 0.4 }}
+    >
+      N
+    </div>
+  );
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-            scroll-behavior: smooth;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
+// ==========================================
+// 2. NAVBAR COMPONENT
+// ==========================================
+const navLinks = [
+  { label: "الرئيسية", href: "#hero" },
+  { label: "خدماتنا", href: "#services" },
+  { label: "أعمالنا", href: "#portfolio" },
+  { label: "لماذا نحن", href: "#why-us" },
+  { label: "الأسئلة", href: "#faq" },
+  { label: "الآراء", href: "#testimonials" },
+  { label: "تواصل معنا", href: "#contact" },
+];
 
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-        /* Glow Orbs */
-        .glow-orb {
-            position: fixed;
-            width: 450px;
-            height: 450px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(114, 41, 230, 0.25) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-        .orb-1 { top: -100px; right: -100px; }
-        .orb-2 { bottom: 5%; left: -150px; }
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: var(--bg-glass);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        /* NEXA SVG Logo */
-        .logo-svg {
-            height: 40px;
-            width: auto;
-        }
-
-        .nav-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        nav a:hover {
-            color: var(--accent-purple-light);
-        }
-
-        .theme-toggle {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            box-shadow: var(--shadow);
-            flex-shrink: 0;
-        }
-
-        .header-btn {
-            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
-            color: #fff !important;
-            padding: 8px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(114, 41, 230, 0.4);
-            white-space: nowrap;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 130px 20px 60px;
-        }
-
-        .badge {
-            background: rgba(114, 41, 230, 0.15);
-            border: 1px solid var(--border-color);
-            color: var(--accent-purple-light);
-            padding: 8px 22px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            font-weight: 900;
-            line-height: 1.3;
-            max-width: 850px;
-            margin-bottom: 20px;
-        }
-
-        /* تحسين وضوح النص الأرجواني في الجملة */
-        .gradient-text {
-            color: var(--accent-purple-light);
-            background: linear-gradient(135deg, #a855f7 0%, #7229e6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 900;
-        }
-
-        html.light .gradient-text {
-            color: #6d28d9;
-            background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-muted);
-            max-width: 650px;
-            margin-bottom: 35px;
-            font-weight: 500;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.05rem;
-            box-shadow: 0 10px 25px rgba(114, 41, 230, 0.4);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.05rem;
-            box-shadow: var(--shadow);
-        }
-
-        /* Campaign Section - صور التصاميم */
-        .campaign-section {
-            padding: 90px 6%;
-            background: rgba(114, 41, 230, 0.03);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 900;
-            margin-bottom: 12px;
-        }
-
-        .section-title p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .gallery-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .gallery-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--accent-purple-light);
-        }
-
-        .gallery-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-content h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 100px 6%;
-            text-align: center;
-        }
-
-        .contact-box {
-            background: linear-gradient(135deg, rgba(114, 41, 230, 0.2) 0%, rgba(157, 82, 255, 0.05) 100%);
-            border: 1px solid var(--border-color);
-            padding: 50px 20px;
-            border-radius: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: var(--shadow);
-        }
-
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .btn-wa {
-            background: #25d366;
-            color: white;
-            padding: 14px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-ig {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 20px rgba(220, 39, 67, 0.3);
-        }
-
-        .float-wa {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: #25d366;
-            color: white;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-            z-index: 999;
-            text-decoration: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            nav ul { display: none; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-
-    <!-- Header مع لوجو NEXA الحقيقي -->
-    <header>
-        <a href="#" class="logo-container">
-            <svg class="logo-svg" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- N Logo Icon -->
-                <path d="M15 65 L38 20 L55 20 L40 65 Z" fill="#ffffff"/>
-                <path d="M38 20 L68 65 L88 65 L58 20 Z" fill="#ffffff"/>
-                <path d="M10 50 Q 55 35 95 20 L85 30 Q 50 42 10 50 Z" fill="#9d52ff"/>
-                <!-- NEXA Text -->
-                <text x="110" y="48" font-family="'Tajawal', sans-serif" font-weight="900" font-size="36" fill="currentColor">NEXA</text>
-                <text x="112" y="65" font-family="'Tajawal', sans-serif" font-weight="500" font-size="12" fill="#9d52ff" letter-spacing="3">CREATIVE</text>
-            </svg>
+  return (
+    <header className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-purple-500/5" : "bg-transparent"}`}>
+      <nav className="container mx-auto px-4 flex items-center justify-between h-16 lg:h-20">
+        <a href="#hero" className="flex items-center gap-3 group">
+          <NexaLogo size={44} />
+          <div className="flex flex-col">
+            <span className="text-white font-bold text-lg lg:text-xl leading-none" style={{ fontFamily: 'Tajawal, sans-serif' }}>NEXA</span>
+            <span className="text-purple-400 text-[10px] lg:text-xs tracking-wider">creative</span>
+          </div>
         </a>
-        
-        <div class="nav-group">
-            <nav>
-                <ul>
-                    <li><a href="#campaigns">أعمالنا</a></li>
-                    <li><a href="#contact">التواصل</a></li>
-                </ul>
-            </nav>
-            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-            </button>
-            <a href="https://wa.me/905364391849" target="_blank" class="header-btn">تواصل معنا</a>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="badge">
-            <i class="fa-solid fa-sparkles"></i> استوديو التسويق والإبداع الرقمي
-        </div>
-        <h1>الإعلان ليس مجرد ظهور.. <br><span class="gradient-text">بل هو تأثير مدروس</span></h1>
-        <p>نحن نوفر عليك الوقت والتعب، ونوصلك للمؤثرين الصح بناءً على استراتيجية واضحة ومضمونة.</p>
-        
-        <div class="hero-actions">
-            <a href="https://wa.me/905364391849" target="_blank" class="btn-primary">
-                <i class="fa-brands fa-whatsapp"></i> ابدأ حملتك الآن
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className="text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium relative group">
+              {link.label}
+              <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-gradient-to-l from-violet-500 to-purple-400 group-hover:w-full transition-all duration-300" />
             </a>
-            <a href="#campaigns" class="btn-secondary">شاهد أعمالنا</a>
+          ))}
         </div>
+        <div className="hidden lg:flex items-center gap-4">
+          <a href="https://wa.me/905364391849?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D9%8A%D9%83%D8%B3%D8%A7%20%D9%83%D8%B1%D9%8A%D8%AA%D9%8A%D9%81%2C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%B5%D9%85%D9%8A%D9%85" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 hover:scale-105 active:scale-95">
+            اطلب تصميمك
+          </a>
+        </div>
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+      {mobileOpen && (
+        <div className="lg:hidden bg-[#0a0a0f]/95 backdrop-blur-xl border-t border-white/5">
+          <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="text-gray-300 hover:text-white transition-colors py-2 text-base font-medium">{link.label}</a>
+            ))}
+            <a href="https://wa.me/905364391849?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D9%86%D9%8A%D9%83%D8%B3%D8%A7%20%D9%83%D8%B1%D9%8A%D8%AA%D9%8A%D9%81%2C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AA%D8%B5%D9%85%D9%8A%D9%85" target="_blank" rel="noopener noreferrer" className="mt-4 px-5 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-center font-semibold">
+              اطلب تصميمك
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+// ==========================================
+// 3. HERO SECTION COMPONENT
+// ==========================================
+function HeroSection() {
+  return (
+    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="container mx-auto px-4 relative z-10 text-center">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto">
+          <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
+            ✨ استوديو التصميم والإبداع الرقمي
+          </span>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight mb-8">
+            الإعلان ليس مجرد ظهور.. <br />
+            <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">بل هو تأثير مدروس</span>
+          </h1>
+          <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            نحوّل أفكارك إلى هوية بصرية ساحرة تجذب عملاءك وتبني لعلامتك التجارية حضوراً استثنائياً لا يُنسى.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/905364391849" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-bold shadow-lg shadow-purple-500/25 hover:scale-105 active:scale-95 transition-all">
+              تواصل معنا الآن
+            </a>
+            <a href="#portfolio" className="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 transition-all">
+              استكشف الأعمال
+            </a>
+          </div>
+        </motion.div>
+      </div>
     </section>
+  );
+}
 
-    <!-- معرض صور البوستات والحملات -->
-    <section class="campaign-section" id="campaigns">
-        <div class="section-title">
-            <h2>من أفكارنا وحملاتنا الإعلانية</h2>
-            <p>التأثير الحقيقي يتحقق عندما تخاطب جمهورك بلغتهم وفي التوقيت المناسب</p>
-        </div>
+// ==========================================
+// 4. SERVICES SECTION COMPONENT
+// ==========================================
+const services = [
+  { icon: PenTool, title: "تصميم الشعارات", description: "شعارات احترافية تميّز علامتك التجارية وتبقى في الذاكرة", color: "from-violet-500 to-purple-600" },
+  { icon: Layers, title: "الهوية البصرية", description: "هوية متكاملة تشمل الألوان، الخطوط، والأدوات البصرية", color: "from-purple-500 to-fuchsia-600" },
+  { icon: Megaphone, title: "تصاميم السوشيال ميديا", description: "محتوى بصري جذاب يناسب جميع منصات التواصل الاجتماعي", color: "from-fuchsia-500 to-pink-600" },
+  { icon: Monitor, title: "تصميم واجهات الويب", description: "واجهات مستخدم عصرية وتجربة استخدام سلسة", color: "from-blue-500 to-violet-600" },
+  { icon: Printer, title: "التصاميم المطبوعة", description: "بروشورات، بطاقات أعمال، وملفات تعريفية احترافية", color: "from-emerald-500 to-teal-600" },
+  { icon: Box, title: "تصميم التغليف", description: "تصاميم تغليف منتجات مبتكرة تعكس جودة العلامة", color: "from-amber-500 to-orange-600" },
+  { icon: Palette, title: "تعديل وتحرير الصور", description: "معالجة احترافية للصور وإزالة الخلفيات والتعديلات", color: "from-rose-500 to-red-600" },
+  { icon: Sparkles, title: "موشن جرافيك", description: "فيديوهات رسوم متحركة جذابة لعلامتك التجارية", color: "from-cyan-500 to-blue-600" },
+];
 
-        <div class="gallery-grid">
-            <!-- الصورة 1 -->
-            <div class="gallery-card">
-                <img src="img1.jpg" alt="هل المؤثرين هم سر أي حملة ناجحة؟" onerror="this.src='https://via.placeholder.com/600x750/170f30/ffffff?text=NEXA+Creative+1'">
-                <div class="card-content">
-                    <h3>هل المؤثرين هم سر الحملة؟</h3>
+const containerVariants = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
+const itemVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
+
+function ServicesSection() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  return (
+    <section id="services" className="relative py-24 lg:py-32">
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">خدماتنا</span>
+          <h2 className="text-3xl lg:text-5xl font-black text-white mb-4">ماذا <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">نقدم</span> لك؟</h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">نقدم مجموعة شاملة من خدمات التصميم الاحترافي التي تغطي كل احتياجاتك البصرية</p>
+        </motion.div>
+
+        <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((service, index) => (
+            <motion.div key={service.title} variants={itemVariants} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} className="relative group">
+              <div className={`relative bg-white/5 border border-white/10 rounded-2xl p-6 h-full overflow-hidden transition-all duration-500 backdrop-blur-xl`} style={{ transform: hoveredIndex === index ? "translateY(-8px)" : undefined }}>
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 shadow-lg`}>
+                  <service.icon size={24} className="text-white" />
                 </div>
-            </div>
-
-            <!-- الصورة 2 -->
-            <div class="gallery-card">
-                <img src="img2.jpg" alt="زمان كان للمؤثرين تأثير أكبر" onerror="this.src='https://via.placeholder.com/600x750/170f30/ffffff?text=NEXA+Creative+2'">
-                <div class="card-content">
-                    <h3>مصداقية التأثير والاستراتيجية</h3>
-                </div>
-            </div>
-
-            <!-- الصورة 3 -->
-            <div class="gallery-card">
-                <img src="img3.jpg" alt="اليوم الموضوع صار تجاري أكثر" onerror="this.src='https://via.placeholder.com/600x750/170f30/ffffff?text=NEXA+Creative+3'">
-                <div class="card-content">
-                    <h3>اختر المؤثر المناسب لجمهورك</h3>
-                </div>
-            </div>
-
-            <!-- الصورة 4 -->
-            <div class="gallery-card">
-                <img src="img4.jpg" alt="نحن نوفر عليك الوقت والتعب" onerror="this.src='https://via.placeholder.com/600x750/170f30/ffffff?text=NEXA+Creative+4'">
-                <div class="card-content">
-                    <h3>توفير الوقت والوصول للجمهور</h3>
-                </div>
-            </div>
-        </div>
+                <h3 className="text-white font-bold text-lg mb-2">{service.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
+  );
+}
 
-    <!-- Contact -->
-    <section class="contact-section" id="contact">
-        <div class="contact-box">
-            <h2>تواصل معنا.. واستعد للفرق!</h2>
-            <p style="color: var(--text-muted); margin-top: 10px;">جاهزون لمساعدتك في تخطيط وتنفيذ أفضل الحملات الإعلانية والهويات البصرية</p>
+// ==========================================
+// 5. PORTFOLIO SECTION COMPONENT
+// ==========================================
+const categories = [
+  { id: "الكل", icon: "✦" },
+  { id: "شعارات", icon: "◆" },
+  { id: "هوية بصرية", icon: "◈" },
+  { id: "سوشيال ميديا", icon: "◇" },
+  { id: "مطبوعات", icon: "▲" },
+  { id: "تغليف", icon: "■" },
+];
 
-            <div class="social-buttons">
-                <a href="https://wa.me/905364391849" target="_blank" class="btn-wa">
-                    <i class="fa-brands fa-whatsapp"></i> مراسلة واتساب
-                </a>
-                <a href="https://www.instagram.com/nexa.cra" target="_blank" class="btn-ig">
-                    <i class="fa-brands fa-instagram"></i> إنستغرام
-                </a>
-            </div>
+const portfolioItems = [
+  { id: 1, title: "هوية بصرية — مقهى ألترا", category: "هوية بصرية", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800", description: "تصميم هوية بصرية متكاملة لمقهى فاخر" },
+  { id: 2, title: "سلسلة سوشيال ميديا", category: "سوشيال ميديا", image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800", description: "تصاميم إنستغرام عصرية لعلامة تجارية" },
+  { id: 3, title: "شعار TechVista", category: "شعارات", image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800", description: "تصميم شعار لشركة تقنية ناشئة" },
+  { id: 4, title: "تغليف فاخر — منتجات عناية", category: "تغليف", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800", description: "تصميم تغليف فاخر لمنتجات العناية" },
+  { id: 5, title: "بوستر مهرجان موسيقي", category: "مطبوعات", image: "https://images.unsplash.com/photo-1572375992501-4b0892d50c69?w=800", description: "تصميم بوستر إبداعي لمهرجان موسيقي" },
+  { id: 6, title: "واجهة تطبيق — StartUp", category: "هوية بصرية", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", description: "تصميم واجهة تطبيق لشركة تقنية" },
+];
+
+function PortfolioSection() {
+  const [activeCategory, setActiveCategory] = useState("الكل");
+  const filtered = activeCategory === "الكل" ? portfolioItems : portfolioItems.filter((item) => item.category === activeCategory);
+
+  return (
+    <section id="portfolio" className="relative py-24 lg:py-32 bg-[#08080d]">
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">معرض أعمالنا</span>
+          <h2 className="text-3xl lg:text-5xl font-black text-white mb-4">أعمال <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">نفخر</span> بها</h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">استكشف مجموعة مختارة من أفضل أعمالنا في التصميم الجرافيكي والهوية البصرية</p>
+        </motion.div>
+
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {categories.map((cat) => (
+            <button key={cat.id} onClick={() => setActiveCategory(cat.id)} className={`px-6 py-3 rounded-xl text-sm font-medium transition-all ${activeCategory === cat.id ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-purple-500/25 scale-105" : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"}`}>
+              {cat.id}
+            </button>
+          ))}
         </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((item) => (
+            <div key={item.id} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div className="p-6">
+                <span className="text-purple-400 text-xs font-semibold">{item.category}</span>
+                <h3 className="text-white font-bold text-lg mt-1">{item.title}</h3>
+                <p className="text-gray-400 text-sm mt-2">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
+  );
+}
 
-    <!-- Float WA -->
-    <a href="https://wa.me/905364391849" class="float-wa" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+// ==========================================
+// 6. FAQ SECTION COMPONENT
+// ==========================================
+const faqs = [
+  { question: "ما هي أنواع خدمات التصميم التي تقدمونها؟", answer: "نقدم مجموعة شاملة من خدمات التصميم الجرافيكي تشمل: تصميم الشعارات والهويات البصرية، تصاميم السوشيال ميديا، تصميم واجهات المواقع والتطبيقات، التصاميم المطبوعة، تصميم التغليف، وتعديل الصور." },
+  { question: "كم يستغرق إنجاز تصميم شعار؟", answer: "عادةً ما يستغرق تصميم الشعار من 3 إلى 5 أيام عمل، حسب تعقيد المشروع." },
+  { question: "هل يمكنني طلب تعديلات على التصميم؟", answer: "نعم بالتأكيد! نقدم تعديلات مجانية مرنة حتى نصل للنتيجة النهائية التي ترضيك تماماً." },
+  { question: "كيف يمكنني التواصل معكم لبدء مشروع؟", answer: "يمكنك التواصل معنا عبر واتساب مباشرة على الرقم 905364391849." },
+];
 
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 NEXA Creative Agency</p>
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section id="faq" className="relative py-24 lg:py-32">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">أسئلة شائعة</span>
+          <h2 className="text-3xl lg:text-5xl font-black text-white mb-4">إجابات <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">أسئلتك</span></h2>
+        </div>
+
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+              <button onClick={() => setOpenIndex(openIndex === index ? null : index)} className="w-full p-6 text-right font-semibold text-white flex justify-between items-center">
+                <span>{faq.question}</span>
+                <ChevronDown className={`transition-transform ${openIndex === index ? "rotate-180 text-purple-400" : "text-gray-400"}`} />
+              </button>
+              {openIndex === index && (
+                <div className="px-6 pb-6 text-gray-400 text-sm border-t border-white/5 pt-4">
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// 7. FOOTER COMPONENT
+// ==========================================
+function Footer() {
+  return (
+    <footer className="border-t border-white/10 py-12 bg-[#050508] text-center text-gray-500 text-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <NexaLogo size={32} />
+          <span className="text-white font-bold">NEXA Creative</span>
+        </div>
+        <p>© 2026 NEXA Creative Agency. جميع الحقوق محفوظة.</p>
+      </div>
     </footer>
+  );
+}
 
-    <script>
-        const htmlElement = document.documentElement;
-        const themeIcon = document.getElementById('themeIcon');
-
-        function toggleTheme() {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                htmlElement.classList.add('light');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                htmlElement.classList.remove('light');
-                htmlElement.classList.add('dark');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-            }
-        }
-    </script>
-</body>
-</html>
+// ==========================================
+// 8. MAIN HOME COMPONENT
+// ==========================================
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden font-sans" dir="rtl">
+      <Navbar />
+      <HeroSection />
+      <ServicesSection />
+      <PortfolioSection />
+      <FAQSection />
+      <Footer />
+    </div>
+  );
+}
+        
