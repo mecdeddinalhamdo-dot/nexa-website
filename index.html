@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth dark">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,14 +15,14 @@
                         brand: {
                             purple: '#7C3AED',
                             accent: '#A855F7',
-                            darkBg: '#08080c',
-                            lightBg: '#F8FAFC'
                         }
                     }
                 }
             }
         }
     </script>
+    <!-- FontAwesome Vector Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -52,18 +52,12 @@
                 <a href="#faq" class="hover:text-purple-600 dark:hover:text-purple-400 transition">الأسئلة</a>
             </div>
 
-            <!-- SOCIAL & THEME TOGGLE & CTA -->
+            <!-- ACTIONS & THEME TOGGLE -->
             <div class="flex items-center gap-4">
-                <!-- Theme Toggle Button -->
+                <!-- Theme Toggle Button (Default Light Status) -->
                 <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 hover:scale-110 active:scale-95 transition-all" title="تبديل وضع الظلام/النور">
-                    <span id="themeIcon" class="text-lg">🌙</span>
+                    <span id="themeIcon" class="text-lg">☀️</span>
                 </button>
-
-                <!-- Social Icons Header -->
-                <div class="hidden sm:flex items-center gap-2 text-slate-600 dark:text-gray-300">
-                    <a href="https://instagram.com" target="_blank" class="p-2 hover:text-purple-600 transition" title="Instagram">📸</a>
-                    <a href="https://behance.net" target="_blank" class="p-2 hover:text-purple-600 transition" title="Behance">🎨</a>
-                </div>
 
                 <a href="https://wa.me/905364391849" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-purple-600/30 hover:scale-105 active:scale-95 transition">
                     اطلب تصميمك
@@ -74,7 +68,7 @@
 
     <!-- HERO SECTION -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-16">
-        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-purple-600/15 dark:bg-purple-600/20 rounded-full blur-[140px] pointer-events-none"></div>
         
         <div class="container mx-auto px-4 relative z-10 text-center">
             <div class="max-w-4xl mx-auto">
@@ -97,7 +91,7 @@
                     <a href="https://wa.me/905364391849" target="_blank" class="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-bold shadow-xl shadow-purple-600/30 hover:scale-105 active:scale-95 transition">
                         تواصل معنا الآن
                     </a>
-                    <a href="#presentation" class="px-8 py-4 bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-2xl font-bold hover:bg-slate-300 dark:hover:bg-white/10 transition">
+                    <a href="#presentation" class="px-8 py-4 bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white rounded-2xl font-bold hover:bg-slate-100 dark:hover:bg-white/10 transition">
                         عرض تقديمي 🎬
                     </a>
                 </div>
@@ -105,7 +99,7 @@
         </div>
     </section>
 
-    <!-- PRESENTATION SECTION (العرض التقديمي) -->
+    <!-- PRESENTATION SECTION -->
     <section id="presentation" class="py-20 bg-slate-100 dark:bg-[#0c0c12]">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
@@ -113,17 +107,15 @@
                 <h2 class="text-3xl lg:text-4xl font-black mt-2">من نحن وكيف نبتكر؟</h2>
             </div>
 
-            <!-- Slides Presentation Card -->
             <div class="max-w-4xl mx-auto bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl relative">
-                <div id="slideContent" class="min-h-[220px] flex flex-col justify-center">
-                    <!-- Dynamic Slide Content Inserted by JS -->
+                <div id="slideContent" class="min-h-[200px] flex flex-col justify-center">
+                    <!-- Dynamic Slide Content -->
                 </div>
 
-                <!-- Slide Navigation Controls -->
                 <div class="flex justify-between items-center mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
-                    <button id="prevSlide" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/10 text-sm font-bold hover:bg-purple-600 hover:text-white transition">السابق</button>
+                    <button id="prevSlide" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-white/10 text-sm font-bold hover:bg-purple-600 hover:text-white transition">السابق</button>
                     <div id="slideDots" class="flex gap-2"></div>
-                    <button id="nextSlide" class="px-4 py-2 rounded-xl bg-purple-600 text-white text-sm font-bold hover:bg-purple-700 transition">التالي</button>
+                    <button id="nextSlide" class="px-5 py-2.5 rounded-xl bg-purple-600 text-white text-sm font-bold hover:bg-purple-700 transition">التالي</button>
                 </div>
             </div>
         </div>
@@ -138,23 +130,34 @@
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">🎨</div>
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
                     <h3 class="font-bold text-lg mb-2">تصميم الشعارات</h3>
                     <p class="text-slate-600 dark:text-gray-400 text-sm">شعارات احترافية تميّز علامتك التجارية وتبقى في الذاكرة.</p>
                 </div>
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">✨</div>
+
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
                     <h3 class="font-bold text-lg mb-2">الهوية البصرية</h3>
                     <p class="text-slate-600 dark:text-gray-400 text-sm">هوية متكاملة تشمل الألوان، الخطوط، والأدوات البصرية.</p>
                 </div>
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">📢</div>
+
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
                     <h3 class="font-bold text-lg mb-2">السوشيال ميديا</h3>
                     <p class="text-slate-600 dark:text-gray-400 text-sm">محتوى بصري جذاب يناسب جميع منصات التواصل الاجتماعي.</p>
                 </div>
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">💻</div>
+
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
                     <h3 class="font-bold text-lg mb-2">واجهات الويب</h3>
                     <p class="text-slate-600 dark:text-gray-400 text-sm">واجهات مستخدم عصرية وتجربة استخدام سلسة وممتازة.</p>
                 </div>
@@ -162,7 +165,7 @@
         </div>
     </section>
 
-    <!-- FAQ SECTION (الأسئلة الشائعة) -->
+    <!-- FAQ SECTION -->
     <section id="faq" class="py-24 bg-slate-100 dark:bg-[#0a0a0f]">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -171,30 +174,30 @@
             </div>
 
             <div class="max-w-3xl mx-auto space-y-4">
-                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden">
+                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
                     <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition">
                         <span>ما هي الخدمات التي يقدمها استوديو NEXA؟</span>
-                        <span class="faq-icon transition-transform duration-300">▼</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300 text-purple-600"></i>
                     </button>
                     <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
                         نقدم تصميم الشعارات، الهويات البصرية المتكاملة، تصاميم منصات التواصل الاجتماعي، وواجهات المستخدم للتقنيات والمواقع.
                     </div>
                 </div>
 
-                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden">
+                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
                     <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition">
                         <span>كم يستغرق تسليم مشروع التصميم؟</span>
-                        <span class="faq-icon transition-transform duration-300">▼</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300 text-purple-600"></i>
                     </button>
                     <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
                         يتراوح مدة التسليم عادةً من 3 إلى 7 أيام عمل حسب حجم ونوع المشروع والمطلوبات.
                     </div>
                 </div>
 
-                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden">
+                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
                     <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition">
                         <span>هل يمكنني طلب تعديلات على التصاميم؟</span>
-                        <span class="faq-icon transition-transform duration-300">▼</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300 text-purple-600"></i>
                     </button>
                     <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
                         نعم بالتأكيد! نوفر جولات تعديل مجانية مع كل مشروع لضمان رضاك الكامل عن النتيجة النهائية.
@@ -207,21 +210,29 @@
     <!-- FOOTER & SOCIAL MEDIA -->
     <footer class="border-t border-slate-200 dark:border-white/10 py-12 text-center text-slate-500 dark:text-gray-400 text-sm">
         <div class="container mx-auto px-6 flex flex-col items-center gap-6">
-            <!-- Social Media Links -->
-            <div class="flex gap-6 text-xl">
-                <a href="https://wa.me/905364391849" target="_blank" class="hover:text-purple-600 transition" title="WhatsApp">💬</a>
-                <a href="https://instagram.com" target="_blank" class="hover:text-purple-600 transition" title="Instagram">📸</a>
-                <a href="https://behance.net" target="_blank" class="hover:text-purple-600 transition" title="Behance">🎨</a>
-                <a href="https://facebook.com" target="_blank" class="hover:text-purple-600 transition" title="Facebook">🌐</a>
+            <!-- Vector Social Icons (سنضع روابطك المباشرة هنا بمجرد إرسالها) -->
+            <div id="socialLinks" class="flex items-center gap-4">
+                <a href="https://wa.me/905364391849" target="_blank" class="w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-gray-300 hover:text-purple-600 hover:border-purple-500 hover:scale-110 active:scale-95 transition-all shadow-sm" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-gray-300 hover:text-purple-600 hover:border-purple-500 hover:scale-110 active:scale-95 transition-all shadow-sm" title="Instagram">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-gray-300 hover:text-purple-600 hover:border-purple-500 hover:scale-110 active:scale-95 transition-all shadow-sm" title="Behance">
+                    <i class="fa-brands fa-behance text-lg"></i>
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-gray-300 hover:text-purple-600 hover:border-purple-500 hover:scale-110 active:scale-95 transition-all shadow-sm" title="Facebook">
+                    <i class="fa-brands fa-facebook-f text-lg"></i>
+                </a>
             </div>
             
             <p>© 2026 NEXA Creative. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT FOR INTERACTIVE FEATURES -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // 1. DARK / LIGHT MODE FEATURE
+        // 1. LIGHT / DARK MODE TOGGLE (DEFAULT IS LIGHT)
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
         
@@ -231,7 +242,7 @@
             themeIcon.textContent = isDark ? '🌙' : '☀️';
         });
 
-        // 2. PRESENTATION SLIDER FEATURE
+        // 2. PRESENTATION SLIDER
         const slides = [
             {
                 tag: "رؤيتنا",
@@ -245,7 +256,7 @@
             },
             {
                 tag: "لماذا نُعد الخيار الأفضل؟",
-                title: "إبداع سرعة والتزام تام بالمعايير",
+                title: "إبداع، سرعة، والتزام تام بالمعايير",
                 desc: "نضمن لك دقة في المواعيد، تعديلات مرنة، ودعماً مستمراً لتخرج علامتك بأفضل صورة ممكنة."
             }
         ];
@@ -281,7 +292,7 @@
 
         renderSlide(currentSlide);
 
-        // 3. FAQ ACCORDION FEATURE
+        // 3. FAQ ACCORDION
         document.querySelectorAll('.faq-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const answer = btn.nextElementSibling;
@@ -293,4 +304,5 @@
         });
     </script>
 </body>
-</html>
+    </html>
+    
