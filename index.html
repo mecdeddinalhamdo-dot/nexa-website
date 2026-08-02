@@ -1,15 +1,63 @@
 import React, { useState, useEffect } from "react";
 
 // ==========================================
-// 1. NEXA LOGO COMPONENT
+// 1. NEXA LOGO COMPONENT (رسم SVG مطور بدقة عالية)
 // ==========================================
-function NexaLogo({ size = 48 }) {
+function NexaLogo({ width = 180, height = 50 }) {
   return (
-    <div 
-      className="rounded-full bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center font-black text-white shadow-lg shadow-purple-500/30 overflow-hidden flex-shrink-0"
-      style={{ width: size, height: size, fontSize: size * 0.4 }}
-    >
-      N
+    <div className="flex items-center gap-3 select-none">
+      {/* أيقونة اللوجو SVG */}
+      <svg 
+        width={height} 
+        height={height} 
+        viewBox="0 0 100 100" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+        className="drop-shadow-[0_4px_12px_rgba(124,58,237,0.4)]"
+      >
+        {/* الجزء البنفسجي الأيسر من حرف N */}
+        <path 
+          d="M20 75 V 35 C20 25, 30 18, 42 28 L50 35 C42 45, 30 58, 20 75 Z" 
+          fill="url(#purpleGradient)" 
+        />
+        <path 
+          d="M 22 75 C 22 45, 38 28, 48 24 C 38 42, 28 60, 22 75 Z" 
+          fill="#8B5CF6" 
+        />
+        {/* الجزء الأسود/الرمادي الأيمن من حرف N */}
+        <path 
+          d="M 52 25 L 75 75 H 60 C 60 60, 68 40, 52 25 Z" 
+          fill="#27272A" 
+        />
+        <path 
+          d="M 55 24 C 68 35, 76 55, 76 75 C 65 75, 58 55, 55 24 Z" 
+          fill="#18181B" 
+        />
+        {/* القوس الفاصل الحاد */}
+        <path 
+          d="M 32 60 Q 55 50 80 32 Q 52 58 32 60 Z" 
+          fill="#FFFFFF" 
+        />
+        <defs>
+          <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#8B5CF6" />
+            <stop offset="100%" stopColor="#6D28D9" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* النص المخصص للعلامة التجارية */}
+      <div className="flex flex-col tracking-wider">
+        <div className="flex items-center text-white font-black text-2xl leading-none tracking-widest font-sans">
+          NE
+          <span className="text-purple-500 font-extrabold px-[1px] transform -skew-x-6 inline-block">X</span>
+          A
+          <span className="text-[9px] text-purple-400 font-normal self-start -ml-0.5 -mt-1">®</span>
+        </div>
+        <span className="text-gray-400 text-[10px] tracking-[0.35em] uppercase font-medium mt-1">
+          creative
+        </span>
+      </div>
     </div>
   );
 }
@@ -35,19 +83,15 @@ function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-purple-500/5" : "bg-transparent"}`}>
-      <nav className="container mx-auto px-4 flex items-center justify-between h-16 lg:h-20">
-        <a href="#hero" className="flex items-center gap-3">
-          <NexaLogo size={44} />
-          <div className="flex flex-col">
-            <span className="text-white font-bold text-lg leading-none">NEXA</span>
-            <span className="text-purple-400 text-xs tracking-wider">creative</span>
-          </div>
+    <header className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#09090e]/90 backdrop-blur-xl border-b border-white/5 shadow-xl shadow-purple-950/20" : "bg-transparent"}`}>
+      <nav className="container mx-auto px-6 flex items-center justify-between h-20">
+        <a href="#hero" className="flex items-center gap-2">
+          <NexaLogo height={42} />
         </a>
         
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium">
+            <a key={link.href} href={link.href} className="text-gray-300 hover:text-purple-400 transition-colors duration-200 text-sm font-medium">
               {link.label}
             </a>
           ))}
@@ -58,21 +102,21 @@ function Navbar() {
             href="https://wa.me/905364391849" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+            className="px-6 py-2.5 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-105 active:scale-95 transition-all duration-300"
           >
             اطلب تصميمك
           </a>
         </div>
 
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-white p-2 font-bold text-xl">
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden text-white p-2 text-2xl">
           {mobileOpen ? "✕" : "☰"}
         </button>
       </nav>
 
       {mobileOpen && (
-        <div className="lg:hidden bg-[#0a0a0f]/95 backdrop-blur-xl border-t border-white/5 px-4 py-6 flex flex-col gap-4">
+        <div className="lg:hidden bg-[#0a0a0f]/98 backdrop-blur-2xl border-b border-white/10 px-6 py-6 flex flex-col gap-4">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="text-gray-300 hover:text-white py-2 text-base font-medium">
+            <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="text-gray-300 hover:text-white py-2 text-base font-medium border-b border-white/5">
               {link.label}
             </a>
           ))}
@@ -80,7 +124,7 @@ function Navbar() {
             href="https://wa.me/905364391849" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="mt-2 px-5 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-center font-semibold"
+            className="mt-2 px-5 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-center font-bold"
           >
             اطلب تصميمك
           </a>
@@ -95,25 +139,41 @@ function Navbar() {
 // ==========================================
 function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
+    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+      {/* خلفية ضوئية متدرجة */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-gradient-to-tr from-violet-600/20 to-purple-500/10 rounded-full blur-[160px] pointer-events-none" />
+      
       <div className="container mx-auto px-4 relative z-10 text-center">
         <div className="max-w-4xl mx-auto">
-          <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
-            ✨ استوديو التصميم والإبداع الرقمي
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs sm:text-sm font-medium mb-8 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+            استوديو NEXA للتصميم والإبداع الرقمي
           </span>
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight mb-8">
+          
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.2] mb-8">
             الإعلان ليس مجرد ظهور.. <br />
-            <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">بل هو تأثير مدروس</span>
+            <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
+              بل هو تأثير مدروس
+            </span>
           </h1>
-          <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+          
+          <p className="text-gray-400 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
             نحوّل أفكارك إلى هوية بصرية ساحرة تجذب عملاءك وتبني لعلامتك التجارية حضوراً استثنائياً لا يُنسى.
           </p>
+          
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="https://wa.me/905364391849" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-bold shadow-lg shadow-purple-500/25 hover:scale-105 active:scale-95 transition-all">
+            <a 
+              href="https://wa.me/905364391849" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-bold shadow-xl shadow-purple-600/25 hover:shadow-purple-600/40 hover:scale-105 active:scale-95 transition-all duration-300"
+            >
               تواصل معنا الآن
             </a>
-            <a href="#portfolio" className="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 transition-all">
+            <a 
+              href="#portfolio" 
+              className="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+            >
               استكشف الأعمال
             </a>
           </div>
@@ -140,17 +200,17 @@ const services = [
 function ServicesSection() {
   return (
     <section id="services" className="relative py-24 lg:py-32">
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">خدماتنا</span>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-4">خدماتنا</span>
           <h2 className="text-3xl lg:text-5xl font-black text-white mb-4">ماذا <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">نقدم</span> لك؟</h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">نقدم مجموعة شاملة من خدمات التصميم الاحترافي التي تغطي كل احتياجاتك البصرية</p>
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">نقدم مجموعة شاملة من خدمات التصميم الاحترافي التي تغطي كل احتياجاتك البصرية</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
-            <div key={service.title} className="bg-white/5 border border-white/10 hover:border-purple-500/40 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2">
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 text-xl shadow-lg`}>
+            <div key={service.title} className="bg-white/[0.03] border border-white/10 hover:border-purple-500/40 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 hover:bg-white/[0.05] group">
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 text-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 {service.icon}
               </div>
               <h3 className="text-white font-bold text-lg mb-2">{service.title}</h3>
@@ -175,18 +235,18 @@ const portfolioItems = [
 
 function PortfolioSection() {
   return (
-    <section id="portfolio" className="relative py-24 lg:py-32 bg-[#08080d]">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">معرض أعمالنا</span>
+    <section id="portfolio" className="relative py-24 lg:py-32 bg-[#060609]">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-4">معرض أعمالنا</span>
           <h2 className="text-3xl lg:text-5xl font-black text-white mb-4">أعمال <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">نفخر</span> بها</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {portfolioItems.map((item) => (
-            <div key={item.id} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10">
+            <div key={item.id} className="group relative rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
               <div className="aspect-[4/3] overflow-hidden">
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               </div>
               <div className="p-5">
                 <span className="text-purple-400 text-xs font-semibold">{item.category}</span>
@@ -215,21 +275,21 @@ function FAQSection() {
 
   return (
     <section id="faq" className="relative py-24 lg:py-32">
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">أسئلة شائعة</span>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold uppercase tracking-wider mb-4">أسئلة شائعة</span>
           <h2 className="text-3xl lg:text-5xl font-black text-white mb-4">إجابات <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">أسئلتك</span></h2>
         </div>
 
         <div className="max-w-3xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-              <button onClick={() => setOpenIndex(openIndex === index ? null : index)} className="w-full p-6 text-right font-semibold text-white flex justify-between items-center gap-4">
+            <div key={index} className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
+              <button onClick={() => setOpenIndex(openIndex === index ? null : index)} className="w-full p-6 text-right font-semibold text-white flex justify-between items-center gap-4 hover:bg-white/[0.02]">
                 <span>{faq.question}</span>
-                <span className={`transition-transform duration-300 ${openIndex === index ? "rotate-180 text-purple-400" : "text-gray-400"}`}>▼</span>
+                <span className={`transition-transform duration-300 text-purple-400 ${openIndex === index ? "rotate-180" : ""}`}>▼</span>
               </button>
               {openIndex === index && (
-                <div className="px-6 pb-6 text-gray-400 text-sm border-t border-white/5 pt-4">
+                <div className="px-6 pb-6 text-gray-400 text-sm border-t border-white/5 pt-4 leading-relaxed">
                   {faq.answer}
                 </div>
               )}
@@ -246,12 +306,9 @@ function FAQSection() {
 // ==========================================
 function Footer() {
   return (
-    <footer className="border-t border-white/10 py-12 bg-[#050508] text-center text-gray-500 text-sm">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <NexaLogo size={32} />
-          <span className="text-white font-bold">NEXA Creative</span>
-        </div>
+    <footer className="border-t border-white/10 py-12 bg-[#040406] text-center text-gray-500 text-sm">
+      <div className="container mx-auto px-6 flex flex-col items-center gap-6">
+        <NexaLogo height={38} />
         <p>© 2026 NEXA Creative Agency. جميع الحقوق محفوظة.</p>
       </div>
     </footer>
@@ -263,7 +320,7 @@ function Footer() {
 // ==========================================
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden" dir="rtl">
+    <div className="min-h-screen bg-[#08080c] text-white overflow-x-hidden font-sans" dir="rtl">
       <Navbar />
       <HeroSection />
       <ServicesSection />
