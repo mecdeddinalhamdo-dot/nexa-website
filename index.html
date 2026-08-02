@@ -1,116 +1,296 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXA Creative | استوديو التصميم والإبداع</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#7C3AED',
+                            accent: '#A855F7',
+                            darkBg: '#08080c',
+                            lightBg: '#F8FAFC'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
+        body { font-family: 'Tajawal', sans-serif; transition: background-color 0.3s, color 0.3s; }
     </style>
 </head>
-<body class="bg-[#08080c] text-white overflow-x-hidden">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#08080c] dark:text-white transition-colors duration-300">
 
     <!-- NAVBAR -->
-    <header class="fixed top-0 right-0 left-0 z-50 bg-[#09090e]/90 backdrop-blur-xl border-b border-white/5">
+    <header class="fixed top-0 right-0 left-0 z-50 bg-white/80 dark:bg-[#09090e]/90 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 transition-colors">
         <nav class="container mx-auto px-6 flex items-center justify-between h-20">
-            <!-- LOGO AREA -->
-            <a href="#" class="flex items-center gap-3">
-                <!-- يمكنك وضع رابط صورة اللوجو الخاص بك هنا في src -->
-                <div class="flex items-center gap-2">
-                    <span class="w-10 h-10 rounded-full bg-gradient-to-tr from-violet-600 to-purple-500 flex items-center justify-center font-black text-xl shadow-lg shadow-purple-500/30">N</span>
-                    <div class="flex flex-col">
-                        <span class="text-white font-black text-xl leading-none tracking-widest">NE<span class="text-purple-500">X</span>A</span>
-                        <span class="text-gray-400 text-[9px] tracking-[0.3em] uppercase mt-1">creative</span>
-                    </div>
+            <!-- LOGO -->
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-purple-500 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-purple-500/30">N</div>
+                <div class="flex flex-col">
+                    <span class="font-black text-xl leading-none tracking-widest text-slate-900 dark:text-white">NE<span class="text-purple-600 dark:text-purple-500">X</span>A</span>
+                    <span class="text-slate-500 dark:text-gray-400 text-[9px] tracking-[0.3em] uppercase mt-1">creative</span>
                 </div>
             </a>
             
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#hero" class="text-gray-300 hover:text-purple-400 transition">الرئيسية</a>
-                <a href="#services" class="text-gray-300 hover:text-purple-400 transition">خدماتنا</a>
-                <a href="#portfolio" class="text-gray-300 hover:text-purple-400 transition">أعمالنا</a>
-                <a href="#faq" class="text-gray-300 hover:text-purple-400 transition">الأسئلة</a>
+            <!-- NAV LINKS -->
+            <div class="hidden lg:flex items-center gap-8 text-sm font-medium">
+                <a href="#hero" class="hover:text-purple-600 dark:hover:text-purple-400 transition">الرئيسية</a>
+                <a href="#presentation" class="hover:text-purple-600 dark:hover:text-purple-400 transition">عن الاستوديو</a>
+                <a href="#services" class="hover:text-purple-600 dark:hover:text-purple-400 transition">خدماتنا</a>
+                <a href="#portfolio" class="hover:text-purple-600 dark:hover:text-purple-400 transition">أعمالنا</a>
+                <a href="#faq" class="hover:text-purple-600 dark:hover:text-purple-400 transition">الأسئلة</a>
             </div>
 
-            <a href="https://wa.me/905364391849" target="_blank" class="hidden md:inline-flex px-6 py-2.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-purple-600/30 hover:scale-105 transition">
-                اطلب تصميمك
-            </a>
+            <!-- SOCIAL & THEME TOGGLE & CTA -->
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 hover:scale-110 active:scale-95 transition-all" title="تبديل وضع الظلام/النور">
+                    <span id="themeIcon" class="text-lg">🌙</span>
+                </button>
+
+                <!-- Social Icons Header -->
+                <div class="hidden sm:flex items-center gap-2 text-slate-600 dark:text-gray-300">
+                    <a href="https://instagram.com" target="_blank" class="p-2 hover:text-purple-600 transition" title="Instagram">📸</a>
+                    <a href="https://behance.net" target="_blank" class="p-2 hover:text-purple-600 transition" title="Behance">🎨</a>
+                </div>
+
+                <a href="https://wa.me/905364391849" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-purple-600/30 hover:scale-105 active:scale-95 transition">
+                    اطلب تصميمك
+                </a>
+            </div>
         </nav>
     </header>
 
     <!-- HERO SECTION -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-16">
-        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-purple-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-purple-600/20 rounded-full blur-[140px] pointer-events-none"></div>
         
         <div class="container mx-auto px-4 relative z-10 text-center">
             <div class="max-w-4xl mx-auto">
-                <span class="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs sm:text-sm font-medium mb-6">
+                <span class="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-300 text-xs sm:text-sm font-medium mb-6">
                     ✨ استوديو NEXA للتصميم والإبداع الرقمي
                 </span>
                 
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight mb-8">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black leading-tight mb-8">
                     الإعلان ليس مجرد ظهور.. <br>
-                    <span class="bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
+                    <span class="bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-400 dark:to-fuchsia-400 bg-clip-text text-transparent">
                         بل هو تأثير مدروس
                     </span>
                 </h1>
                 
-                <p class="text-gray-400 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                <p class="text-slate-600 dark:text-gray-400 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
                     نحوّل أفكارك إلى هوية بصرية ساحرة تجذب عملاءك وتبني لعلامتك التجارية حضوراً استثنائياً لا يُنسى.
                 </p>
                 
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="https://wa.me/905364391849" target="_blank" class="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-bold shadow-xl shadow-purple-600/30 hover:scale-105 transition">
+                    <a href="https://wa.me/905364391849" target="_blank" class="px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-2xl font-bold shadow-xl shadow-purple-600/30 hover:scale-105 active:scale-95 transition">
                         تواصل معنا الآن
                     </a>
-                    <a href="#portfolio" class="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 transition">
-                        استكشف الأعمال
+                    <a href="#presentation" class="px-8 py-4 bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-2xl font-bold hover:bg-slate-300 dark:hover:bg-white/10 transition">
+                        عرض تقديمي 🎬
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRESENTATION SECTION (العرض التقديمي) -->
+    <section id="presentation" class="py-20 bg-slate-100 dark:bg-[#0c0c12]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-purple-600 dark:text-purple-400 text-xs font-semibold uppercase tracking-wider">عرض تقديمي</span>
+                <h2 class="text-3xl lg:text-4xl font-black mt-2">من نحن وكيف نبتكر؟</h2>
+            </div>
+
+            <!-- Slides Presentation Card -->
+            <div class="max-w-4xl mx-auto bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-3xl p-8 sm:p-12 shadow-2xl relative">
+                <div id="slideContent" class="min-h-[220px] flex flex-col justify-center">
+                    <!-- Dynamic Slide Content Inserted by JS -->
+                </div>
+
+                <!-- Slide Navigation Controls -->
+                <div class="flex justify-between items-center mt-8 pt-6 border-t border-slate-200 dark:border-white/10">
+                    <button id="prevSlide" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/10 text-sm font-bold hover:bg-purple-600 hover:text-white transition">السابق</button>
+                    <div id="slideDots" class="flex gap-2"></div>
+                    <button id="nextSlide" class="px-4 py-2 rounded-xl bg-purple-600 text-white text-sm font-bold hover:bg-purple-700 transition">التالي</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SERVICES SECTION -->
-    <section id="services" class="py-24 bg-[#0a0a0f]">
+    <section id="services" class="py-24">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <span class="text-purple-400 text-xs font-semibold uppercase tracking-wider">خدماتنا</span>
-                <h2 class="text-3xl lg:text-5xl font-black text-white mt-2">ماذا <span class="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">نقدم</span> لك؟</h2>
+                <span class="text-purple-600 dark:text-purple-400 text-xs font-semibold uppercase tracking-wider">خدماتنا</span>
+                <h2 class="text-3xl lg:text-5xl font-black mt-2">ماذا <span class="bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">نقدم</span> لك؟</h2>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-purple-500/40 transition">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl mb-4">🎨</div>
-                    <h3 class="text-white font-bold text-lg mb-2">تصميم الشعارات</h3>
-                    <p class="text-gray-400 text-sm">شعارات احترافية تميّز علامتك التجارية وتبقى في الذاكرة</p>
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">🎨</div>
+                    <h3 class="font-bold text-lg mb-2">تصميم الشعارات</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm">شعارات احترافية تميّز علامتك التجارية وتبقى في الذاكرة.</p>
                 </div>
-                <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-purple-500/40 transition">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl mb-4">✨</div>
-                    <h3 class="text-white font-bold text-lg mb-2">الهوية البصرية</h3>
-                    <p class="text-gray-400 text-sm">هوية متكاملة تشمل الألوان، الخطوط، والأدوات البصرية</p>
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">✨</div>
+                    <h3 class="font-bold text-lg mb-2">الهوية البصرية</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm">هوية متكاملة تشمل الألوان، الخطوط، والأدوات البصرية.</p>
                 </div>
-                <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-purple-500/40 transition">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl mb-4">📢</div>
-                    <h3 class="text-white font-bold text-lg mb-2">السوشيال ميديا</h3>
-                    <p class="text-gray-400 text-sm">محتوى بصري جذاب يناسب جميع منصات التواصل الاجتماعي</p>
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">📢</div>
+                    <h3 class="font-bold text-lg mb-2">السوشيال ميديا</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm">محتوى بصري جذاب يناسب جميع منصات التواصل الاجتماعي.</p>
                 </div>
-                <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-purple-500/40 transition">
-                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center text-2xl mb-4">💻</div>
-                    <h3 class="text-white font-bold text-lg mb-2">واجهات الويب</h3>
-                    <p class="text-gray-400 text-sm">واجهات مستخدم عصرية وتجربة استخدام سلسة</p>
+                <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-6 hover:border-purple-500/40 hover:-translate-y-2 transition-all duration-300 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-4">💻</div>
+                    <h3 class="font-bold text-lg mb-2">واجهات الويب</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm">واجهات مستخدم عصرية وتجربة استخدام سلسة وممتازة.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-white/10 py-8 text-center text-gray-500 text-sm">
-        <p>© 2026 NEXA Creative Agency. جميع الحقوق محفوظة.</p>
+    <!-- FAQ SECTION (الأسئلة الشائعة) -->
+    <section id="faq" class="py-24 bg-slate-100 dark:bg-[#0a0a0f]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 dark:text-purple-400 text-xs font-semibold uppercase tracking-wider">أسئلة شائعة</span>
+                <h2 class="text-3xl lg:text-5xl font-black mt-2">إجابات <span class="bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">أسئلتك</span></h2>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition">
+                        <span>ما هي الخدمات التي يقدمها استوديو NEXA؟</span>
+                        <span class="faq-icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
+                        نقدم تصميم الشعارات، الهويات البصرية المتكاملة، تصاميم منصات التواصل الاجتماعي، وواجهات المستخدم للتقنيات والمواقع.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition">
+                        <span>كم يستغرق تسليم مشروع التصميم؟</span>
+                        <span class="faq-icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
+                        يتراوح مدة التسليم عادةً من 3 إلى 7 أيام عمل حسب حجم ونوع المشروع والمطلوبات.
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden">
+                    <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition">
+                        <span>هل يمكنني طلب تعديلات على التصاميم؟</span>
+                        <span class="faq-icon transition-transform duration-300">▼</span>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4">
+                        نعم بالتأكيد! نوفر جولات تعديل مجانية مع كل مشروع لضمان رضاك الكامل عن النتيجة النهائية.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER & SOCIAL MEDIA -->
+    <footer class="border-t border-slate-200 dark:border-white/10 py-12 text-center text-slate-500 dark:text-gray-400 text-sm">
+        <div class="container mx-auto px-6 flex flex-col items-center gap-6">
+            <!-- Social Media Links -->
+            <div class="flex gap-6 text-xl">
+                <a href="https://wa.me/905364391849" target="_blank" class="hover:text-purple-600 transition" title="WhatsApp">💬</a>
+                <a href="https://instagram.com" target="_blank" class="hover:text-purple-600 transition" title="Instagram">📸</a>
+                <a href="https://behance.net" target="_blank" class="hover:text-purple-600 transition" title="Behance">🎨</a>
+                <a href="https://facebook.com" target="_blank" class="hover:text-purple-600 transition" title="Facebook">🌐</a>
+            </div>
+            
+            <p>© 2026 NEXA Creative. جميع الحقوق محفوظة.</p>
+        </div>
     </footer>
 
+    <!-- JAVASCRIPT FOR INTERACTIVE FEATURES -->
+    <script>
+        // 1. DARK / LIGHT MODE FEATURE
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            themeIcon.textContent = isDark ? '🌙' : '☀️';
+        });
+
+        // 2. PRESENTATION SLIDER FEATURE
+        const slides = [
+            {
+                tag: "رؤيتنا",
+                title: "نصنع لكل براند صوتاً بصرياً فريداً",
+                desc: "في NEXA Creative، لا نكتفي بتصميم أشكال جميلة، بل نبني هويات تجارية قادرة على المنافسة وجذب العملاء منذ اللحظة الأولى."
+            },
+            {
+                tag: "منهجية العمل",
+                title: "خطوات مدروسة لتحقيق أفضل النتائج",
+                desc: "تبدأ رحلتنا بتحليل فكرتك، ثم ابتكار المفهوم البصري، وصولاً إلى تنفيذ تصاميم عالية الجودة تُسلم لك بكل التفاصيل."
+            },
+            {
+                tag: "لماذا نُعد الخيار الأفضل؟",
+                title: "إبداع سرعة والتزام تام بالمعايير",
+                desc: "نضمن لك دقة في المواعيد، تعديلات مرنة، ودعماً مستمراً لتخرج علامتك بأفضل صورة ممكنة."
+            }
+        ];
+
+        let currentSlide = 0;
+        const slideContent = document.getElementById('slideContent');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        const slideDots = document.getElementById('slideDots');
+
+        function renderSlide(index) {
+            const slide = slides[index];
+            slideContent.innerHTML = `
+                <span class="inline-block px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold w-fit mb-3">${slide.tag}</span>
+                <h3 class="text-2xl sm:text-3xl font-black mb-4">${slide.title}</h3>
+                <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">${slide.desc}</p>
+            `;
+
+            slideDots.innerHTML = slides.map((_, i) => `
+                <span class="w-2.5 h-2.5 rounded-full ${i === index ? 'bg-purple-600 w-6' : 'bg-slate-300 dark:bg-white/20'} transition-all"></span>
+            `).join('');
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            renderSlide(currentSlide);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            renderSlide(currentSlide);
+        });
+
+        renderSlide(currentSlide);
+
+        // 3. FAQ ACCORDION FEATURE
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const answer = btn.nextElementSibling;
+                const icon = btn.querySelector('.faq-icon');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+    </script>
 </body>
 </html>
