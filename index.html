@@ -21,7 +21,7 @@
             }
         }
     </script>
-    <!-- FontAwesome Vector Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -29,17 +29,38 @@
         body { font-family: 'Tajawal', sans-serif; transition: background-color 0.3s, color 0.3s; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-[#08080c] dark:text-white transition-colors duration-300">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#08080c] dark:text-white transition-colors duration-300 relative">
+
+    <!-- FLOATING WHATSAPP BUTTON (زر الواتساب العائم) -->
+    <a href="https://wa.me/905364391849" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-emerald-500/40 hover:scale-110 active:scale-95 transition-all duration-300 group"
+       title="تواصل معنا عبر واتساب">
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 rounded-full animate-ping"></span>
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
 
     <!-- NAVBAR -->
-    <header class="fixed top-0 right-0 left-0 z-50 bg-white/80 dark:bg-[#09090e]/90 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 transition-colors">
+    <header class="fixed top-0 right-0 left-0 z-40 bg-white/80 dark:bg-[#09090e]/90 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 transition-colors">
         <nav class="container mx-auto px-6 flex items-center justify-between h-20">
-            <!-- LOGO -->
-            <a href="#" class="flex items-center gap-2">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-purple-500 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-purple-500/30">N</div>
+            <!-- TRANSPARENT LOGO -->
+            <a href="#" class="flex items-center gap-3">
+                <svg width="42" height="42" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-[0_2px_8px_rgba(124,58,237,0.3)]">
+                    <!-- Left Purple Curve -->
+                    <path d="M22 76 V 36 C22 24, 34 16, 46 28 L52 34 C44 44, 32 58, 22 76 Z" fill="url(#brandGrad)" />
+                    <!-- Right Dark Curve -->
+                    <path d="M 54 26 L 76 76 H 62 C 62 60, 70 40, 54 26 Z" class="fill-slate-800 dark:fill-slate-100" />
+                    <!-- Sharp Slash -->
+                    <path d="M 34 60 Q 56 48 78 32 Q 54 58 34 60 Z" fill="#FFFFFF" class="dark:fill-[#08080c]" />
+                    <defs>
+                        <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#8B5CF6" />
+                            <stop offset="100%" stop-color="#6D28D9" />
+                        </linearGradient>
+                    </defs>
+                </svg>
                 <div class="flex flex-col">
-                    <span class="font-black text-xl leading-none tracking-widest text-slate-900 dark:text-white">NE<span class="text-purple-600 dark:text-purple-500">X</span>A</span>
-                    <span class="text-slate-500 dark:text-gray-400 text-[9px] tracking-[0.3em] uppercase mt-1">creative</span>
+                    <span class="font-black text-xl leading-none tracking-widest text-slate-900 dark:text-white">NE<span class="text-purple-600 dark:text-purple-500">X</span>A<span class="text-[9px] text-purple-500 font-normal self-start -ml-0.5 -mt-1">®</span></span>
+                    <span class="text-slate-500 dark:text-gray-400 text-[9px] tracking-[0.35em] uppercase mt-1">creative</span>
                 </div>
             </a>
             
@@ -54,7 +75,6 @@
 
             <!-- ACTIONS & THEME TOGGLE -->
             <div class="flex items-center gap-4">
-                <!-- Theme Toggle Button (Default Light Status) -->
                 <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 hover:scale-110 active:scale-95 transition-all" title="تبديل وضع الظلام/النور">
                     <span id="themeIcon" class="text-lg">☀️</span>
                 </button>
@@ -66,13 +86,21 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-16">
+    <!-- HERO SECTION WITH VERY TRANSPARENT LOGO WATERMARK -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+        <!-- خلفية اللوجو الشفافة جداً (Watermark Logo) -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.04] dark:opacity-[0.03] select-none">
+            <svg width="600" height="600" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 76 V 36 C22 24, 34 16, 46 28 L52 34 C44 44, 32 58, 22 76 Z" fill="currentColor" class="text-purple-600" />
+                <path d="M 54 26 L 76 76 H 62 C 62 60, 70 40, 54 26 Z" fill="currentColor" class="text-slate-900 dark:text-white" />
+            </svg>
+        </div>
+
         <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-purple-600/15 dark:bg-purple-600/20 rounded-full blur-[140px] pointer-events-none"></div>
         
         <div class="container mx-auto px-4 relative z-10 text-center">
             <div class="max-w-4xl mx-auto">
-                <span class="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-300 text-xs sm:text-sm font-medium mb-6">
+                <span class="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-300 text-xs sm:text-sm font-medium mb-6 backdrop-blur-md">
                     ✨ استوديو NEXA للتصميم والإبداع الرقمي
                 </span>
                 
@@ -210,7 +238,6 @@
     <!-- FOOTER & SOCIAL MEDIA -->
     <footer class="border-t border-slate-200 dark:border-white/10 py-12 text-center text-slate-500 dark:text-gray-400 text-sm">
         <div class="container mx-auto px-6 flex flex-col items-center gap-6">
-            <!-- Vector Social Icons (سنضع روابطك المباشرة هنا بمجرد إرسالها) -->
             <div id="socialLinks" class="flex items-center gap-4">
                 <a href="https://wa.me/905364391849" target="_blank" class="w-10 h-10 rounded-xl bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 flex items-center justify-center text-slate-700 dark:text-gray-300 hover:text-purple-600 hover:border-purple-500 hover:scale-110 active:scale-95 transition-all shadow-sm" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
@@ -232,7 +259,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // 1. LIGHT / DARK MODE TOGGLE (DEFAULT IS LIGHT)
+        // 1. LIGHT / DARK MODE TOGGLE (DEFAULT LIGHT)
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
         
@@ -270,39 +297,4 @@
         function renderSlide(index) {
             const slide = slides[index];
             slideContent.innerHTML = `
-                <span class="inline-block px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-bold w-fit mb-3">${slide.tag}</span>
-                <h3 class="text-2xl sm:text-3xl font-black mb-4">${slide.title}</h3>
-                <p class="text-slate-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">${slide.desc}</p>
-            `;
-
-            slideDots.innerHTML = slides.map((_, i) => `
-                <span class="w-2.5 h-2.5 rounded-full ${i === index ? 'bg-purple-600 w-6' : 'bg-slate-300 dark:bg-white/20'} transition-all"></span>
-            `).join('');
-        }
-
-        prevBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            renderSlide(currentSlide);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            renderSlide(currentSlide);
-        });
-
-        renderSlide(currentSlide);
-
-        // 3. FAQ ACCORDION
-        document.querySelectorAll('.faq-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const answer = btn.nextElementSibling;
-                const icon = btn.querySelector('.faq-icon');
-                
-                answer.classList.toggle('hidden');
-                icon.classList.toggle('rotate-180');
-            });
-        });
-    </script>
-</body>
-    </html>
-    
+                <span class="inlin
