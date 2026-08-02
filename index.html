@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* نظام الألوان المتغير (Dark & Light) */
         :root {
             --bg-main: #f8fafc;
             --bg-card: #ffffff;
@@ -51,7 +50,7 @@
             overflow-x: hidden;
         }
 
-        /* دوائر الإضاءة الخلفية */
+        /* Glow Elements */
         .glow-orb {
             position: fixed;
             width: 450px;
@@ -64,12 +63,12 @@
         .orb-1 { top: -100px; right: -100px; }
         .orb-2 { bottom: 5%; left: -150px; }
 
-        /* الهيدر الاحترافي */
+        /* Header Fixes */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 6%;
+            padding: 12px 5%;
             position: fixed;
             width: 100%;
             top: 0;
@@ -82,40 +81,42 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
+            flex-shrink: 0; /* يمنع انكماش أو انقصاص اللوجو */
         }
 
         .logo-img {
-            height: 42px;
-            width: auto;
+            height: 38px;
+            width: 38px;
+            flex-shrink: 0;
         }
 
         .logo-text {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: var(--text-main);
-            letter-spacing: 1px;
+            line-height: 1.1;
         }
 
         .logo-text span {
             color: var(--accent-purple-light);
             display: block;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
 
         .nav-group {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 12px;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 20px;
         }
 
         nav a {
@@ -129,34 +130,35 @@
             color: var(--accent-purple-light);
         }
 
-        /* زر تبديل الوضع الليلي والنهاري */
         .theme-toggle {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             box-shadow: var(--shadow);
+            flex-shrink: 0;
         }
 
         .header-btn {
             background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 100%);
             color: #fff;
-            padding: 9px 22px;
+            padding: 8px 18px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 0 20px rgba(114, 41, 230, 0.3);
+            font-size: 0.85rem;
+            box-shadow: 0 0 15px rgba(114, 41, 230, 0.3);
+            white-space: nowrap;
         }
 
-        /* قسم البطل (Hero Section) */
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -164,7 +166,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 140px 20px 60px;
+            padding: 130px 20px 60px;
         }
 
         .badge {
@@ -181,7 +183,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-size: clamp(2rem, 5vw, 3.8rem);
             font-weight: 900;
             line-height: 1.25;
             max-width: 850px;
@@ -234,7 +236,7 @@
             box-shadow: var(--shadow);
         }
 
-        /* قسم المعرض أو الحملات */
+        /* Campaign Section */
         .campaign-section {
             padding: 90px 6%;
             background: rgba(114, 41, 230, 0.02);
@@ -288,7 +290,7 @@
             font-size: 0.95rem;
         }
 
-        /* قسم التواصل */
+        /* Contact Section */
         .contact-section {
             padding: 100px 6%;
             text-align: center;
@@ -338,7 +340,6 @@
             box-shadow: 0 10px 20px rgba(220, 39, 67, 0.3);
         }
 
-        /* زر الواتساب العائم */
         .float-wa {
             position: fixed;
             bottom: 25px;
@@ -365,11 +366,8 @@
             font-size: 0.9rem;
         }
 
-        /* استجابة الموبايل */
         @media (max-width: 768px) {
             nav ul { display: none; }
-            header { padding: 12px 5%; }
-            .hero { padding-top: 120px; }
         }
     </style>
 </head>
@@ -378,7 +376,7 @@
     <div class="glow-orb orb-1"></div>
     <div class="glow-orb orb-2"></div>
 
-    <!-- الهيدر -->
+    <!-- Header -->
     <header>
         <a href="#" class="logo-container">
             <svg class="logo-img" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -398,15 +396,14 @@
                     <li><a href="#contact">التواصل</a></li>
                 </ul>
             </nav>
-            <!-- زر تبديل الوضع -->
-            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع الليلي والنهاري">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع">
+                <i class="fa-solid fa-sun" id="themeIcon"></i>
             </button>
             <a href="https://wa.me/905364391849" target="_blank" class="header-btn">تواصل معنا</a>
         </div>
     </header>
 
-    <!-- الواجهة الرئيسية -->
+    <!-- Hero -->
     <section class="hero">
         <div class="badge">
             <i class="fa-solid fa-sparkles"></i> استوديو التسويق والإبداع الرقمي
@@ -422,7 +419,7 @@
         </div>
     </section>
 
-    <!-- معرض الأفكار والحملات -->
+    <!-- Campaigns -->
     <section class="campaign-section" id="campaigns">
         <div class="section-title">
             <h2>من أفكارنا وحملاتنا الإعلانية</h2>
@@ -447,7 +444,7 @@
         </div>
     </section>
 
-    <!-- قسم التواصل -->
+    <!-- Contact -->
     <section class="contact-section" id="contact">
         <div class="contact-box">
             <h2>تواصل معنا.. واستعد للفرق!</h2>
@@ -464,7 +461,6 @@
         </div>
     </section>
 
-    <!-- زر واتساب عائم -->
     <a href="https://wa.me/905364391849" class="float-wa" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
@@ -473,7 +469,6 @@
         <p>جميع الحقوق محفوظة &copy; 2026 NEXA Creative Agency</p>
     </footer>
 
-    <!-- سكربت التحكم في الوضع (Dark / Light Mode) -->
     <script>
         const htmlElement = document.documentElement;
         const themeIcon = document.getElementById('themeIcon');
@@ -489,5 +484,5 @@
         }
     </script>
 </body>
-                        </html>
-    
+        </html>
+        
