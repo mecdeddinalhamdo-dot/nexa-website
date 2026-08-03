@@ -5,135 +5,108 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEXA Creative</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 
 <style>
-:root{
-    --bg:#0b0b14;
-    --text:#fff;
-    --accent:#7c3aed;
-}
-
-.light{
-    --bg:#f8fafc;
-    --text:#111;
-}
-
 body{
-    margin:0;
-    font-family:'Cairo',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    scroll-behavior:smooth;
-    transition:0.4s;
-}
-
-/* BACKGROUND */
-.bg{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:url("1.jpg") center/cover;
-    filter:blur(40px) brightness(0.4);
-    z-index:-1;
+margin:0;
+font-family:'Cairo',sans-serif;
+background:#0b0b14;
+color:#fff;
 }
 
 /* NAVBAR */
 nav{
-    position:fixed;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    width:90%;
-    display:flex;
-    justify-content:space-between;
-    padding:15px 30px;
-    backdrop-filter:blur(15px);
-    border-radius:20px;
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+width:85%;
+display:flex;
+justify-content:space-between;
+padding:15px 25px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+border-radius:20px;
+border:1px solid rgba(255,255,255,0.1);
 }
 
 /* HERO */
 .hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:radial-gradient(circle,#7c3aed33,#000);
 }
 
-.typing{
-    font-size:40px;
-    border-right:3px solid;
-    white-space:nowrap;
-    overflow:hidden;
+.hero h1{
+font-size:45px;
+}
+
+.hero p{
+opacity:0.7;
 }
 
 /* PORTFOLIO */
 .portfolio{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-    padding:50px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:40px;
 }
 
-.card{
-    overflow:hidden;
-    border-radius:20px;
+.portfolio img{
+width:100%;
+border-radius:15px;
+transition:0.4s;
 }
 
-.card img{
-    width:100%;
-    transition:0.5s;
-}
-
-.card:hover img{
-    transform:scale(1.1);
+.portfolio img:hover{
+transform:scale(1.05);
 }
 
 /* FLOAT BUTTONS */
 .controls{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+position:fixed;
+bottom:20px;
+right:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
 }
 
 .btn{
-    background:var(--accent);
-    color:#fff;
-    padding:12px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#fff;
+background:#7c3aed;
+cursor:pointer;
+transition:0.3s;
 }
 
-/* WHATSAPP */
-.whatsapp{
-    background:#25D366;
-}
-
-/* CONSULT */
-.consult{
-    background:#7c3aed;
+.btn:hover{
+transform:scale(1.1);
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-
 <nav>
 <div>NEXA</div>
-<div>Creative Agency</div>
+<div>Agency</div>
 </nav>
 
 <section class="hero">
-<h1 class="typing" id="typing"></h1>
+<h1>نصنع تجربة رقمية تبهر عملاءك</h1>
 <p>تصميم • برمجة • تسويق</p>
 </section>
 
@@ -145,40 +118,13 @@ nav{
 <img src="5.jpg">
 </section>
 
-<!-- FLOAT BUTTONS -->
 <div class="controls">
-<button class="btn" onclick="toggleMode()">🌙</button>
-<a href="https://wa.me/905364391849" class="btn whatsapp">
+<div class="btn">🌙</div>
+<a href="https://wa.me/905364391849" class="btn">
 <i class="ri-whatsapp-line"></i>
 </a>
-<button class="btn consult">💬</button>
+<div class="btn">💬</div>
 </div>
-
-<script>
-/* DARK MODE */
-if(localStorage.getItem("mode")=="light"){
-    document.body.classList.add("light");
-}
-
-function toggleMode(){
-    document.body.classList.toggle("light");
-    localStorage.setItem("mode",
-        document.body.classList.contains("light") ? "light":"dark"
-    );
-}
-
-/* TYPING EFFECT */
-let text="نصنع تجربة رقمية تبهر عملاءك";
-let i=0;
-function type(){
-    if(i<text.length){
-        document.getElementById("typing").innerHTML+=text.charAt(i);
-        i++;
-        setTimeout(type,50);
-    }
-}
-type();
-</script>
 
 </body>
 </html>
