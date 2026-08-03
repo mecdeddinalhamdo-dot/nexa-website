@@ -1,222 +1,298 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXA Creative</title>
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
-
-<!-- Icons -->
-<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-<style>
-:root{
-    --bg:#0b0b14;
-    --card:#151528;
-    --text:#fff;
-    --accent:#7c3aed;
-}
-
-.light{
-    --bg:#f8fafc;
-    --card:#ffffff;
-    --text:#111;
-}
-
-body{
-    margin:0;
-    font-family:'Cairo',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    transition:0.4s;
-}
-
-/* NAV */
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    backdrop-filter: blur(10px);
-}
-
-.logo img{
-    height:40px;
-}
-
-/* HERO */
-.hero{
-    text-align:center;
-    padding:120px 20px;
-}
-
-.hero h1{
-    font-size:48px;
-    margin-bottom:10px;
-}
-
-.hero p{
-    opacity:0.7;
-}
-
-/* BUTTON */
-.btn{
-    margin-top:20px;
-    padding:12px 25px;
-    border:none;
-    background:var(--accent);
-    color:#fff;
-    border-radius:10px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.btn:hover{
-    transform:scale(1.05);
-}
-
-/* PORTFOLIO */
-.portfolio{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-    padding:60px;
-}
-
-.card{
-    overflow:hidden;
-    border-radius:20px;
-    cursor:pointer;
-}
-
-.card img{
-    width:100%;
-    transition:0.5s;
-}
-
-.card:hover img{
-    transform:scale(1.1);
-}
-
-/* LIGHTBOX */
-.lightbox{
-    position:fixed;
-    top:0;left:0;
-    width:100%;
-    height:100%;
-    display:none;
-    background:rgba(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-}
-
-.lightbox img{
-    max-width:80%;
-}
-
-/* WHATSAPP */
-.whatsapp{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    background:#25D366;
-    color:#fff;
-    padding:15px;
-    border-radius:50%;
-    font-size:22px;
-}
-
-/* SCROLL ANIMATION */
-.fade{
-    opacity:0;
-    transform:translateY(50px);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXA Creative</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            purple: '#7C3AED',
+                            dark: '#08080C',
+                            accent: '#A855F7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+        }
+    </style>
 </head>
+<body class="bg-slate-50 text-slate-900 dark:bg-[#08080C] dark:text-slate-100 transition-colors duration-500 selection:bg-purple-500 selection:text-white relative">
 
-<body>
+    <!-- FLOATING WHATSAPP BUTTON (زر الواتساب العائم) -->
+    <a href="https://wa.me/905364391849" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(16,185,129,0.4)] hover:scale-110 active:scale-95 transition-all duration-300 group"
+       title="مراسلة NEXA عبر واتساب">
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 rounded-full animate-ping"></span>
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
 
-<!-- NAV -->
-<nav>
-<div class="logo">
-<img src="logo.png">
-</div>
+    <!-- NAVBAR -->
+    <header class="fixed top-0 right-0 left-0 z-40 bg-white/70 dark:bg-[#08080C]/70 backdrop-blur-2xl border-b border-slate-200/80 dark:border-white/5 transition-all">
+        <nav class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- LOGO (NEXA Creative) -->
+            <a href="#" class="flex items-center gap-3.5 group">
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_4px_12px_rgba(124,58,237,0.3)]">
+                    <path d="M22 76 V 36 C22 24, 34 16, 46 28 L52 34 C44 44, 32 58, 22 76 Z" fill="url(#brandGrad)" />
+                    <path d="M 54 26 L 76 76 H 62 C 62 60, 70 40, 54 26 Z" class="fill-slate-900 dark:fill-white" />
+                    <path d="M 34 60 Q 56 48 78 32 Q 54 58 34 60 Z" fill="#FFFFFF" class="dark:fill-[#08080C]" />
+                    <defs>
+                        <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#A855F7" />
+                            <stop offset="100%" stop-color="#6D28D9" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="flex flex-col">
+                    <span class="font-black text-xl leading-none tracking-wider text-slate-900 dark:text-white">NEXA<span class="text-purple-600 dark:text-purple-400">.</span></span>
+                    <span class="text-slate-500 dark:text-gray-400 text-[9px] tracking-[0.3em] uppercase mt-1 font-semibold">Creative</span>
+                </div>
+            </a>
+            
+            <!-- NAV LINKS -->
+            <div class="hidden lg:flex items-center gap-10 text-sm font-semibold text-slate-600 dark:text-gray-300">
+                <a href="#hero" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">الرئيسية</a>
+                <a href="#presentation" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">عن الشركة</a>
+                <a href="#services" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">خدماتنا</a>
+                <a href="#portfolio" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">معرض الأعمال</a>
+                <a href="#faq" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">الأسئلة</a>
+            </div>
 
-<div>
-<button class="btn" onclick="toggleMode()">🌙</button>
-</div>
-</nav>
+            <!-- ACTIONS -->
+            <div class="flex items-center gap-4">
+                <button id="themeToggle" class="w-11 h-11 rounded-2xl bg-slate-200/70 dark:bg-white/5 border border-slate-300/50 dark:border-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+                    <span id="themeIcon" class="text-lg">☀️</span>
+                </button>
 
-<!-- HERO -->
-<section class="hero">
-<h1 class="fade">NEXA Creative</h1>
-<p class="fade">نحو تصميم يصنع التأثير الحقيقي</p>
-<button class="btn fade">ابدأ مشروعك</button>
-</section>
+                <a href="https://wa.me/905364391849" target="_blank" class="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-sm font-bold shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-105 active:scale-95 transition-all">
+                    تواصل معنا
+                </a>
+            </div>
+        </nav>
+    </header>
 
-<!-- PORTFOLIO -->
-<section class="portfolio">
+    <!-- HERO SECTION WITH TRANSPARENT LOGO WATERMARK -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
+        <!-- Watermark Logo الخلفية الشفافة جداً -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] dark:opacity-[0.02] select-none">
+            <svg width="700" height="700" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 76 V 36 C22 24, 34 16, 46 28 L52 34 C44 44, 32 58, 22 76 Z" fill="currentColor" class="text-purple-600" />
+                <path d="M 54 26 L 76 76 H 62 C 62 60, 70 40, 54 26 Z" fill="currentColor" class="text-slate-900 dark:text-white" />
+            </svg>
+        </div>
 
-<div class="card fade" onclick="openImg(this)">
-<img src="1.jpg">
-</div>
+        <!-- Glowing Background Blur -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-purple-600/20 dark:bg-purple-600/15 rounded-full blur-[160px] pointer-events-none"></div>
 
-<div class="card fade" onclick="openImg(this)">
-<img src="2.jpg">
-</div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-300 text-xs sm:text-sm font-bold mb-8">
+                    <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
+                    NEXA Creative - عالم التصميم الرقمي الفاخر
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black leading-tight sm:leading-tight mb-8">
+                    نحوّل الرؤى العادية إلى <br>
+                    <span class="bg-gradient-to-r from-violet-600 via-purple-500 to-fuchsia-500 dark:from-violet-400 dark:via-purple-300 dark:to-fuchsia-400 bg-clip-text text-transparent">
+                        تجارب بصرية استثنائية
+                    </span>
+                </h1>
+                
+                <p class="text-slate-600 dark:text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+                    نبتكر هويات بصرية وواجهات مستخدم تضع علامتك التجارية في صدارة الشركات العالمية بلمسات فنية متطورة.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://wa.me/905364391849" target="_blank" class="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold shadow-xl shadow-purple-600/30 hover:scale-105 active:scale-95 transition-all">
+                        ابدأ مشروعك الآن
+                    </a>
+                    <a href="#portfolio" class="px-8 py-4 bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-white rounded-2xl font-bold hover:bg-slate-100 dark:hover:bg-white/10 transition-all">
+                        استكشف أعمالنا
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="card fade" onclick="openImg(this)">
-<img src="3.jpg">
-</div>
+    <!-- PRESENTATION SECTION (عرض تقديمي تفاعلي) -->
+    <section id="presentation" class="py-24 bg-slate-100/70 dark:bg-[#0c0c12] relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 dark:text-purple-400 text-xs font-black uppercase tracking-widest">العرض التقديمي</span>
+                <h2 class="text-3xl lg:text-5xl font-black mt-2">كيف نعمل ونُبدع؟</h2>
+            </div>
 
-<div class="card fade" onclick="openImg(this)">
-<img src="4.jpg">
-</div>
+            <div class="max-w-4xl mx-auto glass-card border border-slate-200 dark:border-white/10 rounded-3xl p-8 sm:p-14 shadow-2xl relative">
+                <div id="slideContent" class="min-h-[180px] flex flex-col justify-center">
+                    <!-- Slide content rendered via JS -->
+                </div>
 
-<div class="card fade" onclick="openImg(this)">
-<img src="5.jpg">
-</div>
+                <div class="flex justify-between items-center mt-10 pt-6 border-t border-slate-200 dark:border-white/10">
+                    <button id="prevSlide" class="px-6 py-2.5 rounded-xl bg-slate-200 dark:bg-white/10 text-xs font-bold hover:bg-purple-600 hover:text-white transition-all">السابق</button>
+                    <div id="slideDots" class="flex gap-2"></div>
+                    <button id="nextSlide" class="px-6 py-2.5 rounded-xl bg-purple-600 text-white text-xs font-bold hover:bg-purple-700 transition-all">التالي</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</section>
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-28">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <span class="text-purple-600 dark:text-purple-400 text-xs font-black uppercase tracking-widest">خدماتنا التخصصية</span>
+                <h2 class="text-3xl lg:text-5xl font-black mt-2">حلول تصميم برتبة <span class="text-purple-600 dark:text-purple-400">عالمية</span></h2>
+            </div>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeImg()">
-<img id="lightImg">
-</div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card border border-slate-200 dark:border-white/10 rounded-3xl p-8 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-bezier-curve"></i>
+                    </div>
+                    <h3 class="font-black text-xl mb-3">تصميم الشعارات</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">شعارات فريدة ومبتكرة تختصر قيم شركتك وتترك انطباعاً رسمياً لدى العملاء.</p>
+                </div>
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/905364391849" class="whatsapp">
-<i class="ri-whatsapp-line"></i>
-</a>
+                <div class="glass-card border border-slate-200 dark:border-white/10 rounded-3xl p-8 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="font-black text-xl mb-3">الهوية البصرية</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">بناء دليل كامل للهوية يشمل الخطوط، الألوان، المطبوعات والتطبيقات المختلفة.</p>
+                </div>
 
-<script>
-function toggleMode(){
-    document.body.classList.toggle("light");
-}
+                <div class="glass-card border border-slate-200 dark:border-white/10 rounded-3xl p-8 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-black text-xl mb-3">تصاميم السوشيال ميديا</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">قوالب وإعلانات احترافية ترفع من نسبة التفاعل وتبرز منتجاتك بشكل فاخر.</p>
+                </div>
 
-/* LIGHTBOX */
-function openImg(el){
-    document.getElementById("lightbox").style.display="flex";
-    document.getElementById("lightImg").src = el.querySelector("img").src;
-}
+                <div class="glass-card border border-slate-200 dark:border-white/10 rounded-3xl p-8 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="font-black text-xl mb-3">واجهات الرقمية (UI/UX)</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">تخطيط وتصميم واجهات التفاعل للمواقع والتطبيقات بأسلوب عصري وسهل الاستخدام.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-function closeImg(){
-    document.getElementById("lightbox").style.display="none";
-}
+    <!-- PORTFOLIO SECTION (معرض أعمال بفرز وصور عالمية) -->
+    <section id="portfolio" class="py-28 bg-slate-100/70 dark:bg-[#0a0a0f]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 dark:text-purple-400 text-xs font-black uppercase tracking-widest">معرض الأعمال</span>
+                <h2 class="text-3xl lg:text-5xl font-black mt-2">نتاج <span class="text-purple-600 dark:text-purple-400">الإبداع</span></h2>
+            </div>
 
-/* GSAP ANIMATION */
-gsap.to(".fade", {
-    opacity:1,
-    y:0,
-    duration:1,
-    stagger:0.2
-});
-</script>
+            <!-- Gallery Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="group relative rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-xl">
+                    <div class="h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=1000&auto=format&fit=crop" alt="Branding Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-purple-600 dark:text-purple-400">هوية تجارية</span>
+                        <h3 class="text-xl font-bold mt-1">مشروع المشروبات العضوية</h3>
+                        <p class="text-slate-500 dark:text-gray-400 text-sm mt-2">تصميم هوية بصرية كاملة وتغليف منتجات عصري.</p>
+                    </div>
+                </div>
 
-</body>
-</html>
+                <!-- Card 2 -->
+                <div class="group relative rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-xl">
+                    <div class="h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="3D Art Project" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-purple-600 dark:text-purple-400">تصميم شعار</span>
+                        <h3 class="text-xl font-bold mt-1">استوديو الابتكار الرقمي</h3>
+                        <p class="text-slate-500 dark:text-gray-400 text-sm mt-2">شعار تجريدي يعكس المستقبل والتطوير البرمجي.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-xl">
+                    <div class="h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1000&auto=format&fit=crop" alt="UI UX Design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-purple-600 dark:text-purple-400">واجهات مستخدم</span>
+                        <h3 class="text-xl font-bold mt-1">منصة NEXA المالية</h3>
+                        <p class="text-slate-500 dark:text-gray-400 text-sm mt-2">تصميم واجهة لوحة تحكم سريعة وسلسة للمستخدمين.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-28">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 dark:text-purple-400 text-xs font-black uppercase tracking-widest">الأسئلة الشائعة</span>
+                <h2 class="text-3xl lg:text-5xl font-black mt-2">إجابات استفساراتك</h2>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="faq-item glass-card border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition-colors">
+                        <span>ما الذي يميز استوديو NEXA Creative عن غيره؟</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300 text-purple-600"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-4">
+                        نحن لا نقدم مجرد تصاميم جمالية، بل نتبع دراسات بصرية وتسويقية تضمن وصول علامتك التجاري لقاعدتك المستهدفة بأسلوب واثق وعالي الدقة.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition-colors">
+                        <span>ما هي الآلية المتبعة لبدء أي مشروع؟</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300 text-purple-600"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-4">
+                        تبدأ الرحلة بجلسة استشارات لفهم تفاصيل مشروعك، ثم تقديم مقترحات ومسودات أولية، وصولاً إلى مرحلة التعديلات والتسليم النهائي بالصيغ الكاملة.
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="faq-btn w-full p-6 text-right font-bold flex justify-between items-center gap-4 hover:text-purple-600 transition-colors">
+                        <span>هل يتم تسليم الملفات المصدرية المفتوحة؟</span>
+                        <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300 text-purple-600"></i>
+                    </button>
+                    <div class="faq-answer hidden px-6 pb-6 text-slate-600 dark:text-gray-400 text-sm leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-4">
+                        نعم بالتأكيد، يتم تسليم كافة ملفات العمل الأصلية (AI, PSD, SVG, Figma) بجودة ممتازة لتتمكن من استخدامها مستقبلاً بحرية.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER & SOCIAL MEDIA
