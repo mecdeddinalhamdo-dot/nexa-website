@@ -12,6 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
+
 :root{
 --bg:#ffffff;
 --text:#111;
@@ -29,6 +30,7 @@ font-family:'Cairo';
 background:var(--bg);
 color:var(--text);
 transition:0.4s;
+overflow-x:hidden;
 }
 
 /* LOADER */
@@ -44,6 +46,12 @@ z-index:9999;
 }
 .loader h1{
 color:#7c3aed;
+font-size:40px;
+animation:pulse 1s infinite alternate;
+}
+@keyframes pulse{
+from{opacity:0.5;}
+to{opacity:1;}
 }
 
 /* NAV */
@@ -72,24 +80,57 @@ align-items:center;
 text-align:center;
 }
 
-/* FIX TEXT */
-.title{
-font-size:32px;
-font-weight:bold;
-letter-spacing:2px;
+.hero h1{
+font-size:50px;
+margin:0;
+}
+
+.hero p{
+opacity:0.7;
 }
 
 /* PORTFOLIO */
 .portfolio{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-padding:20px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:40px;
+}
+
+.card{
+overflow:hidden;
+border-radius:20px;
+position:relative;
 }
 
 .card img{
 width:100%;
-border-radius:15px;
+transition:0.5s;
+}
+
+.card:hover img{
+transform:scale(1.1);
+}
+
+/* overlay */
+.card::after{
+content:"View Project";
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,0.5);
+color:#fff;
+opacity:0;
+transition:0.4s;
+}
+
+.card:hover::after{
+opacity:1;
 }
 
 /* BUTTONS */
@@ -123,41 +164,34 @@ font-size:20px;
 
 <body>
 
-<!-- LOADER -->
 <div class="loader" id="loader">
 <h1>NEXA</h1>
 </div>
 
-<!-- NAV -->
 <nav>
 <div>NEXA</div>
 <div>Creative Agency</div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-<h1 class="title">NEXA Creative</h1>
-<p class="reveal">تصميم • برمجة • تسويق</p>
+<h1 class="hero-title">NEXA Creative</h1>
+<p class="hero-sub">تصميم • برمجة • تسويق</p>
 </section>
 
-<!-- PORTFOLIO -->
 <section class="portfolio">
-<div class="card"><img src="1.jpg"></div>
-<div class="card"><img src="2.jpg"></div>
-<div class="card"><img src="3.jpg"></div>
-<div class="card"><img src="4.jpg"></div>
-<div class="card"><img src="5.jpg"></div>
+<div class="card reveal"><img src="1.jpg"></div>
+<div class="card reveal"><img src="2.jpg"></div>
+<div class="card reveal"><img src="3.jpg"></div>
+<div class="card reveal"><img src="4.jpg"></div>
+<div class="card reveal"><img src="5.jpg"></div>
 </section>
 
-<!-- BUTTONS -->
 <div class="controls">
-
 <button id="modeBtn" class="btn mode">🌙</button>
 
 <a href="https://wa.me/905364391849" target="_blank" class="btn whatsapp">
 <i class="ri-whatsapp-line"></i>
 </a>
-
 </div>
 
 <script>
@@ -167,7 +201,7 @@ window.addEventListener("load", ()=>{
 document.getElementById("loader").style.display="none";
 });
 
-/* DARK MODE FIX */
+/* DARK MODE */
 const modeBtn = document.getElementById("modeBtn");
 
 if(localStorage.getItem("mode")==="dark"){
@@ -186,6 +220,26 @@ localStorage.setItem("mode","light");
 modeBtn.innerHTML="🌙";
 }
 };
+
+/* GSAP ANIMATION */
+gsap.registerPlugin(ScrollTrigger);
+
+/* hero animation */
+gsap.from(".hero-title",{y:50,opacity:0,duration:1});
+gsap.from(".hero-sub",{y:30,opacity:0,duration:1,delay:0.3});
+
+/* cards animation */
+gsap.utils.toArray(".reveal").forEach((el)=>{
+gsap.from(el,{
+opacity:0,
+y:60,
+duration:1,
+scrollTrigger:{
+trigger:el,
+start:"top 85%"
+}
+});
+});
 
 </script>
 
