@@ -13,7 +13,7 @@
 
 <style>
 :root{
---bg:#f8fafc;
+--bg:#ffffff;
 --text:#111;
 --accent:#7c3aed;
 }
@@ -29,7 +29,6 @@ font-family:'Cairo';
 background:var(--bg);
 color:var(--text);
 transition:0.4s;
-overflow-x:hidden;
 }
 
 /* LOADER */
@@ -45,22 +44,20 @@ z-index:9999;
 }
 .loader h1{
 color:#7c3aed;
-font-size:40px;
-letter-spacing:5px;
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
 position:fixed;
 top:20px;
 left:50%;
 transform:translateX(-50%);
-width:85%;
+width:90%;
 display:flex;
 justify-content:space-between;
-padding:15px 25px;
+padding:15px;
 background:rgba(255,255,255,0.2);
-backdrop-filter:blur(15px);
+backdrop-filter:blur(10px);
 border-radius:20px;
 z-index:1000;
 }
@@ -73,33 +70,26 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:radial-gradient(circle,#7c3aed22,#00000011);
 }
 
-.title span{
-opacity:0;
-display:inline-block;
-transform:translateY(20px);
+/* FIX TEXT */
+.title{
+font-size:32px;
+font-weight:bold;
+letter-spacing:2px;
 }
 
 /* PORTFOLIO */
 .portfolio{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:40px;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
 }
 
-.card{
-overflow:hidden;
-border-radius:20px;
-}
 .card img{
 width:100%;
-transition:0.5s;
-}
-.card:hover img{
-transform:scale(1.1);
+border-radius:15px;
 }
 
 /* BUTTONS */
@@ -113,18 +103,19 @@ gap:10px;
 }
 
 .btn{
-width:50px;
-height:50px;
+width:55px;
+height:55px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
 color:#fff;
-background:#7c3aed;
-cursor:pointer;
 border:none;
+cursor:pointer;
+font-size:20px;
 }
 
+.mode{background:#7c3aed;}
 .whatsapp{background:#25D366;}
 
 </style>
@@ -145,24 +136,25 @@ border:none;
 
 <!-- HERO -->
 <section class="hero">
-<h1 class="title" id="title"></h1>
+<h1 class="title">NEXA Creative</h1>
 <p class="reveal">تصميم • برمجة • تسويق</p>
 </section>
 
 <!-- PORTFOLIO -->
 <section class="portfolio">
-<div class="card reveal"><img src="1.jpg"></div>
-<div class="card reveal"><img src="2.jpg"></div>
-<div class="card reveal"><img src="3.jpg"></div>
-<div class="card reveal"><img src="4.jpg"></div>
-<div class="card reveal"><img src="5.jpg"></div>
+<div class="card"><img src="1.jpg"></div>
+<div class="card"><img src="2.jpg"></div>
+<div class="card"><img src="3.jpg"></div>
+<div class="card"><img src="4.jpg"></div>
+<div class="card"><img src="5.jpg"></div>
 </section>
 
-<!-- FLOAT BUTTONS -->
+<!-- BUTTONS -->
 <div class="controls">
-<button id="modeBtn" class="btn" onclick="toggleMode()">🌙</button>
 
-<a href="https://wa.me/905364391849" class="btn whatsapp">
+<button id="modeBtn" class="btn mode">🌙</button>
+
+<a href="https://wa.me/905364391849" target="_blank" class="btn whatsapp">
 <i class="ri-whatsapp-line"></i>
 </a>
 
@@ -171,23 +163,19 @@ border:none;
 <script>
 
 /* LOADER */
-window.addEventListener("load", () => {
-gsap.to("#loader",{opacity:0,duration:1,onComplete:()=>{
+window.addEventListener("load", ()=>{
 document.getElementById("loader").style.display="none";
-}});
 });
 
-/* DARK MODE */
-let mode = localStorage.getItem("mode");
+/* DARK MODE FIX */
+const modeBtn = document.getElementById("modeBtn");
 
-if(mode==="dark"){
+if(localStorage.getItem("mode")==="dark"){
 document.body.classList.add("dark");
 modeBtn.innerHTML="☀️";
-}else{
-modeBtn.innerHTML="🌙";
 }
 
-function toggleMode(){
+modeBtn.onclick = () => {
 document.body.classList.toggle("dark");
 
 if(document.body.classList.contains("dark")){
@@ -197,25 +185,7 @@ modeBtn.innerHTML="☀️";
 localStorage.setItem("mode","light");
 modeBtn.innerHTML="🌙";
 }
-}
-
-/* TEXT REVEAL */
-let text="NEXA Creative";
-let title=document.getElementById("title");
-
-title.innerHTML=text.split("").map(l=>`<span>${l}</span>`).join("");
-
-gsap.to(".title span",{y:0,opacity:1,stagger:0.05,duration:0.8});
-
-/* SCROLL ANIMATION */
-gsap.utils.toArray(".reveal").forEach(el=>{
-gsap.from(el,{
-scrollTrigger:{trigger:el,start:"top 85%"},
-y:60,
-opacity:0,
-duration:1
-});
-});
+};
 
 </script>
 
