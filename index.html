@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 <style>
 :root{
 --bg:#f8fafc;
@@ -22,11 +25,28 @@
 
 body{
 margin:0;
-font-family:'Cairo',sans-serif;
+font-family:'Cairo';
 background:var(--bg);
 color:var(--text);
 transition:0.4s;
 overflow-x:hidden;
+}
+
+/* LOADER */
+.loader{
+position:fixed;
+width:100%;
+height:100%;
+background:#0b0b14;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+.loader h1{
+color:#7c3aed;
+font-size:40px;
+letter-spacing:5px;
 }
 
 /* NAVBAR */
@@ -35,7 +55,7 @@ position:fixed;
 top:20px;
 left:50%;
 transform:translateX(-50%);
-width:90%;
+width:85%;
 display:flex;
 justify-content:space-between;
 padding:15px 25px;
@@ -53,17 +73,13 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-background:linear-gradient(120deg,#7c3aed22,#00000011);
+background:radial-gradient(circle,#7c3aed22,#00000011);
 }
 
-.hero h1{
-font-size:42px;
-}
-
-.typing{
-border-right:3px solid;
-white-space:nowrap;
-overflow:hidden;
+.title span{
+opacity:0;
+display:inline-block;
+transform:translateY(20px);
 }
 
 /* PORTFOLIO */
@@ -74,14 +90,16 @@ gap:20px;
 padding:40px;
 }
 
-.portfolio img{
-width:100%;
-border-radius:15px;
-transition:0.4s;
+.card{
+overflow:hidden;
+border-radius:20px;
 }
-
-.portfolio img:hover{
-transform:scale(1.05);
+.card img{
+width:100%;
+transition:0.5s;
+}
+.card:hover img{
+transform:scale(1.1);
 }
 
 /* BUTTONS */
@@ -107,31 +125,37 @@ cursor:pointer;
 border:none;
 }
 
-/* WHATSAPP */
-.whatsapp{
-background:#25D366;
-}
+.whatsapp{background:#25D366;}
+
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
+<div class="loader" id="loader">
+<h1>NEXA</h1>
+</div>
+
+<!-- NAV -->
 <nav>
 <div>NEXA</div>
 <div>Creative Agency</div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-<h1 class="typing" id="typing"></h1>
-<p>تصميم • برمجة • تسويق</p>
+<h1 class="title" id="title"></h1>
+<p class="reveal">تصميم • برمجة • تسويق</p>
 </section>
 
+<!-- PORTFOLIO -->
 <section class="portfolio">
-<img src="1.jpg">
-<img src="2.jpg">
-<img src="3.jpg">
-<img src="4.jpg">
-<img src="5.jpg">
+<div class="card reveal"><img src="1.jpg"></div>
+<div class="card reveal"><img src="2.jpg"></div>
+<div class="card reveal"><img src="3.jpg"></div>
+<div class="card reveal"><img src="4.jpg"></div>
+<div class="card reveal"><img src="5.jpg"></div>
 </section>
 
 <!-- FLOAT BUTTONS -->
@@ -142,46 +166,56 @@ background:#25D366;
 <i class="ri-whatsapp-line"></i>
 </a>
 
-<button class="btn">💬</button>
 </div>
 
 <script>
 
-/* حفظ الوضع */
+/* LOADER */
+window.addEventListener("load", () => {
+gsap.to("#loader",{opacity:0,duration:1,onComplete:()=>{
+document.getElementById("loader").style.display="none";
+}});
+});
+
+/* DARK MODE */
 let mode = localStorage.getItem("mode");
 
-if(mode === "dark"){
+if(mode==="dark"){
 document.body.classList.add("dark");
-document.getElementById("modeBtn").innerHTML="☀️";
+modeBtn.innerHTML="☀️";
 }else{
-document.getElementById("modeBtn").innerHTML="🌙";
+modeBtn.innerHTML="🌙";
 }
 
-/* التبديل */
 function toggleMode(){
 document.body.classList.toggle("dark");
 
 if(document.body.classList.contains("dark")){
 localStorage.setItem("mode","dark");
-document.getElementById("modeBtn").innerHTML="☀️";
+modeBtn.innerHTML="☀️";
 }else{
 localStorage.setItem("mode","light");
-document.getElementById("modeBtn").innerHTML="🌙";
+modeBtn.innerHTML="🌙";
 }
 }
 
-/* Typing Effect */
-let text="نصنع تجربة رقمية تبهر عملاءك";
-let i=0;
+/* TEXT REVEAL */
+let text="NEXA Creative";
+let title=document.getElementById("title");
 
-function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(type,40);
-}
-}
-type();
+title.innerHTML=text.split("").map(l=>`<span>${l}</span>`).join("");
+
+gsap.to(".title span",{y:0,opacity:1,stagger:0.05,duration:0.8});
+
+/* SCROLL ANIMATION */
+gsap.utils.toArray(".reveal").forEach(el=>{
+gsap.from(el,{
+scrollTrigger:{trigger:el,start:"top 85%"},
+y:60,
+opacity:0,
+duration:1
+});
+});
 
 </script>
 
