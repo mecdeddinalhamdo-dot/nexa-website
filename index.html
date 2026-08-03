@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXA WOW</title>
+
+<title>NEXA PRO</title>
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
 <style>
 
-/* ===== ROOT ===== */
 :root{
 --bg:#020617;
 --text:#fff;
+--card:#0f172a;
 --accent:#38BDF8;
---glass:rgba(255,255,255,0.05);
 }
 
 body.light{
 --bg:#fff;
 --text:#111;
+--card:#f1f5f9;
 }
 
 body{
@@ -25,21 +28,28 @@ margin:0;
 font-family:system-ui;
 background:var(--bg);
 color:var(--text);
-overflow-x:hidden;
-cursor:none;
 }
 
-/* ===== CUSTOM CURSOR ===== */
-.cursor{
-width:20px;
-height:20px;
-border:2px solid var(--accent);
-border-radius:50%;
+/* ===== PROGRESS BAR ===== */
+.progress{
 position:fixed;
-pointer-events:none;
-transform:translate(-50%,-50%);
-transition:0.1s;
+top:0;
+left:0;
+height:4px;
+background:var(--accent);
+width:0%;
 z-index:9999;
+}
+
+/* ===== NAVBAR ===== */
+header{
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+position:fixed;
+width:100%;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(12px);
 }
 
 /* ===== HERO ===== */
@@ -50,79 +60,87 @@ align-items:center;
 justify-content:center;
 flex-direction:column;
 text-align:center;
-position:relative;
 }
 
 .hero h1{
-font-size:4rem;
-animation:fadeUp 1s ease;
+font-size:3.5rem;
 }
 
 .hero span{
 color:var(--accent);
 }
 
-.hero p{
-margin-top:20px;
-opacity:0.7;
-animation:fadeUp 1.5s ease;
-}
-
-.hero button{
-margin-top:30px;
-padding:15px 35px;
-border:none;
+/* ===== BUTTON RIPPLE ===== */
+.btn{
+margin-top:25px;
+padding:14px 30px;
 background:var(--accent);
-border-radius:10px;
+border:none;
+border-radius:8px;
 cursor:pointer;
+position:relative;
+overflow:hidden;
 }
 
-.hero button:hover{
-transform:scale(1.1);
-box-shadow:0 20px 50px rgba(56,189,248,0.5);
-}
-
-/* ===== PARALLAX GLOW ===== */
-.glow{
+.btn::after{
+content:"";
 position:absolute;
-width:500px;
-height:500px;
-background:radial-gradient(circle,var(--accent),transparent);
-filter:blur(120px);
-z-index:-1;
+width:0;
+height:0;
+background:rgba(255,255,255,0.4);
+border-radius:50%;
+transform:translate(-50%,-50%);
+transition:0.5s;
 }
 
-/* ===== SECTION ===== */
-.section{
-padding:120px 40px;
-text-align:center;
+.btn:active::after{
+width:200px;
+height:200px;
+}
+
+/* ===== SERVICES ===== */
+.services{
+padding:100px 60px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
 }
 
 .card{
-margin:20px;
 padding:30px;
-display:inline-block;
-background:var(--glass);
-backdrop-filter:blur(10px);
+background:var(--card);
 border-radius:15px;
+text-align:center;
 transition:0.4s;
-opacity:0;
-transform:translateY(50px);
 }
 
-.card.show{
-opacity:1;
-transform:translateY(0);
+.card i{
+font-size:40px;
+color:var(--accent);
+margin-bottom:15px;
 }
 
 .card:hover{
-transform:scale(1.05);
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeUp{
-from{opacity:0; transform:translateY(40px);}
-to{opacity:1; transform:translateY(0);}
+/* ===== FEATURE SECTION ===== */
+.features{
+padding:100px 60px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:40px;
+}
+
+.feature{
+display:flex;
+gap:20px;
+}
+
+.feature i{
+font-size:30px;
+color:var(--accent);
 }
 
 /* ===== WHATSAPP ===== */
@@ -134,19 +152,20 @@ background:#25D366;
 padding:15px;
 border-radius:50%;
 color:white;
-font-size:20px;
+font-size:22px;
 text-decoration:none;
 }
 
 /* ===== TOGGLE ===== */
 .toggle{
-position:fixed;
-top:20px;
-right:20px;
-background:var(--glass);
-padding:10px 15px;
-border-radius:20px;
 cursor:pointer;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+.services, .features{
+grid-template-columns:1fr;
+}
 }
 
 </style>
@@ -154,58 +173,44 @@ cursor:pointer;
 
 <body>
 
-<div class="cursor"></div>
+<div class="progress" id="progress"></div>
 
-<div class="toggle" onclick="toggleMode()">🌙</div>
+<header>
+<h2>NEXA</h2>
+
+<div>
+<i class="ri-moon-line toggle" onclick="toggleMode()"></i>
+</div>
+</header>
 
 <section class="hero">
-<div class="glow" id="glow"></div>
-
-<h1>نصنع <span>تجربة بصرية</span> لا تُنسى</h1>
-<p>تصاميم تخلي مشروعك يسبق الجميع</p>
-<button>ابدأ الآن</button>
+<h1>نصنع <span>تجربة رقمية</span> فريدة</h1>
+<button class="btn">ابدأ الآن</button>
 </section>
 
-<section class="section">
+<section class="services">
 
-<div class="card">تصميم شعارات فخم</div>
-<div class="card">هوية بصرية كاملة</div>
-<div class="card">تصميم سوشيال ميديا</div>
+<div class="card">
+<i class="ri-brush-line"></i>
+<h3>تصميم شعارات</h3>
+<p>شعارات احترافية تعبر عن هويتك</p>
+</div>
+
+<div class="card">
+<i class="ri-palette-line"></i>
+<h3>هوية بصرية</h3>
+<p>بناء هوية متكاملة لعلامتك</p>
+</div>
+
+<div class="card">
+<i class="ri-instagram-line"></i>
+<h3>سوشيال ميديا</h3>
+<p>تصاميم جذابة تزيد التفاعل</p>
+</div>
 
 </section>
 
-<a class="whatsapp" href="https://wa.me/905364391849">💬</a>
+<section class="features">
 
-<script>
-
-/* ===== CURSOR ===== */
-const cursor = document.querySelector(".cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.top = e.clientY + "px";
-cursor.style.left = e.clientX + "px";
-});
-
-/* ===== PARALLAX ===== */
-document.addEventListener("mousemove",e=>{
-let glow = document.getElementById("glow");
-glow.style.transform = `translate(${e.clientX/20}px, ${e.clientY/20}px)`;
-});
-
-/* ===== DARK MODE ===== */
-function toggleMode(){
-document.body.classList.toggle("light");
-}
-
-/* ===== SCROLL ANIMATION ===== */
-window.addEventListener("scroll",()=>{
-document.querySelectorAll(".card").forEach(el=>{
-if(el.getBoundingClientRect().top < window.innerHeight - 50){
-el.classList.add("show");
-}
-});
-});
-
-</script>
-
-</body>
-</html>
+<div class="feature">
+<i class="ri
