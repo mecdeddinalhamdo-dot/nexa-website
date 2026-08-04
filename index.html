@@ -1,453 +1,389 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelPerfect | تصميم جرافيك احترافي</title>
-    
-    <!-- استدعاء خط Cairo من جوجل -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    
-    <!-- مكتبة الأيقونات FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- مكتبة الأنيميشن AOS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXA Creative — نصنع تأثيراً لا يُنسى</title>
+<meta name="description" content="NEXA Creative - وكالة إبداعية متخصصة في تسويق المؤثرين والإعلانات المدروسة">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ========== VARIABLES ========== */
+  :root{
+    --purple:#6C3EF5;
+    --purple-light:#8B5CF6;
+    --purple-dark:#4C1D95;
+    --bg:#0E0A1A;
+    --bg-2:#1A1230;
+    --bg-3:#241842;
+    --text:#F5F3FF;
+    --muted:#A89FC4;
+    --glass:rgba(255,255,255,0.06);
+    --glass-strong:rgba(255,255,255,0.1);
+    --border:rgba(255,255,255,0.1);
+    --shadow:0 20px 60px rgba(0,0,0,.4);
+    --transition:.4s cubic-bezier(.4,0,.2,1);
+  }
+  [data-theme="light"]{
+    --bg:#FAFAFF;
+    --bg-2:#F0ECFF;
+    --bg-3:#E5DEFF;
+    --text:#1A1230;
+    --muted:#5B4F7A;
+    --glass:rgba(108,62,245,0.05);
+    --glass-strong:rgba(108,62,245,0.1);
+    --border:rgba(108,62,245,0.15);
+    --shadow:0 20px 60px rgba(108,62,245,.15);
+  }
 
-    <style>
-        /* --- متغيرات الألوان (ستايل أبل) --- */
-        :root {
-            --bg-color: #ffffff;
-            --text-main: #1d1d1f;
-            --text-secondary: #86868b;
-            --accent-blue: #0071e3;
-            --accent-hover: #0077ed;
-            --surface-gray: #f5f5f7;
-            --glass-bg: rgba(255, 255, 255, 0.8);
-            --border-radius: 20px;
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Tajawal',sans-serif;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;
+    transition:background .5s,color .5s;cursor:none;
+  }
+  @media(max-width:900px){body{cursor:auto;}}
 
-        /* --- الإعدادات العامة --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
+  /* ========== CUSTOM CURSOR ========== */
+  .cursor,.cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transition:transform .15s,width .3s,height .3s,background .3s;}
+  .cursor{width:36px;height:36px;border:1.5px solid var(--purple-light);transform:translate(-50%,-50%);}
+  .cursor-dot{width:6px;height:6px;background:var(--purple-light);transform:translate(-50%,-50%);}
+  .cursor.hover{width:60px;height:60px;background:rgba(108,62,245,.15);}
+  @media(max-width:900px){.cursor,.cursor-dot{display:none;}}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+  /* ========== PROGRESS BAR ========== */
+  .progress-bar{position:fixed;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-light));z-index:1001;width:0%;transition:width .1s;}
 
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
+  /* ========== ANIMATED BACKGROUND ========== */
+  .bg-orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;}
+  .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.4;animation:float 20s infinite ease-in-out;}
+  .orb-1{width:500px;height:500px;background:var(--purple);top:-10%;right:-10%;}
+  .orb-2{width:400px;height:400px;background:var(--purple-light);bottom:-10%;left:-10%;animation-delay:-7s;}
+  .orb-3{width:300px;height:300px;background:var(--purple-dark);top:40%;left:40%;animation-delay:-14s;}
+  @keyframes float{
+    0%,100%{transform:translate(0,0) scale(1);}
+    33%{transform:translate(50px,-80px) scale(1.1);}
+    66%{transform:translate(-60px,40px) scale(.9);}
+  }
 
-        /* --- شريط التنقل (Glassmorphism) --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: var(--transition);
-        }
+  /* ========== NAVBAR ========== */
+  nav{
+    position:fixed;top:0;width:100%;z-index:1000;
+    padding:18px 6%;display:flex;justify-content:space-between;align-items:center;
+    background:rgba(14,10,26,0.6);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);
+    border-bottom:1px solid var(--border);transition:var(--transition);
+  }
+  [data-theme="light"] nav{background:rgba(250,250,255,0.7);}
+  nav.scrolled{padding:12px 6%;box-shadow:var(--shadow);}
+  .logo{font-weight:900;font-size:1.5rem;letter-spacing:1px;display:flex;align-items:center;gap:6px;cursor:pointer;}
+  .logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--purple),var(--purple-light));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.1rem;}
+  .logo span{color:var(--purple-light);}
+  .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;transition:.3s;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:-6px;right:0;width:0;height:2px;background:var(--purple-light);transition:.3s;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-actions{display:flex;gap:14px;align-items:center;}
+  .theme-toggle{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--border);
+    background:var(--glass);color:var(--text);cursor:pointer;font-size:1.1rem;
+    display:flex;align-items:center;justify-content:center;transition:.3s;
+  }
+  .theme-toggle:hover{background:var(--glass-strong);transform:rotate(20deg);}
+  .nav-cta{
+    background:var(--purple);color:#fff;padding:10px 22px;border-radius:30px;
+    text-decoration:none;font-weight:700;font-size:.9rem;transition:.3s;
+  }
+  .nav-cta:hover{background:var(--purple-light);transform:translateY(-2px);box-shadow:0 10px 30px rgba(108,62,245,.4);}
+  .burger{display:none;font-size:1.6rem;cursor:pointer;background:none;border:none;color:var(--text);}
 
-        .logo {
-            font-weight: 900;
-            font-size: 1.5rem;
-            letter-spacing: -1px;
-        }
+  /* ========== HERO ========== */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;padding:140px 6% 80px;position:relative;
+  }
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border:1px solid var(--border);
+    border-radius:30px;background:var(--glass);font-size:.85rem;color:var(--muted);
+    margin-bottom:30px;backdrop-filter:blur(10px);animation:fadeDown .8s ease;
+  }
+  .hero-badge .dot{width:8px;height:8px;background:#25D366;border-radius:50%;animation:pulse 2s infinite;}
+  .hero h1{
+    font-size:clamp(2.5rem,6.5vw,5.5rem);font-weight:900;line-height:1.1;
+    max-width:950px;margin-bottom:24px;animation:fadeUp 1s ease;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(135deg,var(--purple-light),#C4B5FD,var(--purple));
+    background-size:200% 200%;animation:gradientShift 5s ease infinite;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  @keyframes gradientShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+  .hero p{font-size:1.2rem;color:var(--muted);max-width:640px;margin-bottom:40px;animation:fadeUp 1.2s ease;}
+  .hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;animation:fadeUp 1.4s ease;}
+  .btn-primary,.btn-secondary{
+    padding:16px 34px;border-radius:30px;font-weight:700;font-size:1rem;
+    text-decoration:none;transition:.3s;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none;
+  }
+  .btn-primary{background:var(--purple);color:#fff;}
+  .btn-primary:hover{background:var(--purple-light);transform:translateY(-3px);box-shadow:0 15px 40px rgba(108,62,245,.5);}
+  .btn-secondary{background:var(--glass);color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px);}
+  .btn-secondary:hover{background:var(--glass-strong);transform:translateY(-3px);}
+  .scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.85rem;animation:bounce 2s infinite;}
+  @keyframes bounce{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,10px);}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 
-        nav ul {
-            display: flex;
-            gap: 30px;
-        }
+  /* ========== SECTIONS ========== */
+  section{padding:120px 6%;position:relative;}
+  .section-head{text-align:center;margin-bottom:70px;}
+  .section-head .tag{color:var(--purple-light);font-weight:700;font-size:.9rem;letter-spacing:3px;text-transform:uppercase;}
+  .section-head h2{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:900;margin-top:12px;line-height:1.2;}
+  .section-head p{color:var(--muted);max-width:620px;margin:18px auto 0;font-size:1.05rem;}
 
-        nav a {
-            font-size: 0.9rem;
-            color: var(--text-main);
-            opacity: 0.8;
-            transition: var(--transition);
-        }
+  /* ========== SERVICES ========== */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px;max-width:1250px;margin:0 auto;}
+  .service-card{
+    background:var(--glass);border:1px solid var(--border);border-radius:24px;padding:40px 32px;
+    backdrop-filter:blur(15px);transition:var(--transition);position:relative;overflow:hidden;
+  }
+  .service-card::before{
+    content:'';position:absolute;top:0;right:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--purple),var(--purple-light));
+    transform:scaleX(0);transform-origin:right;transition:.5s;
+  }
+  .service-card:hover{transform:translateY(-10px);border-color:var(--purple);box-shadow:var(--shadow);}
+  .service-card:hover::before{transform:scaleX(1);}
+  .service-icon{
+    width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--purple),var(--purple-light));
+    display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:22px;
+    box-shadow:0 10px 30px rgba(108,62,245,.3);
+  }
+  .service-card h3{font-size:1.3rem;font-weight:700;margin-bottom:12px;}
+  .service-card p{color:var(--muted);font-size:.95rem;}
 
-        nav a:hover { opacity: 1; color: var(--accent-blue); }
+  /* ========== PORTFOLIO ========== */
+  .portfolio{background:var(--bg-2);transition:background .5s;}
+  .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1300px;margin:0 auto;}
+  .work{
+    position:relative;border-radius:24px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;
+    border:1px solid var(--border);transition:var(--transition);
+  }
+  .work img{width:100%;height:100%;object-fit:cover;transition:.7s;}
+  .work:hover{transform:translateY(-8px);box-shadow:var(--shadow);}
+  .work:hover img{transform:scale(1.08);}
+  .work-overlay{
+    position:absolute;inset:0;background:linear-gradient(to top,rgba(14,10,26,.95) 0%,rgba(14,10,26,.3) 50%,transparent 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:28px;
+    opacity:0;transition:.4s;
+  }
+  [data-theme="light"] .work-overlay{background:linear-gradient(to top,rgba(26,18,48,.95) 0%,rgba(26,18,48,.3) 50%,transparent 100%);}
+  .work:hover .work-overlay{opacity:1;}
+  .work-overlay span{color:var(--purple-light);font-size:.85rem;font-weight:700;letter-spacing:1px;}
+  .work-overlay h4{font-size:1.25rem;font-weight:700;margin-top:6px;color:#fff;}
 
-        .cta-btn-small {
-            background: var(--text-main);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            transition: var(--transition);
-        }
+  /* ========== LIGHTBOX ========== */
+  .lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:2000;
+    display:none;align-items:center;justify-content:center;padding:40px;backdrop-filter:blur(10px);
+  }
+  .lightbox.active{display:flex;animation:fadeIn .3s;}
+  .lightbox img{max-width:90%;max-height:90vh;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5);}
+  .lightbox-close{
+    position:absolute;top:30px;left:30px;width:50px;height:50px;border-radius:50%;
+    background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.5rem;cursor:pointer;transition:.3s;
+  }
+  .lightbox-close:hover{background:var(--purple);transform:rotate(90deg);}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-        .cta-btn-small:hover { transform: scale(1.05); }
+  /* ========== STATS ========== */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:30px;max-width:1100px;margin:0 auto;text-align:center;}
+  .stat{padding:30px 20px;background:var(--glass);border:1px solid var(--border);border-radius:20px;backdrop-filter:blur(10px);}
+  .stat-num{font-size:3.2rem;font-weight:900;background:linear-gradient(135deg,var(--purple-light),#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .stat-label{color:var(--muted);margin-top:8px;font-weight:500;}
 
-        /* --- قسم الهيرو (Hero Section) --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: radial-gradient(circle at center, #ffffff 0%, #f5f5f7 100%);
-        }
+  /* ========== PROCESS ========== */
+  .process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:1200px;margin:0 auto;}
+  .step{text-align:center;padding:30px 20px;position:relative;}
+  .step-num{
+    width:70px;height:70px;border-radius:50%;margin:0 auto 20px;
+    background:linear-gradient(135deg,var(--purple),var(--purple-light));
+    display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:900;color:#fff;
+    box-shadow:0 10px 30px rgba(108,62,245,.4);
+  }
+  .step h4{font-size:1.15rem;font-weight:700;margin-bottom:10px;}
+  .step p{color:var(--muted);font-size:.9rem;}
 
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #1d1d1f 0%, #4a4a4a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  /* ========== CTA ========== */
+  .cta-box{
+    max-width:950px;margin:0 auto;text-align:center;padding:80px 40px;border-radius:32px;
+    background:linear-gradient(135deg,rgba(108,62,245,.25),rgba(139,92,246,.1));
+    border:1px solid var(--border);backdrop-filter:blur(20px);position:relative;overflow:hidden;
+  }
+  .cta-box::before{content:'';position:absolute;width:400px;height:400px;background:var(--purple);border-radius:50%;filter:blur(120px);top:-150px;right:-100px;opacity:.5;}
+  .cta-box::after{content:'';position:absolute;width:300px;height:300px;background:var(--purple-light);border-radius:50%;filter:blur(100px);bottom:-100px;left:-50px;opacity:.4;}
+  .cta-box > *{position:relative;z-index:1;}
+  .cta-box h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;margin-bottom:18px;}
+  .cta-box p{color:var(--muted);margin-bottom:32px;font-size:1.1rem;}
 
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
+  /* ========== FOOTER ========== */
+  footer{padding:60px 6% 30px;border-top:1px solid var(--border);background:var(--bg-2);transition:background .5s;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto 40px;}
+  .footer-col h5{font-weight:700;margin-bottom:18px;font-size:1rem;}
+  .footer-col p,.footer-col a{color:var(--muted);font-size:.9rem;text-decoration:none;display:block;margin-bottom:10px;transition:.3s;}
+  .footer-col a:hover{color:var(--purple-light);}
+  .socials{display:flex;gap:12px;margin-top:16px;}
+  .socials a{
+    width:40px;height:40px;border-radius:50%;background:var(--glass);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;margin:0;transition:.3s;
+  }
+  .socials a:hover{background:var(--purple);color:#fff;transform:translateY(-3px);}
+  .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;}
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-        }
+  /* ========== FLOATING BUTTONS ========== */
+  .wa-float{
+    position:fixed;bottom:28px;left:28px;width:60px;height:60px;border-radius:50%;
+    background:#25D366;display:flex;align-items:center;justify-content:center;z-index:999;
+    box-shadow:0 8px 25px rgba(37,211,102,.5);transition:.3s;text-decoration:none;
+  }
+  .wa-float:hover{transform:scale(1.12);}
+  .wa-float svg{width:32px;height:32px;fill:#fff;}
+  .wa-tooltip{
+    position:absolute;right:75px;top:50%;transform:translateY(-50%);
+    background:#fff;color:#1A1230;padding:10px 16px;border-radius:12px;font-size:.85rem;font-weight:600;
+    white-space:nowrap;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 5px 20px rgba(0,0,0,.15);
+  }
+  .wa-float:hover .wa-tooltip{opacity:1;right:80px;}
 
-        .btn-primary {
-            background-color: var(--accent-blue);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2);
-        }
+  .to-top{
+    position:fixed;bottom:28px;right:28px;width:50px;height:50px;border-radius:50%;
+    background:var(--purple);color:#fff;border:none;cursor:pointer;z-index:999;
+    display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+    opacity:0;pointer-events:none;transition:.3s;box-shadow:0 8px 25px rgba(108,62,245,.4);
+  }
+  .to-top.visible{opacity:1;pointer-events:auto;}
+  .to-top:hover{background:var(--purple-light);transform:translateY(-3px);}
 
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0, 113, 227, 0.3);
-        }
+  /* ========== REVEAL ========== */
+  .reveal{opacity:0;transform:translateY(40px);transition:.9s cubic-bezier(.4,0,.2,1);}
+  .reveal.active{opacity:1;transform:translateY(0);}
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--accent-blue);
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .btn-secondary:hover { background-color: rgba(0, 113, 227, 0.05); }
-
-        /* --- قسم الخدمات (Bento Grid Style) --- */
-        .services {
-            padding: 100px 5%;
-            background-color: var(--surface-gray);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-
-        .card i {
-            font-size: 2.5rem;
-            color: var(--accent-blue);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* --- معرض الأعمال (Portfolio) --- */
-        .portfolio {
-            padding: 100px 5%;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-        }
-
-        .work-item {
-            position: relative;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            cursor: pointer;
-        }
-
-        .work-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-
-        .work-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 30px;
-            opacity: 0;
-            transition: var(--transition);
-            transform: translateY(20px);
-        }
-
-        .work-item:hover .overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .overlay h4 { color: white; font-size: 1.2rem; }
-        .overlay span { color: #ccc; font-size: 0.9rem; }
-
-        /* --- قسم التواصل --- */
-        .contact {
-            padding: 100px 20px;
-            text-align: center;
-            background: black;
-            color: white;
-        }
-
-        .contact h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .contact p {
-            color: #86868b;
-            margin-bottom: 40px;
-            font-size: 1.2rem;
-        }
-
-        /* --- الفوتر --- */
-        footer {
-            background: var(--surface-gray);
-            padding: 40px 5%;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            border-top: 1px solid #e1e1e1;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* --- التجاوب مع الجوال --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            nav ul { display: none; } /* يمكن إضافة قائمة هامبرغر لاحقاً */
-            .grid-container { grid-template-columns: 1fr; }
-            .footer-content { flex-direction: column; gap: 20px; }
-        }
-    </style>
+  /* ========== RESPONSIVE ========== */
+  @media(max-width:900px){
+    .nav-links{
+      position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;
+      flex-direction:column;background:var(--bg-2);padding:100px 30px 30px;gap:24px;
+      border-right:1px solid var(--border);transition:.4s;z-index:999;
+    }
+    .nav-links.open{right:0;}
+    .nav-links a{font-size:1.1rem;}
+    .burger{display:block;z-index:1000;}
+    .nav-cta{display:none;}
+    section{padding:80px 6%;}
+    .footer-grid{grid-template-columns:1fr;gap:30px;}
+    .mobile-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:998;
+      opacity:0;pointer-events:none;transition:.3s;backdrop-filter:blur(5px);
+    }
+    .mobile-overlay.active{opacity:1;pointer-events:auto;}
+  }
+</style>
 </head>
 <body>
 
-    <!-- الهيدر -->
-    <header id="navbar">
-        <div class="logo">Pixel.</div>
-        <nav>
-            <ul>
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#services">خدماتنا</a></li>
-                <li><a href="#portfolio">أعمالنا</a></li>
-                <li><a href="#contact">تواصل معنا</a></li>
-            </ul>
-        </nav>
-        <a href="#contact" class="cta-btn-small">ابدأ مشروعك</a>
-    </header>
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
 
-    <!-- القسم الرئيسي -->
-    <section class="hero" id="home">
-        <h1 data-aos="fade-up" data-aos-duration="1000">الإبداع.<br>بكل بساطة.</h1>
-        <p data-aos="fade-up" data-aos-delay="200">نحول أفكارك المعقدة إلى تصاميم بصرية ساحرة تروي قصة علامتك التجارية.</p>
-        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
-            <a href="#portfolio" class="btn-primary">شاهد أعمالنا</a>
-            <a href="#contact" class="btn-secondary">تواصل معنا ></a>
-        </div>
-    </section>
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
 
-    <!-- الخدمات -->
-    <section class="services" id="services">
-        <div class="section-header" data-aos="fade-up">
-            <h2>ماذا نقدم؟</h2>
-            <p style="color: var(--text-secondary)">حلول تصميم متكاملة تناسب طموحك</p>
-        </div>
-        
-        <div class="grid-container">
-            <!-- بطاقة 1 -->
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fa-solid fa-pen-nib"></i>
-                <h3>تصميم الهوية البصرية</h3>
-                <p>شعارات، أدلة استخدام العلامة التجارية، وكل ما تحتاجه لتبدو احترافياً.</p>
-            </div>
-            <!-- بطاقة 2 -->
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fa-solid fa-layer-group"></i>
-                <h3>تصميم واجهات UI/UX</h3>
-                <p>تصميم تطبيقات ومواقع تركز على تجربة المستخدم وسهولة الاستخدام.</p>
-            </div>
-            <!-- بطاقة 3 -->
-            <div class="card" data-aos="fade-up" data-aos-delay="300">
-                <i class="fa-solid fa-bullhorn"></i>
-                <h3>السوشيال ميديا</h3>
-                <p>تصاميم جذابة لمنصات التواصل الاجتماعي تزيد من تفاعل جمهورك.</p>
-            </div>
-             <!-- بطاقة 4 -->
-             <div class="card" data-aos="fade-up" data-aos-delay="400">
-                <i class="fa-solid fa-video"></i>
-                <h3>موشن جرافيك</h3>
-                <p>فيديوهات قصيرة وديناميكية لشرح خدماتك بأسلوب عصري.</p>
-            </div>
-        </div>
-    </section>
+<!-- Animated Background -->
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
 
-    <!-- معرض الأعمال -->
-    <section class="portfolio" id="portfolio">
-        <div class="section-header" data-aos="fade-up">
-            <h2>أحدث المشاريع</h2>
-        </div>
-        <div class="gallery">
-            <!-- استخدم صوراً وهمية عالية الجودة من Unsplash -->
-            <div class="work-item" data-aos="zoom-in">
-                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 1">
-                <div class="overlay">
-                    <h4>مشروع تقنية المستقبل</h4>
-                    <span>هوية بصرية</span>
-                </div>
-            </div>
-            <div class="work-item" data-aos="zoom-in" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 2">
-                <div class="overlay">
-                    <h4>تطبيق الصحة</h4>
-                    <span>UI/UX Design</span>
-                </div>
-            </div>
-            <div class="work-item" data-aos="zoom-in" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 3">
-                <div class="overlay">
-                    <h4>حملة إعلانية</h4>
-                    <span>سوشيال ميديا</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
 
-    <!-- تواصل معنا -->
-    <section class="contact" id="contact">
-        <div data-aos="fade-up">
-            <h2>جاهز لنبدأ؟</h2>
-            <p>دعنا نصنع شيئاً مذهلاً معاً.</p>
-            <a href="mailto:info@pixelperfect.com" class="btn-primary" style="background: white; color: black;">راسلنا الآن</a>
-        </div>
-    </section>
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="logo" onclick="scrollTo({top:0,behavior:'smooth'})">
+    <div class="logo-mark">N</div>
+    NEXA<span>.</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#work">أعمالنا</a></li>
+    <li><a href="#process">آلية العمل</a></li>
+    <li><a href="#contact">تواصل</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">🌙</button>
+    <a href="https://wa.me/905364391849" class="nav-cta">ابدأ مشروعك</a>
+    <button class="burger" id="burger" aria-label="القائمة">☰</button>
+  </div>
+</nav>
 
-    <!-- الفوتر -->
-    <footer>
-        <div class="footer-content">
-            <div>جميع الحقوق محفوظة &copy; 2026 PixelPerfect.</div>
-            <div style="display: flex; gap: 15px;">
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-            </div>
-        </div>
-    </footer>
+<!-- Hero -->
+<section class="hero" id="home">
+  <span class="hero-badge"><span class="dot"></span> وكالة إبداعية لتسويق المؤثرين</span>
+  <h1>نصنع <span class="grad">تأثيراً</span><br>لا يُنسى لعلامتك</h1>
+  <p>في NEXA نؤمن أن الإعلان ليس مجرد ظهور، بل تأثير مدروس. نوصلك بالمؤثرين الصحيحين، ونوفّر عليك الوقت والتعب باستراتيجية واضحة.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/905364391849" class="btn-primary">تواصل عبر واتساب ←</a>
+    <a href="#work" class="btn-secondary">شاهد أعمالنا</a>
+  </div>
+  <div class="scroll-indicator">↓ اسحب للأسفل</div>
+</section>
 
-    <!-- سكربتات التشغيل -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // تفعيل مكتبة الأنيميشن
-        AOS.init({
-            duration: 1000, // مدة الحركة
-            once: true,     // الحركة تحدث مرة واحدة فقط عند النزول
-            offset: 100     // المسافة قبل بدء الحركة
-        });
+<!-- Services -->
+<section id="services">
+  <div class="section-head reveal">
+    <div class="tag">خدماتنا</div>
+    <h2>كل ما تحتاجه علامتك<br>في مكان واحد</h2>
+    <p>حلول إبداعية متكاملة مصممة لتحقيق نتائج حقيقية، لا مجرد مشاهدات.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">📣</div>
+      <h3>تسويق المؤثرين</h3>
+      <p>نوصلك بالمؤثرين المناسبين لجمهورك، ونبني حملات مؤثرة تحقق عائدًا حقيقيًا على استثمارك.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎯</div>
+      <h3>إعلانات مدروسة</h3>
+      <p>حملات إعلانية مبنية على بيانات واستراتيجية واضحة، تخاطب جمهورك بلغتهم وفي التوقيت المناسب.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎨</div>
+      <h3>التصميم الإبداعي</h3>
+      <p>تصاميم بصرية جذابة وهويات متكاملة تعبّر عن علامتك وتترك انطباعًا لا يُنسى لدى عملائك.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📊</div>
+      <h3>استراتيجية المحتوى</h3>
+      <p>نخطط لمحتواك بناءً على استراتيجية واضحة توفر عليك الوقت والتعب وتضاعف أثر رسالتك.</p>
+    </div>
+  </div>
+</section>
 
-        // تغيير خلفية الهيدر عند السكرول
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.8)';
-                header.style.boxShadow = 'none';
-            }
-        });
-    </script>
-</body>
-</html>
+<!-- Portfolio -->
+<section class="portfolio" id="work">
+  <div class="section-head reveal">
+    <div class="tag">أعمالنا</div>
+    <h2>حملات صُنعت لتُلهِم</h2>
+    <p>لمحة من الحملات الإبداعية التي نفذناها — اضغط على أي عمل لمشاهدته بالحجم الكامل.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="work reveal" data-img="work1.jpg">
+      <img src="work1.jpg" alt="حملة المؤثرين - سر الحملة الناجحة" loading="lazy">
+      <div class="work-overlay"><span>حملة توعوية</span><h4>سر الحملة الناجحة</h4></div>
+    </div>
+    <div class="work reveal" data-img="work2.jpg">
+      <img src="work2.jpg" alt="حملة المؤثرين - التأثير الحقيقي" loading="lazy">
+      <div class="work-overlay"><span>استراتيجية محتوى</span><h4>تأثير القلّة المختارة</h4></div>
+   
