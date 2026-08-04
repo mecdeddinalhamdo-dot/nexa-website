@@ -6,7 +6,6 @@
     --transition: all 0.3s ease;
 }
 
-/* الوضع الليلي (Dark Mode) */
 [data-theme="dark"] {
     --bg-main: #0B0F19;
     --card-bg: rgba(20, 26, 43, 0.75);
@@ -17,7 +16,6 @@
     --footer-bg: #070A12;
 }
 
-/* الوضع النهاري (Light Mode) */
 [data-theme="light"] {
     --bg-main: #F8FAFC;
     --card-bg: rgba(255, 255, 255, 0.9);
@@ -32,7 +30,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Tajawal', sans-serif;
+    font-family: 'Tajawal', 'Inter', sans-serif;
 }
 
 body {
@@ -43,7 +41,6 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* خلفية الرياح البنفسجية المتحركة */
 #purpleWindCanvas {
     position: fixed;
     top: 0;
@@ -55,10 +52,7 @@ body {
     opacity: 0.6;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
+img { max-width: 100%; height: auto; }
 
 .logo img {
     max-height: 45px !important;
@@ -66,7 +60,6 @@ img {
     object-fit: contain;
 }
 
-/* الهيدر */
 header {
     position: fixed;
     top: 0;
@@ -116,7 +109,34 @@ header {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
+}
+
+/* تنسيق اختيار اللغة */
+.lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-light);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: var(--primary);
+}
+
+.lang-selector select {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+.lang-selector select option {
+    background: var(--bg-main);
+    color: var(--text-main);
 }
 
 .theme-toggle-btn {
@@ -143,10 +163,11 @@ header {
 .btn-contact {
     background: linear-gradient(135deg, var(--primary), #9333EA);
     color: white;
-    padding: 10px 24px;
+    padding: 10px 20px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 14px;
     box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
     transition: var(--transition);
 }
@@ -169,27 +190,17 @@ header {
     margin-bottom: 25px;
 }
 
-.hero h1 {
-    font-size: 40px;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
-
+.hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 20px; }
 .hero h1 span { color: var(--primary); }
 .hero p { color: var(--text-muted); font-size: 18px; }
 
-/* الأقسام العامة */
 .services, .about, .portfolio {
     max-width: 1200px;
     margin: 0 auto;
     padding: 80px 20px;
 }
 
-.section-head {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
+.section-head { text-align: center; margin-bottom: 40px; }
 .section-head h2 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
 .section-head p { color: var(--text-muted); }
 
@@ -213,7 +224,6 @@ header {
 .card h3 { margin-bottom: 10px; }
 .card p { color: var(--text-muted); font-size: 14px; }
 
-/* قسم من نحن */
 .about-container {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -242,7 +252,6 @@ header {
 .stat-card h3 { font-size: 32px; color: var(--primary); }
 .stat-card p { color: var(--text-main); font-weight: 500; font-size: 14px; }
 
-/* معرض الأعمال */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -281,26 +290,12 @@ header {
     transition: var(--transition);
 }
 
-.portfolio-card:hover .portfolio-img img {
-    transform: scale(1.03);
-}
+.portfolio-card:hover .portfolio-img img { transform: scale(1.03); }
 
-.portfolio-info {
-    padding: 20px;
-}
+.portfolio-info { padding: 20px; }
+.portfolio-info h4 { font-size: 18px; margin-bottom: 6px; color: var(--text-main); }
+.portfolio-info p { font-size: 14px; color: var(--text-muted); }
 
-.portfolio-info h4 {
-    font-size: 18px;
-    margin-bottom: 6px;
-    color: var(--text-main);
-}
-
-.portfolio-info p {
-    font-size: 14px;
-    color: var(--text-muted);
-}
-
-/* التذييل (Footer) */
 footer {
     background-color: var(--footer-bg);
     border-top: 1px solid var(--border);
@@ -349,5 +344,5 @@ footer {
 
 @media (max-width: 768px) {
     .nav-links { display: none; }
-    .hero h1 { font-size: 30px; }
-    }
+    .hero h1 { font-size: 28px; }
+}
