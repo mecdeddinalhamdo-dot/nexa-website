@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXA Creative - حلول إبداعية احترافية</title>
+    <title>NEXA Creative - Creative Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,48 +23,58 @@
                 NEXA<span>.</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#services">خدماتنا</a></li>
-                <li><a href="#about">من نحن</a></li>
-                <li><a href="#portfolio">أعمالنا</a></li>
+                <li><a href="#home" data-key="nav_home">الرئيسية</a></li>
+                <li><a href="#services" data-key="nav_services">خدماتنا</a></li>
+                <li><a href="#about" data-key="nav_about">من نحن</a></li>
+                <li><a href="#portfolio" data-key="nav_portfolio">أعمالنا</a></li>
             </ul>
             <div class="nav-actions">
+                <!-- اختيار اللغة -->
+                <div class="lang-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="langSelect">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                        <option value="tr">Türkçe</option>
+                    </select>
+                </div>
+
                 <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
                     <i class="fas fa-moon"></i>
                 </button>
-                <a href="https://wa.me/905364391849" class="btn-contact">تواصل معنا</a>
+                <a href="https://wa.me/905364391849" class="btn-contact" data-key="btn_contact">تواصل معنا</a>
             </div>
         </div>
     </header>
 
     <!-- 1. قسم البداية (Hero) -->
     <section class="hero" id="home">
-        <div class="badge">✨ حلول إبداعية متكاملة</div>
-        <h1>نصنع <span>التأثير والتميز</span> لعلامتك التجارية</h1>
-        <p>نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>
+        <div class="badge" data-key="hero_badge">✨ حلول إبداعية متكاملة</div>
+        <h1 data-key="hero_title">نصنع <span>التأثير والتميز</span> لعلامتك التجارية</h1>
+        <p data-key="hero_desc">نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>
     </section>
 
     <!-- 2. قسم الخدمات -->
     <section class="services" id="services">
         <div class="section-head">
-            <h2>ماذا نقدم لك؟</h2>
-            <p>خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر</p>
+            <h2 data-key="services_title">ماذا نقدم لك؟</h2>
+            <p data-key="services_desc">خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر</p>
         </div>
         <div class="grid-cards">
             <div class="card">
                 <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
-                <h3>تسويق المؤثرين</h3>
-                <p>ربط العلامات التجارية بأبرز المؤثرين لتحقيق أفضل وصول وانتشار في السوق.</p>
+                <h3 data-key="s1_title">تسويق المؤثرين</h3>
+                <p data-key="s1_desc">ربط العلامات التجارية بأبرز المؤثرين لتحقيق أفضل وصول وانتشار في السوق.</p>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
-                <h3>الهوية البصرية</h3>
-                <p>تصميم لوجو وهويات احترافية تعكس قيمة وأهداف عملك بشكل عصري ومميز.</p>
+                <h3 data-key="s2_title">الهوية البصرية</h3>
+                <p data-key="s2_desc">تصميم لوجو وهويات احترافية تعكس قيمة وأهداف عملك بشكل عصري ومميز.</p>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>استراتيجيات النمو</h3>
-                <p>خطط تسويقية مدروسة تضمن لك نتائج ملموسة وزيادة في المبيعات.</p>
+                <h3 data-key="s3_title">استراتيجيات النمو</h3>
+                <p data-key="s3_desc">خطط تسويقية مدروسة تضمن لك نتائج ملموسة وزيادة في المبيعات.</p>
             </div>
         </div>
     </section>
@@ -73,67 +83,54 @@
     <section class="about" id="about">
         <div class="about-container">
             <div class="about-text">
-                <h2>لماذا تختار <span>NEXA</span>؟</h2>
-                <p>نحن فريق شغوف بالابتكار والتصميم. نسعى جاهدين لتحويل الأفكار الإبداعية إلى واقع ملموس يحقق أعلى مستويات التفاعل والنجاح لشركائنا.</p>
+                <h2 data-key="about_title">لماذا تختار <span>NEXA</span>؟</h2>
+                <p data-key="about_desc">نحن فريق شغوف بالابتكار والتصميم. نسعى جاهدين لتحويل الأفكار الإبداعية إلى واقع ملموس يحقق أعلى مستويات التفاعل والنجاح لشركائنا.</p>
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>+150</h3>
-                    <p>مشروع مكتمل</p>
+                    <p data-key="stat1">مشروع مكتمل</p>
                 </div>
                 <div class="stat-card">
                     <h3>+50</h3>
-                    <p>عميل سعيد</p>
+                    <p data-key="stat2">عميل سعيد</p>
                 </div>
                 <div class="stat-card">
                     <h3>99%</h3>
-                    <p>نسبة الرضا</p>
+                    <p data-key="stat3">نسبة الرضا</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. قسم معرض الأعمال التفاعلي بالصور -->
+    <!-- 4. قسم معرض الأعمال -->
     <section class="portfolio" id="portfolio">
         <div class="section-head">
-            <h2>نماذج من أعمالنا</h2>
-            <p>معرض لأبرز التصاميم والمشاريع التي قمنا بتنفيذها</p>
+            <h2 data-key="portfolio_title">نماذج من أعمالنا</h2>
+            <p data-key="portfolio_desc">معرض لأبرز التصاميم والمشاريع التي قمنا بتنفيذها</p>
         </div>
         <div class="portfolio-grid">
-
-            <!-- التصميم الأول -->
             <div class="portfolio-card">
-                <div class="portfolio-img">
-                    <img src="work1.jpg" alt="تصميم إبداعي 1">
-                </div>
+                <div class="portfolio-img"><img src="work1.jpg" alt="Work 1"></div>
                 <div class="portfolio-info">
-                    <h4>تصميم هوية بصرية</h4>
-                    <p>مشروع تصميم مبتكر لعلامة تجارية احترافية</p>
+                    <h4 data-key="p1_title">تصميم هوية بصرية</h4>
+                    <p data-key="p1_desc">مشروع تصميم مبتكر لعلامة تجارية احترافية</p>
                 </div>
             </div>
-
-            <!-- التصميم الثاني -->
             <div class="portfolio-card">
-                <div class="portfolio-img">
-                    <img src="work2.jpg" alt="تصميم إبداعي 2">
-                </div>
+                <div class="portfolio-img"><img src="work2.jpg" alt="Work 2"></div>
                 <div class="portfolio-info">
-                    <h4>حملة إعلانية</h4>
-                    <p>تصاميم عصرية مخصصة للتسويق الرقمي</p>
+                    <h4 data-key="p2_title">حملة إعلانية</h4>
+                    <p data-key="p2_desc">تصاميم عصرية مخصصة للتسويق الرقمي</p>
                 </div>
             </div>
-
-            <!-- التصميم الثالث -->
             <div class="portfolio-card">
-                <div class="portfolio-img">
-                    <img src="work3.jpg" alt="تصميم إبداعي 3">
-                </div>
+                <div class="portfolio-img"><img src="work3.jpg" alt="Work 3"></div>
                 <div class="portfolio-info">
-                    <h4>تصميم جرافيك مميز</h4>
-                    <p>واجهات وتصاميم عالية الجودة والجاذبية</p>
+                    <h4 data-key="p3_title">تصميم جرافيك مميز</h4>
+                    <p data-key="p3_desc">واجهات وتصاميم عالية الجودة والجاذبية</p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -142,19 +139,19 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <a href="#" class="logo">NEXA<span>.</span></a>
-                <p>شريكك الإبداعي لبناء وتطوير علامتك التجارية.</p>
+                <p data-key="footer_brand">شريكك الإبداعي لبناء وتطوير علامتك التجارية.</p>
             </div>
             <div class="footer-links">
-                <h4>روابط سريعة</h4>
+                <h4 data-key="footer_quick_links">روابط سريعة</h4>
                 <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#services">الخدمات</a></li>
-                    <li><a href="#about">من نحن</a></li>
-                    <li><a href="#portfolio">أعمالنا</a></li>
+                    <li><a href="#home" data-key="nav_home">الرئيسية</a></li>
+                    <li><a href="#services" data-key="nav_services">الخدمات</a></li>
+                    <li><a href="#about" data-key="nav_about">من نحن</a></li>
+                    <li><a href="#portfolio" data-key="nav_portfolio">أعمالنا</a></li>
                 </ul>
             </div>
             <div class="footer-social">
-                <h4>تواصل معنا</h4>
+                <h4 data-key="footer_contact_us">تواصل معنا</h4>
                 <div class="social-icons">
                     <a href="https://wa.me/905364391849" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
@@ -163,7 +160,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>جميع الحقوق محفوظة &copy; 2026 NEXA Creative</p>
+            <p data-key="footer_rights">جميع الحقوق محفوظة &copy; 2026 NEXA Creative</p>
         </div>
     </footer>
 
