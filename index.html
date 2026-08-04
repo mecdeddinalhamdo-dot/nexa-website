@@ -1,37 +1,42 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXA Creative - Creative Solutions</title>
+    <title>NEXA - حلول إبداعية متكاملة</title>
+    <!-- خط Tajawal للعربية و Inter للإنجليزية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- خلفية الرياح البنفسجية المتحركة -->
+    <!-- 🌟 ميزة 3: شريط تقدم التصفح البنفسجي المضيء -->
+    <div id="scrollProgressBar"></div>
+
+    <!-- خلفية الرياح التفاعلية -->
     <canvas id="purpleWindCanvas"></canvas>
 
-    <!-- الهيدر -->
+    <!-- الهيدر العلوي -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="Logo (1).png" alt="Logo" onerror="this.style.display='none'">
-                NEXA<span>.</span>
+                <img src="assets/logo.png" alt="NEXA Logo" onerror="this.style.display='none'">
+                <span>NEXA</span>
             </a>
+
             <ul class="nav-links">
-                <li><a href="#home" data-key="nav_home">الرئيسية</a></li>
-                <li><a href="#services" data-key="nav_services">خدماتنا</a></li>
-                <li><a href="#about" data-key="nav_about">من نحن</a></li>
-                <li><a href="#portfolio" data-key="nav_portfolio">أعمالنا</a></li>
+                <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>
+                <li><a href="#about" data-i18n="nav.about">من نحن</a></li>
+                <li><a href="#portfolio" data-i18n="nav.portfolio">أعمالنا</a></li>
             </ul>
+
             <div class="nav-actions">
-                <!-- اختيار اللغة -->
                 <div class="lang-selector">
-                    <i class="fas fa-globe"></i>
+                    <i class="fa-solid font-globe"></i>
                     <select id="langSelect">
                         <option value="ar">العربية</option>
                         <option value="en">English</option>
@@ -39,131 +44,208 @@
                     </select>
                 </div>
 
-                <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
-                    <i class="fas fa-moon"></i>
+                <button class="theme-toggle-btn" id="themeToggle" title="تغيير المظهر">
+                    <i class="fa-solid fa-moon"></i>
                 </button>
-                <a href="https://wa.me/905364391849" class="btn-contact" data-key="btn_contact">تواصل معنا</a>
+
+                <a href="#contact" class="btn-contact" data-i18n="nav.contact">تواصل معنا</a>
             </div>
         </div>
     </header>
 
-    <!-- 1. قسم البداية (Hero) -->
-    <section class="hero" id="home">
-        <div class="badge" data-key="hero_badge">✨ حلول إبداعية متكاملة</div>
-        <h1 data-key="hero_title">نصنع <span>التأثير والتميز</span> لعلامتك التجارية</h1>
-        <p data-key="hero_desc">نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>
+    <!-- قسم الهيرو الرئيسي -->
+    <section class="hero">
+        <div class="badge" data-i18n="hero.badge">✨ حلول إبداعية متكاملة</div>
+        <h1 data-i18n="hero.title">نصنع <span>التأثير والتألق</span> لعلامتك التجارية</h1>
+        <p data-i18n="hero.desc">نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>
     </section>
 
-    <!-- 2. قسم الخدمات -->
-    <section class="services" id="services">
+    <!-- قسم الخدمات -->
+    <section id="services" class="services">
         <div class="section-head">
-            <h2 data-key="services_title">ماذا نقدم لك؟</h2>
-            <p data-key="services_desc">خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر</p>
+            <h2 data-i18n="services.title">ماذا نقدم لك؟</h2>
+            <p data-i18n="services.subtitle">خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر</p>
         </div>
         <div class="grid-cards">
             <div class="card">
-                <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
-                <h3 data-key="s1_title">تسويق المؤثرين</h3>
-                <p data-key="s1_desc">ربط العلامات التجارية بأبرز المؤثرين لتحقيق أفضل وصول وانتشار في السوق.</p>
+                <div class="card-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                <h3 data-i18n="services.s1_title">التصميم والهوية البصرية</h3>
+                <p data-i18n="services.s1_desc">بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.</p>
             </div>
             <div class="card">
-                <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
-                <h3 data-key="s2_title">الهوية البصرية</h3>
-                <p data-key="s2_desc">تصميم لوجو وهويات احترافية تعكس قيمة وأهداف عملك بشكل عصري ومميز.</p>
+                <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                <h3 data-i18n="services.s2_title">التسويق الرقمي</h3>
+                <p data-i18n="services.s2_desc">حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.</p>
             </div>
             <div class="card">
-                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                <h3 data-key="s3_title">استراتيجيات النمو</h3>
-                <p data-key="s3_desc">خطط تسويقية مدروسة تضمن لك نتائج ملموسة وزيادة في المبيعات.</p>
+                <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                <h3 data-i18n="services.s3_title">تطوير المواقع والتطبيقات</h3>
+                <p data-i18n="services.s3_desc">تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات.</p>
             </div>
         </div>
     </section>
 
-    <!-- 3. قسم من نحن والأرقام -->
-    <section class="about" id="about">
+    <!-- قسم من نحن -->
+    <section id="about" class="about">
         <div class="about-container">
             <div class="about-text">
-                <h2 data-key="about_title">لماذا تختار <span>NEXA</span>؟</h2>
-                <p data-key="about_desc">نحن فريق شغوف بالابتكار والتصميم. نسعى جاهدين لتحويل الأفكار الإبداعية إلى واقع ملموس يحقق أعلى مستويات التفاعل والنجاح لشركائنا.</p>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>+150</h3>
-                    <p data-key="stat1">مشروع مكتمل</p>
-                </div>
-                <div class="stat-card">
-                    <h3>+50</h3>
-                    <p data-key="stat2">عميل سعيد</p>
-                </div>
-                <div class="stat-card">
-                    <h3>99%</h3>
-                    <p data-key="stat3">نسبة الرضا</p>
+                <h2 data-i18n="about.title">عن <span>NEXA</span></h2>
+                <p data-i18n="about.desc">نحن فريق متكامل من المصممين والمطورين والمُسوقين الشغوفين بتحويل الأفكار إلى واقع رقمي متميز وبناء شراكات نجاح طويلة الأمد.</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>+50</h3>
+                        <p data-i18n="about.projects">مشروع مكتمل</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>+30</h3>
+                        <p data-i18n="about.clients">عميل سعيد</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>100%</h3>
+                        <p data-i18n="about.quality">جودة جرافيك</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. قسم معرض الأعمال -->
-    <section class="portfolio" id="portfolio">
+    <!-- قسم معرض الأعمال (الكروت البلورية الشفافة) -->
+    <section id="portfolio" class="portfolio">
         <div class="section-head">
-            <h2 data-key="portfolio_title">نماذج من أعمالنا</h2>
-            <p data-key="portfolio_desc">معرض لأبرز التصاميم والمشاريع التي قمنا بتنفيذها</p>
+            <h2 data-i18n="portfolio.title">معرض أعمالنا</h2>
+            <p data-i18n="portfolio.subtitle">نظرة على بعض مشاريعنا والتصاميم المبتكرة</p>
         </div>
         <div class="portfolio-grid">
-            <div class="portfolio-card">
-                <div class="portfolio-img"><img src="work1.jpg" alt="Work 1"></div>
+            
+            <!-- كارت 1 -->
+            <div class="portfolio-card" data-title="تصميم هوية بصرية متكاملة" data-img="assets/img1.jpg">
+                <div class="portfolio-img" onclick="openLightbox('assets/img1.jpg', 'تصميم هوية بصرية متكاملة')">
+                    <img src="assets/img1.jpg" alt="مشروع 1" onerror="this.src='https://via.placeholder.com/600x400/7C3AED/ffffff?text=NEXA+Design+1'">
+                    <div class="zoom-overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <span data-i18n="portfolio.zoom">تكبير التصميم</span>
+                    </div>
+                </div>
                 <div class="portfolio-info">
-                    <h4 data-key="p1_title">تصميم هوية بصرية</h4>
-                    <p data-key="p1_desc">مشروع تصميم مبتكر لعلامة تجارية احترافية</p>
+                    <h4>تصميم هوية بصرية متكاملة</h4>
+                    <p>مشروع تصميم شعار وهوية بصرية فاخرة.</p>
+                    <!-- 🌟 ميزة 2: زر طلب تصميم شبيه -->
+                    <button class="btn-order-card" onclick="openOrderModal('تصميم هوية بصرية متكاملة')">
+                        <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>
+                    </button>
                 </div>
             </div>
-            <div class="portfolio-card">
-                <div class="portfolio-img"><img src="work2.jpg" alt="Work 2"></div>
+
+            <!-- كارت 2 -->
+            <div class="portfolio-card" data-title="حملة تسويقية واحترافية" data-img="assets/img2.jpg">
+                <div class="portfolio-img" onclick="openLightbox('assets/img2.jpg', 'حملة تسويقية واحترافية')">
+                    <img src="assets/img2.jpg" alt="مشروع 2" onerror="this.src='https://via.placeholder.com/600x400/9333EA/ffffff?text=NEXA+Design+2'">
+                    <div class="zoom-overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <span data-i18n="portfolio.zoom">تكبير التصميم</span>
+                    </div>
+                </div>
                 <div class="portfolio-info">
-                    <h4 data-key="p2_title">حملة إعلانية</h4>
-                    <p data-key="p2_desc">تصاميم عصرية مخصصة للتسويق الرقمي</p>
+                    <h4>حملة تسويقية واحترافية</h4>
+                    <p>تصاميم إعلانات السوشيال ميديا الحصرية.</p>
+                    <button class="btn-order-card" onclick="openOrderModal('حملة تسويقية واحترافية')">
+                        <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>
+                    </button>
                 </div>
             </div>
-            <div class="portfolio-card">
-                <div class="portfolio-img"><img src="work3.jpg" alt="Work 3"></div>
+
+            <!-- كارت 3 -->
+            <div class="portfolio-card" data-title="واجهة تطبيق ذكية" data-img="assets/img3.jpg">
+                <div class="portfolio-img" onclick="openLightbox('assets/img3.jpg', 'واجهة تطبيق ذكية')">
+                    <img src="assets/img3.jpg" alt="مشروع 3" onerror="this.src='https://via.placeholder.com/600x400/6D28D9/ffffff?text=NEXA+Design+3'">
+                    <div class="zoom-overlay">
+                        <i class="fa-solid fa-expand"></i>
+                        <span data-i18n="portfolio.zoom">تكبير التصميم</span>
+                    </div>
+                </div>
                 <div class="portfolio-info">
-                    <h4 data-key="p3_title">تصميم جرافيك مميز</h4>
-                    <p data-key="p3_desc">واجهات وتصاميم عالية الجودة والجاذبية</p>
+                    <h4>واجهة تطبيق ذكية</h4>
+                    <p>تصميم واجهات المستخدم UI/UX فائقة الجودة.</p>
+                    <button class="btn-order-card" onclick="openOrderModal('واجهة تطبيق ذكية')">
+                        <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>
+                    </button>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- 5. التذييل (Footer) -->
-    <footer>
+    <!-- الفوتر -->
+    <footer id="contact">
         <div class="footer-container">
             <div class="footer-brand">
-                <a href="#" class="logo">NEXA<span>.</span></a>
-                <p data-key="footer_brand">شريكك الإبداعي لبناء وتطوير علامتك التجارية.</p>
+                <h3>NEXA</h3>
+                <p data-i18n="footer.desc">حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>
             </div>
             <div class="footer-links">
-                <h4 data-key="footer_quick_links">روابط سريعة</h4>
+                <h4 data-i18n="footer.quick_links">روابط سريعة</h4>
                 <ul>
-                    <li><a href="#home" data-key="nav_home">الرئيسية</a></li>
-                    <li><a href="#services" data-key="nav_services">الخدمات</a></li>
-                    <li><a href="#about" data-key="nav_about">من نحن</a></li>
-                    <li><a href="#portfolio" data-key="nav_portfolio">أعمالنا</a></li>
+                    <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>
+                    <li><a href="#about" data-i18n="nav.about">من نحن</a></li>
+                    <li><a href="#portfolio" data-i18n="nav.portfolio">أعمالنا</a></li>
                 </ul>
             </div>
             <div class="footer-social">
-                <h4 data-key="footer_contact_us">تواصل معنا</h4>
+                <h4 data-i18n="footer.social">تابعنا</h4>
                 <div class="social-icons">
-                    <a href="https://wa.me/905364391849" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p data-key="footer_rights">جميع الحقوق محفوظة &copy; 2026 NEXA Creative</p>
+            <p>© 2026 NEXA. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
+    <!-- 🌟 ميزة 1 + 2: النافذة الشفافة المجمعة للمعاينة والطلب السريع (Glass Lightbox & Order Modal) -->
+    <div id="glassModal" class="glass-modal">
+        <div class="glass-modal-content">
+            <button class="close-modal" onclick="closeGlassModal()">&times;</button>
+            
+            <!-- قسم عرض الصورة المكبرة -->
+            <div id="lightboxView" class="modal-view">
+                <div class="modal-img-container">
+                    <img id="modalImg" src="" alt="معاينة التصميم">
+                </div>
+                <div class="modal-details">
+                    <h3 id="modalTitle">اسم التصميم</h3>
+                    <button class="btn-modal-order" onclick="switchToOrderView()">
+                        <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.order_this">اطلب تصميم مشابه الآن</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- قسم نموذج الطلب السريع عبر الواتساب -->
+            <div id="orderView" class="modal-view" style="display: none;">
+                <h3 data-i18n="modal.order_title">طلب تصميم سريع</h3>
+                <p id="orderProjectName" class="order-subtitle">اسم المشروع المختارة</p>
+                <form id="whatsappForm" onsubmit="sendWhatsAppOrder(event)">
+                    <div class="input-group">
+                        <label data-i18n="modal.name_label">الاسم الكريم:</label>
+                        <input type="text" id="custName" placeholder="أدخل اسمك هنا..." required>
+                    </div>
+                    <div class="input-group">
+                        <label data-i18n="modal.details_label">تفاصيل إضافية (اختياري):</label>
+                        <textarea id="custDetails" rows="3" placeholder="اكتب أي ملاحظات أو أفكار تريدها..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit-order">
+                        <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.send_btn">إرسال الطلب عبر الواتساب</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-</html>
+                </html>
+                    
