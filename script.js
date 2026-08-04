@@ -51,10 +51,10 @@ const translations = {
     },
     tr: {
         nav: { services: "Hizmetlerimiz", about: "Hakkımızda", portfolio: "Portföy", contact: "İletişim" },
-        hero: { badge: "✨ Entegre Yaratıcı Çözümler", title: "Markanız İçin <span>Etki ve Etkileyicilik</span> Yaratıyoruz", desc: "Modern tasarım ve pazarlama stratejileri ile büyümenize yardımcı oluyoruz." },
+        hero: { badge: "✨ Entegre Yaratıcı Çوزüмler", title: "Markanız İçin <span>Etki ve Etkileyicilik</span> Yaratıyoruz", desc: "Modern tasarım ve pazarlama stratejileri ile büyümenize yardımcı oluyoruz." },
         services: {
             title: "Neler Sunuyoruz?", subtitle: "İşinizi bir üst seviyeye taşımak için tasarlanmış çözümler",
-            s1_title: "Tasarım ve Markalaşma", s1_desc: "Eşsiz kurumsal kimlik ve profesyonel logo tasarıımları.",
+            s1_title: "Tasarım ve Markalaşma", s1_desc: "Eşsiz kurumsal kimlik ve profesyonel logo tasarımları.",
             s2_title: "Dijital Pazarlama", s2_desc: "Satışlarınızı artıracak hedefli sosyal medya kampanyaları.",
             s3_title: "Web ve Uygulama Geliştirme", s3_desc: "En son teknolojilerle oluşturulmuş hızlı ve duyarlı web siteleri."
         },
@@ -89,6 +89,7 @@ function openLightbox(imgUrl, title) {
     currentSelectedProject = title;
     const modalImg = document.getElementById('modalImg');
     
+    // تم التأكد من استخدام مسار الصورة الأصلية الممرر من الـ HTML مباشرة
     modalImg.src = imgUrl;
 
     document.getElementById('modalTitle').textContent = title;
@@ -216,4 +217,3 @@ function animateWind() {
     requestAnimationFrame(animateWind);
 }
 animateWind();
-                          
