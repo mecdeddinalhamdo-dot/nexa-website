@@ -3,140 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DesignFlow - محرر جرافيك احترافي</title>
+    <title>NEXA Creative - حلول إبداعية احترافية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- شاشة التحميل -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">جاري تحميل DesignFlow...</div>
-    </div>
 
-    <div class="app-container">
-        <!-- الشريط الجانبي الأيسر - الأدوات -->
-        <div class="sidebar-left">
-            <div class="tool-btn active" data-tool="select">
-                <i class="fas fa-mouse-pointer"></i>
+    <!-- الهيدر -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="Logo.png" alt="Logo" onerror="this.style.display='none'">
+                NEXA<span>.</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#about">من نحن</a></li>
+            </ul>
+            <a href="https://wa.me/905364391849" class="btn-contact">تواصل معنا</a>
+        </div>
+    </header>
+
+    <!-- البداية -->
+    <section class="hero" id="home">
+        <div class="badge">✨ حلول إبداعية متكاملة</div>
+        <h1>نصنع <span>التأثير والتميز</span> لعلامتك التجارية</h1>
+        <p>نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>
+    </section>
+
+    <!-- الخدمات -->
+    <section class="services" id="services">
+        <div class="section-head">
+            <h2>ماذا نقدم لك؟</h2>
+        </div>
+        <div class="grid-cards">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>تسويق المؤثرين</h3>
+                <p>ربط العلامات التجارية بأبرز المؤثرين لتحقيق أفضل وصول وانتشار.</p>
             </div>
-            <div class="tool-btn" data-tool="pen">
-                <i class="fas fa-pen-nib"></i>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>الهوية البصرية</h3>
+                <p>تصميم لوجو وهويات احترافية تعكس قيمة وأهداف عملك.</p>
             </div>
-            <div class="tool-btn" data-tool="shapes">
-                <i class="fas fa-shapes"></i>
-            </div>
-            <div class="tool-btn" data-tool="text">
-                <i class="fas fa-font"></i>
-            </div>
-            <div class="tool-btn" data-tool="layers">
-                <i class="fas fa-layer-group"></i>
-            </div>
-            <div class="tool-btn" data-tool="effects">
-                <i class="fas fa-magic"></i>
-            </div>
-            <div class="tool-btn" data-tool="export">
-                <i class="fas fa-file-export"></i>
-            </div>
-            <div class="tool-btn" id="themeToggle">
-                <i class="fas fa-moon"></i>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>استراتيجيات النمو</h3>
+                <p>خطط تسويقية مدروسة تضمن لك نتائج ملموسة وأرباح مستمرة.</p>
             </div>
         </div>
-
-        <!-- منطقة العمل المركزية -->
-        <div class="canvas-area">
-            <div class="canvas-header">
-                <div class="window-controls">
-                    <div class="control-dot dot-red"></div>
-                    <div class="control-dot dot-yellow"></div>
-                    <div class="control-dot dot-green"></div>
-                </div>
-                <div class="project-title">مشروع تصميم جديد</div>
-                <div style="width: 60px;"></div>
-            </div>
-            <div class="canvas-content">
-                <div class="design-element" id="designElement">
-                    <div class="design-shape shape-1"></div>
-                    <div class="design-shape shape-2"></div>
-                    <div class="design-shape shape-3"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- الشريط الجانبي الأيمن - الخصائص -->
-        <div class="sidebar-right">
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-sliders-h"></i>
-                    التحكم في التصميم
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-label">
-                        <span>الشفافية</span>
-                        <span class="slider-value" id="opacityValue">70%</span>
-                    </div>
-                    <input type="range" min="0" max="100" value="70" id="opacitySlider">
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-label">
-                        <span>التشويش</span>
-                        <span class="slider-value" id="blurValue">40px</span>
-                    </div>
-                    <input type="range" min="0" max="100" value="40" id="blurSlider">
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-label">
-                        <span>الحجم</span>
-                        <span class="slider-value" id="sizeValue">100%</span>
-                    </div>
-                    <input type="range" min="50" max="200" value="100" id="sizeSlider">
-                </div>
-            </div>
-            
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-palette"></i>
-                    الألوان
-                </div>
-                <div class="color-picker">
-                    <div class="color-option active" style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4);" data-color="1"></div>
-                    <div class="color-option" style="background: linear-gradient(45deg, #45B7D1, #96CEB4);" data-color="2"></div>
-                    <div class="color-option" style="background: linear-gradient(45deg, #FFEAA7, #DDA0DD);" data-color="3"></div>
-                    <div class="color-option" style="background: linear-gradient(45deg, #FF9A9E, #FAD0C4);" data-color="4"></div>
-                    <div class="color-option" style="background: linear-gradient(45deg, #A1C4FD, #C2E9FB);" data-color="5"></div>
-                    <div class="color-option" style="background: linear-gradient(45deg, #D4FC79, #96E6A1);" data-color="6"></div>
-                </div>
-            </div>
-            
-            <div class="panel-section">
-                <div class="section-title">
-                    <i class="fas fa-cog"></i>
-                    الإعدادات
-                </div>
-                <div class="slider-group">
-                    <div class="slider-label">
-                        <span>سرعة الحركة</span>
-                        <span class="slider-value" id="speedValue">6s</span>
-                    </div>
-                    <input type="range" min="1" max="10" value="6" id="speedSlider">
-                </div>
-            </div>
-            
-            <div class="action-buttons">
-                <button class="btn btn-secondary" id="resetBtn">
-                    <i class="fas fa-undo"></i>
-                    إعادة تعيين
-                </button>
-                <button class="btn btn-primary" id="exportBtn">
-                    <i class="fas fa-download"></i>
-                    تصدير
-                </button>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
