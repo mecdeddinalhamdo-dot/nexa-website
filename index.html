@@ -1,302 +1,453 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXA Creative • عالم التصميم الرقمي الفاخر</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            purple: '#6A38FF',
-                            accent: '#A855F7'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Tajawal', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <title>PixelPerfect | تصميم جرافيك احترافي</title>
+    
+    <!-- استدعاء خط Cairo من جوجل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- مكتبة الأنيميشن AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        body { font-family: 'Tajawal', sans-serif; -webkit-tap-highlight-color: transparent; }
-        .glass-header {
-            background: rgba(255, 255, 255, 0.8);
+        /* --- متغيرات الألوان (ستايل أبل) --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-blue: #0071e3;
+            --accent-hover: #0077ed;
+            --surface-gray: #f5f5f7;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --border-radius: 20px;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- الإعدادات العامة --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- شريط التنقل (Glassmorphism) --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition);
         }
-        .dark .glass-header {
-            background: rgba(8, 8, 12, 0.8);
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
+
+        nav ul {
+            display: flex;
+            gap: 30px;
         }
-        .dark .glass-card {
-            background: rgba(255, 255, 255, 0.03);
+
+        nav a {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            opacity: 0.8;
+            transition: var(--transition);
         }
-        .apple-hover {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+        nav a:hover { opacity: 1; color: var(--accent-blue); }
+
+        .cta-btn-small {
+            background: var(--text-main);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            transition: var(--transition);
         }
-        .apple-hover:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -10px rgba(106, 56, 255, 0.15);
+
+        .cta-btn-small:hover { transform: scale(1.05); }
+
+        /* --- قسم الهيرو (Hero Section) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #ffffff 0%, #f5f5f7 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1d1d1f 0%, #4a4a4a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 113, 227, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-blue);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover { background-color: rgba(0, 113, 227, 0.05); }
+
+        /* --- قسم الخدمات (Bento Grid Style) --- */
+        .services {
+            padding: 100px 5%;
+            background-color: var(--surface-gray);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* --- معرض الأعمال (Portfolio) --- */
+        .portfolio {
+            padding: 100px 5%;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .work-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .work-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px;
+            opacity: 0;
+            transition: var(--transition);
+            transform: translateY(20px);
+        }
+
+        .work-item:hover .overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .overlay h4 { color: white; font-size: 1.2rem; }
+        .overlay span { color: #ccc; font-size: 0.9rem; }
+
+        /* --- قسم التواصل --- */
+        .contact {
+            padding: 100px 20px;
+            text-align: center;
+            background: black;
+            color: white;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            color: #86868b;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
+
+        /* --- الفوتر --- */
+        footer {
+            background: var(--surface-gray);
+            padding: 40px 5%;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-top: 1px solid #e1e1e1;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- التجاوب مع الجوال --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            nav ul { display: none; } /* يمكن إضافة قائمة هامبرغر لاحقاً */
+            .grid-container { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; gap: 20px; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-[#08080C] dark:text-slate-100 transition-colors duration-300 selection:bg-[#6A38FF] selection:text-white relative min-h-screen">
+<body>
 
-    <!-- READING PROGRESS BAR -->
-    <div id="progressBar" class="fixed top-0 right-0 left-0 h-1 bg-[#6A38FF] z-50 transition-all duration-150 w-0"></div>
-
-    <!-- FLOATING WHATSAPP BUTTON -->
-    <a href="https://wa.me/905364391849" target="_blank" rel="noopener noreferrer" 
-       class="fixed bottom-5 left-5 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(16,185,129,0.35)] hover:scale-110 active:scale-95 transition-all duration-300"
-       title="مراسلة NEXA عبر واتساب">
-        <span class="absolute -top-0.5 -right-0.5 w-3 h-3 bg-emerald-300 rounded-full animate-ping"></span>
-        <i class="fa-brands fa-whatsapp text-2xl sm:text-3xl"></i>
-    </a>
-
-    <!-- SCROLL TO TOP BUTTON -->
-    <button id="scrollTopBtn" type="button" class="fixed bottom-5 right-5 z-50 w-10 h-10 rounded-full bg-slate-900/80 dark:bg-white/10 text-white border border-slate-700/50 dark:border-white/20 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-95">
-        <i class="fa-solid fa-arrow-up text-sm"></i>
-    </button>
-
-    <!-- TOP ANNOUNCEMENT BAR (APPLE STYLE) -->
-    <div class="bg-gradient-to-r from-[#6A38FF] to-purple-800 text-white text-[11px] sm:text-xs font-bold py-2 px-4 text-center tracking-wide">
-        ✨ احصل على خصم 20% على باقات الهوية البصرية الكاملة هذا الشهر — <a href="https://wa.me/905364391849" target="_blank" class="underline hover:text-purple-200">احجز استشارتك مجاناً</a>
-    </div>
-
-    <!-- NAVBAR -->
-    <header class="sticky top-0 z-40 glass-header border-b border-slate-200/60 dark:border-white/10 transition-all">
-        <nav class="container mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-            <!-- BRAND LOGO SVG -->
-            <a href="#" class="flex items-center hover:opacity-90 transition-opacity">
-                <svg width="130" height="42" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 15 70 L 40 10 C 43 5, 52 5, 55 10 L 68 30 C 55 48, 40 60, 22 70 Z" fill="#6A38FF"/>
-                    <path d="M 75 10 L 65 35 C 60 48, 65 68, 50 72 C 45 73, 40 70, 40 66 Q 55 52, 65 30 Z" class="fill-slate-900 dark:fill-white"/>
-                    <path d="M 22 72 Q 55 52 82 32 Q 52 58 22 72 Z" class="fill-slate-900 dark:fill-white"/>
-                    <g class="fill-slate-900 dark:fill-white" font-family="'Tajawal', sans-serif" font-weight="900">
-                        <path d="M 95 30 V 62 H 105 L 122 38 V 62 H 131 V 30 H 121 L 104 54 V 30 Z"/>
-                        <path d="M 140 30 V 62 H 168 V 54 H 150 V 48 H 164 V 40 H 150 V 38 H 167 V 30 Z"/>
-                        <path d="M 176 30 L 190 46 L 204 30 H 215 L 197 49 L 216 62 H 204 L 189 51 L 175 62 H 164 L 182 48 L 165 30 Z"/>
-                        <path d="M 184 46 L 198 30 H 188 L 179 40 Z" fill="#6A38FF"/>
-                        <path d="M 230 30 L 214 62 H 225 L 228 54 H 244 L 247 62 H 258 L 243 30 Z M 232 46 L 236 36 L 240 46 Z"/>
-                    </g>
-                    <text x="175" y="82" text-anchor="middle" class="fill-slate-700 dark:fill-gray-300" font-family="'Tajawal', sans-serif" font-weight="600" font-size="15" letter-spacing="6">creative</text>
-                    <circle cx="262" cy="26" r="5" fill="#6A38FF"/>
-                    <text x="262" y="29" text-anchor="middle" fill="#FFFFFF" font-size="7" font-weight="bold">R</text>
-                </svg>
-            </a>
-            
-            <!-- NAV LINKS -->
-            <div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-600 dark:text-gray-300">
-                <a href="#hero" class="hover:text-[#6A38FF] dark:hover:text-purple-400 transition-colors">الرئيسية</a>
-                <a href="#stats" class="hover:text-[#6A38FF] dark:hover:text-purple-400 transition-colors">إنجازاتنا</a>
-                <a href="#services" class="hover:text-[#6A38FF] dark:hover:text-purple-400 transition-colors">خدماتنا</a>
-                <a href="#portfolio" class="hover:text-[#6A38FF] dark:hover:text-purple-400 transition-colors">أعمالنا</a>
-                <a href="#testimonials" class="hover:text-[#6A38FF] dark:hover:text-purple-400 transition-colors">الآراء</a>
-                <a href="#faq" class="hover:text-[#6A38FF] dark:hover:text-purple-400 transition-colors">الأسئلة</a>
-            </div>
-
-            <!-- ACTIONS -->
-            <div class="flex items-center gap-2">
-                <button id="themeToggle" type="button" class="w-10 h-10 rounded-xl bg-slate-200/80 dark:bg-white/10 border border-slate-300/50 dark:border-white/10 flex items-center justify-center hover:scale-105 active:scale-95 transition-all text-sm shadow-sm cursor-pointer" title="تبديل الثيم">
-                    <i id="themeIcon" class="fa-solid fa-sun text-amber-500"></i>
-                </button>
-
-                <a href="https://wa.me/905364391849" target="_blank" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#6A38FF] hover:bg-purple-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md shadow-purple-600/20 active:scale-95 transition-all whitespace-nowrap">
-                    تواصل معنا
-                </a>
-            </div>
+    <!-- الهيدر -->
+    <header id="navbar">
+        <div class="logo">Pixel.</div>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#portfolio">أعمالنا</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
         </nav>
+        <a href="#contact" class="cta-btn-small">ابدأ مشروعك</a>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="relative pt-16 pb-16 sm:pt-28 sm:pb-24 overflow-hidden">
-        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-[#6A38FF]/15 rounded-full blur-[120px] pointer-events-none"></div>
+    <!-- القسم الرئيسي -->
+    <section class="hero" id="home">
+        <h1 data-aos="fade-up" data-aos-duration="1000">الإبداع.<br>بكل بساطة.</h1>
+        <p data-aos="fade-up" data-aos-delay="200">نحول أفكارك المعقدة إلى تصاميم بصرية ساحرة تروي قصة علامتك التجارية.</p>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+            <a href="#portfolio" class="btn-primary">شاهد أعمالنا</a>
+            <a href="#contact" class="btn-secondary">تواصل معنا ></a>
+        </div>
+    </section>
 
-        <div class="container mx-auto px-4 sm:px-6 relative z-10 text-center">
-            <div class="max-w-3xl mx-auto">
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#6A38FF]/10 border border-[#6A38FF]/20 text-[#6A38FF] dark:text-purple-300 text-xs font-bold mb-6 shadow-sm">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#6A38FF] animate-pulse"></span>
-                    NEXA Creative • عالم التصميم الرقمي الفاخر
+    <!-- الخدمات -->
+    <section class="services" id="services">
+        <div class="section-header" data-aos="fade-up">
+            <h2>ماذا نقدم؟</h2>
+            <p style="color: var(--text-secondary)">حلول تصميم متكاملة تناسب طموحك</p>
+        </div>
+        
+        <div class="grid-container">
+            <!-- بطاقة 1 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-pen-nib"></i>
+                <h3>تصميم الهوية البصرية</h3>
+                <p>شعارات، أدلة استخدام العلامة التجارية، وكل ما تحتاجه لتبدو احترافياً.</p>
+            </div>
+            <!-- بطاقة 2 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-layer-group"></i>
+                <h3>تصميم واجهات UI/UX</h3>
+                <p>تصميم تطبيقات ومواقع تركز على تجربة المستخدم وسهولة الاستخدام.</p>
+            </div>
+            <!-- بطاقة 3 -->
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fa-solid fa-bullhorn"></i>
+                <h3>السوشيال ميديا</h3>
+                <p>تصاميم جذابة لمنصات التواصل الاجتماعي تزيد من تفاعل جمهورك.</p>
+            </div>
+             <!-- بطاقة 4 -->
+             <div class="card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fa-solid fa-video"></i>
+                <h3>موشن جرافيك</h3>
+                <p>فيديوهات قصيرة وديناميكية لشرح خدماتك بأسلوب عصري.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- معرض الأعمال -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-header" data-aos="fade-up">
+            <h2>أحدث المشاريع</h2>
+        </div>
+        <div class="gallery">
+            <!-- استخدم صوراً وهمية عالية الجودة من Unsplash -->
+            <div class="work-item" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 1">
+                <div class="overlay">
+                    <h4>مشروع تقنية المستقبل</h4>
+                    <span>هوية بصرية</span>
                 </div>
-                
-                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.25] mb-6">
-                    نحوّل الرؤى العادية إلى <br>
-                    <span class="bg-gradient-to-r from-[#6A38FF] via-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
-                        تجارب بصرية استثنائية
-                    </span>
-                </h1>
-                
-                <p class="text-slate-600 dark:text-gray-300 text-sm sm:text-lg leading-relaxed max-w-xl mx-auto mb-8 font-medium">
-                    نبتكر هويات بصرية وواجهات مستخدم تضع علامتك التجارية في صدارة الشركات العالمية بلمسات فنية متطورة.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row justify-center gap-3 max-w-xs sm:max-w-none mx-auto">
-                    <a href="https://wa.me/905364391849" target="_blank" class="w-full sm:w-auto px-7 py-3.5 bg-[#6A38FF] hover:bg-purple-700 text-white rounded-xl font-bold shadow-lg shadow-purple-600/25 active:scale-95 transition-all text-sm">
-                        ابدأ مشروعك الآن
-                    </a>
-                    <a href="#portfolio" class="w-full sm:w-auto px-7 py-3.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white rounded-xl font-bold hover:bg-slate-100 dark:hover:bg-white/10 transition-all text-sm">
-                        استكشف أعمالنا
-                    </a>
+            </div>
+            <div class="work-item" data-aos="zoom-in" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 2">
+                <div class="overlay">
+                    <h4>تطبيق الصحة</h4>
+                    <span>UI/UX Design</span>
+                </div>
+            </div>
+            <div class="work-item" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Project 3">
+                <div class="overlay">
+                    <h4>حملة إعلانية</h4>
+                    <span>سوشيال ميديا</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- STATS COUNTER SECTION (NEW) -->
-    <section id="stats" class="py-12 border-y border-slate-200/60 dark:border-white/5 bg-slate-100/50 dark:bg-white/[0.01]">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="p-4">
-                    <div class="text-3xl sm:text-4xl font-black text-[#6A38FF] dark:text-purple-400">+120</div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-gray-400 mt-1">مشروع المكتمل</div>
-                </div>
-                <div class="p-4">
-                    <div class="text-3xl sm:text-4xl font-black text-[#6A38FF] dark:text-purple-400">99%</div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-gray-400 mt-1">رضا العملاء</div>
-                </div>
-                <div class="p-4">
-                    <div class="text-3xl sm:text-4xl font-black text-[#6A38FF] dark:text-purple-400">+5</div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-gray-400 mt-1">سنوات خبرة</div>
-                </div>
-                <div class="p-4">
-                    <div class="text-3xl sm:text-4xl font-black text-[#6A38FF] dark:text-purple-400">24/7</div>
-                    <div class="text-xs sm:text-sm font-semibold text-slate-600 dark:text-gray-400 mt-1">دعم متواصل</div>
-                </div>
-            </div>
+    <!-- تواصل معنا -->
+    <section class="contact" id="contact">
+        <div data-aos="fade-up">
+            <h2>جاهز لنبدأ؟</h2>
+            <p>دعنا نصنع شيئاً مذهلاً معاً.</p>
+            <a href="mailto:info@pixelperfect.com" class="btn-primary" style="background: white; color: black;">راسلنا الآن</a>
         </div>
     </section>
 
-    <!-- PRESENTATION SECTION -->
-    <section id="presentation" class="py-16 sm:py-24 bg-slate-100/80 dark:bg-[#0b0b10]">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="text-center mb-10 sm:mb-14">
-                <span class="text-[#6A38FF] dark:text-purple-400 text-xs font-black uppercase tracking-widest">عرض تقديمي</span>
-                <h2 class="text-2xl sm:text-4xl font-black mt-1">كيف نبتكر لمشروعك؟</h2>
-            </div>
-
-            <div class="max-w-3xl mx-auto glass-card border border-slate-200/80 dark:border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-xl relative">
-                <div id="slideContent" class="min-h-[140px] flex flex-col justify-center">
-                    <!-- Dynamic Content -->
-                </div>
-
-                <div class="flex justify-between items-center mt-6 pt-5 border-t border-slate-200 dark:border-white/10">
-                    <button id="prevSlide" type="button" class="px-4 py-2 rounded-lg bg-slate-200/80 dark:bg-white/10 text-xs font-bold hover:bg-[#6A38FF] hover:text-white transition-all cursor-pointer">السابق</button>
-                    <div id="slideDots" class="flex gap-1.5"></div>
-                    <button id="nextSlide" type="button" class="px-4 py-2 rounded-lg bg-[#6A38FF] text-white text-xs font-bold hover:bg-purple-700 transition-all cursor-pointer">التالي</button>
-                </div>
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <div>جميع الحقوق محفوظة &copy; 2026 PixelPerfect.</div>
+            <div style="display: flex; gap: 15px;">
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
             </div>
         </div>
-    </section>
+    </footer>
 
-    <!-- SERVICES SECTION -->
-    <section id="services" class="py-16 sm:py-24">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="text-center mb-12 sm:mb-16">
-                <span class="text-[#6A38FF] dark:text-purple-400 text-xs font-black uppercase tracking-widest">خدماتنا التخصصية</span>
-                <h2 class="text-2xl sm:text-4xl font-black mt-1">حلول تصميم بمستوى عالمي</h2>
-            </div>
+    <!-- سكربتات التشغيل -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // تفعيل مكتبة الأنيميشن
+        AOS.init({
+            duration: 1000, // مدة الحركة
+            once: true,     // الحركة تحدث مرة واحدة فقط عند النزول
+            offset: 100     // المسافة قبل بدء الحركة
+        });
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-6 apple-hover shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-[#6A38FF]/10 text-[#6A38FF] dark:text-purple-400 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-bezier-curve"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">تصميم الشعارات</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed">شعارات فريدة ومبتكرة تختصر قيم شركتك وتترك انطباعاً رسمياً لدى العملاء.</p>
-                </div>
-
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-6 apple-hover shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-[#6A38FF]/10 text-[#6A38FF] dark:text-purple-400 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-layer-group"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">الهوية البصرية</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed">بناء دليل كامل للهوية يشمل الخطوط، الألوان، المطبوعات والتطبيقات المختلفة.</p>
-                </div>
-
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-6 apple-hover shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-[#6A38FF]/10 text-[#6A38FF] dark:text-purple-400 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">تصاميم السوشيال ميديا</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed">قوالب وإعلانات احترافية ترفع من نسبة التفاعل وتبرز منتجاتك بشكل فاخر.</p>
-                </div>
-
-                <div class="bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 rounded-2xl p-6 apple-hover shadow-sm">
-                    <div class="w-12 h-12 rounded-xl bg-[#6A38FF]/10 text-[#6A38FF] dark:text-purple-400 flex items-center justify-center text-xl mb-4">
-                        <i class="fa-solid fa-laptop-code"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">واجهات الرقمية (UI/UX)</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed">تخطيط وتصميم واجهات التفاعل للم مواقع والتطبيقات بأسلوب عصري وسهل الاستخدام.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PORTFOLIO SECTION -->
-    <section id="portfolio" class="py-16 sm:py-24 bg-slate-100/80 dark:bg-[#0b0b10]">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="text-center mb-12 sm:mb-16">
-                <span class="text-[#6A38FF] dark:text-purple-400 text-xs font-black uppercase tracking-widest">معرض الأعمال</span>
-                <h2 class="text-2xl sm:text-4xl font-black mt-1">نتاج الإبداع</h2>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-white/5 shadow-md apple-hover">
-                    <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=800&auto=format&fit=crop" alt="Branding" class="w-full h-52 object-cover">
-                    <div class="p-5">
-                        <span class="text-[11px] font-bold text-[#6A38FF] dark:text-purple-400">هوية تجارية</span>
-                        <h3 class="text-lg font-bold mt-1">مشروع المشروبات العضوية</h3>
-                        <p class="text-slate-500 dark:text-gray-400 text-xs mt-1.5">تصميم هوية بصرية كاملة وتغليف منتجات عصري.</p>
-                    </div>
-                </div>
-
-                <div class="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-white/5 shadow-md apple-hover">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop" alt="Logo Design" class="w-full h-52 object-cover">
-                    <div class="p-5">
-                        <span class="text-[11px] font-bold text-[#6A38FF] dark:text-purple-400">تصميم شعار</span>
-                        <h3 class="text-lg font-bold mt-1">استوديو الابتكار الرقمي</h3>
-                        <p class="text-slate-500 dark:text-gray-400 text-xs mt-1.5">شعار تجريدي يعكس المستقبل والتطوير البرمجي.</p>
-                    </div>
-                </div>
-
-                <div class="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-white/5 shadow-md apple-hover">
-                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop" alt="UI Design" class="w-full h-52 object-cover">
-                    <div class="p-5">
-                        <span class="text-[11px] font-bold text-[#6A38FF] dark:text-purple-400">واجهات مستخدم</span>
-                        <h3 class="text-lg font-bold mt-1">منصة NEXA المالية</h3>
-                        <p class="text-slate-500 dark:text-gray-400 text-xs mt-1.5">تصميم واجهة لوحة تحكم سريعة وسلسة للمستخدمين.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS SECTION (NEW) -->
-    <section id="testimonials" class="py-16 sm:py-24">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="text-center mb-12">
-                <span class="text-[#6A38FF] dark:text-purple-400 text-xs font-black uppercase tracking-widest">آراء الشركاء</span>
-                <h2 class="text-2xl sm:text-4xl font-black mt-1">ماذا يقول عملاؤنا؟</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="p-6 rounded-2xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 apple-hover">
-                    <div class="flex text-amber-400 text-xs gap-1 mb-3">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-xs sm:text-sm text-slate-600 dark:text-gray-300 leading-relaxed mb-4">"التعامل مع فريق NEXA غير مفهومتنا للتصميم. سرعة في التنفيذ واحترافية تفوق التوقعات."</p>
-                    <div class="font-bold text
+        // تغيير خلفية الهيدر عند السكرول
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
