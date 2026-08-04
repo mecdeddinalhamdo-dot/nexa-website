@@ -1,7 +1,7 @@
-// ⚡ رقم الواتساب الخاص بك لإستقبال الطلبات (يمكنك تغييره لاحقاً)
+// ⚡ ضع رقم الواتساب الخاص بك هنا
 const WHATSAPP_NUMBER = "905000000000"; 
 
-// 1. نظام الترجمات اللغوية (AR / EN / TR)
+// 1. نظام الترجمات المتعددة
 const translations = {
     ar: {
         nav: { services: "خدماتنا", about: "من نحن", portfolio: "أعمالنا", contact: "تواصل معنا" },
@@ -54,7 +54,7 @@ const translations = {
         hero: { badge: "✨ Entegre Yaratıcı Çözümler", title: "Markanız İçin <span>Etki ve Etkileyicilik</span> Yaratıyoruz", desc: "Modern tasarım ve pazarlama stratejileri ile büyümenize yardımcı oluyoruz." },
         services: {
             title: "Neler Sunuyoruz?", subtitle: "İşinizi bir üst seviyeye taşımak için tasarlanmış çözümler",
-            s1_title: "Tasarım ve Markalaşma", s1_desc: "Eşsiz kurumsal kimlik ve profesyonel logo tasarımları.",
+            s1_title: "Tasarım ve Markalaşma", s1_desc: "Eşsiz kurumsal kimlik ve profesyonel logo tasarıımları.",
             s2_title: "Dijital Pazarlama", s2_desc: "Satışlarınızı artıracak hedefli sosyal medya kampanyaları.",
             s3_title: "Web ve Uygulama Geliştirme", s3_desc: "En son teknolojilerle oluşturulmuş hızlı ve duyarlı web siteleri."
         },
@@ -64,7 +64,7 @@ const translations = {
         },
         portfolio: {
             title: "Portföyümüz", subtitle: "Yenilikçi projelerimize bir bakış",
-            zoom: "Resمي Büyüt", order_btn: "Benzerini İsteyin"
+            zoom: "Resmi Büyüt", order_btn: "Benzerini İsteyin"
         },
         modal: {
             order_this: "Şimdi Benzer Tasarım İsteyin", order_title: "Hızlı Sipariş",
@@ -76,7 +76,7 @@ const translations = {
 
 let currentSelectedProject = "";
 
-// 2. ميزة 3: شريط تقدم التصفح البنفسجي
+// 2. شريط تقدم التصفح البنفسجي
 window.addEventListener('scroll', () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -84,18 +84,24 @@ window.addEventListener('scroll', () => {
     document.getElementById("scrollProgressBar").style.width = scrolled + "%";
 });
 
-// 3. ميزة 1 + 2: التحكم بالنوافذ الزجاجية المكبرة والطلب السريع
+// 3. فتح المعاينة مع معالجة الصورة الاحتياطية
 function openLightbox(imgUrl, title) {
     currentSelectedProject = title;
-    document.getElementById('modalImg').src = imgUrl;
-    document.getElementById('modalTitle').textContent = title;
+    const modalImg = document.getElementById('modalImg');
     
+    modalImg.src = imgUrl;
+    modalImg.onerror = function() {
+        this.src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80';
+    };
+
+    document.getElementById('modalTitle').textContent = title;
     document.getElementById('lightboxView').style.display = 'block';
     document.getElementById('orderView').style.display = 'none';
     
     document.getElementById('glassModal').classList.add('active');
 }
 
+// 4. فتح نافذة الطلب المباشر
 function openOrderModal(title) {
     currentSelectedProject = title;
     document.getElementById('orderProjectName').textContent = "📌 المشروع المطلوبة: " + title;
@@ -114,14 +120,13 @@ function closeGlassModal() {
     document.getElementById('glassModal').classList.remove('active');
 }
 
-// إغلاق النافذة عند الضغط خارجها
 document.getElementById('glassModal').addEventListener('click', (e) => {
     if (e.target.id === 'glassModal') {
         closeGlassModal();
     }
 });
 
-// إرسال الطلب المباشر عبر الواتساب
+// 5. إرسال الطلب عبر الواتساب
 function sendWhatsAppOrder(e) {
     e.preventDefault();
     const name = document.getElementById('custName').value.trim();
@@ -139,7 +144,7 @@ function sendWhatsAppOrder(e) {
     closeGlassModal();
 }
 
-// 4. تغيير اللغة ديناميكياً
+// 6. تغيير اللغة
 document.getElementById('langSelect').addEventListener('change', (e) => {
     const lang = e.target.value;
     document.documentElement.lang = lang;
@@ -153,7 +158,7 @@ document.getElementById('langSelect').addEventListener('change', (e) => {
     });
 });
 
-// 5. تبديل وضع الليل والنهار (Dark / Light Mode)
+// 7. الوضع الليلي والنهاري
 const themeBtn = document.getElementById('themeToggle');
 themeBtn.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -162,7 +167,7 @@ themeBtn.addEventListener('click', () => {
     themeBtn.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
 });
 
-// 6. تشغيل خلفية الرياح البنفسجية التفاعلية
+// 8. خلفية الرياح البنفسجية التفاعلية
 const canvas = document.getElementById('purpleWindCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -214,3 +219,4 @@ function animateWind() {
     requestAnimationFrame(animateWind);
 }
 animateWind();
+    
