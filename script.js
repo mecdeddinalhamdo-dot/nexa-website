@@ -1,7 +1,7 @@
-// ⚡ ضع رقم الواتساب الخاص بك هنا
+// ⚡ رقم الواتساب الخاص بك
 const WHATSAPP_NUMBER = "905000000000"; 
 
-// 1. نظام الترجمات المتعددة
+// 1. الترجمات
 const translations = {
     ar: {
         nav: { services: "خدماتنا", about: "من نحن", portfolio: "أعمالنا", contact: "تواصل معنا" },
@@ -84,15 +84,12 @@ window.addEventListener('scroll', () => {
     document.getElementById("scrollProgressBar").style.width = scrolled + "%";
 });
 
-// 3. فتح المعاينة مع معالجة الصورة الاحتياطية
+// 3. فتح المعاينة بالصورة الأصلية
 function openLightbox(imgUrl, title) {
     currentSelectedProject = title;
     const modalImg = document.getElementById('modalImg');
     
     modalImg.src = imgUrl;
-    modalImg.onerror = function() {
-        this.src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80';
-    };
 
     document.getElementById('modalTitle').textContent = title;
     document.getElementById('lightboxView').style.display = 'block';
@@ -158,13 +155,13 @@ document.getElementById('langSelect').addEventListener('change', (e) => {
     });
 });
 
-// 7. الوضع الليلي والنهاري
+// 7. التبديل بين الوضع الليلي والنهاري (مع جعل النهاري افتراضي)
 const themeBtn = document.getElementById('themeToggle');
 themeBtn.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);
-    themeBtn.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+    themeBtn.innerHTML = newTheme === 'light' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
 });
 
 // 8. خلفية الرياح البنفسجية التفاعلية
@@ -219,4 +216,4 @@ function animateWind() {
     requestAnimationFrame(animateWind);
 }
 animateWind();
-    
+                          
