@@ -9,7 +9,7 @@
 /* الوضع الليلي (Dark Mode) */
 [data-theme="dark"] {
     --bg-main: #0B0F19;
-    --card-bg: rgba(20, 26, 43, 0.7);
+    --card-bg: rgba(20, 26, 43, 0.75);
     --border: rgba(255, 255, 255, 0.08);
     --text-main: #F8FAFC;
     --text-muted: #94A3B8;
@@ -17,10 +17,10 @@
     --footer-bg: #070A12;
 }
 
-/* الوضع النهاري (Light Mode) - الافتراضي */
+/* الوضع النهاري (Light Mode) */
 [data-theme="light"] {
     --bg-main: #F8FAFC;
-    --card-bg: #FFFFFF;
+    --card-bg: rgba(255, 255, 255, 0.9);
     --border: rgba(0, 0, 0, 0.08);
     --text-main: #0F172A;
     --text-muted: #64748B;
@@ -43,6 +43,18 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* خلفية الرياح البنفسجية المتحركة */
+#purpleWindCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -54,7 +66,7 @@ img {
     object-fit: contain;
 }
 
-/* الهيدر مع تعديل العزل لمنع التداخل */
+/* الهيدر */
 header {
     position: fixed;
     top: 0;
@@ -193,6 +205,7 @@ header {
     padding: 30px;
     border-radius: var(--radius);
     transition: var(--transition);
+    backdrop-filter: blur(10px);
 }
 
 .card:hover { transform: translateY(-5px); border-color: var(--primary); }
@@ -206,6 +219,7 @@ header {
     border: 1px solid var(--border);
     padding: 40px;
     border-radius: var(--radius);
+    backdrop-filter: blur(10px);
 }
 
 .about-text h2 { font-size: 28px; margin-bottom: 15px; }
@@ -228,7 +242,7 @@ header {
 .stat-card h3 { font-size: 32px; color: var(--primary); }
 .stat-card p { color: var(--text-main); font-weight: 500; font-size: 14px; }
 
-/* كروت المعرض مع ضبط احترافي للصور كاملة */
+/* معرض الأعمال */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -241,6 +255,7 @@ header {
     border-radius: var(--radius);
     overflow: hidden;
     transition: var(--transition);
+    backdrop-filter: blur(10px);
 }
 
 .portfolio-card:hover {
@@ -262,7 +277,7 @@ header {
 .portfolio-img img {
     width: 100%;
     height: 100%;
-    object-fit: contain !important; /* يضمن إظهار كل النصوص والتصاميم بدون قص */
+    object-fit: contain !important;
     transition: var(--transition);
 }
 
@@ -335,4 +350,4 @@ footer {
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero h1 { font-size: 30px; }
-}
+    }
