@@ -1,29 +1,35 @@
 :root {
     --primary: #7C3AED;
     --primary-hover: #6D28D9;
-    --primary-light: rgba(124, 58, 237, 0.12);
-    --radius: 16px;
-    --transition: all 0.3s ease;
+    --primary-light: rgba(124, 58, 237, 0.15);
+    --radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* الوضع الليلي (Dark Mode) */
 [data-theme="dark"] {
     --bg-main: #0B0F19;
-    --card-bg: rgba(20, 26, 43, 0.75);
-    --border: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(20, 26, 43, 0.4);
+    --glass-card: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.12);
     --text-main: #F8FAFC;
     --text-muted: #94A3B8;
-    --glass-nav: rgba(11, 15, 25, 0.85);
-    --footer-bg: #070A12;
+    --glass-nav: rgba(11, 15, 25, 0.75);
+    --footer-bg: rgba(7, 10, 18, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.15);
 }
 
+/* الوضع النهاري (Light Mode) */
 [data-theme="light"] {
     --bg-main: #F8FAFC;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --border: rgba(0, 0, 0, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.5);
+    --glass-card: rgba(255, 255, 255, 0.6);
+    --border: rgba(124, 58, 237, 0.15);
     --text-main: #0F172A;
     --text-muted: #64748B;
-    --glass-nav: rgba(248, 250, 252, 0.85);
-    --footer-bg: #F1F5F9;
+    --glass-nav: rgba(248, 250, 252, 0.8);
+    --footer-bg: rgba(241, 245, 249, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.8);
 }
 
 * {
@@ -41,6 +47,7 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* خلفية الرياح البنفسجية المتحركة */
 #purpleWindCanvas {
     position: fixed;
     top: 0;
@@ -49,44 +56,47 @@ body {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 img { max-width: 100%; height: auto; }
 
 .logo img {
-    max-height: 45px !important;
+    max-height: 38px !important;
     width: auto !important;
     object-fit: contain;
 }
 
+/* 🛠️ إصلاح الهيدر لمنع التداخل في الجوال */
 header {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 9999 !important;
     background: var(--glass-nav);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 15px 20px;
+    padding: 12px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     text-decoration: none;
     color: var(--text-main);
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .logo span { color: var(--primary); }
@@ -94,7 +104,7 @@ header {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 25px;
 }
 
 .nav-links a {
@@ -109,19 +119,21 @@ header {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    flex-wrap: nowrap;
 }
 
-/* تنسيق اختيار اللغة */
+/* قائمة اختيار اللغة */
 .lang-selector {
     display: flex;
     align-items: center;
-    gap: 6px;
-    background: var(--primary-light);
+    gap: 4px;
+    background: var(--glass-card);
     border: 1px solid var(--border);
-    padding: 6px 12px;
+    padding: 5px 10px;
     border-radius: 20px;
     color: var(--primary);
+    backdrop-filter: blur(10px);
 }
 
 .lang-selector select {
@@ -129,7 +141,7 @@ header {
     border: none;
     color: var(--text-main);
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     outline: none;
     cursor: pointer;
 }
@@ -140,22 +152,23 @@ header {
 }
 
 .theme-toggle-btn {
-    background: var(--primary-light);
+    background: var(--glass-card);
     border: 1px solid var(--border);
     color: var(--primary);
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 16px;
     transition: var(--transition);
+    backdrop-filter: blur(10px);
 }
 
 .theme-toggle-btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
     background: var(--primary);
     color: #FFFFFF;
 }
@@ -163,41 +176,47 @@ header {
 .btn-contact {
     background: linear-gradient(135deg, var(--primary), #9333EA);
     color: white;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 14px;
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+    font-size: 13px;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
     transition: var(--transition);
 }
 
+/* قسم الهيرو */
 .hero {
-    padding: 160px 20px 100px;
+    padding: 140px 20px 80px;
     text-align: center;
     max-width: 900px;
     margin: 0 auto;
 }
 
 .badge {
-    background: var(--primary-light);
+    background: var(--glass-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--primary);
-    border: 1px solid rgba(124, 58, 237, 0.3);
-    padding: 8px 18px;
-    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 8px 20px;
+    border-radius: 30px;
     font-size: 14px;
     display: inline-block;
     margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
 }
 
-.hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 20px; }
+.hero h1 { font-size: 38px; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
 .hero h1 span { color: var(--primary); }
 .hero p { color: var(--text-muted); font-size: 18px; }
 
+/* الأقسام العامة */
 .services, .about, .portfolio {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 20px;
+    padding: 60px 20px;
 }
 
 .section-head { text-align: center; margin-bottom: 40px; }
@@ -216,7 +235,8 @@ header {
     padding: 30px;
     border-radius: var(--radius);
     transition: var(--transition);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
 .card:hover { transform: translateY(-5px); border-color: var(--primary); }
@@ -224,12 +244,14 @@ header {
 .card h3 { margin-bottom: 10px; }
 .card p { color: var(--text-muted); font-size: 14px; }
 
+/* قسم من نحن */
 .about-container {
     background: var(--card-bg);
     border: 1px solid var(--border);
     padding: 40px;
     border-radius: var(--radius);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
 .about-text h2 { font-size: 28px; margin-bottom: 15px; }
@@ -238,49 +260,60 @@ header {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 20px;
     text-align: center;
 }
 
 .stat-card {
-    background: var(--primary-light);
+    background: var(--glass-card);
+    border: 1px solid var(--border);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
 }
 
 .stat-card h3 { font-size: 32px; color: var(--primary); }
 .stat-card p { color: var(--text-main); font-weight: 500; font-size: 14px; }
 
+/* 💎 تصميم البلور / الزجاج لمعرض الأعمال (Glassmorphism Portfolio) */
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 30px;
 }
 
 .portfolio-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    /* تأثير لوح الزجاج المضبب */
+    background: var(--glass-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 15px;
     overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transition: var(--transition);
-    backdrop-filter: blur(10px);
 }
 
 .portfolio-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary);
-    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.2);
+    transform: translateY(-8px) scale(1.01);
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .portfolio-img {
     width: 100%;
     height: 320px;
+    border-radius: 16px;
     overflow: hidden;
-    background: #0B0F19;
+    /* خلفية شبه شفافة لتظهر حركة الرياح من خلف الصورة */
+    background: rgba(11, 15, 25, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    border: 1px solid var(--border);
 }
 
 .portfolio-img img {
@@ -288,19 +321,37 @@ header {
     height: 100%;
     object-fit: contain !important;
     transition: var(--transition);
+    /* إعطاء لمسة انسيابية للصورة */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
 }
 
-.portfolio-card:hover .portfolio-img img { transform: scale(1.03); }
+.portfolio-card:hover .portfolio-img img {
+    transform: scale(1.05);
+}
 
-.portfolio-info { padding: 20px; }
-.portfolio-info h4 { font-size: 18px; margin-bottom: 6px; color: var(--text-main); }
-.portfolio-info p { font-size: 14px; color: var(--text-muted); }
+.portfolio-info {
+    padding: 18px 8px 8px;
+}
 
+.portfolio-info h4 {
+    font-size: 19px;
+    margin-bottom: 6px;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.portfolio-info p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Footer */
 footer {
     background-color: var(--footer-bg);
     border-top: 1px solid var(--border);
     padding-top: 60px;
     margin-top: 60px;
+    backdrop-filter: blur(15px);
 }
 
 .footer-container {
@@ -319,11 +370,12 @@ footer {
 .footer-links a { color: var(--text-muted); text-decoration: none; transition: var(--transition); }
 .footer-links a:hover { color: var(--primary); }
 
-.social-icons { display: flex; gap: 15px; }
+.social-icons { display: flex; gap: 12px; }
 .social-icons a {
     width: 38px;
     height: 38px;
-    background: var(--primary-light);
+    background: var(--glass-card);
+    border: 1px solid var(--border);
     color: var(--primary);
     border-radius: 50%;
     display: flex;
@@ -342,7 +394,40 @@ footer {
     font-size: 14px;
 }
 
+/* 📱 استجابة شاشات الهاتف المحمول */
 @media (max-width: 768px) {
     .nav-links { display: none; }
-    .hero h1 { font-size: 28px; }
+    
+    .nav-container {
+        padding: 10px 12px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+    
+    .btn-contact {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .lang-selector {
+        padding: 4px 6px;
+    }
+
+    .lang-selector select {
+        font-size: 11px;
+    }
+
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero h1 { 
+        font-size: 26px; 
+    }
+
+    .portfolio-img {
+        height: 260px;
+    }
 }
