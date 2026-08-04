@@ -1,219 +1,385 @@
-// ⚡ رقم الواتساب الخاص بك
-const WHATSAPP_NUMBER = "905000000000"; 
-
-// 1. الترجمات
-const translations = {
-    ar: {
-        nav: { services: "خدماتنا", about: "من نحن", portfolio: "أعمالنا", contact: "تواصل معنا" },
-        hero: { badge: "✨ حلول إبداعية متكاملة", title: "نصنع <span>التأثير والتألق</span> لعلامتك التجارية", desc: "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك." },
-        services: {
-            title: "ماذا نقدم لك؟", subtitle: "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر",
-            s1_title: "التصميم والهوية البصرية", s1_desc: "بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.",
-            s2_title: "التسويق الرقمي", s2_desc: "حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.",
-            s3_title: "تطوير المواقع والتطبيقات", s3_desc: "تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات."
-        },
-        about: {
-            title: "عن <span>NEXA</span>", desc: "نحن فريق متكامل من المصممين والمطورين والمُسوقين الشغوفين بتحويل الأفكار إلى واقع رقمي متميز وبناء شراكات نجاح طويلة الأمد.",
-            projects: "مشروع مكتمل", clients: "عميل سعيد", quality: "جودة جرافيك"
-        },
-        portfolio: {
-            title: "معرض أعمالنا", subtitle: "نظرة على بعض مشاريعنا والتصاميم المبتكرة",
-            zoom: "تكبير التصميم", order_btn: "اطلب مثل هذا"
-        },
-        modal: {
-            order_this: "اطلب تصميم مشابه الآن", order_title: "طلب تصميم سريع",
-            name_label: "الاسم الكريم:", details_label: "تفاصيل إضافية (اختياري):", send_btn: "إرسال الطلب عبر الواتساب"
-        },
-        footer: { desc: "حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.", quick_links: "روابط سريعة", social: "تابعنا" }
-    },
-    en: {
-        nav: { services: "Services", about: "About Us", portfolio: "Portfolio", contact: "Contact Us" },
-        hero: { badge: "✨ Integrated Creative Solutions", title: "We Create <span>Impact & Brilliance</span> For Your Brand", desc: "Helping you grow and scale with modern, innovative design and marketing strategies." },
-        services: {
-            title: "What We Offer?", subtitle: "Integrated services crafted to elevate your business",
-            s1_title: "Branding & Design", s1_desc: "Complete visual identities and professional logos representing your values.",
-            s2_title: "Digital Marketing", s2_desc: "Targeted campaigns and social media management to boost sales.",
-            s3_title: "Web & App Development", s3_desc: "Fast, modern, and responsive websites built with cutting-edge tech."
-        },
-        about: {
-            title: "About <span>NEXA</span>", desc: "We are a passionate team of designers, developers, and marketers turning ideas into digital excellence.",
-            projects: "Completed Projects", clients: "Happy Clients", quality: "Graphic Quality"
-        },
-        portfolio: {
-            title: "Our Portfolio", subtitle: "A glance at our recent innovative work",
-            zoom: "Zoom Image", order_btn: "Order Similar"
-        },
-        modal: {
-            order_this: "Order Similar Design Now", order_title: "Quick Order",
-            name_label: "Your Name:", details_label: "Additional Details (Optional):", send_btn: "Send Order via WhatsApp"
-        },
-        footer: { desc: "Creative solutions that elevate your brand to the stars.", quick_links: "Quick Links", social: "Follow Us" }
-    },
-    tr: {
-        nav: { services: "Hizmetlerimiz", about: "Hakkımızda", portfolio: "Portföy", contact: "İletişim" },
-        hero: { badge: "✨ Entegre Yaratıcı Çوزüмler", title: "Markanız İçin <span>Etki ve Etkileyicilik</span> Yaratıyoruz", desc: "Modern tasarım ve pazarlama stratejileri ile büyümenize yardımcı oluyoruz." },
-        services: {
-            title: "Neler Sunuyoruz?", subtitle: "İşinizi bir üst seviyeye taşımak için tasarlanmış çözümler",
-            s1_title: "Tasarım ve Markalaşma", s1_desc: "Eşsiz kurumsal kimlik ve profesyonel logo tasarımları.",
-            s2_title: "Dijital Pazarlama", s2_desc: "Satışlarınızı artıracak hedefli sosyal medya kampanyaları.",
-            s3_title: "Web ve Uygulama Geliştirme", s3_desc: "En son teknolojilerle oluşturulmuş hızlı ve duyarlı web siteleri."
-        },
-        about: {
-            title: "<span>NEXA</span> Hakkında", desc: "Fikirleri dijital mükemmelliğe dönüştüren tutkulu bir tasarımcı ve geliştirici ekibiyiz.",
-            projects: "Tamamlanan Proje", clients: "Mutlu Müşteri", quality: "Grafik Kalitesi"
-        },
-        portfolio: {
-            title: "Portföyümüz", subtitle: "Yenilikçi projelerimize bir bakış",
-            zoom: "Resmi Büyüt", order_btn: "Benzerini İsteyin"
-        },
-        modal: {
-            order_this: "Şimdi Benzer Tasarım İsteyin", order_title: "Hızlı Sipariş",
-            name_label: "Adınız:", details_label: "Ek Detaylar (İsteğe bağlı):", send_btn: "WhatsApp ile Sipariş Gönder"
-        },
-        footer: { desc: "Markanızı yıldızlara taşıyan yaratıcı çözümler.", quick_links: "Hızlı Bağlantılar", social: "Takip Edin" }
-    }
-};
-
-let currentSelectedProject = "";
-
-// 2. شريط تقدم التصفح البنفسجي
-window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById("scrollProgressBar").style.width = scrolled + "%";
-});
-
-// 3. فتح المعاينة بالصورة الأصلية
-function openLightbox(imgUrl, title) {
-    currentSelectedProject = title;
-    const modalImg = document.getElementById('modalImg');
-    
-    // تم التأكد من استخدام مسار الصورة الأصلية الممرر من الـ HTML مباشرة
-    modalImg.src = imgUrl;
-
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('lightboxView').style.display = 'block';
-    document.getElementById('orderView').style.display = 'none';
-    
-    document.getElementById('glassModal').classList.add('active');
-}
-
-// 4. فتح نافذة الطلب المباشر
-function openOrderModal(title) {
-    currentSelectedProject = title;
-    document.getElementById('orderProjectName').textContent = "📌 المشروع المطلوبة: " + title;
-    
-    document.getElementById('lightboxView').style.display = 'none';
-    document.getElementById('orderView').style.display = 'block';
-    
-    document.getElementById('glassModal').classList.add('active');
-}
-
-function switchToOrderView() {
-    openOrderModal(currentSelectedProject);
-}
-
-function closeGlassModal() {
-    document.getElementById('glassModal').classList.remove('active');
-}
-
-document.getElementById('glassModal').addEventListener('click', (e) => {
-    if (e.target.id === 'glassModal') {
-        closeGlassModal();
-    }
-});
-
-// 5. إرسال الطلب عبر الواتساب
-function sendWhatsAppOrder(e) {
-    e.preventDefault();
-    const name = document.getElementById('custName').value.trim();
-    const details = document.getElementById('custDetails').value.trim();
-    
-    let msg = `مرحباً NEXA 👋\n`;
-    msg += `أريد طلب تصميم شبيه بمشروع: *${currentSelectedProject}*\n`;
-    msg += `👤 الاسم: ${name}\n`;
-    if(details) {
-        msg += `📝 تفاصيل إضافية: ${details}\n`;
-    }
-
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(whatsappUrl, '_blank');
-    closeGlassModal();
-}
-
-// 6. تغيير اللغة
-document.getElementById('langSelect').addEventListener('change', (e) => {
-    const lang = e.target.value;
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const keys = el.getAttribute('data-i18n').split('.');
-        let val = translations[lang];
-        keys.forEach(k => { if(val) val = val[k]; });
-        if(val) el.innerHTML = val;
-    });
-});
-
-// 7. التبديل بين الوضع الليلي والنهاري (مع جعل النهاري افتراضي)
-const themeBtn = document.getElementById('themeToggle');
-themeBtn.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    themeBtn.innerHTML = newTheme === 'light' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-});
-
-// 8. خلفية الرياح البنفسجية التفاعلية
+// --- 1. تأثير الرياح البنفسجية المتحركة في الخلفية ---
 const canvas = document.getElementById('purpleWindCanvas');
 const ctx = canvas.getContext('2d');
 
+let width, height;
+let particles = [];
+
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-const particles = [];
-const particleCount = 45;
-
-for (let i = 0; i < particleCount; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        length: Math.random() * 80 + 40,
-        speed: Math.random() * 1.5 + 0.5,
-        opacity: Math.random() * 0.4 + 0.1,
-        width: Math.random() * 2 + 0.5
-    });
+class WindParticle {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.length = Math.random() * 120 + 40;
+        this.speed = Math.random() * 2 + 1;
+        this.opacity = Math.random() * 0.4 + 0.1;
+        this.angle = Math.PI / 6; // ميلان الخطوط
+    }
+    update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        if (this.x > width + 100 || this.y > height + 100) {
+            this.x = -100;
+            this.y = Math.random() * height - 200;
+        }
+    }
+    draw() {
+        ctx.strokeStyle = document.documentElement.getAttribute('data-theme') === 'light' 
+            ? `rgba(124, 58, 237, ${this.opacity * 0.5})` 
+            : `rgba(124, 58, 237, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x - Math.cos(this.angle) * this.length, this.y - Math.sin(this.angle) * this.length);
+        ctx.stroke();
+    }
 }
 
-function animateWind() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+for (let i = 0; i < 35; i++) {
+    particles.push(new WindParticle());
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, width, height);
     particles.forEach(p => {
-        ctx.beginPath();
-        const gradient = ctx.createLinearGradient(p.x, p.y, p.x - p.length, p.y + p.length * 0.4);
-        gradient.addColorStop(0, `rgba(124, 58, 237, ${p.opacity})`);
-        gradient.addColorStop(1, 'rgba(124, 58, 237, 0)');
-        
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = p.width;
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x - p.length, p.y + p.length * 0.4);
-        ctx.stroke();
-        
-        p.x += p.speed * 2;
-        p.y -= p.speed * 0.8;
-        
-        if (p.x > canvas.width + p.length || p.y < -p.length) {
-            p.x = -p.length;
-            p.y = Math.random() * canvas.height + p.length;
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// --- 2. مؤشر شريط التمرير العلوي ---
+window.addEventListener('scroll', () => {
+    const winScroll = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('scrollProgressBar').style.width = scrolled + '%';
+});
+
+// --- 3. نظام الوضع الليلي والنهاري ---
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = htmlEl.getAttribute('data-theme');
+    if (currentTheme === 'light') {
+        htmlEl.setAttribute('data-theme', 'dark');
+        themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    } else {
+        htmlEl.setAttribute('data-theme', 'light');
+        themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    }
+});
+
+// --- 4. ترجمات اللغات (عربي، إنجليزي، تركي) ---
+const translations = {
+    ar: {
+        "nav.services": "خدماتنا",
+        "nav.about": "من نحن",
+        "nav.portfolio": "أعمالنا",
+        "nav.pricing": "الأسعار",
+        "nav.faq": "الأسئلة",
+        "nav.contact": "تواصل معنا",
+        "hero.badge": "✨ حلول إبداعية متكاملة",
+        "hero.title": "نصنع التأثير والتألق لعلامتك التجارية",
+        "hero.desc": "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.",
+        "services.title": "ماذا نقدم لك؟",
+        "services.subtitle": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر",
+        "services.s1_title": "التصميم والهوية البصرية",
+        "services.s1_desc": "بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.",
+        "services.s2_title": "التسويق الرقمي",
+        "services.s2_desc": "حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.",
+        "services.s3_title": "تطوير المواقع والتطبيقات",
+        "services.s3_desc": "تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات.",
+        "beforeAfter.title": "نصنع الفارق",
+        "beforeAfter.subtitle": "اسحب الشريط لترى كيف نطور العلامات التجارية (قبل وبعد)",
+        "portfolio.title": "معرض أعمالنا",
+        "portfolio.subtitle": "نظرة على بعض مشاريعنا والتصاميم المبتكرة",
+        "portfolio.zoom": "تكبير التصميم",
+        "portfolio.order_btn": "اطلب مثل هذا",
+        "calc.title": "حاسبة التكلفة التقديرية",
+        "calc.subtitle": "حدد الخدمات التي تحتاجها لتعرف التكلفة المتوقعة لمشروعك",
+        "calc.logo": "تصميم شعار احترافي ($50)",
+        "calc.identity": "هوية بصرية كاملة ($150)",
+        "calc.social": "إدارة منصات التواصل (شهرياً - $100)",
+        "calc.web": "تطوير موقع تعريفي ($300)",
+        "calc.total_text": "التكلفة الإجمالية التقديرية:",
+        "calc.order_btn": "اطلب هذه الحزمة الآن",
+        "testimonials.title": "ماذا يقول عملاؤنا؟",
+        "testimonials.c1_name": "- شركة الأفق",
+        "testimonials.c2_name": "- متجر كريستال",
+        "faq.title": "الأسئلة الشائعة",
+        "faq.q1": "كم يستغرق تصميم الهوية البصرية؟",
+        "faq.a1": "عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.",
+        "faq.q2": "هل تسلمون الملفات المصدرية المفتوحة؟",
+        "faq.a2": "نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.",
+        "footer.desc": "حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.",
+        "modal.order_this": "اطلب تصميم مشابه الآن",
+        "modal.order_title": "طلب تصميم سريع",
+        "modal.name_label": "الاسم الكريم:",
+        "modal.details_label": "تفاصيل إضافية (اختياري):",
+        "modal.send_btn": "إرسال الطلب عبر الواتساب"
+    },
+    en: {
+        "nav.services": "Services",
+        "nav.about": "About",
+        "nav.portfolio": "Portfolio",
+        "nav.pricing": "Pricing",
+        "nav.faq": "FAQ",
+        "nav.contact": "Contact Us",
+        "hero.badge": "✨ Integrated Creative Solutions",
+        "hero.title": "We Create Impact & Shine For Your Brand",
+        "hero.desc": "Helping you grow and expand with modern marketing strategies and innovative designs.",
+        "services.title": "What We Offer?",
+        "services.subtitle": "Comprehensive services designed to take your project to the next level",
+        "services.s1_title": "Design & Brand Identity",
+        "services.s1_desc": "Building a complete brand identity and professional logos reflecting your business value.",
+        "services.s2_title": "Digital Marketing",
+        "services.s2_desc": "Targeted ad campaigns and social media management to increase sales and reach.",
+        "services.s3_title": "Web & App Development",
+        "services.s3_desc": "Developing fast, responsive websites with the latest cutting-edge technologies.",
+        "beforeAfter.title": "We Make a Difference",
+        "beforeAfter.subtitle": "Drag the slider to see how we upgrade brands (Before & After)",
+        "portfolio.title": "Our Portfolio",
+        "portfolio.subtitle": "A glimpse into our projects and innovative designs",
+        "portfolio.zoom": "Zoom Design",
+        "portfolio.order_btn": "Order Similar",
+        "calc.title": "Estimated Cost Calculator",
+        "calc.subtitle": "Select the services you need to know the expected project cost",
+        "calc.logo": "Professional Logo Design ($50)",
+        "calc.identity": "Full Brand Identity ($150)",
+        "calc.social": "Social Media Management (Monthly - $100)",
+        "calc.web": "Landing Page Development ($300)",
+        "calc.total_text": "Estimated Total Cost:",
+        "calc.order_btn": "Order This Package Now",
+        "testimonials.title": "What Our Clients Say",
+        "testimonials.c1_name": "- Al-Afaq Company",
+        "testimonials.c2_name": "- Crystal Store",
+        "faq.title": "Frequently Asked Questions",
+        "faq.q1": "How long does brand identity design take?",
+        "faq.a1": "Usually takes 5 to 10 business days depending on the scope and required revisions.",
+        "faq.q2": "Do you deliver open source master files?",
+        "faq.a2": "Yes absolutely! We deliver all source files in formats (AI, PSD, PDF, PNG) for your convenience.",
+        "footer.desc": "Modern creative solutions elevating your brand to the highest stars.",
+        "modal.order_this": "Order Similar Design Now",
+        "modal.order_title": "Quick Design Order",
+        "modal.name_label": "Your Name:",
+        "modal.details_label": "Additional Details (Optional):",
+        "modal.send_btn": "Send Order via WhatsApp"
+    },
+    tr: {
+        "nav.services": "Hizmetlerimiz",
+        "nav.about": "Hakkımızda",
+        "nav.portfolio": "Projelerimiz",
+        "nav.pricing": "Fiyatlar",
+        "nav.faq": "SSS",
+        "nav.contact": "İletişim",
+        "hero.badge": "✨ Entegre Yaratıcı Çözümler",
+        "hero.title": "Markanız İçin Etki ve Parlaklık Yaratıyoruz",
+        "hero.desc": "Modern pazarlama stratejileri ve yenilikçi tasarımlarla büyümenize yardımcı oluyoruz.",
+        "services.title": "Neler Sunuyoruz?",
+        "services.subtitle": "Projenizi bir üst seviyeye taşımak için kapsamlı hizmetler",
+        "services.s1_title": "Tasarım ve Marka Kimliği",
+        "services.s1_desc": "İşletmenizin değerini yansıtan eksiksiz kimlik ve profesyonel logolar.",
+        "services.s2_title": "Dijital Pazarlama",
+        "services.s2_desc": "Satışları artırmak için hedefli reklam kampanyaları ve sosyal medya yönetimi.",
+        "services.s3_title": "Web ve Uygulama Geliştirme",
+        "services.s3_desc": "En son teknolojilerle hızlı ve duyarlı web siteleri geliştirme.",
+        "beforeAfter.title": "Fark Yaratıyoruz",
+        "beforeAfter.subtitle": "Markaları nasıl geliştirdiğimizi görmek için kaydırıcıyı sürükleyin (Önce & Sonra)",
+        "portfolio.title": "Portföyümüz",
+        "portfolio.subtitle": "Projelerimizden ve yenilikçi tasarımlarımızdan bir kesit",
+        "portfolio.zoom": "Tasarımı Büyüt",
+        "portfolio.order_btn": "Benzerini İste",
+        "calc.title": "Tahmini Maliyet Hesaplayıcı",
+        "calc.subtitle": "Beklenen proje maliyetini öğrenmek için ihtiyacınız olan hizmetleri seçin",
+        "calc.logo": "Profesyonel Logo Tasarımı ($50)",
+        "calc.identity": "Tam Marka Kimliği ($150)",
+        "calc.social": "Sosyal Medya Yönetimi (Aylık - $100)",
+        "calc.web": "Tanıtım Sitesi Geliştirme ($300)",
+        "calc.total_text": "Tahmini Toplam Maliyet:",
+        "calc.order_btn": "Bu Paketi Hemen Sipariş Et",
+        "testimonials.title": "Müşterilerimiz Ne Diyor?",
+        "testimonials.c1_name": "- Al-Afaq Şirketi",
+        "testimonials.c2_name": "- Crystal Mağazası",
+        "faq.title": "Sıkça Sorulan Sorular",
+        "faq.q1": "Kimlik tasarımı ne kadar sürer?",
+        "faq.a1": "Genellikle detaylara ve düzeltmelere bağlı olarak 5-10 iş günü sürer.",
+        "faq.q2": "Kaynak dosyalarını teslim ediyor musunuz?",
+        "faq.a2": "Evet kesinlikle! Tüm dosyaları (AI, PSD, PDF, PNG) formatlarında teslim ediyoruz.",
+        "footer.desc": "Markanızı en yüksek yıldızlara taşıyan modern yaratıcı çözümler.",
+        "modal.order_this": "Şimdi Benzer Tasarım Sipariş Et",
+        "modal.order_title": "Hızlı Tasarım Siparişi",
+        "modal.name_label": "Adınız:",
+        "modal.details_label": "Ek Detaylar (İsteğe bağlı):",
+        "modal.send_btn": "WhatsApp ile Sipariş Gönder"
+    }
+};
+
+const langSelect = document.getElementById('langSelect');
+langSelect.addEventListener('change', (e) => {
+    const lang = e.target.value;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'en') ? 'ltr' : 'rtl';
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.innerText = translations[lang][key];
         }
     });
-    
-    requestAnimationFrame(animateWind);
+});
+
+// --- 5. النافذة المنبثقة (Modal & Lightbox) ---
+const glassModal = document.getElementById('glassModal');
+const lightboxView = document.getElementById('lightboxView');
+const orderView = document.getElementById('orderView');
+const modalImg = document.getElementById('modalImg');
+const modalTitle = document.getElementById('modalTitle');
+const orderProjectName = document.getElementById('orderProjectName');
+
+let currentProject = "";
+
+function openLightbox(imgSrc, title) {
+    lightboxView.style.display = 'block';
+    orderView.style.display = 'none';
+    modalImg.src = imgSrc;
+    modalTitle.innerText = title;
+    currentProject = title;
+    glassModal.classList.add('active');
 }
-animateWind();
+
+function openOrderModal(projectName) {
+    lightboxView.style.display = 'none';
+    orderView.style.display = 'block';
+    currentProject = projectName;
+    orderProjectName.innerText = `الخدمة المطلوبة: ${projectName}`;
+    glassModal.classList.add('active');
+}
+
+function switchToOrderView() {
+    lightboxView.style.display = 'none';
+    orderView.style.display = 'block';
+    orderProjectName.innerText = `الخدمة المطلوبة: ${currentProject}`;
+}
+
+function closeGlassModal() {
+    glassModal.classList.remove('active');
+}
+
+glassModal.addEventListener('click', (e) => {
+    if (e.target === glassModal) closeGlassModal();
+});
+
+// --- 6. إرسال طلب الواتساب ---
+function sendWhatsAppOrder(e) {
+    e.preventDefault();
+    const name = document.getElementById('custName').value;
+    const details = document.getElementById('custDetails').value;
+    
+    const phoneNumber = "905000000000"; // استبدل برقم الواتساب الخاص بك
+    const message = `مرحباً NEXA، أود طلب خدمة: *${currentProject}*%0Aالاسم: ${name}%0Aالتفاصيل: ${details}`;
+    
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    closeGlassModal();
+}
+
+// --- 7. ميزة المقارنة (قبل وبعد) ---
+const baSlider = document.getElementById('baSlider');
+const baBefore = document.getElementById('baBefore');
+const baLine = document.getElementById('baSliderLine');
+const baBtn = document.getElementById('baSliderBtn');
+
+if(baSlider) {
+    baSlider.addEventListener('input', (e) => {
+        let sliderVal = e.target.value;
+        if (document.documentElement.dir === 'rtl') {
+            baBefore.style.clipPath = `polygon(100% 0, ${100-sliderVal}% 0, ${100-sliderVal}% 100%, 100% 100%)`;
+            baLine.style.left = `${sliderVal}%`;
+            baBtn.style.left = `${sliderVal}%`;
+        } else {
+            baBefore.style.clipPath = `polygon(0 0, ${sliderVal}% 0, ${sliderVal}% 100%, 0 100%)`;
+            baLine.style.left = `${sliderVal}%`;
+            baBtn.style.left = `${sliderVal}%`;
+        }
+    });
+}
+
+// --- 8. حاسبة الأسعار التفاعلية ---
+const calcCheckboxes = document.querySelectorAll('.calc-checkbox');
+const totalPriceEl = document.getElementById('totalPrice');
+let currentTotal = 0;
+
+calcCheckboxes.forEach(box => {
+    box.addEventListener('change', () => {
+        currentTotal = Array.from(calcCheckboxes)
+            .filter(i => i.checked)
+            .reduce((sum, i) => sum + parseInt(i.value), 0);
+        
+        let start = parseInt(totalPriceEl.innerText);
+        animateValue(totalPriceEl, start, currentTotal, 300);
+    });
+});
+
+function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+function orderFromCalc() {
+    if(currentTotal === 0) {
+        alert("يرجى تحديد خدمة واحدة على الأقل!");
+        return;
+    }
+    openOrderModal(`حزمة مخصصة بقيمة $${currentTotal}`);
+}
+
+// --- 9. الأسئلة الشائعة (Accordion) ---
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click', () => {
+        faqItems.forEach(i => { if(i !== item) i.classList.remove('active'); });
+        item.classList.toggle('active');
+    });
+});
+
+// --- 10. تأثير 3D Hover لمعرض الأعمال ---
+const tiltCards = document.querySelectorAll('.tilt-card');
+tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        card.querySelector('.portfolio-img').style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.querySelector('.portfolio-img').style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    });
+});
+        
