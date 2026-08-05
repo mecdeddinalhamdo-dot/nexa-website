@@ -156,7 +156,36 @@
             </div>
         </div>
     </section>
+<!-- قسم استوديو معاينة الشعار التفاعلي -->
+<section class="mockup-studio-sec" style="padding: 60px 20px; text-align: center;">
+    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">
+        <h2>استوديو معاينة الشعار الحية</h2>
+        <p>ارفع شعارك أو اختر تصميماً لمعاينته فوراً على المنتجات الواقعية</p>
+    </div>
+    
+    <div class="mockup-container" style="max-width: 650px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">
+        
+        <!-- زر رفع الشعار -->
+        <div style="margin-bottom: 20px;">
+            <label for="logoUploadInput" style="background: #7c3aed; color: #fff; padding: 12px 25px; border-radius: 10px; cursor: pointer; display: inline-block; font-weight: bold; transition: background 0.3s;">
+                <i class="fa-solid fa-cloud-arrow-up"></i> ارفع شعارك هنا (PNG/JPG)
+            </label>
+            <input type="file" id="logoUploadInput" accept="image/*" style="display: none;">
+        </div>
 
+        <!-- منصة عرض المنتج والشعار -->
+        <div id="mockupStage" style="position: relative; width: 100%; height: 320px; background: rgba(0, 0, 0, 0.2); border-radius: 15px; overflow: hidden; display: flex; justify-content: center; align-items: center; border: 2px dashed rgba(124, 58, 237, 0.4);">
+            <div id="mockupPlaceholderText" style="color: rgba(255,255,255,0.6); font-weight: bold;">
+                لم يتم رفع شعار بعد.. قم برفع شعارك لرؤية السحر!
+            </div>
+            <!-- الشعار المرفق سيظهر هنا ديناميكياً -->
+            <img id="previewLogoOverlay" src="" alt="Logo Preview" style="display: none; max-width: 120px; max-height: 120px; position: absolute; object-fit: contain; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border-radius: 8px; cursor: grab;">
+        </div>
+        
+        <p style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 15px;">💡 نصيحة: يمكنك سحب الشعار بالماوس وتحريكه داخل مساحة المعاينة بحرية!</p>
+    </div>
+</section>
+    
     <!-- حاسبة الأسعار التفاعلية -->
     <section id="pricing" class="calculator-sec">
         <div class="section-head">
