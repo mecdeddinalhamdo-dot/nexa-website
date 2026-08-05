@@ -91,7 +91,24 @@
             <div class="ba-slider-button" id="baSliderBtn"><i class="fa-solid fa-arrows-left-right"></i></div>
         </div>
     </section>
-
+<!-- قسم توليد لوحة الألوان الذكية -->
+<section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">
+    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">
+        <h2>مولد لوحة الألوان الذكي</h2>
+        <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>
+    </div>
+    
+    <div class="palette-box" style="max-width: 600px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">
+        <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <label for="baseColorPicker" style="font-weight: bold;">اختر اللون الأساسي:</label>
+            <input type="color" id="baseColorPicker" value="#7c3aed" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">
+        </div>
+        
+        <!-- حاوية الألوان المولدة -->
+        <div id="paletteColorsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; margin-top: 25px;"></div>
+    </div>
+</section>
+    
     <!-- قسم معرض الأعمال (مع ميزة الـ 3D Hover) -->
     <section id="portfolio" class="portfolio">
         <div class="section-head">
