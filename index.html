@@ -9,6 +9,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes logoGlow {
+            0% {
+                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);
+                border-color: rgba(124, 58, 237, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(124, 58, 237, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(124, 58, 237, 0.4);
+                border-color: rgba(168, 85, 247, 1);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);
+                border-color: rgba(124, 58, 237, 0.4);
+            }
+        }
+
+        .glow-border {
+            border: 2px solid rgba(124, 58, 237, 0.4);
+            border-radius: 15px;
+            animation: logoGlow 3s infinite ease-in-out;
+            transition: all 0.3s ease;
+        }
+
+        .glow-border-thin {
+            border: 1px solid rgba(124, 58, 237, 0.5);
+            animation: logoGlow 2.5s infinite ease-in-out;
+        }
+    </style>
 </head>
 <body>
 
