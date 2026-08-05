@@ -711,3 +711,30 @@ footer {
     }
     }
                
+@keyframes logoGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);
+        border-color: rgba(124, 58, 237, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(124, 58, 237, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(124, 58, 237, 0.4);
+        border-color: rgba(168, 85, 247, 1);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);
+        border-color: rgba(124, 58, 237, 0.4);
+    }
+}
+
+.glow-border {
+    border: 2px solid rgba(124, 58, 237, 0.4);
+    border-radius: 15px; /* يقبل التعديل حسب شكل العنصر */
+    animation: logoGlow 3s infinite ease-in-out;
+    transition: all 0.3s ease;
+}
+
+/* وميض أرفع وأكثر دقة للعناصر النحيفة */
+.glow-border-thin {
+    border: 1px solid rgba(124, 58, 237, 0.5);
+    animation: logoGlow 2.5s infinite ease-in-out;
+}
