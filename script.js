@@ -360,3 +360,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
                     
+    // --- 12. استوديو معاينة الشعار التفاعلي (الميزة الخرافية) ---
+    const logoUploadInput = document.getElementById('logoUploadInput');
+    const previewLogoOverlay = document.getElementById('previewLogoOverlay');
+    const mockupPlaceholderText = document.getElementById('mockupPlaceholderText');
+    const mockupStage = document.getElementById('mockupStage');
+
+    if (logoUploadInput && previewLogoOverlay) {
+        logoUploadInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewLogoOverlay.src = event.target.result;
+                    previewLogoOverlay.style.display = 'block';
+                    if (mockupPlaceholderText) mockupPlaceholderText.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // جعل الشعار قابلاً للسحب والإفلات داخل الصندوق (Drag & Drop داخل الـ Stage)
+        let isDragging = false;
+        let startX, startY;
+
+        previewLogoOverlay.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - previewLogoOverlay.offsetLeft;
+            startY = e.clientY - previewLogoOverlay.offsetTop;
+            previewLogoOverlay.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            let x = e.clientX - startX;
+            let y = e.clientY - startY;
+            
+            // حدود الحركة داخل الصندوق
+            previewLogoOverlay.style.left = `${x}px`;
+            previewLogoOverlay.style.top = `${y}px`;
+            previewLogoOverlay.style.position = 'absolute';
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            previewLogoOverlay.style.cursor = 'grab';
+        });
+    }
