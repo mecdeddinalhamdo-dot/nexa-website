@@ -360,11 +360,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
                     
-    // --- 12. استوديو معاينة الشعار التفاعلي (الميزة الخرافية) ---
+        // --- 12. استوديو معاينة الشعار التفاعلي (محدث ليدعم اللمس والماوس) ---
     const logoUploadInput = document.getElementById('logoUploadInput');
     const previewLogoOverlay = document.getElementById('previewLogoOverlay');
     const mockupPlaceholderText = document.getElementById('mockupPlaceholderText');
-    const mockupStage = document.getElementById('mockupStage');
 
     if (logoUploadInput && previewLogoOverlay) {
         logoUploadInput.addEventListener('change', function(e) {
@@ -374,11 +373,65 @@ document.addEventListener("DOMContentLoaded", () => {
                 reader.onload = function(event) {
                     previewLogoOverlay.src = event.target.result;
                     previewLogoOverlay.style.display = 'block';
+                    previewLogoOverlay.style.left = '50%';
+                    previewLogoOverlay.style.top = '50%';
+                    previewLogoOverlay.style.transform = 'translate(-50%, -50%)';
                     if (mockupPlaceholderText) mockupPlaceholderText.style.display = 'none';
                 }
                 reader.readAsDataURL(file);
             }
         });
+
+        let isDragging = false;
+        let startX, startY;
+        let initialX = 0;
+        let initialY = 0;
+
+        // بدء السحب (للماوس واللمس)
+        function dragStart(e) {
+            isDragging = true;
+            const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+            
+            const rect = previewLogoOverlay.getBoundingClientRect();
+            initialX = clientX - rect.left;
+            initialY = clientY - rect.top;
+            
+            previewLogoOverlay.style.transform = 'none'; // إلغاء السنتر لتحريك حر
+            previewLogoOverlay.style.left = `${previewLogoOverlay.offsetLeft}px`;
+            previewLogoOverlay.style.top = `${previewLogoOverlay.offsetTop}px`;
+        }
+
+        // حركة السحب
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+
+            let x = clientX - initialX;
+            let y = clientY - initialY;
+
+            previewLogoOverlay.style.left = `${x}px`;
+            previewLogoOverlay.style.top = `${y}px`;
+        }
+
+        // إيقاف السحب
+        function dragEnd() {
+            isDragging = false;
+        }
+
+        // ربط أحداث الماوس
+        previewLogoOverlay.addEventListener('mousedown', dragStart);
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('mouseup', dragEnd);
+
+        // ربط أحداث اللمس (للهواتف والأجهزة الذكية)
+        previewLogoOverlay.addEventListener('touchstart', dragStart, { passive: false });
+        window.addEventListener('touchmove', drag, { passive: false });
+        window.addEventListener('touchend', dragEnd);
+    }
+
 
         // جعل الشعار قابلاً للسحب والإفلات داخل الصندوق (Drag & Drop داخل الـ Stage)
         let isDragging = false;
