@@ -112,19 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 4. ترجمات اللغات ---
     const translations = {
         ar: {
-            "nav.services": "خدماتنا", "nav.about": "من نحن", "nav.portfolio": "أعمالنا", "nav.pricing": "الأسعار", "nav.faq": "الأسئلة", "nav.contact": "تواصل معنا",
-            "hero.badge": "✨ حلول إبداعية متكاملة", "hero.title": "نصنع التأثير والتألق لعلامتك التجارية", "hero.desc": "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.",
-            "services.title": "ماذا نقدم لك؟", "services.subtitle": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر"
+            "nav.services": "خدماتنا", "nav.about": "من نحن", "nav.portfolio": "أعمالنا", "nav.pricing": "الأسعار", "nav.faq": "الأسئلة", "nav.contact": "تواصل معنا"
         },
         en: {
-            "nav.services": "Services", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.pricing": "Pricing", "nav.faq": "FAQ", "nav.contact": "Contact Us",
-            "hero.badge": "✨ Integrated Creative Solutions", "hero.title": "We Create Impact & Shine For Your Brand", "hero.desc": "Helping you grow and expand with modern marketing strategies and innovative designs.",
-            "services.title": "What We Offer?", "services.subtitle": "Comprehensive services designed to take your project to the next level"
+            "nav.services": "Services", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.pricing": "Pricing", "nav.faq": "FAQ", "nav.contact": "Contact Us"
         },
         tr: {
-            "nav.services": "Hizmetlerimiz", "nav.about": "Hakkımızda", "nav.portfolio": "Projelerimiz", "nav.pricing": "Fiyatlar", "nav.faq": "SSS", "nav.contact": "İletişim",
-            "hero.badge": "✨ Entegre Yaratıcı Çözümler", "hero.title": "Markanız İçin Etki ve Parlaklık Yaratıyoruz", "hero.desc": "Modern pazarlama stratejileri ve yenilikçi tasarımlarla büyümenize yardımcı oluyoruz.",
-            "services.title": "Neler Sunuyoruz?", "services.subtitle": "Projenizi bir üst seviyeye taşımak için kapsamlı hizmetler"
+            "nav.services": "Hizmetlerimiz", "nav.about": "Hakkımızda", "nav.portfolio": "Projelerimiz", "nav.pricing": "Fiyatlar", "nav.faq": "SSS", "nav.contact": "İletişim"
         }
     };
 
@@ -290,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 11. أداة توليد لوحة الألوان الذكية (الجديدة) ---
+    // --- 11. أداة توليد لوحة الألوان الذكية ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -358,9 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-});
-                    
-        // --- 12. استوديو معاينة الشعار التفاعلي (محدث ليدعم اللمس والماوس) ---
+    // --- 12. استوديو معاينة الشعار التفاعلي (يدعم اللمس والماوس) ---
     const logoUploadInput = document.getElementById('logoUploadInput');
     const previewLogoOverlay = document.getElementById('previewLogoOverlay');
     const mockupPlaceholderText = document.getElementById('mockupPlaceholderText');
@@ -383,11 +375,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         let isDragging = false;
-        let startX, startY;
         let initialX = 0;
         let initialY = 0;
 
-        // بدء السحب (للماوس واللمس)
         function dragStart(e) {
             isDragging = true;
             const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
@@ -397,12 +387,11 @@ document.addEventListener("DOMContentLoaded", () => {
             initialX = clientX - rect.left;
             initialY = clientY - rect.top;
             
-            previewLogoOverlay.style.transform = 'none'; // إلغاء السنتر لتحريك حر
+            previewLogoOverlay.style.transform = 'none';
             previewLogoOverlay.style.left = `${previewLogoOverlay.offsetLeft}px`;
             previewLogoOverlay.style.top = `${previewLogoOverlay.offsetTop}px`;
         }
 
-        // حركة السحب
         function drag(e) {
             if (!isDragging) return;
             e.preventDefault();
@@ -416,47 +405,18 @@ document.addEventListener("DOMContentLoaded", () => {
             previewLogoOverlay.style.top = `${y}px`;
         }
 
-        // إيقاف السحب
         function dragEnd() {
             isDragging = false;
         }
 
-        // ربط أحداث الماوس
         previewLogoOverlay.addEventListener('mousedown', dragStart);
         window.addEventListener('mousemove', drag);
         window.addEventListener('mouseup', dragEnd);
 
-        // ربط أحداث اللمس (للهواتف والأجهزة الذكية)
         previewLogoOverlay.addEventListener('touchstart', dragStart, { passive: false });
         window.addEventListener('touchmove', drag, { passive: false });
         window.addEventListener('touchend', dragEnd);
     }
 
-
-        // جعل الشعار قابلاً للسحب والإفلات داخل الصندوق (Drag & Drop داخل الـ Stage)
-        let isDragging = false;
-        let startX, startY;
-
-        previewLogoOverlay.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX - previewLogoOverlay.offsetLeft;
-            startY = e.clientY - previewLogoOverlay.offsetTop;
-            previewLogoOverlay.style.cursor = 'grabbing';
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            let x = e.clientX - startX;
-            let y = e.clientY - startY;
-            
-            // حدود الحركة داخل الصندوق
-            previewLogoOverlay.style.left = `${x}px`;
-            previewLogoOverlay.style.top = `${y}px`;
-            previewLogoOverlay.style.position = 'absolute';
-        });
-
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-            previewLogoOverlay.style.cursor = 'grab';
-        });
-    }
+});
+                          
