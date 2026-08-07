@@ -656,3 +656,16 @@ footer {
         font-size: 36px;
     }
     }
+/* تأثير الخلفية المضيئة بالبنفسجي حسب التمرير */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% var(--scroll-y, 50%), rgba(124, 58, 237, 0.18) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: -1;
+    transition: background 0.1s ease-out;
+    }
