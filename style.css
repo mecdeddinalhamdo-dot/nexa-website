@@ -2,24 +2,24 @@
     --primary: #7C3AED;
     --primary-light: #8B5CF6;
     --bg-main: #0F0F17;
-    --card-bg: rgba(18, 16, 35, 0.65);
+    --card-bg: rgba(255, 255, 255, 0.85);
     --glass-card: rgba(124, 58, 237, 0.05);
-    --border: rgba(168, 85, 247, 0.2);
+    --border: rgba(168, 85, 247, 0.25);
     --text-main: #FFFFFF;
     --text-muted: #9CA3AF;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --radius: 20px;
-    --glass-bg: rgba(18, 16, 35, 0.65);
-    --glass-border: rgba(168, 85, 247, 0.25);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(168, 85, 247, 0.3);
     --primary-glow: #7c3aed;
     --accent-glow: #a855f7;
 }
 
 [data-theme="light"] {
     --bg-main: #F4F4F8;
-    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.9);
     --glass-card: rgba(124, 58, 237, 0.03);
-    --border: rgba(124, 58, 237, 0.12);
+    --border: rgba(124, 58, 237, 0.15);
     --text-main: #1F2937;
     --text-muted: #4B5563;
 }
@@ -655,4 +655,4 @@ footer {
     .hero h1 {
         font-size: 36px;
     }
-}
+    }
