@@ -669,3 +669,48 @@ body::before {
     z-index: -1;
     transition: background 0.1s ease-out;
     }
+/* حاوية الدولاب العرضي المتحرك للألوان */
+.palette-scroll-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    margin-top: 25px;
+    padding: 10px 0;
+}
+
+.palette-track {
+    display: flex;
+    gap: 15px;
+    width: max-content;
+    animation: scrollColors 20s linear infinite;
+}
+
+.palette-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollColors {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.color-card-item {
+    min-width: 100px;
+    height: 110px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.color-card-item:hover {
+    transform: scale(1.08);
+    }
