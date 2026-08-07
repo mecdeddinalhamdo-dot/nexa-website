@@ -420,3 +420,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
                           
+    // --- 13. تأثير الإضاءة البنفسجية المتفاعلة مع التمرير ---
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
+        
+        // تحديث متغير الـ CSS الخاص بموقع الإضاءة عمودياً
+        document.body.style.setProperty('--scroll-y', `${scrollPercent}%`);
+    });
