@@ -283,73 +283,67 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
-
-    // --- 11. أداة توليد لوحة الألوان الذكية ---
+    // --- 11. أداة توليد لوحة الألوان الذكية (الدولاب العرضي المتحرك لجميع الألوان) ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
-    function hexToRgb(hex) {
-        let bigint = parseInt(hex.slice(1), 16);
-        let r = (bigint >> 16) & 255;
-        let g = (bigint >> 8) & 255;
-        let b = bigint & 255;
-        return { r, g, b };
-    }
-
-    function rgbToHex(r, g, b) {
-        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-    }
-
-    function adjustBrightness(hex, percent) {
-        let { r, g, b } = hexToRgb(hex);
-        r = Math.min(255, Math.max(0, parseInt(r * (100 + percent) / 100)));
-        g = Math.min(255, Math.max(0, parseInt(g * (100 + percent) / 100)));
-        b = Math.min(255, Math.max(0, parseInt(b * (100 + percent) / 100)));
-        return rgbToHex(r, g, b);
-    }
-
-    function generatePalette(baseHex) {
+    function generateRainbowPalette(baseHex) {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
-        const percentages = [-40, -20, 0, 20, 40];
-        
-        percentages.forEach(p => {
-            const colorHex = adjustBrightness(baseHex, p);
-            const colorCard = document.createElement('div');
-            colorCard.style.cssText = `
-                background-color: ${colorHex};
-                height: 100px;
-                border-radius: 12px;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: center;
-                padding: 10px;
-                cursor: pointer;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                transition: transform 0.3s ease;
-            `;
-            
-            const { r, g, b } = hexToRgb(colorHex);
-            const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-            const textColor = yiq >= 128 ? '#000' : '#fff';
 
-            colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: ${textColor}; background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">${colorHex}</span>`;
-            
-            colorCard.addEventListener('click', () => {
-                navigator.clipboard.writeText(colorHex);
-                alert(`تم نسخ كود اللون: ${colorHex}`);
+        // إنشاء حاوية الدولاب المتحرك
+        const wrapper = document.createElement('div');
+        wrapper.className = 'palette-scroll-wrapper';
+
+        const track = document.createElement('div');
+        track.className = 'palette-track';
+
+        // مصفوفة درجات زوايا اللون (Hue) لتوليد جميع ألوان الطيف
+        const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+
+        // تكرار العناصر لضمان استمرار الحركة الدائرية بسلاسة
+        for (let j = 0; j < 2; j++) {
+            hues.forEach(hue => {
+                const colorHex = hslToHex(hue, 70, 55);
+                
+                const colorCard = document.createElement('div');
+                colorCard.className = 'color-card-item';
+                colorCard.style.backgroundColor = colorHex;
+                
+                colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(4px);">${colorHex}</span>`;
+                
+                colorCard.addEventListener('click', () => {
+                    navigator.clipboard.writeText(colorHex);
+                    alert(`تم نسخ كود اللون: ${colorHex}`);
+                });
+
+                track.appendChild(colorCard);
             });
+        }
 
-            paletteContainer.appendChild(colorCard);
-        });
+        wrapper.appendChild(track);
+        paletteContainer.appendChild(wrapper);
+    }
+
+    // دالة مساعدة لتحويل نظام HSL إلى Hex
+    function hslToHex(h, s, l) {
+        l /= 100;
+        const a = s * Math.min(l, 1 - l) / 100;
+        const f = n => {
+            const k = (n + h / 30) % 12;
+            const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+            return Math.round(255 * color).toString(16).padStart(2, '0');
+        };
+        return `#${f(0)}${f(8)}${f(4)}`;
     }
 
     if (baseColorPicker) {
-        generatePalette(baseColorPicker.value);
+        generateRainbowPalette(baseColorPicker.value);
         baseColorPicker.addEventListener('input', (e) => {
-            generatePalette(e.target.value);
+            generateRainbowPalette(e.target.value);
         });
+    }
+});
     }
 
     // --- 12. استوديو معاينة الشعار التفاعلي (يدعم اللمس والماوس) ---
