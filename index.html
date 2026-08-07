@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>NEXA - حلول إبداعية متكاملة</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,11 +44,12 @@
     <div id="scrollProgressBar"></div>
     <canvas id="purpleWindCanvas"></canvas>
 
-    <!-- الهيدر العلوي (بدون زر تواصل معنا وبدون كتابة NEXA بجانب الشعار) -->
+    <!-- الهيدر العلوي -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
                 <img src="Logo (1).png" alt="NEXA Logo">
+                <span>NEXA</span>
             </a>
             <ul class="nav-links">
                 <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>
@@ -116,7 +118,6 @@
                 <input type="color" id="baseColorPicker" value="#7c3aed" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">
             </div>
             
-            <!-- حاوية الألوان المولدة -->
             <div id="paletteColorsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; margin-top: 25px;"></div>
         </div>
     </section>
@@ -298,4 +299,4 @@
     <script src="script.js"></script>
 </body>
     </html>
-    
+                    
