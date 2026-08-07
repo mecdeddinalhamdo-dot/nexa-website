@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>NEXA - حلول إبداعية متكاملة</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,9 +11,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* منع المتصفحات من فرض الوضع المظلم وعكس الألوان عشوائياً */
-        html {
-            color-scheme: light;
+        /* تثبيت متغيرات الألوان ودعم الوضع المظلم مع إبقاء الكتابة بيضاء */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1f2937;
+        }
+
+        [data-theme="dark"], html.dark, @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #0f0728 !important;
+                color: #ffffff !important;
+            }
+            
+            /* إجبار كافة النصوص والعناوين والروابط على أن تكون بيضاء وواضحة في الوضع المظلم */
+            p, h1, h2, h3, h4, h5, h6, span, a, label, li, .calc-text, .total-price {
+                color: #ffffff !important;
+            }
+
+            .calculator-sec, .palette-box, .card, .portfolio-card {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border-color: rgba(124, 58, 237, 0.3) !important;
+            }
         }
 
         @keyframes logoGlow {
@@ -301,5 +320,4 @@
 
     <script src="script.js"></script>
 </body>
-                                                                  </html>
-                                       
+</html>
