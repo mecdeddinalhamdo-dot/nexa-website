@@ -283,6 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
+
     // --- 11. أداة توليد لوحة الألوان الذكية (الدولاب العرضي المتحرك لجميع الألوان) ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
@@ -291,17 +292,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
 
-        // إنشاء حاوية الدولاب المتحرك
         const wrapper = document.createElement('div');
         wrapper.className = 'palette-scroll-wrapper';
 
         const track = document.createElement('div');
         track.className = 'palette-track';
 
-        // مصفوفة درجات زوايا اللون (Hue) لتوليد جميع ألوان الطيف
         const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 
-        // تكرار العناصر لضمان استمرار الحركة الدائرية بسلاسة
         for (let j = 0; j < 2; j++) {
             hues.forEach(hue => {
                 const colorHex = hslToHex(hue, 70, 55);
@@ -325,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
         paletteContainer.appendChild(wrapper);
     }
 
-    // دالة مساعدة لتحويل نظام HSL إلى Hex
     function hslToHex(h, s, l) {
         l /= 100;
         const a = s * Math.min(l, 1 - l) / 100;
@@ -342,8 +339,6 @@ document.addEventListener("DOMContentLoaded", () => {
         baseColorPicker.addEventListener('input', (e) => {
             generateRainbowPalette(e.target.value);
         });
-    }
-});
     }
 
     // --- 12. استوديو معاينة الشعار التفاعلي (يدعم اللمس والماوس) ---
@@ -413,13 +408,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-                          
-    // --- 13. تأثير الإضاءة البنفسجية المتفاعلة مع التمرير ---
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
-        
-        // تحديث متغير الـ CSS الخاص بموقع الإضاءة عمودياً
-        document.body.style.setProperty('--scroll-y', `${scrollPercent}%`);
-    });
+
+// --- 13. تأثير الإضاءة البنفسجية المتفاعلة مع التمرير ---
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
+    document.body.style.setProperty('--scroll-y', `${scrollPercent}%`);
+});
+                    
