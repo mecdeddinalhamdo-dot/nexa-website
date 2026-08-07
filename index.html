@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* تثبيت متغيرات الألوان ودعم الوضع المظلم مع إبقاء الكتابة بيضاء */
+        /* تثبيت متغيرات الألوان ودعم الوضع المظلم مع إبقاء الكتابة بيضاء وتفعيل الشفافية الزجاجية */
         :root {
             --bg-color: #ffffff;
             --text-color: #1f2937;
@@ -28,9 +28,12 @@
                 color: #ffffff !important;
             }
 
-            .calculator-sec, .palette-box, .card, .portfolio-card {
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                border-color: rgba(124, 58, 237, 0.3) !important;
+            /* تحويل البطاقات والعناصر إلى تصميم زجاجي شفاف (Glassmorphism) يتفاعل مع الخلفية */
+            .portfolio-card, .card, .calculator-sec, .palette-box {
+                background: rgba(255, 255, 255, 0.03) !important;
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
             }
         }
 
@@ -320,4 +323,5 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+        </html>
+                    
