@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         closeGlassModal();
     };
 
-    // --- 7. حاسبة الأسعار التفاعلية ---
+    // --- 7. حاسبة الأسعار السلسة والتفاعلية (مع العداد المتدرج) ---
     const calcCheckboxes = document.querySelectorAll('.calc-checkbox');
     const totalPriceEl = document.getElementById('totalPrice');
     let currentTotal = 0;
@@ -203,10 +203,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 .reduce((sum, i) => sum + parseInt(i.value), 0);
             
             if (totalPriceEl) {
-                totalPriceEl.innerText = currentTotal;
+                let start = parseInt(totalPriceEl.innerText) || 0;
+                animateValue(totalPriceEl, start, currentTotal, 300);
             }
         });
     });
+
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
 
     window.orderFromCalc = function() {
         if(currentTotal === 0) {
@@ -228,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. توليد لوحة الألوان الذكية ---
+    // --- 9. دولاب الألوان الذكي والمتحرك (Rainbow Palette Wheel) ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -236,30 +250,60 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
 
+        // إنشاء حاوية الشريط المتحرك
+        const wrapper = document.createElement('div');
+        wrapper.className = 'palette-scroll-wrapper';
+        wrapper.style.overflowX = 'auto';
+        wrapper.style.padding = '10px 0';
+        wrapper.style.scrollbarWidth = 'thin';
+
+        const track = document.createElement('div');
+        track.className = 'palette-track';
+        track.style.display = 'flex';
+        track.style.gap = '12px';
+        track.style.width = 'max-content';
+
         const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 
-        hues.forEach(hue => {
-            const colorHex = hslToHex(hue, 70, 55);
-            
-            const colorCard = document.createElement('div');
-            colorCard.style.backgroundColor = colorHex;
-            colorCard.style.height = '60px';
-            colorCard.style.borderRadius = '8px';
-            colorCard.style.display = 'flex';
-            colorCard.style.alignItems = 'flex-end';
-            colorCard.style.justifyContent = 'center';
-            colorCard.style.padding = '5px';
-            colorCard.style.cursor = 'pointer';
-            
-            colorCard.innerHTML = `<span style="font-size: 10px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.4); padding: 2px 4px; border-radius: 4px;">${colorHex}</span>`;
-            
-            colorCard.addEventListener('click', () => {
-                navigator.clipboard.writeText(colorHex);
-                alert(`تم نسخ كود اللون: ${colorHex}`);
-            });
+        // تكرار الألوان ليعطي إيحاء الدولاب المتحرك المستمر
+        for (let j = 0; j < 2; j++) {
+            hues.forEach(hue => {
+                const colorHex = hslToHex(hue, 70, 55);
+                
+                const colorCard = document.createElement('div');
+                colorCard.className = 'color-card-item';
+                colorCard.style.backgroundColor = colorHex;
+                colorCard.style.minWidth = '85px';
+                colorCard.style.height = '65px';
+                colorCard.style.borderRadius = '10px';
+                colorCard.style.display = 'flex';
+                colorCard.style.alignItems = 'flex-end';
+                colorCard.style.justifyContent = 'center';
+                colorCard.style.padding = '6px';
+                colorCard.style.cursor = 'pointer';
+                colorCard.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                colorCard.style.transition = 'transform 0.2s ease';
+                
+                colorCard.innerHTML = `<span style="font-size: 10px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(4px);">${colorHex}</span>`;
+                
+                colorCard.addEventListener('mouseenter', () => {
+                    colorCard.style.transform = 'scale(1.05)';
+                });
+                colorCard.addEventListener('mouseleave', () => {
+                    colorCard.style.transform = 'scale(1)';
+                });
 
-            paletteContainer.appendChild(colorCard);
-        });
+                colorCard.addEventListener('click', () => {
+                    navigator.clipboard.writeText(colorHex);
+                    alert(`تم نسخ كود اللون: ${colorHex}`);
+                });
+
+                track.appendChild(colorCard);
+            });
+        }
+
+        wrapper.appendChild(track);
+        paletteContainer.appendChild(wrapper);
     }
 
     function hslToHex(h, s, l) {
@@ -281,4 +325,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-        
+                
