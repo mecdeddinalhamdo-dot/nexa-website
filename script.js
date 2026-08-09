@@ -90,6 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const scrolled = (winScroll / height) * 100;
         const progressBar = document.getElementById('scrollProgressBar');
         if (progressBar) progressBar.style.width = scrolled + '%';
+        
+        // تحديث تأثير الإضاءة المتحركة للخلفية
+        document.body.style.setProperty('--scroll-y', (winScroll / height * 100) + '%');
     });
 
     // --- 3. نظام الوضع الليلي والنهاري ---
@@ -138,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 5. النافذة المنبثقة (Modal & Lightbox) وتفعيل النقر التلقائي على صور معرض الأعمال ---
+    // --- 5. النافذة المنبثقة (Modal & Lightbox) وتفعيل النقر على صور المعرض ---
     const glassModal = document.getElementById('glassModal');
     const lightboxView = document.getElementById('lightboxView');
     const orderView = document.getElementById('orderView');
@@ -154,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (modalImg) modalImg.src = imgSrc;
         if (modalTitle) modalTitle.innerText = title;
         currentProject = title;
-        if (glassModal) glassModal.style.display = 'flex';
+        if (glassModal) glassModal.classList.add('active');
     };
 
     window.openOrderModal = function(projectName) {
@@ -162,11 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (orderView) orderView.style.display = 'block';
         currentProject = projectName;
         if (orderProjectName) orderProjectName.innerText = `الخدمة المطلوبة: ${projectName}`;
-        if (glassModal) glassModal.style.display = 'flex';
+        if (glassModal) glassModal.classList.add('active');
     };
 
     window.closeGlassModal = function() {
-        if (glassModal) glassModal.style.display = 'none';
+        if (glassModal) glassModal.classList.remove('active');
     };
 
     if (glassModal) {
@@ -175,11 +178,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ربط أي صورة في معرض الأعمال تلقائياً لتفتح عند النقر عليها أو على زر التكبير فوقها
-    document.querySelectorAll('.portfolio-item, .project-card, [onclick*="openLightbox"]').forEach(card => {
+    // ربط بطاقات معرض الأعمال لفتح النافذة المنبثقة عند النقر
+    document.querySelectorAll('.portfolio-item, .portfolio-card, [onclick*="openLightbox"]').forEach(card => {
         card.style.cursor = 'pointer';
         card.addEventListener('click', (e) => {
-            // منع تداخل الأزرار الأخرى داخل البطاقة
             if (e.target.closest('button') || e.target.closest('a')) return;
             
             const img = card.querySelector('img');
@@ -209,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         closeGlassModal();
     };
 
-    // --- 7. حاسبة الأسعار السلسة والتفاعلية (مع العداد المتدرج) ---
+    // --- 7. حاسبة الأسعار التفاعلية ---
     const calcCheckboxes = document.querySelectorAll('.calc-checkbox');
     const totalPriceEl = document.getElementById('totalPrice');
     let currentTotal = 0;
@@ -260,44 +262,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. دولاب الألوان المتحرك والسلس تلقائياً ---
-    const baseColorPicker = document.getElementById('baseColorPicker');
+    // --- 9. دولاب الألوان المتحرك والسلس (بأكواد HEX صحيحة) ---
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
-    function generateRainbowPalette(baseHex) {
+    function generateRainbowPalette() {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
 
         const wrapper = document.createElement('div');
-        wrapper.style.overflow = 'hidden';
-        wrapper.style.width = '100%';
-        wrapper.style.padding = '10px 0';
-        wrapper.style.position = 'relative';
+        wrapper.className = 'palette-scroll-wrapper';
 
         const track = document.createElement('div');
-        track.className = 'palette-track-animated';
+        track.className = 'palette-track';
 
-        const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+        // درجات مختلفة لتدرج الألوان بشكل احترافي
+        const colorsList = [
+            "#7C3AED", "#8B5CF6", "#A855F7", "#D946EF", 
+            "#EC4899", "#F43F5E", "#EF4444", "#F59E0B", 
+            "#10B981", "#06B6D4", "#3B82F6", "#6366F1"
+        ];
 
-        // نكرر العناصر لضمان حركة دائرية ناعمة لا تنقطع
-        for (let j = 0; j < 3; j++) {
-            hues.forEach(hue => {
-                const colorHex = hslToHex(hue, 70, 55);
-                
+        // تكرار القائمة مرتين لضمان استمرارية الحركة بدون تقطيع
+        for (let j = 0; j < 2; j++) {
+            colorsList.forEach(colorHex => {
                 const colorCard = document.createElement('div');
+                colorCard.className = 'color-card-item';
                 colorCard.style.backgroundColor = colorHex;
-                colorCard.style.minWidth = '85px';
-                colorCard.style.height = '65px';
-                colorCard.style.borderRadius = '10px';
-                colorCard.style.display = 'flex';
-                colorCard.style.alignItems = 'flex-end';
-                colorCard.style.justifyContent = 'center';
-                colorCard.style.padding = '6px';
-                colorCard.style.cursor = 'pointer';
-                colorCard.style.boxShadow = '0 4px 6px rgba(0,0,0,0.2)';
-                colorCard.style.flexShrink = '0';
                 
-                colorCard.innerHTML = `<span style="font-size: 10px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 6px;">${colorHex}</span>`;
+                colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.4); padding: 3px 8px; border-radius: 6px;">${colorHex}</span>`;
 
                 colorCard.addEventListener('click', () => {
                     navigator.clipboard.writeText(colorHex);
@@ -312,23 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
         paletteContainer.appendChild(wrapper);
     }
 
-    function hslToHex(h, s, l) {
-        l /= 100;
-        const a = s * Math.min(l, 1 - l) / 100;
-        const f = n => {
-            const k = (n + h / 30) % 12;
-            const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-            return Math.round(255 * color).toString(16).padStart(2, '0');
-        };
-        return `#${f(0)}${f(8)}${f(4)}`;
-    }
-
-    if (baseColorPicker) {
-        generateRainbowPalette(baseColorPicker.value || '#7c3aed');
-        baseColorPicker.addEventListener('input', (e) => {
-            generateRainbowPalette(e.target.value);
-        });
-    }
+    generateRainbowPalette();
 
 });
-                                    
+        
