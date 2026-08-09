@@ -109,16 +109,46 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. ترجمات اللغات ---
+    // --- 4. ترجمات اللغات الشاملة ---
     const translations = {
         ar: {
-            "nav.services": "خدماتنا", "nav.about": "من نحن", "nav.portfolio": "أعمالنا", "nav.pricing": "الأسعار", "nav.faq": "الأسئلة", "nav.contact": "تواصل معنا"
+            "nav.services": "خدماتنا", 
+            "nav.about": "من نحن", 
+            "nav.portfolio": "أعمالنا", 
+            "nav.pricing": "الأسعار", 
+            "nav.faq": "الأسئلة", 
+            "nav.contact": "تواصل معنا",
+            "hero.badge": "✨ حلول إبداعية متكاملة",
+            "hero.title": "نصنع التأثير والتألق لعلامتك التجارية",
+            "hero.desc": "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.",
+            "services.title": "ماذا نقدم لك؟",
+            "services.subtitle": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر"
         },
         en: {
-            "nav.services": "Services", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.pricing": "Pricing", "nav.faq": "FAQ", "nav.contact": "Contact Us"
+            "nav.services": "Services", 
+            "nav.about": "About", 
+            "nav.portfolio": "Portfolio", 
+            "nav.pricing": "Pricing", 
+            "nav.faq": "FAQ", 
+            "nav.contact": "Contact Us",
+            "hero.badge": "✨ Integrated Creative Solutions",
+            "hero.title": "We Create Impact and Brilliance for Your Brand",
+            "hero.desc": "We help you grow and expand with modern, innovative marketing methods and designs tailored to your aspirations.",
+            "services.title": "What We Offer",
+            "services.subtitle": "Integrated services designed to take your project to the next level"
         },
         tr: {
-            "nav.services": "Hizmetlerimiz", "nav.about": "Hakkımızda", "nav.portfolio": "Projelerimiz", "nav.pricing": "Fiyatlar", "nav.faq": "SSS", "nav.contact": "İletişim"
+            "nav.services": "Hizmetlerimiz", 
+            "nav.about": "Hakkımızda", 
+            "nav.portfolio": "Projelerimiz", 
+            "nav.pricing": "Fiyatlar", 
+            "nav.faq": "SSS", 
+            "nav.contact": "İletişim",
+            "hero.badge": "✨ Entegre Yaratıcı Çözümler",
+            "hero.title": "Markanız İçin Etki ve Parlaklık Yaratıyoruz",
+            "hero.desc": "Hedeflerinize uygun modern ve yenilikçi pazarlama yöntemleri ve tasarımlarla büyümenize yardımcı oluyoruz.",
+            "services.title": "Ne Sunuyoruz?",
+            "services.subtitle": "Projenizi bir üst seviyeye taşımak için tasarlanmış entegre hizmetler"
         }
     };
 
@@ -127,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         langSelect.addEventListener('change', (e) => {
             const lang = e.target.value;
             document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'en') ? 'ltr' : 'rtl';
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
             
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -284,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 11. أداة توليد لوحة الألوان الذكية (الدولاب العرضي المتحرك لجميع الألوان) ---
+    // --- 11. أداة توليد لوحة الألوان الذكية ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -341,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 12. استوديو معاينة الشعار التفاعلي (يدعم اللمس والماوس) ---
+    // --- 12. استوديو معاينة الشعار التفاعلي ---
     const logoUploadInput = document.getElementById('logoUploadInput');
     const previewLogoOverlay = document.getElementById('previewLogoOverlay');
     const mockupPlaceholderText = document.getElementById('mockupPlaceholderText');
@@ -416,4 +446,4 @@ window.addEventListener('scroll', () => {
     const scrollPercent = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
     document.body.style.setProperty('--scroll-y', `${scrollPercent}%`);
 });
-                    
+        
