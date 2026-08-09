@@ -175,7 +175,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 6. إرسال طلب الواتساب ---
+    // --- 6. إرسال طلب الواتساب (محدث برقمك الشخصي) ---
     window.sendWhatsAppOrder = function(e) {
         e.preventDefault();
         const custNameInput = document.getElementById('custName');
@@ -184,7 +184,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         const name = custNameInput ? custNameInput.value : '';
         const details = custDetailsInput ? custDetailsInput.value : '';
         
-        const phoneNumber = "905000000000"; 
+        const phoneNumber = "905364391849"; // رقمك الشخصي المحدث مع مفتاح تركيا
         const message = `مرحباً NEXA، أود طلب خدمة: *${currentProject}*%0Aالاسم: ${name}%0Aالتفاصيل: ${details}`;
         
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
@@ -284,7 +284,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 11. أداة توليد لوحة الألوان الذكية (الدولاب العرضي المتحرك لجميع الألوان) ---
+    // --- 11. أداة توليد لوحة الألوان الذكية ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -341,7 +341,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 12. استوديو معاينة الشعار التفاعلي (يدعم اللمس والماوس) ---
+    // --- 12. استوديو معاينة الشعار التفاعلي ---
     const logoUploadInput = document.getElementById('logoUploadInput');
     const previewLogoOverlay = document.getElementById('previewLogoOverlay');
     const mockupPlaceholderText = document.getElementById('mockupPlaceholderText');
@@ -416,5 +416,4 @@ window.addEventListener('scroll', () => {
     const scrollPercent = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
     document.body.style.setProperty('--scroll-y', `${scrollPercent}%`);
 });
-
         
