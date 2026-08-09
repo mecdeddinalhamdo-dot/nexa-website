@@ -112,46 +112,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /    // --- 4. ترجمات اللغات الشاملة ---
+    // --- 4. ترجمات اللغات ---
     const translations = {
         ar: {
-            "nav.services": "خدماتنا", 
-            "nav.about": "من نحن", 
-            "nav.portfolio": "أعمالنا", 
-            "nav.pricing": "الأسعار", 
-            "nav.faq": "الأسئلة", 
-            "nav.contact": "تواصل معنا",
-            "hero.badge": "✨ حلول إبداعية متكاملة",
-            "hero.title": "نصنع التأثير والتألق لعلامتك التجارية",
-            "hero.desc": "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.",
-            "services.title": "ماذا نقدم لك؟",
-            "services.desc": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر"
+            "nav.services": "خدماتنا", "nav.about": "من نحن", "nav.portfolio": "أعمالنا", "nav.pricing": "الأسعار", "nav.faq": "الأسئلة", "nav.contact": "تواصل معنا"
         },
         en: {
-            "nav.services": "Services", 
-            "nav.about": "About", 
-            "nav.portfolio": "Portfolio", 
-            "nav.pricing": "Pricing", 
-            "nav.faq": "FAQ", 
-            "nav.contact": "Contact Us",
-            "hero.badge": "✨ Integrated Creative Solutions",
-            "hero.title": "We Create Impact & Brilliance for Your Brand",
-            "hero.desc": "We help you grow and expand with modern, innovative marketing methods and designs tailored to your aspirations.",
-            "services.title": "What We Offer?",
-            "services.desc": "Comprehensive services designed to take your project to the next level"
+            "nav.services": "Services", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.pricing": "Pricing", "nav.faq": "FAQ", "nav.contact": "Contact Us"
         },
         tr: {
-            "nav.services": "Hizmetlerimiz", 
-            "nav.about": "Hakkımızda", 
-            "nav.portfolio": "Projelerimiz", 
-            "nav.pricing": "Fiyatlar", 
-            "nav.faq": "SSS", 
-            "nav.contact": "İletişim",
-            "hero.badge": "✨ Entegre Yaratıcı Çözümler",
-            "hero.title": "Markanız İçin Etki ve Parlaklık Yaratıyoruz",
-            "hero.desc": "Hedeflerinize uygun modern, yenilikçi pazarlama yöntemleri و tasarımlarla büyümenize yardımcı oluyoruz.",
-            "services.title": "Neler Sunuyoruz?",
-            "services.desc": "Projenizi bir üst seviyeye taşımak için tasarlanmış kapsamlı hizmetler"
+            "nav.services": "Hizmetlerimiz", "nav.about": "Hakkımızda", "nav.portfolio": "Projelerimiz", "nav.pricing": "Fiyatlar", "nav.faq": "SSS", "nav.contact": "İletişim"
         }
     };
 
@@ -160,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         langSelect.addEventListener('change', (e) => {
             const lang = e.target.value;
             document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'en' || lang === 'tr') ? 'ltr' : 'rtl';
+            document.documentElement.dir = (lang === 'en') ? 'ltr' : 'rtl';
             
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -170,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-
 
     // --- 5. النافذة المنبثقة (Modal & Lightbox) وتفعيل النقر على صور المعرض ---
     const glassModal = document.getElementById('glassModal');
@@ -338,4 +307,4 @@ document.addEventListener("DOMContentLoaded", () => {
     generateRainbowPalette();
 
 });
-        
+                
