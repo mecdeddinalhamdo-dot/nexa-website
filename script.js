@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. دولاب الألوان الذكي والمتحرك (Rainbow Palette Wheel) ---
+    // --- 9. دولاب الألوان المتحرك والسلس ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -250,48 +250,40 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
 
-        // إنشاء حاوية الشريط المتحرك
         const wrapper = document.createElement('div');
-        wrapper.className = 'palette-scroll-wrapper';
         wrapper.style.overflowX = 'auto';
         wrapper.style.padding = '10px 0';
         wrapper.style.scrollbarWidth = 'thin';
 
         const track = document.createElement('div');
-        track.className = 'palette-track';
         track.style.display = 'flex';
         track.style.gap = '12px';
         track.style.width = 'max-content';
 
         const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 
-        // تكرار الألوان ليعطي إيحاء الدولاب المتحرك المستمر
         for (let j = 0; j < 2; j++) {
             hues.forEach(hue => {
                 const colorHex = hslToHex(hue, 70, 55);
                 
                 const colorCard = document.createElement('div');
-                colorCard.className = 'color-card-item';
                 colorCard.style.backgroundColor = colorHex;
                 colorCard.style.minWidth = '85px';
                 colorCard.style.height = '65px';
                 colorCard.style.borderRadius = '10px';
                 colorCard.style.display = 'flex';
                 colorCard.style.alignItems = 'flex-end';
+                colorCard.style.justifyContent + 'center';
                 colorCard.style.justifyContent = 'center';
                 colorCard.style.padding = '6px';
                 colorCard.style.cursor = 'pointer';
-                colorCard.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                colorCard.style.boxShadow = '0 4px 6px rgba(0,0,0,0.2)';
                 colorCard.style.transition = 'transform 0.2s ease';
                 
-                colorCard.innerHTML = `<span style="font-size: 10px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(4px);">${colorHex}</span>`;
+                colorCard.innerHTML = `<span style="font-size: 10px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 6px;">${colorHex}</span>`;
                 
-                colorCard.addEventListener('mouseenter', () => {
-                    colorCard.style.transform = 'scale(1.05)';
-                });
-                colorCard.addEventListener('mouseleave', () => {
-                    colorCard.style.transform = 'scale(1)';
-                });
+                colorCard.addEventListener('mouseenter', () => colorCard.style.transform = 'scale(1.05)');
+                colorCard.addEventListener('mouseleave', () => colorCard.style.transform = 'scale(1)');
 
                 colorCard.addEventListener('click', () => {
                     navigator.clipboard.writeText(colorHex);
@@ -318,11 +310,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (baseColorPicker) {
-        generateRainbowPalette(baseColorPicker.value);
+        // إذا كان عنصر الـ input مخفياً، نجعله ظاهراً أو نتفاعل معه
+        baseColorPicker.style.display = 'inline-block';
+        baseColorPicker.style.opacity = '1';
+        baseColorPicker.style.visibility = 'visible';
+        
+        generateRainbowPalette(baseColorPicker.value || '#7c3aed');
         baseColorPicker.addEventListener('input', (e) => {
             generateRainbowPalette(e.target.value);
         });
     }
 
 });
-                
+                          
