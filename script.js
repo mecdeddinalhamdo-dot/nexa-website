@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+Document.addEventListener("DOMContentLoaded", () => {
 
     // --- 1. تأثير خلفية الجرافيك والتصميم المتحركة ---
     const canvas = document.getElementById('purpleWindCanvas');
@@ -154,6 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
             "modal.order_title": "طلب تصميم سريع",
             "modal.name_label": "الاسم الكريم:",
             "modal.details_label": "تفاصيل إضافية (اختياري):",
+            "modal.send_btn": "إرسال الطلب عبر الواتساب",
+            "palette.title": "مولد لوحة الألوان الذكي",
+            "palette.subtitle": "اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً",
+            "palette.label": "اختر اللون الأساسي:",
+            "modal.order_this": "اطلب تصميم مشابه الآن",
+            "modal.order_title": "طلب تصميم سريع",
+            "modal.name_label": "الاسم الكريم:",
+            "modal.details_label": "تفاصيل إضافية (اختياري):",
             "modal.send_btn": "إرسال الطلب عبر الواتساب"
         },
         en: {
@@ -195,6 +203,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "faq.q2": "Do you deliver open source files?",
             "faq.a2": "Yes, absolutely! We deliver all files in formats (AI, PSD, PDF, PNG) for easy use.",
             "footer.desc": "Creative and modern solutions to elevate your brand to the stars.",
+            "palette.title": "Smart Color Palette Generator",
+            "palette.subtitle": "Choose your primary color to instantly generate consistent visual identity shades",
+            "palette.label": "Choose Primary Color:",
             "modal.order_this": "Order Similar Design Now",
             "modal.order_title": "Quick Design Request",
             "modal.name_label": "Your Name:",
@@ -240,6 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "faq.q2": "Açık kaynaklı dosyaları teslim ediyor musunuz?",
             "faq.a2": "Evet kesinlikle! Kolayca kullanabilmeniz için tüm dosyaları (AI, PSD, PDF, PNG) formatlarında teslim ediyoruz.",
             "footer.desc": "Markanızı zirveye taşıyacak yaratıcı ve modern çözümler.",
+            "palette.title": "Akıllı Renk Paleti Üreteci",
+            "palette.subtitle": "Projeniz için uyumlu görsel kimlik tonları oluşturmak üzere ana renginizi seçin",
+            "palette.label": "Ana Rengi Seçin:",
             "modal.order_this": "Şimdi Benzer Tasarım Sipariş Et",
             "modal.order_title": "Hızlı Tasarım Talebi",
             "modal.name_label": "Adınız:",
@@ -395,28 +409,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 10. أداة توليد لوحة الألوان الذكية ---
-    const baseColorPicker = document.getElementById('baseColorPicker');
-    const paletteContainer = document.getElementById('paletteColorsContainer');
-
-    function generateRainbowPalette(baseHex) {
-        if (!paletteContainer) return;
-        paletteContainer.innerHTML = '';
-
-        const wrapper = document.createElement('div');
-        wrapper.className = 'palette-scroll-wrapper';
-
-        const track = document.createElement('div');
-        track.className = 'palette-track';
-
-        const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
-
-        for (let j = 0; j < 2; j++) {
-            hues.forEach(hue => {
-                const colorHex = hslToHex(hue, 70, 55);
-                
-                const colorCard = document.createElement('div');
-                colorCard.className = 'color-card-item';
-                colorCard.style.backgroundColor = colorHex;
-
-                
+    // --- 10. أداة 
