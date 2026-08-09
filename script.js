@@ -109,156 +109,16 @@ Document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. ترجمات اللغات الشاملة والمتكاملة ---
+    // --- 4. ترجمات اللغات ---
     const translations = {
         ar: {
-            "nav.services": "خدماتنا", 
-            "nav.about": "من نحن", 
-            "nav.portfolio": "أعمالنا", 
-            "nav.pricing": "الأسعار", 
-            "nav.faq": "الأسئلة", 
-            "nav.contact": "تواصل معنا",
-            "hero.badge": "✨ حلول إبداعية متكاملة",
-            "hero.title": "نصنع التأثير والتألق لعلامتك التجارية",
-            "hero.desc": "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.",
-            "services.title": "ماذا نقدم لك؟",
-            "services.subtitle": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر",
-            "services.s1_title": "التصميم والهوية البصرية",
-            "services.s1_desc": "بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.",
-            "services.s2_title": "التسويق الرقمي",
-            "services.s2_desc": "حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.",
-            "services.s3_title": "تطوير المواقع والتطبيقات",
-            "services.s3_desc": "تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات.",
-            "portfolio.title": "معرض أعمالنا",
-            "portfolio.subtitle": "نظرة على بعض مشاريعنا والتصاميم المبتكرة",
-            "portfolio.zoom": "تكبير التصميم",
-            "portfolio.order_btn": "اطلب مثل هذا",
-            "calc.title": "حاسبة التكلفة التقديرية",
-            "calc.subtitle": "حدد الخدمات التي تحتاجها لتعرف التكلفة المتوقعة لمشروعك",
-            "calc.logo": "تصميم شعار احترافي ($50)",
-            "calc.identity": "هوية بصرية كاملة ($150)",
-            "calc.social": "إدارة منصات التواصل (شهرياً - $100)",
-            "calc.web": "تطوير موقع تعريفي ($300)",
-            "calc.total_text": "التكلفة الإجمالية التقديرية:",
-            "calc.order_btn": "اطلب هذه الحزمة الآن",
-            "testimonials.title": "ماذا يقول عملاؤنا؟",
-            "testimonials.c1_name": "- شركة الأفق",
-            "testimonials.c2_name": "- متجر كريستال",
-            "faq.title": "الأسئلة الشائعة",
-            "faq.q1": "كم يستغرق تصميم الهوية البصرية؟",
-            "faq.a1": "عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.",
-            "faq.q2": "هل تسلمون الملفات المصدرية المفتوحة؟",
-            "faq.a2": "نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.",
-            "footer.desc": "حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.",
-            "modal.order_this": "اطلب تصميم مشابه الآن",
-            "modal.order_title": "طلب تصميم سريع",
-            "modal.name_label": "الاسم الكريم:",
-            "modal.details_label": "تفاصيل إضافية (اختياري):",
-            "modal.send_btn": "إرسال الطلب عبر الواتساب",
-            "palette.title": "مولد لوحة الألوان الذكي",
-            "palette.subtitle": "اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً",
-            "palette.label": "اختر اللون الأساسي:",
-            "modal.order_this": "اطلب تصميم مشابه الآن",
-            "modal.order_title": "طلب تصميم سريع",
-            "modal.name_label": "الاسم الكريم:",
-            "modal.details_label": "تفاصيل إضافية (اختياري):",
-            "modal.send_btn": "إرسال الطلب عبر الواتساب"
+            "nav.services": "خدماتنا", "nav.about": "من نحن", "nav.portfolio": "أعمالنا", "nav.pricing": "الأسعار", "nav.faq": "الأسئلة", "nav.contact": "تواصل معنا"
         },
         en: {
-            "nav.services": "Services", 
-            "nav.about": "About", 
-            "nav.portfolio": "Portfolio", 
-            "nav.pricing": "Pricing", 
-            "nav.faq": "FAQ", 
-            "nav.contact": "Contact Us",
-            "hero.badge": "✨ Integrated Creative Solutions",
-            "hero.title": "We Create Impact and Brilliance for Your Brand",
-            "hero.desc": "We help you grow and expand with modern, innovative marketing methods and designs tailored to your aspirations.",
-            "services.title": "What We Offer",
-            "services.subtitle": "Integrated services designed to take your project to the next level",
-            "services.s1_title": "Design & Visual Identity",
-            "services.s1_desc": "Building a complete visual identity and professional logos expressing your business value.",
-            "services.s2_title": "Digital Marketing",
-            "services.s2_desc": "Well-studied advertising campaigns and social media management to boost sales.",
-            "services.s3_title": "Web & App Development",
-            "services.s3_desc": "Developing fast, responsive websites and applications using modern technologies.",
-            "portfolio.title": "Our Portfolio",
-            "portfolio.subtitle": "A glimpse of our projects and innovative designs",
-            "portfolio.zoom": "Zoom Design",
-            "portfolio.order_btn": "Order Similar",
-            "calc.title": "Estimated Cost Calculator",
-            "calc.subtitle": "Select the services you need to estimate your project cost",
-            "calc.logo": "Professional Logo Design ($50)",
-            "calc.identity": "Complete Visual Identity ($150)",
-            "calc.social": "Social Media Management (Monthly - $100)",
-            "calc.web": "Introductory Website Development ($300)",
-            "calc.total_text": "Estimated Total Cost:",
-            "calc.order_btn": "Order This Package Now",
-            "testimonials.title": "What Our Clients Say",
-            "testimonials.c1_name": "- Al-Aفق Company",
-            "testimonials.c2_name": "- Crystal Store",
-            "faq.title": "Frequently Asked Questions",
-            "faq.q1": "How long does visual identity design take?",
-            "faq.a1": "It usually takes 5 to 10 working days depending on details and requested revisions.",
-            "faq.q2": "Do you deliver open source files?",
-            "faq.a2": "Yes, absolutely! We deliver all files in formats (AI, PSD, PDF, PNG) for easy use.",
-            "footer.desc": "Creative and modern solutions to elevate your brand to the stars.",
-            "palette.title": "Smart Color Palette Generator",
-            "palette.subtitle": "Choose your primary color to instantly generate consistent visual identity shades",
-            "palette.label": "Choose Primary Color:",
-            "modal.order_this": "Order Similar Design Now",
-            "modal.order_title": "Quick Design Request",
-            "modal.name_label": "Your Name:",
-            "modal.details_label": "Additional Details (Optional):",
-            "modal.send_btn": "Send Request via WhatsApp"
+            "nav.services": "Services", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.pricing": "Pricing", "nav.faq": "FAQ", "nav.contact": "Contact Us"
         },
         tr: {
-            "nav.services": "Hizmetlerimiz", 
-            "nav.about": "Hakkımızda", 
-            "nav.portfolio": "Projelerimiz", 
-            "nav.pricing": "Fiyatlar", 
-            "nav.faq": "SSS", 
-            "nav.contact": "İletişim",
-            "hero.badge": "✨ Entegre Yaratıcı Çözümler",
-            "hero.title": "Markanız İçin Etki ve Parlaklık Yaratıyoruz",
-            "hero.desc": "Hedeflerinize uygun modern ve yenilikçi pazarlama yöntemleri ve tasarımlarla büyümenize yardımcı oluyoruz.",
-            "services.title": "Ne Sunuyoruz?",
-            "services.subtitle": "Projenizi bir üst seviyeye taşımak için tasarlanmış entegre hizmetler",
-            "services.s1_title": "Tasarım ve Görsel Kimlik",
-            "services.s1_desc": "İş değerinizi yansıtan eksiksiz bir görsel kimlik ve profesyonel logolar oluşturma.",
-            "services.s2_title": "Dijital Pazarlama",
-            "services.s2_desc": "Satışları artırmak için iyi planlanmış reklam kampanyaları ve sosyal medya yönetimi.",
-            "services.s3_title": "Web ve Uygulama Geliştirme",
-            "services.s3_desc": "Modern teknolojileri kullanarak hızlı ve duyarlı web siteleri geliştirme.",
-            "portfolio.title": "Portföyümüz",
-            "portfolio.subtitle": "Projelerimizden ve yenilikçi tasarımlarımızdan bir kesit",
-            "portfolio.zoom": "Tasarımı Büyüt",
-            "portfolio.order_btn": "Benzerini Sipariş Et",
-            "calc.title": "Tahmini Maliyet Hesaplayıcı",
-            "calc.subtitle": "Projenizin maliyetini öğrenmek için ihtiyacınız olan hizmetleri seçin",
-            "calc.logo": "Profesyonel Logo Tasarımı ($50)",
-            "calc.identity": "Komple Görsel Kimlik ($150)",
-            "calc.social": "Sosyal Medya Yönetimi (Aylık - $100)",
-            "calc.web": "Tanıtım Web Sitesi Geliştirme ($300)",
-            "calc.total_text": "Tahmini Toplam Maliyet:",
-            "calc.order_btn": "Bu Paketi Hemen Sipariş Et",
-            "testimonials.title": "Müşterilerimiz Ne Diyor?",
-            "testimonials.c1_name": "- Al-Ufuq Şirketi",
-            "testimonials.c2_name": "- Kristal Mağazası",
-            "faq.title": "Sıkça Sorulan Sorular",
-            "faq.q1": "Görsel kimlik tasarımı ne kadar sürer?",
-            "faq.a1": "Detaylara ve istenen revizyonlara bağlı olarak genellikle 5 ila 10 iş günü sürer.",
-            "faq.q2": "Açık kaynaklı dosyaları teslim ediyor musunuz?",
-            "faq.a2": "Evet kesinlikle! Kolayca kullanabilmeniz için tüm dosyaları (AI, PSD, PDF, PNG) formatlarında teslim ediyoruz.",
-            "footer.desc": "Markanızı zirveye taşıyacak yaratıcı ve modern çözümler.",
-            "palette.title": "Akıllı Renk Paleti Üreteci",
-            "palette.subtitle": "Projeniz için uyumlu görsel kimlik tonları oluşturmak üzere ana renginizi seçin",
-            "palette.label": "Ana Rengi Seçin:",
-            "modal.order_this": "Şimdi Benzer Tasarım Sipariş Et",
-            "modal.order_title": "Hızlı Tasarım Talebi",
-            "modal.name_label": "Adınız:",
-            "modal.details_label": "Ek Detaylar (İsteğe bağlı):",
-            "modal.send_btn": "WhatsApp ile Talep Gönder"
+            "nav.services": "Hizmetlerimiz", "nav.about": "Hakkımızda", "nav.portfolio": "Projelerimiz", "nav.pricing": "Fiyatlar", "nav.faq": "SSS", "nav.contact": "İletişim"
         }
     };
 
@@ -267,7 +127,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         langSelect.addEventListener('change', (e) => {
             const lang = e.target.value;
             document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            document.documentElement.dir = (lang === 'en') ? 'ltr' : 'rtl';
             
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -305,12 +165,6 @@ Document.addEventListener("DOMContentLoaded", () => {
         if (glassModal) glassModal.classList.add('active');
     };
 
-    window.switchToOrderView = function() {
-        if (lightboxView) lightboxView.style.display = 'none';
-        if (orderView) orderView.style.display = 'block';
-        if (orderProjectName) orderProjectName.innerText = `الخدمة المطلوبة: ${currentProject}`;
-    };
-
     window.closeGlassModal = function() {
         if (glassModal) glassModal.classList.remove('active');
     };
@@ -337,7 +191,28 @@ Document.addEventListener("DOMContentLoaded", () => {
         closeGlassModal();
     };
 
-    // --- 7. حاسبة الأسعار التفاعلية ---
+    // --- 7. ميزة المقارنة (قبل وبعد) ---
+    const baSlider = document.getElementById('baSlider');
+    const baBefore = document.getElementById('baBefore');
+    const baLine = document.getElementById('baSliderLine');
+    const baBtn = document.getElementById('baSliderBtn');
+
+    if(baSlider && baBefore) {
+        baSlider.addEventListener('input', (e) => {
+            let sliderVal = e.target.value;
+            if (document.documentElement.dir === 'rtl') {
+                baBefore.style.clipPath = `polygon(100% 0, ${100-sliderVal}% 0, ${100-sliderVal}% 100%, 100% 100%)`;
+                if (baLine) baLine.style.left = `${sliderVal}%`;
+                if (baBtn) baBtn.style.left = `${sliderVal}%`;
+            } else {
+                baBefore.style.clipPath = `polygon(0 0, ${sliderVal}% 0, ${sliderVal}% 100%, 0 100%)`;
+                if (baLine) baLine.style.left = `${sliderVal}%`;
+                if (baBtn) baBtn.style.left = `${sliderVal}%`;
+            }
+        });
+    }
+
+    // --- 8. حاسبة الأسعار التفاعلية ---
     const calcCheckboxes = document.querySelectorAll('.calc-checkbox');
     const totalPriceEl = document.getElementById('totalPrice');
     let currentTotal = 0;
@@ -376,7 +251,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         openOrderModal(`حزمة مخصصة بقيمة $${currentTotal}`);
     };
 
-    // --- 8. الأسئلة الشائعة (Accordion) ---
+    // --- 9. الأسئلة الشائعة (Accordion) ---
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
@@ -388,7 +263,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. تأثير 3D Hover لمعرض الأعمال ---
+    // --- 10. تأثير 3D Hover لمعرض الأعمال ---
     const tiltCards = document.querySelectorAll('.tilt-card');
     tiltCards.forEach(card => {
         const portfolioImg = card.querySelector('.portfolio-img');
@@ -409,4 +284,137 @@ Document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 10. أداة 
+    // --- 11. أداة توليد لوحة الألوان الذكية (الدولاب العرضي المتحرك لجميع الألوان) ---
+    const baseColorPicker = document.getElementById('baseColorPicker');
+    const paletteContainer = document.getElementById('paletteColorsContainer');
+
+    function generateRainbowPalette(baseHex) {
+        if (!paletteContainer) return;
+        paletteContainer.innerHTML = '';
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'palette-scroll-wrapper';
+
+        const track = document.createElement('div');
+        track.className = 'palette-track';
+
+        const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
+
+        for (let j = 0; j < 2; j++) {
+            hues.forEach(hue => {
+                const colorHex = hslToHex(hue, 70, 55);
+                
+                const colorCard = document.createElement('div');
+                colorCard.className = 'color-card-item';
+                colorCard.style.backgroundColor = colorHex;
+                
+                colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(4px);">${colorHex}</span>`;
+                
+                colorCard.addEventListener('click', () => {
+                    navigator.clipboard.writeText(colorHex);
+                    alert(`تم نسخ كود اللون: ${colorHex}`);
+                });
+
+                track.appendChild(colorCard);
+            });
+        }
+
+        wrapper.appendChild(track);
+        paletteContainer.appendChild(wrapper);
+    }
+
+    function hslToHex(h, s, l) {
+        l /= 100;
+        const a = s * Math.min(l, 1 - l) / 100;
+        const f = n => {
+            const k = (n + h / 30) % 12;
+            const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+            return Math.round(255 * color).toString(16).padStart(2, '0');
+        };
+        return `#${f(0)}${f(8)}${f(4)}`;
+    }
+
+    if (baseColorPicker) {
+        generateRainbowPalette(baseColorPicker.value);
+        baseColorPicker.addEventListener('input', (e) => {
+            generateRainbowPalette(e.target.value);
+        });
+    }
+
+    // --- 12. استوديو معاينة الشعار التفاعلي (يدعم اللمس والماوس) ---
+    const logoUploadInput = document.getElementById('logoUploadInput');
+    const previewLogoOverlay = document.getElementById('previewLogoOverlay');
+    const mockupPlaceholderText = document.getElementById('mockupPlaceholderText');
+
+    if (logoUploadInput && previewLogoOverlay) {
+        logoUploadInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewLogoOverlay.src = event.target.result;
+                    previewLogoOverlay.style.display = 'block';
+                    previewLogoOverlay.style.left = '50%';
+                    previewLogoOverlay.style.top = '50%';
+                    previewLogoOverlay.style.transform = 'translate(-50%, -50%)';
+                    if (mockupPlaceholderText) mockupPlaceholderText.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        let isDragging = false;
+        let initialX = 0;
+        let initialY = 0;
+
+        function dragStart(e) {
+            isDragging = true;
+            const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+            
+            const rect = previewLogoOverlay.getBoundingClientRect();
+            initialX = clientX - rect.left;
+            initialY = clientY - rect.top;
+            
+            previewLogoOverlay.style.transform = 'none';
+            previewLogoOverlay.style.left = `${previewLogoOverlay.offsetLeft}px`;
+            previewLogoOverlay.style.top = `${previewLogoOverlay.offsetTop}px`;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+
+            let x = clientX - initialX;
+            let y = clientY - initialY;
+
+            previewLogoOverlay.style.left = `${x}px`;
+            previewLogoOverlay.style.top = `${y}px`;
+        }
+
+        function dragEnd() {
+            isDragging = false;
+        }
+
+        previewLogoOverlay.addEventListener('mousedown', dragStart);
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('mouseup', dragEnd);
+
+        previewLogoOverlay.addEventListener('touchstart', dragStart, { passive: false });
+        window.addEventListener('touchmove', drag, { passive: false });
+        window.addEventListener('touchend', dragEnd);
+    }
+
+});
+
+// --- 13. تأثير الإضاءة البنفسجية المتفاعلة مع التمرير ---
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
+    document.body.style.setProperty('--scroll-y', `${scrollPercent}%`);
+});
+
+        
