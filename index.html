@@ -11,22 +11,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
     <link rel="stylesheet" href="style.css">  
     <style>  
+        /* تثبيت متغيرات الألوان وجعل الوضع النهري (الفاتح) هو الافتراضي */  
         :root {  
             --bg-color: #ffffff;  
             --text-color: #1f2937;  
         }  
+
+        /* الوضع الافتراضي (النهري/الفاتح) */  
         body {  
             background-color: var(--bg-color) !important;  
             color: var(--text-color) !important;  
         }  
+
+        /* تطبيق الوضع المظلم فقط عند تفعيله يدوياً عبر الكلاس أو السمة، أو استجابة لنظام الجهاز إذا لم يكن الوضع الفاتح مفرضاً */  
         [data-theme="dark"] body, html.dark body {  
             background-color: #0f0728 !important;  
             color: #ffffff !important;  
         }  
+          
         [data-theme="dark"] p, [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] span, [data-theme="dark"] a, [data-theme="dark"] label, [data-theme="dark"] li, [data-theme="dark"] .calc-text, [data-theme="dark"] .total-price,  
         html.dark p, html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6, html.dark span, html.dark a, html.dark label, html.dark li, html.dark .calc-text, html.dark .total-price {  
             color: #ffffff !important;  
         }  
+
+        /* تحويل البطاقات والعناصر إلى تصميم زجاجي شفاف في الوضع المظلم فقط */  
         [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box,  
         html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box {  
             background: rgba(255, 255, 255, 0.03) !important;  
@@ -34,6 +42,7 @@
             -webkit-backdrop-filter: blur(12px) !important;  
             border: 1px solid rgba(255, 255, 255, 0.1) !important;  
         }  
+
         @keyframes logoGlow {  
             0% {  
                 box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);  
@@ -48,12 +57,14 @@
                 border-color: rgba(124, 58, 237, 0.4);  
             }  
         }  
+
         .glow-border {  
             border: 2px solid rgba(124, 58, 237, 0.4);  
             border-radius: 15px;  
             animation: logoGlow 3s infinite ease-in-out;  
             transition: all 0.3s ease;  
         }  
+
         .glow-border-thin {  
             border: 1px solid rgba(124, 58, 237, 0.5);  
             animation: logoGlow 2.5s infinite ease-in-out;  
@@ -126,14 +137,14 @@
 
 <!-- قسم توليد لوحة الألوان الذكية -->  
 <section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" style="margin-bottom: 30px;">  
-        <h2 data-i18n="palette.title">مولد لوحة الألوان الذكي</h2>  
-        <p data-i18n="palette.subtitle">اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
+    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">  
+        <h2>مولد لوحة الألوان الذكي</h2>  
+        <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
     </div>  
       
     <div class="palette-box" style="max-width: 600px; margin: 0 auto; background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">  
         <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 15px;">  
-            <label for="baseColorPicker" style="font-weight: bold;" data-i18n="palette.label">اختر اللون الأساسي:</label>  
+            <label for="baseColorPicker" style="font-weight: bold;">اختر اللون الأساسي:</label>  
             <input type="color" id="baseColorPicker" value="#7c3aed" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">  
         </div>  
           
@@ -154,7 +165,7 @@
                 <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
-                <h4 data-i18n="portfolio.p1_title">تصميم هوية بصرية متكاملة</h4>  
+                <h4>تصميم هوية بصرية متكاملة</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('تصميم هوية بصرية متكاملة')">  
                     <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
                 </button>  
@@ -167,7 +178,7 @@
                 <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
-                <h4 data-i18n="portfolio.p2_title">حملة تسويقية واحترافية</h4>  
+                <h4>حملة تسويقية واحترافية</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('حملة تسويقية واحترافية')">  
                     <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
                 </button>  
@@ -180,7 +191,7 @@
                 <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
-                <h4 data-i18n="portfolio.p3_title">واجهة تطبيق ذكية</h4>  
+                <h4>واجهة تطبيق ذكية</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('واجهة تطبيق ذكية')">  
                     <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
                 </button>  
@@ -232,12 +243,12 @@
     <div class="grid-cards">  
         <div class="card testimonial-card">  
             <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
-            <p data-i18n="testimonials.t1">"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
+            <p>"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
             <h4 data-i18n="testimonials.c1_name">- شركة الأفق</h4>  
         </div>  
         <div class="card testimonial-card">  
             <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
-            <p data-i18n="testimonials.t2">"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
+            <p>"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
             <h4 data-i18n="testimonials.c2_name">- متجر كريستال</h4>  
         </div>  
     </div>  
@@ -317,4 +328,6 @@
 
 <script src="script.js"></script>
 </body>  
-</html>
+    </html>
+
+                     
