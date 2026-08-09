@@ -11,40 +11,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
     <link rel="stylesheet" href="style.css">  
     <style>  
+        /* تثبيت متغيرات الألوان وجعل الوضع النهري (الفاتح) هو الافتراضي */  
         :root {  
             --bg-color: #ffffff;  
             --text-color: #1f2937;  
         }  
+
+        /* الوضع الافتراضي (النهري/الفاتح) */  
         body {  
             background-color: var(--bg-color) !important;  
             color: var(--text-color) !important;  
         }  
+
+        /* تطبيق الوضع المظلم فقط عند تفعيله يدوياً عبر الكلاس أو السمة، أو استجابة لنظام الجهاز إذا لم يكن الوضع الفاتح مفرضاً */  
         [data-theme="dark"] body, html.dark body {  
             background-color: #0f0728 !important;  
             color: #ffffff !important;  
         }  
+          
         [data-theme="dark"] p, [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] span, [data-theme="dark"] a, [data-theme="dark"] label, [data-theme="dark"] li, [data-theme="dark"] .calc-text, [data-theme="dark"] .total-price,  
         html.dark p, html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6, html.dark span, html.dark a, html.dark label, html.dark li, html.dark .calc-text, html.dark .total-price {  
             color: #ffffff !important;  
         }  
-        [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box, [data-theme="dark"] .consultation-box, [data-theme="dark"] .stat-card,  
-        html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box, html.dark .consultation-box, html.dark .stat-card {  
+
+        /* تحويل البطاقات والعناصر إلى تصميم زجاجي شفاف في الوضع المظلم فقط */  
+        [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box,  
+        html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box {  
             background: rgba(255, 255, 255, 0.03) !important;  
             backdrop-filter: blur(12px) !important;  
             -webkit-backdrop-filter: blur(12px) !important;  
             border: 1px solid rgba(255, 255, 255, 0.1) !important;  
         }  
+
         @keyframes logoGlow {  
-            0% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); border-color: rgba(124, 58, 237, 0.4); }  
-            50% { box-shadow: 0 0 15px rgba(124, 58, 237, 0.8); border-color: rgba(168, 85, 247, 1); }  
-            100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); border-color: rgba(124, 58, 237, 0.4); }  
+            0% {  
+                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);  
+                border-color: rgba(124, 58, 237, 0.4);  
+            }  
+            50% {  
+                box-shadow: 0 0 15px rgba(124, 58, 237, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(124, 58, 237, 0.4);  
+                border-color: rgba(168, 85, 247, 1);  
+            }  
+            100% {  
+                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);  
+                border-color: rgba(124, 58, 237, 0.4);  
+            }  
         }  
-        .glow-border { border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 15px; animation: logoGlow 3s infinite ease-in-out; }  
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }  
-        .stat-card { background: rgba(255, 255, 255, 0.7); transition: transform 0.3s ease; }  
-        .stat-card:hover { transform: translateY(-5px); }  
-        [data-theme="dark"] .stat-card { background: rgba(255, 255, 255, 0.03) !important; }  
-    </style>  
+
+        .glow-border {  
+            border: 2px solid rgba(124, 58, 237, 0.4);  
+            border-radius: 15px;  
+            animation: logoGlow 3s infinite ease-in-out;  
+            transition: all 0.3s ease;  
+        }  
+
+        .glow-border-thin {  
+            border: 1px solid rgba(124, 58, 237, 0.5);  
+            animation: logoGlow 2.5s infinite ease-in-out;  
+        }  
+    </style>
 </head>  
 <body>  
 <div id="scrollProgressBar"></div>  
@@ -53,7 +78,9 @@
 <!-- الهيدر العلوي -->  
 <header>  
     <div class="nav-container">  
-        <a href="#" class="logo"><img src="Logo (1).png" alt="NEXA Logo"></a>  
+        <a href="#" class="logo">  
+            <img src="Logo (1).png" alt="NEXA Logo">  
+        </a>  
         <ul class="nav-links">  
             <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>  
             <li><a href="#about" data-i18n="nav.about">من نحن</a></li>  
@@ -83,17 +110,6 @@
     <p data-i18n="hero.desc">نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>  
 </section>  
 
-<!-- شريط شعارات الشركاء والعملاء المتحرك -->  
-<section class="clients-ticker-sec" style="padding: 20px 0; background: rgba(124, 58, 237, 0.03); overflow: hidden; white-space: nowrap; border-top: 1px solid rgba(124, 58, 237, 0.1); border-bottom: 1px solid rgba(124, 58, 237, 0.1);">  
-    <div class="clients-track" style="display: inline-block; animation: marquee 25s linear infinite;">  
-        <span style="margin: 0 40px; font-weight: bold; font-size: 1.1rem; opacity: 0.7;"><i class="fa-solid fa-gem" style="color: #7c3aed; margin-left: 8px;"></i> شركة الأفق الرقمي</span>  
-        <span style="margin: 0 40px; font-weight: bold; font-size: 1.1rem; opacity: 0.7;"><i class="fa-solid fa-fire" style="color: #7c3aed; margin-left: 8px;"></i> متجر كريستال</span>  
-        <span style="margin: 0 40px; font-weight: bold; font-size: 1.1rem; opacity: 0.7;"><i class="fa-solid fa-bolt" style="color: #7c3aed; margin-left: 8px;"></i> مؤسسة النجم العالي</span>  
-        <span style="margin: 0 40px; font-weight: bold; font-size: 1.1rem; opacity: 0.7;"><i class="fa-solid fa-shield-halved" style="color: #7c3aed; margin-left: 8px;"></i> بكسل للحلول التقنية</span>  
-        <span style="margin: 0 40px; font-weight: bold; font-size: 1.1rem; opacity: 0.7;"><i class="fa-solid fa-rocket" style="color: #7c3aed; margin-left: 8px;"></i> فيو للإعلانات</span>  
-    </div>  
-</section>  
-
 <!-- قسم الخدمات -->  
 <section id="services" class="services">  
     <div class="section-head">  
@@ -119,81 +135,31 @@
     </div>  
 </section>  
 
-<!-- قسم لماذا تختارنا -->  
-<section id="about" class="why-us-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" style="margin-bottom: 40px;">  
-        <h2>لماذا تختار NEXA؟</h2>  
-        <p>نحن لا نقدم خدمات تقليدية، بل نبني معك شراكة نجاح حقيقية</p>  
-    </div>  
-    <div class="grid-cards" style="max-width: 1100px; margin: 0 auto;">  
-        <div class="card" style="text-align: center;">  
-            <div class="card-icon" style="margin: 0 auto 20px;"><i class="fa-solid fa-clock-rotate-left"></i></div>  
-            <h3>التسليم في الوقت المحدد</h3>  
-            <p>نلتزم بالمواعيد بدقة متناهية دون أي تأخير في تسليم المشاريع.</p>  
-        </div>  
-        <div class="card" style="text-align: center;">  
-            <div class="card-icon" style="margin: 0 auto 20px;"><i class="fa-solid fa-headset"></i></div>  
-            <h3>دعم فني مستمر</h3>  
-            <p>فريقنا متواجد دائماً لمساعدتك والإجابة على استفساراتك على مدار الساعة.</p>  
-        </div>  
-        <div class="card" style="text-align: center;">  
-            <div class="card-icon" style="margin: 0 auto 20px;"><i class="fa-solid fa-hand-holding-dollar"></i></div>  
-            <h3>أسعار تنافسية تناسبك</h3>  
-            <p>نقدم أعلى جودة بأسعار مدروسة تناسب ميزانية الشركات الناشئة والمتوسطة.</p>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- عداد الإنجازات والأرقام -->  
-<section class="stats-sec" style="padding: 50px 20px; background: rgba(124, 58, 237, 0.02);">  
-    <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">  
-        <div class="stat-card" style="padding: 30px; border-radius: 15px; border: 1px solid rgba(124, 58, 237, 0.1);">  
-            <i class="fa-solid fa-briefcase" style="font-size: 35px; color: #7c3aed; margin-bottom: 15px;"></i>  
-            <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">+120</h2>  
-            <p style="opacity: 0.8;">مشروع ناجح</p>  
-        </div>  
-        <div class="stat-card" style="padding: 30px; border-radius: 15px; border: 1px solid rgba(124, 58, 237, 0.1);">  
-            <i class="fa-solid fa-face-smile" style="font-size: 35px; color: #7c3aed; margin-bottom: 15px;"></i>  
-            <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">98%</h2>  
-            <p style="opacity: 0.8;">رضا العملاء</p>  
-        </div>  
-        <div class="stat-card" style="padding: 30px; border-radius: 15px; border: 1px solid rgba(124, 58, 237, 0.1);">  
-            <i class="fa-solid fa-award" style="font-size: 35px; color: #7c3aed; margin-bottom: 15px;"></i>  
-            <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">+5</h2>  
-            <p style="opacity: 0.8;">سنوات خبرة</p>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- مولد لوحة الألوان الذكي -->  
+<!-- قسم توليد لوحة الألوان الذكية -->  
 <section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" style="margin-bottom: 30px;">  
+    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">  
         <h2>مولد لوحة الألوان الذكي</h2>  
         <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
     </div>  
+      
     <div class="palette-box" style="max-width: 600px; margin: 0 auto; background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">  
         <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 15px;">  
             <label for="baseColorPicker" style="font-weight: bold;">اختر اللون الأساسي:</label>  
             <input type="color" id="baseColorPicker" value="#7c3aed" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">  
         </div>  
+          
         <div id="paletteColorsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; margin-top: 25px;"></div>  
     </div>  
 </section>  
-
-<!-- معرض الأعمال -->  
+  
+<!-- قسم معرض الأعمال -->  
 <section id="portfolio" class="portfolio">  
     <div class="section-head">  
         <h2 data-i18n="portfolio.title">معرض أعمالنا</h2>  
         <p data-i18n="portfolio.subtitle">نظرة على بعض مشاريعنا والتصاميم المبتكرة</p>  
     </div>  
-    <div class="portfolio-filters" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">  
-        <button class="filter-btn active" data-filter="all" style="padding: 8px 20px; border-radius: 20px; border: 1px solid #7c3aed; background: #7c3aed; color: #fff; cursor: pointer; transition: 0.3s;">الكل</button>  
-        <button class="filter-btn" data-filter="identity" style="padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.4); background: transparent; cursor: pointer; transition: 0.3s;">الهوية البصرية</button>  
-        <button class="filter-btn" data-filter="marketing" style="padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.4); background: transparent; cursor: pointer; transition: 0.3s;">الحملات الإعلانية</button>  
-        <button class="filter-btn" data-filter="apps" style="padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.4); background: transparent; cursor: pointer; transition: 0.3s;">التطبيقات والمواقع</button>  
-    </div>  
     <div class="portfolio-grid">  
-        <div class="portfolio-card tilt-card" data-category="identity">  
+        <div class="portfolio-card tilt-card">  
             <div class="portfolio-img" onclick="openLightbox('work1.jpg', 'تصميم هوية بصرية متكاملة')">  
                 <img src="work1.jpg" alt="تصميم هوية بصرية متكاملة">  
                 <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
@@ -205,7 +171,8 @@
                 </button>  
             </div>  
         </div>  
-        <div class="portfolio-card tilt-card" data-category="marketing">  
+
+        <div class="portfolio-card tilt-card">  
             <div class="portfolio-img" onclick="openLightbox('work2.jpg', 'حملة تسويقية واحترافية')">  
                 <img src="work2.jpg" alt="حملة تسويقية واحترافية">  
                 <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
@@ -217,7 +184,8 @@
                 </button>  
             </div>  
         </div>  
-        <div class="portfolio-card tilt-card" data-category="apps">  
+
+        <div class="portfolio-card tilt-card">  
             <div class="portfolio-img" onclick="openLightbox('work3.jpg', 'واجهة تطبيق ذكية')">  
                 <img src="work3.jpg" alt="واجهة تطبيق ذكية">  
                 <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
@@ -267,17 +235,6 @@
     </div>  
 </section>  
 
-<!-- قسم الاستشارة المجانية -->  
-<section class="consultation-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="consultation-box" style="max-width: 700px; margin: 0 auto; background: rgba(124, 58, 237, 0.04); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">  
-        <h2 style="margin-bottom: 15px;"><i class="fa-solid fa-comments" style="color: #7c3aed; margin-left: 10px;"></i> هل تحتاج إلى استشارة مجانية لمشروعك؟</h2>  
-        <p style="margin-bottom: 25px; opacity: 0.8;">تحدث مباشرة مع خبرائنا لمدة 15 دقيقة لمناقشة أفكارك واختيار الحل الأمثل لك دون أي رسوم.</p>  
-        <a href="https://wa.me/905364391849?text=مرحباً، أرغب في حجز استشارة مجانية لمشروعـي" target="_blank" class="btn-order-card" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; text-decoration: none; border-radius: 30px; background: #25d366; color: #fff; font-weight: bold;">  
-            <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> احجز استشارتك المجانية عبر الواتساب  
-        </a>  
-    </div>  
-</section>  
-
 <!-- آراء العملاء -->  
 <section class="testimonials">  
     <div class="section-head">  
@@ -312,4 +269,68 @@
         </div>  
         <div class="faq-item">  
             <div class="faq-question">  
-                <span 
+                <span data-i18n="faq.q2">هل تسلمون الملفات المصدرية المفتوحة؟</span>  
+                <i class="fa-solid fa-chevron-down"></i>  
+            </div>  
+            <div class="faq-answer"><p data-i18n="faq.a2">نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.</p></div>  
+        </div>  
+    </div>  
+</section>  
+
+<!-- الفوتر -->  
+<footer id="contact">  
+    <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">  
+        <div class="footer-brand">  
+            <h3>NEXA</h3>  
+            <p data-i18n="footer.desc">حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>  
+        </div>  
+        <div>  
+            <a href="#contact" class="btn-contact" data-i18n="nav.contact" style="display: inline-block;">تواصل معنا</a>  
+        </div>  
+    </div>  
+    <div class="footer-bottom">  
+        <p>© 2026 NEXA. جميع الحقوق محفوظة.</p>  
+    </div>  
+</footer>  
+
+<!-- النافذة المنبثقة -->  
+<div id="glassModal" class="glass-modal">  
+    <div class="glass-modal-content">  
+        <button class="close-modal" onclick="closeGlassModal()">&times;</button>  
+        <div id="lightboxView" class="modal-view">  
+            <div class="modal-img-container"><img id="modalImg" src="" alt="معاينة"></div>  
+            <div class="modal-details">  
+                <h3 id="modalTitle">اسم التصميم</h3>  
+                <button class="btn-modal-order" onclick="switchToOrderView()">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.order_this">اطلب تصميم مشابه الآن</span>  
+                </button>  
+            </div>  
+        </div>  
+        <div id="orderView" class="modal-view" style="display: none;">  
+            <h3 data-i18n="modal.order_title">طلب تصميم سريع</h3>  
+            <p id="orderProjectName" class="order-subtitle"></p>  
+            <form id="whatsappForm" onsubmit="sendWhatsAppOrder(event)">  
+                <div class="input-group">  
+                    <label data-i18n="modal.name_label">الاسم الكريم:</label>  
+                    <input type="text" id="custName" required>  
+                </div>  
+                <div class="input-group">  
+                    <label data-i18n="modal.details_label">تفاصيل إضافية (اختياري):</label>  
+                    <textarea id="custDetails" rows="3"></textarea>  
+                </div>  
+                <button type="submit" class="btn-submit-order">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.send_btn">إرسال الطلب عبر الواتساب</span>  
+                </button>  
+            </form>  
+        </div>  
+    </div>  
+</div>  
+
+<!-- زر الواتساب العائم -->  
+<a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
+    <i class="fa-brands fa-whatsapp"></i>  
+</a>  
+
+<script src="script.js"></script>
+</body>  
+                </html>
