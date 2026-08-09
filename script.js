@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const progressBar = document.getElementById('scrollProgressBar');
         if (progressBar) progressBar.style.width = scrolled + '%';
         
-        // تحديث تأثير الإضاءة المتحركة للخلفية
         document.body.style.setProperty('--scroll-y', (winScroll / height * 100) + '%');
     });
 
@@ -112,16 +111,46 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 4. ترجمات اللغات ---
+    // --- 4. ترجمات اللغات الشاملة ---
     const translations = {
         ar: {
-            "nav.services": "خدماتنا", "nav.about": "من نحن", "nav.portfolio": "أعمالنا", "nav.pricing": "الأسعار", "nav.faq": "الأسئلة", "nav.contact": "تواصل معنا"
+            "nav.services": "خدماتنا", 
+            "nav.about": "من نحن", 
+            "nav.portfolio": "أعمالنا", 
+            "nav.pricing": "الأسعار", 
+            "nav.faq": "الأسئلة", 
+            "nav.contact": "تواصل معنا",
+            "hero.badge": "✨ حلول إبداعية متكاملة",
+            "hero.title": "نصنع التأثير والتألق لعلامتك التجارية",
+            "hero.desc": "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.",
+            "services.title": "ماذا نقدم لك؟",
+            "services.desc": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر"
         },
         en: {
-            "nav.services": "Services", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.pricing": "Pricing", "nav.faq": "FAQ", "nav.contact": "Contact Us"
+            "nav.services": "Services", 
+            "nav.about": "About", 
+            "nav.portfolio": "Portfolio", 
+            "nav.pricing": "Pricing", 
+            "nav.faq": "FAQ", 
+            "nav.contact": "Contact Us",
+            "hero.badge": "✨ Integrated Creative Solutions",
+            "hero.title": "We Create Impact & Brilliance for Your Brand",
+            "hero.desc": "We help you grow and expand with modern, innovative marketing methods and designs tailored to your aspirations.",
+            "services.title": "What We Offer?",
+            "services.desc": "Comprehensive services designed to take your project to the next level"
         },
         tr: {
-            "nav.services": "Hizmetlerimiz", "nav.about": "Hakkımızda", "nav.portfolio": "Projelerimiz", "nav.pricing": "Fiyatlar", "nav.faq": "SSS", "nav.contact": "İletişim"
+            "nav.services": "Hizmetlerimiz", 
+            "nav.about": "Hakkımızda", 
+            "nav.portfolio": "Projelerimiz", 
+            "nav.pricing": "Fiyatlar", 
+            "nav.faq": "SSS", 
+            "nav.contact": "İletişim",
+            "hero.badge": "✨ Entegre Yaratıcı Çözümler",
+            "hero.title": "Markanız İçin Etki و Parlaklık Yaratıyoruz",
+            "hero.desc": "Hedeflerinize uygun modern, yenilikçi pazarlama yöntemleri و tasarımlarla büyümenize yardımcı oluyoruz.",
+            "services.title": "Neler Sunuyoruz?",
+            "services.desc": "Projenizi bir üst seviyeye taşımak için tasarlanmış kapsamlı hizmetler"
         }
     };
 
@@ -130,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         langSelect.addEventListener('change', (e) => {
             const lang = e.target.value;
             document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'en') ? 'ltr' : 'rtl';
+            document.documentElement.dir = (lang === 'en' || lang === 'tr') ? 'ltr' : 'rtl';
             
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -178,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ربط بطاقات معرض الأعمال لفتح النافذة المنبثقة عند النقر
     document.querySelectorAll('.portfolio-item, .portfolio-card, [onclick*="openLightbox"]').forEach(card => {
         card.style.cursor = 'pointer';
         card.addEventListener('click', (e) => {
@@ -262,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. دولاب الألوان المتحرك والسلس (بأكواد HEX صحيحة) ---
+    // --- 9. دولاب الألوان المتحرك والسلس ---
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
     function generateRainbowPalette() {
@@ -275,14 +303,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const track = document.createElement('div');
         track.className = 'palette-track';
 
-        // درجات مختلفة لتدرج الألوان بشكل احترافي
         const colorsList = [
             "#7C3AED", "#8B5CF6", "#A855F7", "#D946EF", 
             "#EC4899", "#F43F5E", "#EF4444", "#F59E0B", 
             "#10B981", "#06B6D4", "#3B82F6", "#6366F1"
         ];
 
-        // تكرار القائمة مرتين لضمان استمرارية الحركة بدون تقطيع
         for (let j = 0; j < 2; j++) {
             colorsList.forEach(colorHex => {
                 const colorCard = document.createElement('div');
@@ -307,4 +333,4 @@ document.addEventListener("DOMContentLoaded", () => {
     generateRainbowPalette();
 
 });
-                
+            
