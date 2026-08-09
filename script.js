@@ -1,4 +1,4 @@
-Document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     // --- 1. تأثير خلفية الجرافيك والتصميم المتحركة ---
     const canvas = document.getElementById('purpleWindCanvas');
@@ -154,7 +154,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         if (modalImg) modalImg.src = imgSrc;
         if (modalTitle) modalTitle.innerText = title;
         currentProject = title;
-        if (glassModal) glassModal.classList.add('active');
+        if (glassModal) glassModal.style.display = 'flex';
     };
 
     window.openOrderModal = function(projectName) {
@@ -162,11 +162,11 @@ Document.addEventListener("DOMContentLoaded", () => {
         if (orderView) orderView.style.display = 'block';
         currentProject = projectName;
         if (orderProjectName) orderProjectName.innerText = `الخدمة المطلوبة: ${projectName}`;
-        if (glassModal) glassModal.classList.add('active');
+        if (glassModal) glassModal.style.display = 'flex';
     };
 
     window.closeGlassModal = function() {
-        if (glassModal) glassModal.classList.remove('active');
+        if (glassModal) glassModal.style.display = 'none';
     };
 
     if (glassModal) {
@@ -175,7 +175,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 6. إرسال طلب الواتساب (محدث برقمك الشخصي) ---
+    // --- 6. إرسال طلب الواتساب ---
     window.sendWhatsAppOrder = function(e) {
         e.preventDefault();
         const custNameInput = document.getElementById('custName');
@@ -184,35 +184,14 @@ Document.addEventListener("DOMContentLoaded", () => {
         const name = custNameInput ? custNameInput.value : '';
         const details = custDetailsInput ? custDetailsInput.value : '';
         
-        const phoneNumber = "905364391849"; // رقمك الشخصي المحدث مع مفتاح تركيا
+        const phoneNumber = "905364391849"; 
         const message = `مرحباً NEXA، أود طلب خدمة: *${currentProject}*%0Aالاسم: ${name}%0Aالتفاصيل: ${details}`;
         
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         closeGlassModal();
     };
 
-    // --- 7. ميزة المقارنة (قبل وبعد) ---
-    const baSlider = document.getElementById('baSlider');
-    const baBefore = document.getElementById('baBefore');
-    const baLine = document.getElementById('baSliderLine');
-    const baBtn = document.getElementById('baSliderBtn');
-
-    if(baSlider && baBefore) {
-        baSlider.addEventListener('input', (e) => {
-            let sliderVal = e.target.value;
-            if (document.documentElement.dir === 'rtl') {
-                baBefore.style.clipPath = `polygon(100% 0, ${100-sliderVal}% 0, ${100-sliderVal}% 100%, 100% 100%)`;
-                if (baLine) baLine.style.left = `${sliderVal}%`;
-                if (baBtn) baBtn.style.left = `${sliderVal}%`;
-            } else {
-                baBefore.style.clipPath = `polygon(0 0, ${sliderVal}% 0, ${sliderVal}% 100%, 0 100%)`;
-                if (baLine) baLine.style.left = `${sliderVal}%`;
-                if (baBtn) baBtn.style.left = `${sliderVal}%`;
-            }
-        });
-    }
-
-    // --- 8. حاسبة الأسعار التفاعلية ---
+    // --- 7. حاسبة الأسعار التفاعلية ---
     const calcCheckboxes = document.querySelectorAll('.calc-checkbox');
     const totalPriceEl = document.getElementById('totalPrice');
     let currentTotal = 0;
@@ -224,24 +203,10 @@ Document.addEventListener("DOMContentLoaded", () => {
                 .reduce((sum, i) => sum + parseInt(i.value), 0);
             
             if (totalPriceEl) {
-                let start = parseInt(totalPriceEl.innerText) || 0;
-                animateValue(totalPriceEl, start, currentTotal, 300);
+                totalPriceEl.innerText = currentTotal;
             }
         });
     });
-
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            obj.innerHTML = Math.floor(progress * (end - start) + start);
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    }
 
     window.orderFromCalc = function() {
         if(currentTotal === 0) {
@@ -251,7 +216,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         openOrderModal(`حزمة مخصصة بقيمة $${currentTotal}`);
     };
 
-    // --- 9. الأسئلة الشائعة (Accordion) ---
+    // --- 8. الأسئلة الشائعة (Accordion) ---
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
@@ -263,28 +228,7 @@ Document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 10. تأثير 3D Hover لمعرض الأعمال ---
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    tiltCards.forEach(card => {
-        const portfolioImg = card.querySelector('.portfolio-img');
-        if (portfolioImg) {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
-                portfolioImg.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                portfolioImg.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            });
-        }
-    });
-
-    // --- 11. أداة توليد لوحة الألوان الذكية ---
+    // --- 9. توليد لوحة الألوان الذكية ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -292,35 +236,30 @@ Document.addEventListener("DOMContentLoaded", () => {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
 
-        const wrapper = document.createElement('div');
-        wrapper.className = 'palette-scroll-wrapper';
-
-        const track = document.createElement('div');
-        track.className = 'palette-track';
-
         const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 
-        for (let j = 0; j < 2; j++) {
-            hues.forEach(hue => {
-                const colorHex = hslToHex(hue, 70, 55);
-                
-                const colorCard = document.createElement('div');
-                colorCard.className = 'color-card-item';
-                colorCard.style.backgroundColor = colorHex;
-                
-                colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 6px; backdrop-filter: blur(4px);">${colorHex}</span>`;
-                
-                colorCard.addEventListener('click', () => {
-                    navigator.clipboard.writeText(colorHex);
-                    alert(`تم نسخ كود اللون: ${colorHex}`);
-                });
-
-                track.appendChild(colorCard);
+        hues.forEach(hue => {
+            const colorHex = hslToHex(hue, 70, 55);
+            
+            const colorCard = document.createElement('div');
+            colorCard.style.backgroundColor = colorHex;
+            colorCard.style.height = '60px';
+            colorCard.style.borderRadius = '8px';
+            colorCard.style.display = 'flex';
+            colorCard.style.alignItems = 'flex-end';
+            colorCard.style.justifyContent = 'center';
+            colorCard.style.padding = '5px';
+            colorCard.style.cursor = 'pointer';
+            
+            colorCard.innerHTML = `<span style="font-size: 10px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.4); padding: 2px 4px; border-radius: 4px;">${colorHex}</span>`;
+            
+            colorCard.addEventListener('click', () => {
+                navigator.clipboard.writeText(colorHex);
+                alert(`تم نسخ كود اللون: ${colorHex}`);
             });
-        }
 
-        wrapper.appendChild(track);
-        paletteContainer.appendChild(wrapper);
+            paletteContainer.appendChild(colorCard);
+        });
     }
 
     function hslToHex(h, s, l) {
@@ -341,79 +280,5 @@ Document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 12. استوديو معاينة الشعار التفاعلي ---
-    const logoUploadInput = document.getElementById('logoUploadInput');
-    const previewLogoOverlay = document.getElementById('previewLogoOverlay');
-    const mockupPlaceholderText = document.getElementById('mockupPlaceholderText');
-
-    if (logoUploadInput && previewLogoOverlay) {
-        logoUploadInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    previewLogoOverlay.src = event.target.result;
-                    previewLogoOverlay.style.display = 'block';
-                    previewLogoOverlay.style.left = '50%';
-                    previewLogoOverlay.style.top = '50%';
-                    previewLogoOverlay.style.transform = 'translate(-50%, -50%)';
-                    if (mockupPlaceholderText) mockupPlaceholderText.style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        let isDragging = false;
-        let initialX = 0;
-        let initialY = 0;
-
-        function dragStart(e) {
-            isDragging = true;
-            const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
-            const clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
-            
-            const rect = previewLogoOverlay.getBoundingClientRect();
-            initialX = clientX - rect.left;
-            initialY = clientY - rect.top;
-            
-            previewLogoOverlay.style.transform = 'none';
-            previewLogoOverlay.style.left = `${previewLogoOverlay.offsetLeft}px`;
-            previewLogoOverlay.style.top = `${previewLogoOverlay.offsetTop}px`;
-        }
-
-        function drag(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-            const clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
-
-            let x = clientX - initialX;
-            let y = clientY - initialY;
-
-            previewLogoOverlay.style.left = `${x}px`;
-            previewLogoOverlay.style.top = `${y}px`;
-        }
-
-        function dragEnd() {
-            isDragging = false;
-        }
-
-        previewLogoOverlay.addEventListener('mousedown', dragStart);
-        window.addEventListener('mousemove', drag);
-        window.addEventListener('mouseup', dragEnd);
-
-        previewLogoOverlay.addEventListener('touchstart', dragStart, { passive: false });
-        window.addEventListener('touchmove', drag, { passive: false });
-        window.addEventListener('touchend', dragEnd);
-    }
-
-});
-
-// --- 13. تأثير الإضاءة البنفسجية المتفاعلة مع التمرير ---
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
-    document.body.style.setProperty('--scroll-y', `${scrollPercent}%`);
 });
         
