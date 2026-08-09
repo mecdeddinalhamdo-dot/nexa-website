@@ -64,6 +64,27 @@
             animation: logoGlow 3s infinite ease-in-out;  
             transition: all 0.3s ease;  
         }  
+
+        .glow-border-thin {  
+            border: 1px solid rgba(124, 58, 237, 0.5);  
+            animation: logoGlow 2.5s infinite ease-in-out;  
+        }  
+
+        /* حركة شريط شعارات الشركاء */  
+        @keyframes marquee {  
+            0% { transform: translateX(0); }  
+            100% { transform: translateX(50%); }  
+        }  
+        .stat-card {  
+            background: rgba(255, 255, 255, 0.7);  
+            transition: transform 0.3s ease;  
+        }  
+        .stat-card:hover {  
+            transform: translateY(-5px);  
+        }  
+        [data-theme="dark"] .stat-card {  
+            background: rgba(255, 255, 255, 0.03) !important;  
+        }  
     </style>
 </head>  
 <body>  
@@ -105,7 +126,7 @@
     <p data-i18n="hero.desc">نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>  
 </section>  
 
-<!-- 1. شريط شعارات الشركاء والعملاء (Clients Marquee) -->
+<!-- 1. شريط شعارات الشركاء والعملاء المتحرك -->
 <section class="clients-ticker-sec" style="padding: 20px 0; background: rgba(124, 58, 237, 0.03); overflow: hidden; white-space: nowrap; border-top: 1px solid rgba(124, 58, 237, 0.1); border-bottom: 1px solid rgba(124, 58, 237, 0.1);">
     <div class="clients-track" style="display: inline-block; animation: marquee 25s linear infinite;">
         <span style="margin: 0 40px; font-weight: bold; font-size: 1.1rem; opacity: 0.7;"><i class="fa-solid fa-gem" style="color: #7c3aed; margin-left: 8px;"></i> شركة الأفق الرقمي</span>
@@ -187,29 +208,31 @@
     </div>
 </section>
 
-<!-- مولد لوحة الألوان الذكية -->  
+<!-- قسم توليد لوحة الألوان الذكية -->  
 <section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" style="margin-bottom: 30px;">  
+    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">  
         <h2>مولد لوحة الألوان الذكي</h2>  
         <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
     </div>  
+      
     <div class="palette-box" style="max-width: 600px; margin: 0 auto; background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">  
         <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 15px;">  
             <label for="baseColorPicker" style="font-weight: bold;">اختر اللون الأساسي:</label>  
             <input type="color" id="baseColorPicker" value="#7c3aed" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">  
         </div>  
+          
         <div id="paletteColorsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; margin-top: 25px;"></div>  
     </div>  
 </section>  
   
-<!-- 1 (محدث). قسم معرض الأعمال التفاعلي مع أزرار الفلترة -->  
+<!-- 1. قسم معرض الأعمال مع أزرار الفلترة الاحترافية -->  
 <section id="portfolio" class="portfolio">  
     <div class="section-head">  
         <h2 data-i18n="portfolio.title">معرض أعمالنا</h2>  
         <p data-i18n="portfolio.subtitle">نظرة على بعض مشاريعنا والتصاميم المبتكرة</p>  
     </div>  
 
-    <!-- أزرار الفلترة للأعمال -->
+    <!-- أزرار الفلترة -->
     <div class="portfolio-filters" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
         <button class="filter-btn active" onclick="filterPortfolio('all')" style="padding: 8px 20px; border-radius: 20px; border: 1px solid #7c3aed; background: #7c3aed; color: #fff; cursor: pointer; transition: 0.3s;">الكل</button>
         <button class="filter-btn" onclick="filterPortfolio('identity')" style="padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.4); background: transparent; cursor: pointer; transition: 0.3s;">الهوية البصرية</button>
@@ -314,21 +337,4 @@
         <div class="card testimonial-card">  
             <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
             <p>"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
-            <h4>- شركة الأفق</h4>  
-        </div>  
-        <div class="card testimonial-card">  
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
-            <p>"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
-            <h4>- متجر كريستال</h4>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- الأسئلة الشائعة -->  
-<section id="faq" class="faq-sec">  
-    <div class="section-head">  
-        <h2>الأسئلة الشائعة</h2>  
-    </div>  
-    <div class="faq-container">  
-        <div class="faq-item">  
-            <div class="faq-ques
+            <h4 data-i18n="tes
