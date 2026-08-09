@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 5. النافذة المنبثقة (Modal & Lightbox) ---
+    // --- 5. النافذة المنبثقة (Modal & Lightbox) وتفعيل النقر التلقائي على صور معرض الأعمال ---
     const glassModal = document.getElementById('glassModal');
     const lightboxView = document.getElementById('lightboxView');
     const orderView = document.getElementById('orderView');
@@ -174,6 +174,24 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target === glassModal) closeGlassModal();
         });
     }
+
+    // ربط أي صورة في معرض الأعمال تلقائياً لتفتح عند النقر عليها أو على زر التكبير فوقها
+    document.querySelectorAll('.portfolio-item, .project-card, [onclick*="openLightbox"]').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // منع تداخل الأزرار الأخرى داخل البطاقة
+            if (e.target.closest('button') || e.target.closest('a')) return;
+            
+            const img = card.querySelector('img');
+            const titleEl = card.querySelector('h3, h4, .project-title');
+            const imgSrc = img ? img.src : '';
+            const title = titleEl ? titleEl.innerText : 'تصميم مميز';
+            
+            if (imgSrc) {
+                window.openLightbox(imgSrc, title);
+            }
+        });
+    });
 
     // --- 6. إرسال طلب الواتساب ---
     window.sendWhatsAppOrder = function(e) {
@@ -242,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. دولاب الألوان المتحرك والسلس ---
+    // --- 9. دولاب الألوان المتحرك والسلس تلقائياً ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -251,18 +269,18 @@ document.addEventListener("DOMContentLoaded", () => {
         paletteContainer.innerHTML = '';
 
         const wrapper = document.createElement('div');
-        wrapper.style.overflowX = 'auto';
+        wrapper.style.overflow = 'hidden';
+        wrapper.style.width = '100%';
         wrapper.style.padding = '10px 0';
-        wrapper.style.scrollbarWidth = 'thin';
+        wrapper.style.position = 'relative';
 
         const track = document.createElement('div');
-        track.style.display = 'flex';
-        track.style.gap = '12px';
-        track.style.width = 'max-content';
+        track.className = 'palette-track-animated';
 
         const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330];
 
-        for (let j = 0; j < 2; j++) {
+        // نكرر العناصر لضمان حركة دائرية ناعمة لا تنقطع
+        for (let j = 0; j < 3; j++) {
             hues.forEach(hue => {
                 const colorHex = hslToHex(hue, 70, 55);
                 
@@ -273,17 +291,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 colorCard.style.borderRadius = '10px';
                 colorCard.style.display = 'flex';
                 colorCard.style.alignItems = 'flex-end';
-                colorCard.style.justifyContent + 'center';
                 colorCard.style.justifyContent = 'center';
                 colorCard.style.padding = '6px';
                 colorCard.style.cursor = 'pointer';
                 colorCard.style.boxShadow = '0 4px 6px rgba(0,0,0,0.2)';
-                colorCard.style.transition = 'transform 0.2s ease';
+                colorCard.style.flexShrink = '0';
                 
                 colorCard.innerHTML = `<span style="font-size: 10px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 6px;">${colorHex}</span>`;
-                
-                colorCard.addEventListener('mouseenter', () => colorCard.style.transform = 'scale(1.05)');
-                colorCard.addEventListener('mouseleave', () => colorCard.style.transform = 'scale(1)');
 
                 colorCard.addEventListener('click', () => {
                     navigator.clipboard.writeText(colorHex);
@@ -310,11 +324,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (baseColorPicker) {
-        // إذا كان عنصر الـ input مخفياً، نجعله ظاهراً أو نتفاعل معه
-        baseColorPicker.style.display = 'inline-block';
-        baseColorPicker.style.opacity = '1';
-        baseColorPicker.style.visibility = 'visible';
-        
         generateRainbowPalette(baseColorPicker.value || '#7c3aed');
         baseColorPicker.addEventListener('input', (e) => {
             generateRainbowPalette(e.target.value);
@@ -322,4 +331,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-                          
+                                    
