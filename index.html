@@ -301,6 +301,52 @@
 <a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
     <i class="fa-brands fa-whatsapp"></i>  
 </a>  
+
+<!-- قسم إضافة تقييم وتعليق جديد -->
+<section id="add-review" class="add-review-sec" style="padding: 60px 20px; text-align: center;">
+    <div class="section-head">
+        <h2>أضف تقييمك ورأيك</h2>
+        <p>شاركونا انطباعكم عن خدماتنا لنستمر في تقديم الأفضل</p>
+    </div>
+
+    <div class="review-box" style="max-width: 600px; margin: 0 auto; background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">
+        <form id="reviewForm" onsubmit="submitReview(event)">
+            <!-- حقل الاسم -->
+            <div style="margin-bottom: 20px; text-align: right;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">اسمك أو اسم شركتك:</label>
+                <input type="text" id="reviewerName" required placeholder="أدخل اسمك هنا..." style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(124, 58, 237, 0.3); background: transparent; color: inherit; box-sizing: border-box;">
+            </div>
+
+            <!-- تحديد النجوم -->
+            <div style="margin-bottom: 20px; text-align: right;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">تقييمك:</label>
+                <div class="star-rating" style="display: flex; gap: 8px; font-size: 28px; cursor: pointer; direction: ltr; justify-content: flex-end;">
+                    <i class="fa-star fa-regular star-btn" data-value="1"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="2"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="3"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="4"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="5"></i>
+                </div>
+            </div>
+
+            <!-- حقل التعليق -->
+            <div style="margin-bottom: 20px; text-align: right;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold;">تعليقك أو انطباعك:</label>
+                <textarea id="reviewerComment" rows="4" required placeholder="اكتب تعليقك هنا..." style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(124, 58, 237, 0.3); background: transparent; color: inherit; box-sizing: border-box; resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" class="btn-order-card" style="width: 100%; padding: 12px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                <i class="fa-solid fa-paper-plane"></i> إرسال التقييم
+            </button>
+        </form>
+    </div>
+
+    <!-- مكان عرض التعليقات المضافة حديثاً -->
+    <div id="userReviewsContainer" class="grid-cards" style="margin-top: 40px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <!-- ستظهر تعليقات المستخدمين هنا تلقائياً -->
+    </div>
+</section>
+    
     
 <script src="script.js"></script>
 </body>  
