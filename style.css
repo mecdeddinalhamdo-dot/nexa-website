@@ -1071,12 +1071,12 @@ footer {
     margin-bottom: 12px;
     font-size: 16px;
 }
-/* --- قسم اللوح البلوري في أول الصفحة --- */
+/* --- الكود النهائي للوح البلوري في أول الصفحة --- */
 .glass-hero-section {
     position: relative;
     width: 92%;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 50px auto 20px auto; /* مسافة من الأعلى لإنزال اللوح عن شريط التنقل */
     padding: 80px 20px;
     border-radius: 35px;
     overflow: hidden;
@@ -1087,7 +1087,7 @@ footer {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* طبقة التغبش (Frosted Glass) */
+/* طبقة التغبش (Frosted Glass) - تم تعديل الغباش ليصبح أخف */
 .glass-hero-section::before {
     content: '';
     position: absolute;
@@ -1096,11 +1096,11 @@ footer {
     width: 100%;
     height: 100%;
     background: inherit;
-    filter: blur(14px) brightness(0.85);
+    filter: blur(6px) brightness(0.9); /* غباش أخف لتظهر تفاصيل الصورة */
     z-index: 1;
 }
 
-/* طبقة التباين لضمان وضوح النصوص فوق الصورة */
+/* طبقة التباين لضمان وضوح النصوص البيضاء فوق الصورة */
 .glass-hero-section::after {
     content: '';
     position: absolute;
@@ -1112,7 +1112,7 @@ footer {
     z-index: 2;
 }
 
-/* محتوى النصوص */
+/* محتوى النصوص داخل اللوح البلوري */
 .hero-content {
     position: relative;
     z-index: 3;
@@ -1122,9 +1122,10 @@ footer {
 }
 
 .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     margin: 15px 0;
     font-weight: bold;
+    color: #ffffff;
 }
 
 .hero-content p {
@@ -1132,4 +1133,3 @@ footer {
     line-height: 1.6;
     color: #e2e8f0;
 }
-
