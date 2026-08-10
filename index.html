@@ -474,60 +474,190 @@
             width: 2px;
             height: 10px;
             background: #94a3b8;
+<!-- روبوت حقيقي متكامل بالأذرع والأرجل وحركة تلويح واقعية -->
+<div id="nexa-ai-bot" style="position: fixed; bottom: 25px; right: 25px; z-index: 9999; font-family: 'Tajawal', sans-serif;">
+    
+    <!-- نافذة المحادثة (مخفية افتراضياً) -->
+    <div id="chat-window" style="display: none; margin-bottom: 15px; width: 320px; background: rgba(15, 7, 40, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(124, 58, 237, 0.4); border-radius: 20px; box-shadow: 0 10px 30px rgba(124,58,237,0.3); overflow: hidden;">
+        
+        <!-- رأس نافذة المحادثة -->
+        <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 15px; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e;"></div>
+                <span style="font-weight: bold; font-size: 14px;">مساعد NEXA الذكي</span>
+            </div>
+            <button onclick="toggleChat()" style="background: none; border: none; color: #fff; font-size: 22px; cursor: pointer;">&times;</button>
+        </div>
+        
+        <!-- جسم المحادثة والرسائل -->
+        <div id="chat-messages" style="padding: 15px; height: 230px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #fff; text-align: right;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 85%; align-self: flex-start;">
+                أهلاً بك في NEXA! أنا مساعدك الذكي، كيف يمكنني مساعدتك اليوم؟
+            </div>
+        </div>
+        
+        <!-- حقل الكتابة والأزرار السريعة -->
+        <div style="padding: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.3);">
+            <div style="margin-bottom: 8px; display: flex; gap: 5px; flex-wrap: wrap;">
+                <button onclick="sendQuickReply('ما هي خدماتكم؟')" style="background: rgba(124, 58, 237, 0.3); border: 1px solid rgba(124, 58, 237, 0.5); color: #fff; padding: 4px 8px; border-radius: 12px; font-size: 11px; cursor: pointer;">ما هي خدماتكم؟</button>
+                <button onclick="sendQuickReply('كم تبلغ الأسعار؟')" style="background: rgba(124, 58, 237, 0.3); border: 1px solid rgba(124, 58, 237, 0.5); color: #fff; padding: 4px 8px; border-radius: 12px; font-size: 11px; cursor: pointer;">كم تبلغ الأسعار؟</button>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." style="flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; padding: 8px 12px; font-size: 12px; color: #fff; outline: none;" onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()" style="background: #7c3aed; border: none; color: #fff; padding: 8px 14px; border-radius: 10px; cursor: pointer; font-size: 12px;">إرسال</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- تصميم الروبوت المتكامل بالحركات -->
+    <style>
+        .full-robot-container {
+            width: 75px;
+            height: 90px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: floatBot 3s infinite ease-in-out;
         }
-        .robot-antenna::after {
+        /* الهوائي العلوي */
+        .f-antenna {
+            width: 2px;
+            height: 12px;
+            background: #94a3b8;
+            position: relative;
+        }
+        .f-antenna::after {
             content: '';
             position: absolute;
-            top: -4px;
-            left: -3px;
-            width: 8px;
-            height: 8px;
+            top: -5px;
+            left: -4px;
+            width: 10px;
+            height: 10px;
             background: #f43f5e;
             border-radius: 50%;
-            box-shadow: 0 0 6px #f43f5e;
+            box-shadow: 0 0 8px #f43f5e;
+            animation: pulseLight 1.5s infinite;
         }
-        /* اليد الملوحة */
-        .robot-hand {
+        /* الرأس */
+        .f-head {
+            width: 48px;
+            height: 34px;
+            background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        .f-eyes {
+            display: flex;
+            gap: 8px;
+        }
+        .f-eye {
+            width: 8px;
+            height: 8px;
+            background: #06b6d4;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #06b6d4;
+        }
+        /* منطقة الجذع والأذرع والأرجل */
+        .f-body-area {
+            width: 40px;
+            height: 38px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 8px;
+            position: relative;
+            margin-top: -2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.5);
+            z-index: 1;
+        }
+        .f-chest-screen {
+            width: 20px;
+            height: 16px;
+            background: #0f172a;
+            border-radius: 4px;
+            box-shadow: inset 0 0 4px #22d3ee;
+        }
+        /* الذراع اليسرى الثابتة */
+        .f-arm-left {
             position: absolute;
-            right: -6px;
-            top: 35px;
-            width: 12px;
-            height: 20px;
-            background: #e2e8f0;
-            border-radius: 6px;
-            animation: waveHand 1.5s infinite ease-in-out;
+            left: -8px;
+            top: 4px;
+            width: 8px;
+            height: 24px;
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        /* الذراع اليمنى الملوحة (تلوح بحيوية) */
+        .f-arm-right {
+            position: absolute;
+            right: -10px;
+            top: 2px;
+            width: 8px;
+            height: 24px;
+            background: #94a3b8;
+            border-radius: 4px;
             transform-origin: top center;
+            animation: waveArm 1.2s infinite ease-in-out;
         }
-        @keyframes waveHand {
+        /* الأرجل */
+        .f-legs {
+            display: flex;
+            gap: 12px;
+            margin-top: -2px;
+        }
+        .f-leg {
+            width: 8px;
+            height: 12px;
+            background: #64748b;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        /* الحركات animations */
+        @keyframes waveArm {
             0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-35deg); }
+            50% { transform: rotate(-45deg); }
         }
-        @keyframes floatRobot {
+        @keyframes floatBot {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
-        @keyframes blinkEye {
-            0%, 96%, 100% { transform: scaleY(1); }
-            98% { transform: scaleY(0.1); }
+        @keyframes pulseLight {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
     </style>
 
-    <!-- زر الروبوت المبرمج -->
-    <div onclick="toggleChat()" class="real-robot">
-        <div class="robot-antenna"></div>
-        <div class="robot-head">
-            <div class="robot-eyes">
-                <div class="robot-eye"></div>
-                <div class="robot-eye"></div>
+    <!-- شكل الروبوت المعروض -->
+    <div onclick="toggleChat()" class="full-robot-container">
+        <div class="f-antenna"></div>
+        <div class="f-head">
+            <div class="f-eyes">
+                <div class="f-eye"></div>
+                <div class="f-eye"></div>
             </div>
         </div>
-        <div class="robot-hand"></div>
-        <!-- نقطة خضراء متصل -->
-        <span style="position: absolute; bottom: 4px; right: 4px; width: 12px; height: 12px; background: #22c55e; border: 2px solid #fff; border-radius: 50%;"></span>
+        <div class="f-body-area">
+            <div class="f-arm-left"></div>
+            <div class="f-chest-screen"></div>
+            <div class="f-arm-right"></div>
+        </div>
+        <div class="f-legs">
+            <div class="f-leg"></div>
+            <div class="f-leg"></div>
+        </div>
+        <!-- نقطة خضراء تفاعلية -->
+        <span style="position: absolute; bottom: 0; right: 2px; width: 10px; height: 10px; background: #22c55e; border: 2px solid #fff; border-radius: 50%;"></span>
     </div>
 </div>
 
-<!-- كود تفاعل الروبوت -->
+<!-- كود تفاعل الروبوت والذكاء الاصطناعي -->
 <script>
 const nexaWhatsappNumber = "905364391849";
 
