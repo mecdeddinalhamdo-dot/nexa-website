@@ -10,66 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
     <link rel="stylesheet" href="style.css">  
-    <style>  
-        /* تثبيت متغيرات الألوان وجعل الوضع النهري (الفاتح) هو الافتراضي */  
-        :root {  
-            --bg-color: #ffffff;  
-            --text-color: #1f2937;  
-        }  
-
-        /* الوضع الافتراضي (النهري/الفاتح) */  
-        body {  
-            background-color: var(--bg-color) !important;  
-            color: var(--text-color) !important;  
-        }  
-
-        /* تطبيق الوضع المظلم فقط عند تفعيله يدوياً عبر الكلاس أو السمة، أو استجابة لنظام الجهاز إذا لم يكن الوضع الفاتح مفرضاً */  
-        [data-theme="dark"] body, html.dark body {  
-            background-color: #0f0728 !important;  
-            color: #ffffff !important;  
-        }  
-          
-        [data-theme="dark"] p, [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] span, [data-theme="dark"] a, [data-theme="dark"] label, [data-theme="dark"] li, [data-theme="dark"] .calc-text, [data-theme="dark"] .total-price,  
-        html.dark p, html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6, html.dark span, html.dark a, html.dark label, html.dark li, html.dark .calc-text, html.dark .total-price {  
-            color: #ffffff !important;  
-        }  
-
-        /* تحويل البطاقات والعناصر إلى تصميم زجاجي شفاف في الوضع المظلم فقط */  
-        [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box,  
-        html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box {  
-            background: rgba(255, 255, 255, 0.03) !important;  
-            backdrop-filter: blur(12px) !important;  
-            -webkit-backdrop-filter: blur(12px) !important;  
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;  
-        }  
-
-        @keyframes logoGlow {  
-            0% {  
-                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);  
-                border-color: rgba(124, 58, 237, 0.4);  
-            }  
-            50% {  
-                box-shadow: 0 0 15px rgba(124, 58, 237, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(124, 58, 237, 0.4);  
-                border-color: rgba(168, 85, 247, 1);  
-            }  
-            100% {  
-                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);  
-                border-color: rgba(124, 58, 237, 0.4);  
-            }  
-        }  
-
-        .glow-border {  
-            border: 2px solid rgba(124, 58, 237, 0.4);  
-            border-radius: 15px;  
-            animation: logoGlow 3s infinite ease-in-out;  
-            transition: all 0.3s ease;  
-        }  
-
-        .glow-border-thin {  
-            border: 1px solid rgba(124, 58, 237, 0.5);  
-            animation: logoGlow 2.5s infinite ease-in-out;  
-        }  
-    </style>
 </head>  
 <body>  
 <div id="scrollProgressBar"></div>  
@@ -137,7 +77,7 @@
 
 <!-- قسم توليد لوحة الألوان الذكية -->  
 <section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">  
+    <div class="section-head" style="margin-bottom: 30px;">  
         <h2>مولد لوحة الألوان الذكي</h2>  
         <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
     </div>  
@@ -364,4 +304,5 @@
     
 <script src="script.js"></script>
 </body>  
-                </html>
+        </html>
+        
