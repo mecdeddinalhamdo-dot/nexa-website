@@ -9,64 +9,101 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
-    <link rel="stylesheet" href="style.css">  
+    
+    <!-- تنسيقات الموقع بالكامل لضمان عدم تعطل أي ميزة -->  
     <style>  
-        :root {  
-            --bg-color: #ffffff;  
-            --text-color: #1f2937;  
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }  
+        :root { --bg-color: #f8fafc; --text-color: #1f2937; --card-bg: #ffffff; --primary: #7C3AED; }  
+        body { background-color: var(--bg-color); color: var(--text-color); transition: 0.3s; }  
+
+        [data-theme="dark"] {  
+            --bg-color: #0f0728;  
+            --text-color: #ffffff;  
+            --card-bg: rgba(255, 255, 255, 0.03);  
         }  
 
-        body {  
-            background-color: var(--bg-color) !important;  
-            color: var(--text-color) !important;  
-            font-family: 'Tajawal', sans-serif;
-        }  
+        header { position: fixed; top: 0; left: 0; width: 100%; background: var(--card-bg); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(124,58,237,0.2); z-index: 1000; }  
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }  
+        .logo img { height: 40px; }  
+        .nav-links { display: flex; list-style: none; gap: 20px; }  
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: 0.3s; }  
+        .nav-links a:hover { color: var(--primary); }  
+        .nav-actions { display: flex; gap: 10px; align-items: center; }  
+        .theme-toggle-btn, .lang-selector select { background: none; border: 1px solid rgba(124,58,237,0.3); color: var(--text-color); padding: 8px 12px; border-radius: 8px; cursor: pointer; }  
 
-        [data-theme="dark"] body, html.dark body {  
-            background-color: #0f0728 !important;  
-            color: #ffffff !important;  
-        }  
-          
-        [data-theme="dark"] p, [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] span, [data-theme="dark"] a, [data-theme="dark"] label, [data-theme="dark"] li, [data-theme="dark"] .calc-text, [data-theme="dark"] .total-price,  
-        html.dark p, html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6, html.dark span, html.dark a, html.dark label, html.dark li, html.dark .calc-text, html.dark .total-price {  
-            color: #ffffff !important;  
-        }  
+        .hero { padding: 160px 20px 80px; text-align: center; max-width: 800px; margin: 0 auto; }  
+        .hero .badge { background: rgba(124,58,237,0.1); color: var(--primary); display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: bold; margin-bottom: 20px; }  
+        .hero h1 { font-size: 42px; margin-bottom: 20px; }  
+        .hero h1 span { color: var(--primary); }  
+        .hero p { color: #6b7280; font-size: 18px; line-height: 1.6; }  
+        [data-theme="dark"] .hero p { color: #cbd5e1; }  
 
-        [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box, [data-theme="dark"] .review-box,  
-        html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box, html.dark .review-box {  
-            background: rgba(255, 255, 255, 0.03) !important;  
-            backdrop-filter: blur(12px) !important;  
-            -webkit-backdrop-filter: blur(12px) !important;  
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;  
-        }  
+        .section-head { text-align: center; margin-bottom: 40px; }  
+        .section-head h2 { font-size: 32px; margin-bottom: 10px; }  
+        .section-head p { color: #6b7280; }  
+        [data-theme="dark"] .section-head p { color: #cbd5e1; }  
 
-        @keyframes logoGlow {  
-            0% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); border-color: rgba(124, 58, 237, 0.4); }  
-            50% { box-shadow: 0 0 15px rgba(124, 58, 237, 0.8); border-color: rgba(168, 85, 247, 1); }  
-            100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); border-color: rgba(124, 58, 237, 0.4); }  
-        }  
+        .services, .portfolio, .calculator-sec, .faq-sec { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }  
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }  
+        .card { background: var(--card-bg); border: 1px solid rgba(124,58,237,0.15); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: 0.3s; }  
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); }  
+        .card-icon { font-size: 35px; color: var(--primary); margin-bottom: 20px; }  
+        .card h3 { margin-bottom: 15px; font-size: 20px; }  
+        .card p { color: #6b7280; font-size: 15px; line-height: 1.5; }  
+        [data-theme="dark"] .card p { color: #cbd5e1; }  
 
-        .star-rating-input i {  
-            cursor: pointer;  
-            color: #cbd5e1;  
-            transition: color 0.2s;  
-        }  
-        .star-rating-input i.active,  
-        .star-rating-input i:hover,  
-        .star-rating-input i:hover ~ i {  
-            color: #f59e0b !important;  
-        }  
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }  
+        .portfolio-card { background: var(--card-bg); border: 1px solid rgba(124,58,237,0.15); border-radius: 16px; overflow: hidden; }  
+        .portfolio-img { position: relative; height: 220px; cursor: pointer; overflow: hidden; }  
+        .portfolio-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }  
+        .portfolio-img:hover img { transform: scale(1.05); }  
+        .zoom-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; opacity: 0; transition: 0.3s; }  
+        .portfolio-img:hover .zoom-overlay { opacity: 1; }  
+        .portfolio-info { padding: 20px; display: flex; justify-content: space-between; align-items: center; }  
+        .btn-order-card { background: var(--primary); color: #fff; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 14px; }  
+
+        .calculator-sec { background: var(--card-bg); border-radius: 20px; border: 1px solid rgba(124,58,237,0.2); }  
+        .calc-container { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }  
+        @media(max-width: 768px) { .calc-container { grid-template-columns: 1fr; } }  
+        .calc-options { display: flex; flex-direction: column; gap: 15px; }  
+        .calc-item { display: flex; align-items: center; gap: 12px; background: rgba(124,58,237,0.05); padding: 15px; border-radius: 10px; cursor: pointer; }  
+        .calc-item input { width: 18px; height: 18px; accent-color: var(--primary); }  
+        .calc-result { background: rgba(124,58,237,0.1); padding: 30px; border-radius: 12px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; }  
+        .total-price { font-size: 36px; font-weight: bold; color: var(--primary); margin: 15px 0; }  
+
+        /* نظام التقييمات والنجوم */  
+        .star-rating-input i { cursor: pointer; color: #cbd5e1; font-size: 24px; transition: color 0.2s; }  
+        .star-rating-input i.active, .star-rating-input i:hover, .star-rating-input i:hover ~ i { color: #f59e0b !important; }  
+
+        .faq-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }  
+        .faq-item { background: var(--card-bg); border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; overflow: hidden; }  
+        .faq-question { padding: 18px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: bold; }  
+        .faq-answer { padding: 0 18px 18px; color: #6b7280; display: none; }  
+        [data-theme="dark"] .faq-answer { color: #cbd5e1; }  
+        .faq-item.active .faq-answer { display: block; }  
+
+        footer { background: #0b041a; color: #fff; padding: 60px 20px 20px; border-top: 1px solid rgba(124,58,237,0.2); }  
+        .footer-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }  
+        .footer-brand, .footer-contact-info, .footer-social { flex: 1; min-width: 250px; }  
+        .footer-contact-info a, .footer-social a { color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }  
+        .footer-social .social-icons { display: flex; gap: 15px; margin-top: 15px; }  
+        .footer-social .social-icons a { width: 40px; height: 40px; background: rgba(124,58,237,0.2); border-radius: 50%; justify-content: center; }  
+        .footer-bottom { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; color: #888; font-size: 13px; }  
+
+        /* النافذة المنبثقة Modal */  
+        #glassModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; }  
+        .glass-modal-content { background: #1a103c; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%; position: relative; color: #fff; border: 1px solid rgba(124,58,237,0.4); }  
+        .close-modal { position: absolute; top: 15px; left: 15px; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }  
+        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; background: #25D366; color: #fff; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; }  
     </style>
 </head>  
 <body>  
-<div id="scrollProgressBar"></div>  
-<canvas id="purpleWindCanvas"></canvas>  
 
 <!-- الهيدر العلوي -->  
 <header>  
     <div class="nav-container">  
         <a href="#" class="logo">  
-            <img src="Logo (1).png" alt="NEXA Logo">  
+            <img src="Logo (1).png" alt="NEXA Logo" onerror="this.outerHTML='<h2 style=\'color:var(--primary);\'>NEXA</h2>'">  
         </a>  
         <ul class="nav-links">  
             <li><a href="#services">خدماتنا</a></li>  
@@ -77,7 +114,6 @@
         </ul>  
         <div class="nav-actions">  
             <div class="lang-selector">  
-                <i class="fa-solid fa-globe"></i>  
                 <select id="langSelect">  
                     <option value="ar">العربية</option>  
                     <option value="en">English</option>  
@@ -121,22 +157,6 @@
         </div>  
     </div>  
 </section>  
-
-<!-- قسم توليد لوحة الألوان الذكية -->  
-<section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" style="margin-bottom: 30px;">  
-        <h2>مولد لوحة الألوان الذكي</h2>  
-        <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
-    </div>  
-      
-    <div class="palette-box" style="max-width: 600px; margin: 0 auto; background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">  
-        <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 15px;">  
-            <label for="baseColorPicker" style="font-weight: bold;">اختر اللون الأساسي:</label>  
-            <input type="color" id="baseColorPicker" value="#7c3aed" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">  
-        </div>  
-        <div id="paletteColorsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; margin-top: 25px;"></div>  
-    </div>  
-</section>  
   
 <!-- قسم معرض الأعمال -->  
 <section id="portfolio" class="portfolio">  
@@ -145,36 +165,36 @@
         <p>نظرة على بعض مشاريعنا والتصاميم المبتكرة</p>  
     </div>  
     <div class="portfolio-grid">  
-        <div class="portfolio-card tilt-card">  
+        <div class="portfolio-card">  
             <div class="portfolio-img" onclick="openLightbox('work1.jpg', 'تصميم هوية بصرية متكاملة')">  
-                <img src="work1.jpg" alt="تصميم هوية بصرية متكاملة" onerror="this.src='https://via.placeholder.com/400x300/7c3aed/ffffff?text=NEXA+Project+1'">  
-                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span>تكبير التصميم</span></div>  
+                <img src="work1.jpg" alt="مشروع 1" onerror="this.src='https://picsum.photos/400/300?random=1'">  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand" style="font-size:24px; margin-bottom:8px;"></i><span>تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
-                <h4>تصميم هوية بصرية متكاملة</h4>  
+                <h4>تصميم هوية بصرية</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('تصميم هوية بصرية متكاملة')">  
                     <i class="fa-brands fa-whatsapp"></i> <span>اطلب مثل هذا</span>  
                 </button>  
             </div>  
         </div>  
 
-        <div class="portfolio-card tilt-card">  
+        <div class="portfolio-card">  
             <div class="portfolio-img" onclick="openLightbox('work2.jpg', 'حملة تسويقية واحترافية')">  
-                <img src="work2.jpg" alt="حملة تسويقية واحترافية" onerror="this.src='https://via.placeholder.com/400x300/7c3aed/ffffff?text=NEXA+Project+2'">  
-                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span>تكبير التصميم</span></div>  
+                <img src="work2.jpg" alt="مشروع 2" onerror="this.src='https://picsum.photos/400/300?random=2'">  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand" style="font-size:24px; margin-bottom:8px;"></i><span>تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
-                <h4>حملة تسويقية واحترافية</h4>  
+                <h4>حملة تسويقية</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('حملة تسويقية واحترافية')">  
                     <i class="fa-brands fa-whatsapp"></i> <span>اطلب مثل هذا</span>  
                 </button>  
             </div>  
         </div>  
 
-        <div class="portfolio-card tilt-card">  
+        <div class="portfolio-card">  
             <div class="portfolio-img" onclick="openLightbox('work3.jpg', 'واجهة تطبيق ذكية')">  
-                <img src="work3.jpg" alt="واجهة تطبيق ذكية" onerror="this.src='https://via.placeholder.com/400x300/7c3aed/ffffff?text=NEXA+Project+3'">  
-                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span>تكبير التصميم</span></div>  
+                <img src="work3.jpg" alt="مشروع 3" onerror="this.src='https://picsum.photos/400/300?random=3'">  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand" style="font-size:24px; margin-bottom:8px;"></i><span>تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
                 <h4>واجهة تطبيق ذكية</h4>  
@@ -188,52 +208,40 @@
 
 <!-- حاسبة الأسعار التفاعلية -->  
 <section id="pricing" class="calculator-sec">  
-    <div class="section-head">  
+    <div class="section-head" style="padding-top: 40px;">  
         <h2>حاسبة التكلفة التقديرية</h2>  
         <p>حدد الخدمات التي تحتاجها لتعرف التكلفة المتوقعة لمشروعك</p>  
     </div>  
-    <div class="calc-container">  
+    <div class="calc-container" style="padding: 0 40px 40px;">  
         <div class="calc-options">  
-            <label class="calc-item">  
-                <input type="checkbox" value="50" class="calc-checkbox" onchange="calculateTotal()">  
-                <span class="calc-text">تصميم شعار احترافي ($50)</span>  
-            </label>  
-            <label class="calc-item">  
-                <input type="checkbox" value="150" class="calc-checkbox" onchange="calculateTotal()">  
-                <span class="calc-text">هوية بصرية كاملة ($150)</span>  
-            </label>  
-            <label class="calc-item">  
-                <input type="checkbox" value="100" class="calc-checkbox" onchange="calculateTotal()">  
-                <span class="calc-text">إدارة منصات التواصل (شهرياً - $100)</span>  
-            </label>  
-            <label class="calc-item">  
-                <input type="checkbox" value="300" class="calc-checkbox" onchange="calculateTotal()">  
-                <span class="calc-text">تطوير موقع تعريفي ($300)</span>  
-            </label>  
+            <label class="calc-item"><input type="checkbox" value="50" class="calc-checkbox" onchange="calculateTotal()"> <span>تصميم شعار احترافي ($50)</span></label>  
+            <label class="calc-item"><input type="checkbox" value="150" class="calc-checkbox" onchange="calculateTotal()"> <span>هوية بصرية كاملة ($150)</span></label>  
+            <label class="calc-item"><input type="checkbox" value="100" class="calc-checkbox" onchange="calculateTotal()"> <span>إدارة منصات التواصل (شهرياً - $100)</span></label>  
+            <label class="calc-item"><input type="checkbox" value="300" class="calc-checkbox" onchange="calculateTotal()"> <span>تطوير موقع تعريفي ($300)</span></label>  
         </div>  
         <div class="calc-result">  
-            <h3>التكلفة الإجمالية التقديرية:</h3>  
+            <h3 style="color:#fff;">التكلفة الإجمالية:</h3>  
             <div class="total-price">$<span id="totalPrice">0</span></div>  
-            <button class="btn-order-card" onclick="orderFromCalc()" style="margin-top: 20px;">  
+            <button class="btn-order-card" onclick="orderFromCalc()" style="width:100%; justify-content:center; padding:12px;">  
                 <i class="fa-brands fa-whatsapp"></i> <span>اطلب هذه الحزمة الآن</span>  
             </button>  
         </div>  
     </div>  
 </section>  
 
-<!-- قسم التقييمات وإضافة تعليق جديد -->  
-<section id="reviewsSection" style="padding: 60px 20px; max-width: 900px; margin: 0 auto;">  
-    <div class="section-head" style="text-align: center; margin-bottom: 40px;">  
+<!-- قسم التقييمات والتعليقات -->  
+<section id="reviewsSection" style="padding: 80px 20px; max-width: 900px; margin: 0 auto;">  
+    <div class="section-head">  
         <h2>آراء وتقييمات العملاء</h2>  
         <p>شاركنا بريكك وأضف تقييمك للموقع بالنجوم</p>  
     </div>  
 
-    <div class="review-box" style="background: rgba(0,0,0,0.02); padding: 30px; border-radius: 16px; border: 1px solid rgba(124, 58, 237, 0.2); margin-bottom: 40px;">  
-        <h3 style="margin-bottom: 20px; font-size: 20px;">أضف تقييمك وتعليقك</h3>  
+    <div class="card" style="margin-bottom: 40px;">  
+        <h3 style="margin-bottom: 20px;">أضف تقييمك وتعليقك</h3>  
         <form id="addReviewForm" onsubmit="submitUserReview(event)">  
             <div style="margin-bottom: 15px;">  
                 <label style="display: block; margin-bottom: 8px; font-weight: 500;">تقييمك بالنجوم:</label>  
-                <div class="star-rating-input" id="starInputContainer" style="font-size: 24px; display: flex; gap: 5px;">  
+                <div class="star-rating-input" id="starInputContainer" style="display: flex; gap: 5px;">  
                     <i class="fa-solid fa-star active" data-value="1" onclick="setRating(1)"></i>  
                     <i class="fa-solid fa-star active" data-value="2" onclick="setRating(2)"></i>  
                     <i class="fa-solid fa-star active" data-value="3" onclick="setRating(3)"></i>  
@@ -243,28 +251,21 @@
             </div>  
             <div style="margin-bottom: 15px;">  
                 <label style="display: block; margin-bottom: 8px; font-weight: 500;">اسمك الكريم:</label>  
-                <input type="text" id="reviewerName" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: transparent; color: inherit;">  
+                <input type="text" id="reviewerName" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(124,58,237,0.3); background: transparent; color: inherit;">  
             </div>  
             <div style="margin-bottom: 15px;">  
                 <label style="display: block; margin-bottom: 8px; font-weight: 500;">التعليق أو الرأي:</label>  
-                <textarea id="reviewerText" rows="3" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: transparent; color: inherit;"></textarea>  
+                <textarea id="reviewerText" rows="3" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(124,58,237,0.3); background: transparent; color: inherit;"></textarea>  
             </div>  
-            <button type="submit" style="background: #7C3AED; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s;">  
-                إرسال التقييم  
-            </button>  
+            <button type="submit" class="btn-order-card">إرسال التقييم</button>  
         </form>  
     </div>  
 
     <div id="reviewsListContainer" style="display: grid; gap: 20px;">  
-        <div class="card testimonial-card" style="padding: 20px; border-radius: 12px;">  
-            <div class="stars" style="color: #f59e0b; margin-bottom: 8px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
+        <div class="card">  
+            <div style="color: #f59e0b; margin-bottom: 8px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
             <p style="margin-bottom: 10px;">"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
             <h4 style="font-size: 14px; opacity: 0.8;">- شركة الأفق</h4>  
-        </div>  
-        <div class="card testimonial-card" style="padding: 20px; border-radius: 12px;">  
-            <div class="stars" style="color: #f59e0b; margin-bottom: 8px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
-            <p style="margin-bottom: 10px;">"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
-            <h4 style="font-size: 14px; opacity: 0.8;">- متجر كريستال</h4>  
         </div>  
     </div>  
 </section>  
@@ -292,52 +293,22 @@
     </div>  
 </section>  
 
-<!-- الفوتر (مع التواصل والسوشيال ميديا والبريد الإلكتروني المحدث) -->  
-<footer id="contact" style="background: rgba(15, 7, 40, 0.95); padding: 50px 20px 20px; border-top: 1px solid rgba(124, 58, 237, 0.2);">  
-    <div class="footer-container" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px;">  
-        
-        <div class="footer-brand" style="flex: 1; min-width: 250px;">  
-            <h3 style="color: #fff; font-size: 24px; margin-bottom: 10px;">NEXA</h3>  
+<!-- الفوتر -->  
+<footer>  
+    <div class="footer-container">  
+        <div class="footer-brand">  
+            <h3 style="font-size: 24px; margin-bottom: 10px;">NEXA</h3>  
             <p style="color: #aaa; font-size: 14px; line-height: 1.6;">حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>  
         </div>  
-
-        <div class="footer-contact-info" style="flex: 1; min-width: 250px;">
-            <h4 style="color: #fff; font-size: 18px; margin-bottom: 15px;">تواصل معنا</h4>
-            <p style="margin-bottom: 12px; font-size: 14px;">
-                <a href="mailto:magdalhamdo176@gmail.com" style="color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-envelope" style="color: #7C3AED;"></i> 
-                    <span>magdalhamdo176@gmail.com</span>
-                </a>
-            </p>
-            <p style="margin-bottom: 12px; font-size: 14px;">
-                <a href="https://wa.me/905364391849" target="_blank" style="color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-phone" style="color: #7C3AED;"></i> 
-                    <span dir="ltr">+90 536 439 1849</span>
-                </a>
-            </p>
-        </div>
-
-        <div class="footer-social" style="flex: 1; min-width: 250px;">
-            <h4 style="color: #fff; font-size: 18px; margin-bottom: 15px;">تابعنا على منصات التواصل</h4>
-            <div style="display: flex; gap: 15px; font-size: 20px;">
-                <a href="https://wa.me/905364391849" target="_blank" title="WhatsApp" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://instagram.com" target="_blank" title="Instagram" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://t.me" target="_blank" title="Telegram" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://facebook.com" target="_blank" title="Facebook" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;"><i class="fa-brands fa-facebook-f"></i></a>
-            </div>
-        </div>
-
-    </div>  
-    
-    <div class="footer-bottom" style="text-align: center; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; color: #888; font-size: 13px;">  
-        <p>© 2026 NEXA. جميع الحقوق محفوظة.</p>  
-    </div>  
-</footer>
-
-<!-- النوافذ المنبثقة والزر العائم -->  
-<div id="glassModal" class="glass-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center;">  
-    <div class="glass-modal-content" style="background:#1a103c; padding:30px; border-radius:15px; max-width:500px; width:90%; position:relative; color:#fff;">  
-        <button class="close-modal" onclick="closeGlassModal()" style="position:absolute; top:15px; left:15px; background:none; border:none; color:#fff; font-size:24px; cursor:pointer;">&times;</button>  
-        <div id="lightboxView" class="modal-view">  
-            <div class="modal-img-container" style="text-align:center; margin-bottom:15px;"><img id="modalImg" src="" alt="معاينة" style="max-width:100%; max-height:250px; border-radius:8px;"></div>  
-          
+        <div class="footer-contact-info">  
+            <h4 style="font-size: 18px; margin-bottom: 15px;">تواصل معنا</h4>  
+            <a href="mailto:magdalhamdo176@gmail.com"><i class="fa-solid fa-envelope" style="color: #7C3AED;"></i> <span>magdalhamdo176@gmail.com</span></a>  
+            <a href="https://wa.me/905364391849" target="_blank"><i class="fa-solid fa-phone" style="color: #7C3AED;"></i> <span dir="ltr">+90 536 439 1849</span></a>  
+        </div>  
+        <div class="footer-social">  
+            <h4 style="font-size: 18px; margin-bottom: 15px;">تابعنا على المنصات</h4>  
+            <div class="social-icons">  
+                <a href="https://wa.me/905364391849" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>  
+                <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>  
+                <a href="https://t.me" target="_blank"><i class="fa-brands fa-telegram"></i></a>  
+                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-
