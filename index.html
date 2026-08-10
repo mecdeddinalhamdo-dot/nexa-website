@@ -651,13 +651,54 @@
         <div class="f-legs">
             <div class="f-leg"></div>
             <div class="f-leg"></div>
+<!-- زر روبوت المحادثة الذكي والواضح -->
+<div id="nexa-ai-bot" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; font-family: 'Tajawal', sans-serif;">
+    
+    <!-- نافذة المحادثة -->
+    <div id="chat-window" style="display: none; position: absolute; bottom: 85px; right: 0; width: 320px; background: #0f0728; border: 2px solid #7c3aed; border-radius: 20px; box-shadow: 0 10px 30px rgba(124,58,237,0.5); overflow: hidden;">
+        
+        <!-- رأس المحادثة -->
+        <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 12px 15px; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%;"></div>
+                <span style="font-weight: bold; font-size: 14px;">مساعد NEXA الذكي</span>
+            </div>
+            <button onclick="toggleChat()" style="background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
         </div>
-        <!-- نقطة خضراء تفاعلية -->
-        <span style="position: absolute; bottom: 0; right: 2px; width: 10px; height: 10px; background: #22c55e; border: 2px solid #fff; border-radius: 50%;"></span>
+        
+        <!-- صندوق الرسائل -->
+        <div id="chat-messages" style="padding: 15px; height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #fff; text-align: right;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 90%; align-self: flex-start;">
+                أهلاً بك في NEXA! اسألني عن أي شيء يخص خدماتنا أو شركتنا وسأرد عليك فوراً.
+            </div>
+        </div>
+        
+        <!-- خانة الإدخال -->
+        <div style="padding: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.4); display: flex; gap: 6px;">
+            <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." style="flex: 1; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #fff; outline: none;" onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" style="background: #7c3aed; border: none; color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: bold;">إرسال</button>
+        </div>
     </div>
+
+    <!-- تأثير الحركة للروبوت -->
+    <style>
+        @keyframes bounceRobot {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.05); }
+        }
+        .robot-btn-icon {
+            animation: bounceRobot 2.5s infinite ease-in-out;
+        }
+    </style>
+
+    <!-- أيقونة الروبوت البارزة الواضحة -->
+    <button onclick="toggleChat()" class="robot-btn-icon" style="background: #1e1b4b; border: 3px solid #7c3aed; width: 75px; height: 75px; border-radius: 50%; cursor: pointer; padding: 0; overflow: hidden; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.6); display: flex; align-items: center; justify-content: center; position: relative;">
+        <img src="robot-icon.png" alt="Robot" style="width: 100%; height: 100%; object-fit: cover;">
+        <span style="position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: #22c55e; border: 2px solid #fff; border-radius: 50%;"></span>
+    </button>
 </div>
 
-<!-- كود تفاعل الروبوت والذكاء الاصطناعي -->
+<!-- كود الرد على كافة الأسئلة -->
 <script>
 const nexaWhatsappNumber = "905364391849";
 
@@ -676,9 +717,9 @@ function appendMessage(sender, text) {
     const msgDiv = document.createElement('div');
     
     if(sender === 'user') {
-        msgDiv.style.cssText = "background: #7c3aed; color: #fff; padding: 10px 14px; border-radius: 12px; border-bottom-left-radius: 0; max-width: 85%; align-self: flex-end;";
+        msgDiv.style.cssText = "background: #7c3aed; color: #fff; padding: 10px 14px; border-radius: 12px; border-bottom-left-radius: 0; max-width: 90%; align-self: flex-end;";
     } else {
-        msgDiv.style.cssText = "background: rgba(255, 255, 255, 0.1); color: #fff; padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 85%; align-self: flex-start;";
+        msgDiv.style.cssText = "background: rgba(255, 255, 255, 0.1); color: #fff; padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 90%; align-self: flex-start;";
     }
     msgDiv.innerHTML = text;
     messagesContainer.appendChild(msgDiv);
@@ -688,23 +729,40 @@ function appendMessage(sender, text) {
 function handleBotResponse(userText) {
     const lowerText = userText.toLowerCase();
     
-    if(lowerText.includes('سعر') || lowerText.includes('اسعار') || lowerText.includes('تكلفة') || lowerText.includes('كم') || lowerText.includes('الأسعار')) {
+    // التوجيه للواتساب فقط عند السؤال عن الأسعار
+    if(lowerText.includes('سعر') || lowerText.includes('اسعار') || lowerText.includes('تكلفة') || lowerText.includes('كم') || lowerText.includes('بكم')) {
         setTimeout(() => {
-            const reply = `بخصوص الأسعار والتفاصيل المالية، يرجى التواصل مباشرة مع مالكي:<br><a href="https://wa.me/${nexaWhatsappNumber}?text=مرحباً، أستفسر عن أسعار خدمات NEXA" target="_blank" style="color: #4ade80; font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 5px;">تواصل مع المالك عبر واتساب 💬</a>`;
+            const reply = `بخصوص الأسعار والتفاصيل المالية، يرجى التواصل مباشرة مع المالك:<br><a href="https://wa.me/${nexaWhatsappNumber}?text=مرحباً، أستفسر عن أسعار خدمات NEXA" target="_blank" style="color: #4ade80; font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 5px;">تواصل عبر واتساب 💬</a>`;
             appendMessage('bot', reply);
-        }, 500);
+        }, 400);
     } 
-    else if(lowerText.includes('خدمات') || lowerText.includes('خدمة') || lowerText.includes('ماذا تقدمون')) {
+    // الرد على أسئلة الخدمات والشغل
+    else if(lowerText.includes('خدمات') || lowerText.includes('خدمة') || lowerText.includes('تشغلون') || lowerText.includes('تسوون')) {
         setTimeout(() => {
-            const reply = `نحن نقدم حلولاً إبداعية متكاملة تشمل: التصميم والهوية البصرية، التسويق الرقمي، وتطوير المواقع والتطبيقات بأعلى جودة!`;
+            const reply = `نحن في NEXA نقدم حلولاً إبداعية متكاملة تشمل تصميم الهويات البصرية، الشعارات، تطوير وتصميم واجهات المواقع، والتسويق الرقمي بتميز واحترافية عالية.`;
             appendMessage('bot', reply);
-        }, 500);
+        }, 400);
     }
+    // الرد على طلبات التصميم واللوجو
+    else if(lowerText.includes('لوجو') || lowerText.includes('شعار') || lowerText.includes('تصميم') || lowerText.includes('موقع')) {
+        setTimeout(() => {
+            const reply = `يسعدنا جداً تنفيذ طلبك بأعلى جودة! يمكنك الاطلاع على أعمالنا في الموقع، أو إخباري بالتفاصيل لنبدأ العمل عليها فوراً.`;
+            appendMessage('bot', reply);
+        }, 400);
+    }
+    // الرد على التحية
+    else if(lowerText.includes('السلام') || lowerText.includes('مرحباً') || lowerText.includes('اهلا') || lowerText.includes('مرحبا')) {
+        setTimeout(() => {
+            const reply = `وعليكم السلام ورحمة الله وبركاته أهلاً بك! كيف يمكنني مساعدتك في أعمالك اليوم؟`;
+            appendMessage('bot', reply);
+        }, 400);
+    }
+    // رد ذكي افتراضي لأي شيء آخر يسأله العميل
     else {
         setTimeout(() => {
-            const reply = `أهلاً بك! يسعدنا مساعدتك في أي استفسار. تصفح الموقع أو أخبرنا بما تحتاجه لنلبي طلبك!`;
+            const reply = `سؤال جميل! نحن مستعدون لتلبية طلبك ومساعدتك في مشروعك بكل إتقان. هل ترغب بأن أساعدك في تفاصيل إضافية حول خدماتنا؟`;
             appendMessage('bot', reply);
-        }, 500);
+        }, 400);
     }
 }
 
@@ -720,14 +778,10 @@ function sendMessage() {
     handleBotResponse(text);
 }
 
-function sendQuickReply(text) {
-    appendMessage('user', text);
-    handleBotResponse(text);
-}
-
 function handleKeyPress(e) {
     if(e.key === 'Enter') {
         sendMessage();
     }
 }
 </script>
+
