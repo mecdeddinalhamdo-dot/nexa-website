@@ -334,3 +334,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
                                                
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById('nexaChatToggle');
+    const chatWindow = document.getElementById('nexaChatWindow');
+    const closeBtn = document.getElementById('nexaCloseBtn');
+    const messagesBox = document.getElementById('nexaMessages');
+    const inputField = document.getElementById('nexaInput');
+    const sendBtn = document.getElementById('nexaSendBtn');
+
+    if (toggleBtn && chatWindow) {
+        toggleBtn.addEventListener('click', () => {
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        });
+    }
+    if (closeBtn && chatWindow) {
+        closeBtn.addEventListener('click', () => {
+            chatWindow.style.display = 'none';
+        });
+    }
+
+    function addMsg(text, sender) {
+        const div = document.createElement('div');
+        div.style.cssText = sender === 'user' 
+            ? "background: #7C3AED; color: white; padding: 8px 12px; border-radius: 8px; max-width: 85%; align-self: flex-end;"
+            : "background: rgba(255,255,255,0.1); color: white; padding: 8px 12px; border-radius: 8px; max-width: 85%; align-self: flex-start;";
+        div.innerText = text;
+        messagesBox.appendChild(div);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+
+    async function handleSend() {
+        const text = inputField.value.trim();
+        if (!text) return;
+
+        addMsg(text, 'user');
+        inputField.value = '';
+
+        // رد تلقائي ذكي وسريع يوجه الزبون للخدمات أو الواتساب
+        setTimeout(() => {
+            let reply = "شكراً لتواصلك مع NEXA. يمكنك تصفح خدماتنا عبر القائمة أو التواصل معنا مباشرة عبر زر الواتساب لإتمام طلبك فوراً!";
+            if (text.includes("سعر") || text.includes("أسعار") || text.includes("تكلفة")) {
+                reply = "تبدأ أسعار حزمنا وتصاميمنا بحسب الخدمة المطلوبة. يمكنك استخدام حاسبة الأسعار التفاعلية في الموقع لمعرفة التكلفة التقريبية بدقة!";
+            } else if (text.includes("خدمات") || text.includes("شو") || text.includes("ماذا")) {
+                reply = "نحن نقدم خدمات متكاملة في التصميم، الهويات البصرية، تطوير الويب، والحلول الإبداعية لنمو علامتك التجارية.";
+            }
+            addMsg(reply, 'bot');
+        }, 600);
+    }
+
+    if (sendBtn) sendBtn.addEventListener('click', handleSend);
+    if (inputField) inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
+});
