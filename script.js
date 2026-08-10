@@ -1,5 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // --- 0. إضافات الميزات الجديدة (Custom Cursor + Scroll Reveal) ---
+    
+    // 1. إنشاء ومتابعة مؤشر الماوس المخصص (Custom Cursor)
+    let cursor = document.querySelector('.custom-cursor');
+    if (!cursor) {
+        cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        document.body.appendChild(cursor);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // تكبير المؤشر عند الإشارة إلى العناصر التفاعلية
+    const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, .card, .portfolio-img, .calc-item, .faq-question, .color-card-item');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+    });
+
+    // 2. تأثير الظهور السلس عند التمرير (Scroll Reveal)
+    const revealElements = document.querySelectorAll('.card, .portfolio-card, .calc-container, .faq-item, .section-head, .stat-card');
+    revealElements.forEach(el => el.classList.add('reveal'));
+
+    function handleScrollReveal() {
+        const triggerBottom = window.innerHeight * 0.85;
+        revealElements.forEach(el => {
+            const top = el.getBoundingClientRect().top;
+            if (top < triggerBottom) {
+                el.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', handleScrollReveal);
+    handleScrollReveal(); // تشغيل أولي للعناصر المرئية فوراً
+
     // --- 1. تأثير خلفية الجرافيك والتصميم المتحركة ---
     const canvas = document.getElementById('purpleWindCanvas');
     if (canvas) {
@@ -333,3 +372,4 @@ document.addEventListener("DOMContentLoaded", () => {
     generateRainbowPalette();
 
 });
+                
