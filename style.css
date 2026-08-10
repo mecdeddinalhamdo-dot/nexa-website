@@ -1096,11 +1096,11 @@ footer {
     width: 100%;
     height: 100%;
     background: inherit;
-    filter: blur(2px) brightness(0.95); /* غباش خفيف جداً (2px) لتظهر تفاصيل الصورة بوضوح */
+    filter: blur(2px) brightness(0.95); /* غباش خفيف جداً لتظهر تفاصيل الصورة بوضوح */
     z-index: 1;
 }
 
-/* طبقة التباين الخفيفة لضمان وضوح النصوص فوق الصورة */
+/* طبقة التباين والتحكم بالشفافية (تم تعديل العتامة لتكون أدكن وقليلة الشفافية) */
 .glass-hero-section::after {
     content: '';
     position: absolute;
@@ -1108,7 +1108,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* طبقة داكنة شفافة لبروز النصوص */
+    background: rgba(0, 0, 0, 0.6); /* زيادة العتامة لتقليل الشفافية وجعل اللوح واضحاً ومميزاً */
     z-index: 2;
 }
 
@@ -1129,7 +1129,7 @@ footer {
 }
 
 .hero-content h1 span {
-    color: #a78bfa; /* لون مميز لكلمة التأثير والتألق إذا رغبت */
+    color: #a78bfa; /* لون مميز لكلمة التأثير والتألق */
 }
 
 .hero-content p {
