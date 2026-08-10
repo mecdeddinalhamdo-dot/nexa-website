@@ -1,4 +1,4 @@
-Document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     // --- 1. تأثير خلفية الجرافيك والتصميم المتحركة ---
     const canvas = document.getElementById('purpleWindCanvas');
@@ -148,7 +148,7 @@ Document.addEventListener("DOMContentLoaded", () => {
             "nav.contact": "İletişim",
             "hero.badge": "✨ Entegre Yaratıcı Çözümler",
             "hero.title": "Markanız İçin Etki ve Parlaklık Yaratıyoruz",
-            "hero.desc": "Hedeflerinize uygun modern, yenilikçi pazarlama yöntemleri ve tasarımlarla büyümenize yardımcı oluyoruz.",
+            "hero.desc": "Hedeflerinize uygun modern, yenilikçi pazarlama yöntemleri و tasarımlarla büyümenize yardımcı oluyoruz.",
             "services.title": "Neler Sunuyoruz?",
             "services.desc": "Projenizi bir üst seviyeye taşımak için tasarlanmış kapsamlı hizmetler"
         }
@@ -333,4 +333,4 @@ Document.addEventListener("DOMContentLoaded", () => {
     generateRainbowPalette();
 
 });
-            
+                                               
