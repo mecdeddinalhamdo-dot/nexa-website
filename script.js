@@ -1,4 +1,4 @@
-Document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     // --- 1. تأثير خلفية الجرافيك والتصميم المتحركة ---
     const canvas = document.getElementById('purpleWindCanvas');
