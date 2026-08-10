@@ -38,7 +38,7 @@ window.submitReview = function(e) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- 0. Custom Cursor + Scroll Reveal ---
+        // --- 0. Custom Cursor + Scroll Reveal ---
     let cursor = document.querySelector('.custom-cursor');
     if (!cursor) {
         cursor = document.createElement('div');
@@ -46,9 +46,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(cursor);
     }
 
+    cursor.style.position = 'fixed';
+    cursor.style.pointerEvents = 'none'; 
+    cursor.style.zIndex = '99999'; 
+    
+    if (getComputedStyle(cursor).width === '0px') {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        cursor.style.backgroundColor = 'var(--primary-color, #7c3aed)';
+        cursor.style.borderRadius = '50%';
+        cursor.style.transform = 'translate(-50%, -50%)'; 
+        cursor.style.transition = 'transform 0.1s ease';
+    }
+
     document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+        requestAnimationFrame(() => {
+             cursor.style.left = e.clientX + 'px';
+             cursor.style.top = e.clientY + 'px';
+        });
     });
 
     const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, .card, .portfolio-card, .calc-item, .faq-question, .color-card-item');
@@ -56,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
     });
+    
 
     const revealElements = document.querySelectorAll('.card, .portfolio-card, .calc-container, .faq-item, .section-head, .palette-box');
     revealElements.forEach(el => el.classList.add('reveal'));
