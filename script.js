@@ -379,3 +379,104 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
                             
+    // --- 10. نظام تقييم النجوم وإضافة التعليقات ---
+    const stars = document.querySelectorAll('.star-btn');
+    let selectedRating = 0;
+
+    // التعامل مع تحريك الماوس والنقر على النجوم
+    stars.forEach((star, index) => {
+        star.addEventListener('mouseover', () => {
+            stars.forEach((s, i) => {
+                if (i <= index) {
+                    s.classList.add('hover', 'fa-solid');
+                    s.classList.remove('fa-regular');
+                } else {
+                    s.classList.remove('hover', 'fa-solid');
+                    s.classList.add('fa-regular');
+                }
+            });
+        });
+
+        star.addEventListener('mouseleave', () => {
+            stars.forEach((s, i) => {
+                s.classList.remove('hover');
+                if (i >= selectedRating) {
+                    s.classList.remove('fa-solid');
+                    s.classList.add('fa-regular');
+                }
+            });
+        });
+
+        star.addEventListener('click', () => {
+            selectedRating = index + 1;
+            stars.forEach((s, i) => {
+                if (i < selectedRating) {
+                    s.classList.add('active', 'fa-solid');
+                    s.classList.remove('fa-regular');
+                } else {
+                    s.classList.remove('active', 'fa-solid');
+                    s.classList.add('fa-regular');
+                }
+            });
+        });
+    });
+
+    // دالة لحفظ وعرض التقييمات
+    const userReviewsContainer = document.getElementById('userReviewsContainer');
+
+    function loadReviews() {
+        if (!userReviewsContainer) return;
+        const savedReviews = JSON.parse(localStorage.getItem('nexa_reviews') || '[]');
+        userReviewsContainer.innerHTML = '';
+
+        savedReviews.forEach(rev => {
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                starsHtml += i < rev.rating ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+            }
+
+            const card = document.createElement('div');
+            card.className = 'card testimonial-card user-review-card reveal active';
+            card.innerHTML = `
+                <div class="review-stars">${starsHtml}</div>
+                <p>"${rev.comment}"</p>
+                <h4 style="color: #7c3aed; margin-top: 10px;">- ${rev.name}</h4>
+            `;
+            userReviewsContainer.prepend(card);
+        });
+    }
+
+    window.submitReview = function(e) {
+        e.preventDefault();
+        const nameInput = document.getElementById('reviewerName');
+        const commentInput = document.getElementById('reviewerComment');
+
+        if (selectedRating === 0) {
+            alert("يرجى اختيار عدد النجوم أولاً!");
+            return;
+        }
+
+        const newReview = {
+            name: nameInput.value,
+            rating: selectedRating,
+            comment: commentInput.value,
+            date: new Date().toLocaleDateString()
+        };
+
+        // حفظ في LocalStorage
+        const savedReviews = JSON.parse(localStorage.getItem('nexa_reviews') || '[]');
+        savedReviews.push(newReview);
+        localStorage.setItem('nexa_reviews', JSON.stringify(savedReviews));
+
+        // إعادة تعيين النموذج وعرض التعليق فوراً
+        nameInput.value = '';
+        commentInput.value = '';
+        selectedRating = 0;
+        stars.forEach(s => s.classList.remove('active', 'fa-solid', 'hover') || s.classList.add('fa-regular'));
+
+        loadReviews();
+        alert("شكراً لك! تم إضافة تقييمك بنجاح.");
+    };
+
+    // تحميل التقييمات فور فتح الصفحة
+    loadReviews();
