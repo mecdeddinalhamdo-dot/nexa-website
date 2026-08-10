@@ -38,7 +38,7 @@ window.submitReview = function(e) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-            // --- 0. Custom Cursor (للكمبيوتر فقط) ---
+    // --- 0. Custom Cursor (للكمبيوتر فقط وبدون أي أخطاء) ---
     if (window.matchMedia("(pointer: fine)").matches) {
         let cursor = document.querySelector('.custom-cursor');
         if (!cursor) {
@@ -74,21 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-    document.addEventListener('mousemove', (e) => {
-        requestAnimationFrame(() => {
-             cursor.style.left = e.clientX + 'px';
-             cursor.style.top = e.clientY + 'px';
-        });
-    });
-
-    const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, .card, .portfolio-card, .calc-item, .faq-question, .color-card-item');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-    });
-    
-
+    // --- Scroll Reveal ---
     const revealElements = document.querySelectorAll('.card, .portfolio-card, .calc-container, .faq-item, .section-head, .palette-box');
     revealElements.forEach(el => el.classList.add('reveal'));
 
@@ -325,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-                             // --- 9. مولد لوحة الألوان الذكي وتغيير ألوان الموقع كلياً ---
+    // --- 9. مولد لوحة الألوان الذكي وتغيير ألوان الموقع كلياً ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -371,13 +357,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const primaryLight = hslToHex(hsl.h, hsl.s, Math.min(85, hsl.l + 20));
         const accentColor = hslToHex((hsl.h + 180) % 360, hsl.s, hsl.l);
 
-        // تطبيق الألوان على كافة متغيرات CSS الهيكلية
         document.documentElement.style.setProperty('--primary-color', primaryColor);
         document.documentElement.style.setProperty('--primary-dark', primaryDark);
         document.documentElement.style.setProperty('--primary-light', primaryLight);
         document.documentElement.style.setProperty('--accent-color', accentColor);
 
-        // توليد درجات اللوحة كاملة (غامق، أساسي، فاتح، ومكمل)
         const generatedColors = [
             hslToHex(hsl.h, hsl.s, Math.max(12, hsl.l - 35)),
             primaryDark, 
@@ -460,4 +444,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.loadReviews();
 });
-                                          
+                
