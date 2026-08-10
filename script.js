@@ -370,16 +370,77 @@ document.addEventListener("DOMContentLoaded", () => {
         addMsg(text, 'user');
         inputField.value = '';
 
-        // رد تلقائي ذكي وسريع يوجه الزبون للخدمات أو الواتساب
-        setTimeout(() => {
-            let reply = "شكراً لتواصلك مع NEXA. يمكنك تصفح خدماتنا عبر القائمة أو التواصل معنا مباشرة عبر زر الواتساب لإتمام طلبك فوراً!";
-            if (text.includes("سعر") || text.includes("أسعار") || text.includes("تكلفة")) {
-                reply = "تبدأ أسعار حزمنا وتصاميمنا بحسب الخدمة المطلوبة. يمكنك استخدام حاسبة الأسعار التفاعلية في الموقع لمعرفة التكلفة التقريبية بدقة!";
-            } else if (text.includes("خدمات") || text.includes("شو") || text.includes("ماذا")) {
-                reply = "نحن نقدم خدمات متكاملة في التصميم، الهويات البصرية، تطوير الويب، والحلول الإبداعية لنمو علامتك التجارية.";
-            }
+        document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById('nexaChatToggle');
+    const chatWindow = document.getElementById('nexaChatWindow');
+    const closeBtn = document.getElementById('nexaCloseBtn');
+    const messagesBox = document.getElementById('nexaMessages');
+    const inputField = document.getElementById('nexaInput');
+    const sendBtn = document.getElementById('nexaSendBtn');
+
+    // ضع مفتاح Gemini API الخاص بك هنا بين علامتي التنصيص
+    const GEMINI_API_KEY = "ضع_مفتاحك_هنا"; 
+
+    if (toggleBtn && chatWindow) {
+        toggleBtn.addEventListener('click', () => {
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        });
+    }
+    if (closeBtn && chatWindow) {
+        closeBtn.addEventListener('click', () => {
+            chatWindow.style.display = 'none';
+        });
+    }
+
+    function addMsg(text, sender) {
+        const div = document.createElement('div');
+        div.style.cssText = sender === 'user' 
+            ? "background: #7C3AED; color: white; padding: 8px 12px; border-radius: 8px; max-width: 85%; align-self: flex-end;"
+            : "background: rgba(255,255,255,0.1); color: white; padding: 8px 12px; border-radius: 8px; max-width: 85%; align-self: flex-start;";
+        div.innerText = text;
+        messagesBox.appendChild(div);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+
+    async function handleSend() {
+        const text = inputField.value.trim();
+        if (!text) return;
+
+        addMsg(text, 'user');
+        inputField.value = '';
+
+        // رسالة انتظار ذكية
+        const loadingId = 'loading_' + Date.now();
+        const loadingDiv = document.createElement('div');
+        loadingDiv.id = loadingId;
+        loadingDiv.style.cssText = "background: rgba(255,255,255,0.1); color: #aaa; padding: 8px 12px; border-radius: 8px; max-width: 85%; align-self: flex-start; font-style: italic;";
+        loadingDiv.innerText = "جاري التفكير...";
+        messagesBox.appendChild(loadingDiv);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+
+        try {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: `أنت مساعد خدمة عملاء ذكي لموقع NEXA للحلول الإبداعية والتصميم والتسويق. أجب باحترافية وتحدث بلغة الزبون (عربي، تركي، إنجليزي). بناءً على سؤال الزبون التالي أجب بدقة واختصار: ${text}`
+                        }]
+                    }]
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById(loadingId).remove();
+
+            const reply = data.candidates?.[علامة_أو_رقم]?.content?.parts?.[0]?.text || "عذراً، حدث خطأ بسيط. يمكنك مراسلتنا مباشرة عبر قنوات الاتصال في الموقع!";
             addMsg(reply, 'bot');
-        }, 600);
+
+        } catch (error) {
+            document.getElementById(loadingId)?.remove();
+            addMsg("عذراً، يرجى التأكد من اتصال الإنترنت أو محاولة لاحقاً.", 'bot');
+        }
     }
 
     if (sendBtn) sendBtn.addEventListener('click', handleSend);
