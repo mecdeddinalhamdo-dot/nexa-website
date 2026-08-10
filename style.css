@@ -1071,7 +1071,7 @@ footer {
     margin-bottom: 12px;
     font-size: 16px;
 }
-/* --- الكود النهائي للوح البلوري في أول الصفحة --- */
+/* --- الكود الكامل والنهائي للوح البلوري في أول الصفحة --- */
 .glass-hero-section {
     position: relative;
     width: 92%;
@@ -1087,7 +1087,7 @@ footer {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* طبقة التغبش (Frosted Glass) - تم تعديل الغباش ليصبح أخف */
+/* طبقة التغبش الخفيف جداً لتكون الصورة واضحة */
 .glass-hero-section::before {
     content: '';
     position: absolute;
@@ -1096,11 +1096,11 @@ footer {
     width: 100%;
     height: 100%;
     background: inherit;
-    filter: blur(6px) brightness(0.9); /* غباش أخف لتظهر تفاصيل الصورة */
+    filter: blur(2px) brightness(0.95); /* غباش خفيف جداً (2px) لتظهر تفاصيل الصورة بوضوح */
     z-index: 1;
 }
 
-/* طبقة التباين لضمان وضوح النصوص البيضاء فوق الصورة */
+/* طبقة التباين الخفيفة لضمان وضوح النصوص فوق الصورة */
 .glass-hero-section::after {
     content: '';
     position: absolute;
@@ -1108,7 +1108,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.3); /* طبقة داكنة شفافة لبروز النصوص */
     z-index: 2;
 }
 
@@ -1128,8 +1128,22 @@ footer {
     color: #ffffff;
 }
 
+.hero-content h1 span {
+    color: #a78bfa; /* لون مميز لكلمة التأثير والتألق إذا رغبت */
+}
+
 .hero-content p {
     font-size: 1.1rem;
     line-height: 1.6;
     color: #e2e8f0;
+}
+
+.hero-content .badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
 }
