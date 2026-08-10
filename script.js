@@ -335,11 +335,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-        // --- 9. مولد لوحة الألوان الذكي والمتفاعل ---
+    // --- 9. مولد لوحة الألوان الذكي والمتفاعل ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
-    // دالة تحويل الهكس (HEX) إلى HSL لتوليد التدرجات بسهولة
     function hexToHSL(H) {
         let r = 0, g = 0, b = 0;
         if (H.length == 4) {
@@ -371,7 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return { h, s, l };
     }
 
-    // دالة تحويل HSL إلى HEX للعرض والنسخ
     function hslToHex(h, s, l) {
         s /= 100;
         l /= 100;
@@ -398,7 +396,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return "#" + r + g + b;
     }
 
-    // توليد لوحة ألوان ديناميكية بناءً على اللون المختار
     function generateDynamicPalette(hexColor) {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
@@ -406,13 +403,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const hsl = hexToHSL(hexColor);
         const generatedColors = [];
 
-        // إنشاء 6 درجات متناسقة (من الداكن إلى الفاتح والتباين)
-        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.max(15, hsl.l - 30))); // داكن جداً
-        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.max(25, hsl.l - 15))); // داكن
-        generatedColors.push(hexColor.toUpperCase());                            // اللون الأساسي
-        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.min(85, hsl.l + 15))); // فاتح
-        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.min(93, hsl.l + 30))); // فاتح جداً
-        generatedColors.push(hslToHex((hsl.h + 180) % 360, hsl.s, hsl.l));       // لون مكمل (Complementary)
+        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.max(15, hsl.l - 30)));
+        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.max(25, hsl.l - 15)));
+        generatedColors.push(hexColor.toUpperCase());
+        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.min(85, hsl.l + 15)));
+        generatedColors.push(hslToHex(hsl.h, hsl.s, Math.min(93, hsl.l + 30)));
+        generatedColors.push(hslToHex((hsl.h + 180) % 360, hsl.s, hsl.l));
 
         const track = document.createElement('div');
         track.className = 'palette-track';
@@ -435,22 +431,18 @@ document.addEventListener("DOMContentLoaded", () => {
         paletteContainer.appendChild(track);
     }
 
-    // تفعيل التغيير المباشر عند اختيار أي لون جديد
     if (baseColorPicker) {
         baseColorPicker.addEventListener('input', (e) => {
             generateDynamicPalette(e.target.value);
         });
 
-        // تشغيل أولي باللون المكتوب افتراضياً
         generateDynamicPalette(baseColorPicker.value);
     }
 
-                            
-    // --- 10. نظام تقييم النجوم وإضافة التعليقات ---
+    // --- 10. نظام تقييم النجوم وإضافة التعليقات المكتمل ---
     const stars = document.querySelectorAll('.star-btn');
     let selectedRating = 0;
 
-    // التعامل مع تحريك الماوس والنقر على النجوم
     stars.forEach((star, index) => {
         star.addEventListener('mouseover', () => {
             stars.forEach((s, i) => {
@@ -488,7 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // دالة لحفظ وعرض التقييمات
     const userReviewsContainer = document.getElementById('userReviewsContainer');
 
     function loadReviews() {
@@ -503,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const card = document.createElement('div');
-            card.className = 'card testimonial-card user-review-card reveal active';
+            card.className = 'user-review-card reveal active';
             card.innerHTML = `
                 <div class="review-stars">${starsHtml}</div>
                 <p>"${rev.comment}"</p>
@@ -515,35 +506,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.submitReview = function(e) {
         e.preventDefault();
-        const nameInput = document.getElementById('reviewerName');
-        const commentInput = document.getElementById('reviewerComment');
-
-        if (selectedRating === 0) {
-            alert("يرجى اختيار عدد النجوم أولاً!");
-            return;
-        }
-
-        const newReview = {
-            name: nameInput.value,
-            rating: selectedRating,
-            comment: commentInput.value,
-            date: new Date().toLocaleDateString()
-        };
-
-        // حفظ في LocalStorage
-        const savedReviews = JSON.parse(localStorage.getItem('nexa_reviews') || '[]');
-        savedReviews.push(newReview);
-        localStorage.setItem('nexa_reviews', JSON.stringify(savedReviews));
-
-        // إعادة تعيين النموذج وعرض التعليق فوراً
-        nameInput.value = '';
-        commentInput.value = '';
-        selectedRating = 0;
-        stars.forEach(s => s.classList.remove('active', 'fa-solid', 'hover') || s.classList.add('fa-regular'));
-
-        loadReviews();
-        alert("شكراً لك! تم إضافة تقييمك بنجاح.");
-    };
-
-    // تحميل التقييمات فور فتح الصفحة
-    loadReviews();
+        const nameInput = document.getElementById('rev
