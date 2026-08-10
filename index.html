@@ -360,3 +360,30 @@
 
 <!-- زر الواتساب العائم -->  
 <a href="https://wa.me/905364391849" target="_blank" class="floating-whatsapp" title="تواصل عبر الواتساب"
+            <div id="orderView" class="modal-view" style="display: none;">  
+            <h3 data-i18n="modal.order_title">طلب تصميم سريع</h3>  
+            <p id="orderProjectName" class="order-subtitle"></p>  
+            <form id="whatsappForm" onsubmit="sendWhatsAppOrder(event)">  
+                <div class="input-group">  
+                    <label data-i18n="modal.name_label">الاسم الكريم:</label>  
+                    <input type="text" id="custName" required>  
+                </div>  
+                <div class="input-group">  
+                    <label data-i18n="modal.details_label">تفاصيل إضافية (اختياري):</label>  
+                    <textarea id="custDetails" rows="3"></textarea>  
+                </div>  
+                <button type="submit" class="btn-submit-order">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.send_btn">إرسال الطلب عبر الواتساب</span>  
+                </button>  
+            </form>  
+        </div>  
+    </div>  
+</div>  
+
+<!-- زر الواتساب العائم -->  
+<a href="https://wa.me/905364391849" target="_blank" class="floating-whatsapp" title="تواصل عبر الواتساب" style="position: fixed; bottom: 25px; left: 25px; background: #25D366; color: #fff; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; transition: 0.3s;">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+</body>  
+</html>
