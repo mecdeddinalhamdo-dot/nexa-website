@@ -90,6 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const scrolled = (winScroll / height) * 100;
         const progressBar = document.getElementById('scrollProgressBar');
         if (progressBar) progressBar.style.width = scrolled + '%';
+        
+        document.body.style.setProperty('--scroll-y', (winScroll / height * 100) + '%');
     });
 
     // --- 3. نظام الوضع الليلي والنهاري ---
@@ -117,11 +119,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "nav.portfolio": "أعمالنا", 
             "nav.pricing": "الأسعار", 
             "nav.faq": "الأسئلة", 
+            "nav.contact": "تواصل معنا",
             "hero.badge": "✨ حلول إبداعية متكاملة",
             "hero.title": "نصنع التأثير والتألق لعلامتك التجارية",
             "hero.desc": "نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.",
             "services.title": "ماذا نقدم لك؟",
-            "services.subtitle": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر"
+            "services.desc": "خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر"
         },
         en: {
             "nav.services": "Services", 
@@ -129,11 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "nav.portfolio": "Portfolio", 
             "nav.pricing": "Pricing", 
             "nav.faq": "FAQ", 
+            "nav.contact": "Contact Us",
             "hero.badge": "✨ Integrated Creative Solutions",
             "hero.title": "We Create Impact & Brilliance for Your Brand",
             "hero.desc": "We help you grow and expand with modern, innovative marketing methods and designs tailored to your aspirations.",
             "services.title": "What We Offer?",
-            "services.subtitle": "Comprehensive services designed to take your project to the next level"
+            "services.desc": "Comprehensive services designed to take your project to the next level"
         },
         tr: {
             "nav.services": "Hizmetlerimiz", 
@@ -141,11 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
             "nav.portfolio": "Projelerimiz", 
             "nav.pricing": "Fiyatlar", 
             "nav.faq": "SSS", 
+            "nav.contact": "İletişim",
             "hero.badge": "✨ Entegre Yaratıcı Çözümler",
             "hero.title": "Markanız İçin Etki ve Parlaklık Yaratıyoruz",
             "hero.desc": "Hedeflerinize uygun modern, yenilikçi pazarlama yöntemleri ve tasarımlarla büyümenize yardımcı oluyoruz.",
             "services.title": "Neler Sunuyoruz?",
-            "services.subtitle": "Projenizi bir üst seviyeye taşımak için tasarlanmış kapsamlı hizmetler"
+            "services.desc": "Projenizi bir üst seviyeye taşımak için tasarlanmış kapsamlı hizmetler"
         }
     };
 
@@ -165,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 5. النافذة المنبثقة (Modal & Lightbox) ---
+    // --- 5. النافذة المنبثقة (Modal & Lightbox) وتفعيل النقر على صور المعرض ---
     const glassModal = document.getElementById('glassModal');
     const lightboxView = document.getElementById('lightboxView');
     const orderView = document.getElementById('orderView');
@@ -192,12 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (glassModal) glassModal.classList.add('active');
     };
 
-    window.switchToOrderView = function() {
-        if (lightboxView) lightboxView.style.display = 'none';
-        if (orderView) orderView.style.display = 'block';
-        if (orderProjectName) orderProjectName.innerText = `الخدمة المطلوبة: ${currentProject}`;
-    };
-
     window.closeGlassModal = function() {
         if (glassModal) glassModal.classList.remove('active');
     };
@@ -207,6 +206,22 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target === glassModal) closeGlassModal();
         });
     }
+
+    document.querySelectorAll('.portfolio-item, .portfolio-card, [onclick*="openLightbox"]').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('button') || e.target.closest('a')) return;
+            
+            const img = card.querySelector('img');
+            const titleEl = card.querySelector('h3, h4, .project-title');
+            const imgSrc = img ? img.src : '';
+            const title = titleEl ? titleEl.innerText : 'تصميم مميز';
+            
+            if (imgSrc) {
+                window.openLightbox(imgSrc, title);
+            }
+        });
+    });
 
     // --- 6. إرسال طلب الواتساب ---
     window.sendWhatsAppOrder = function(e) {
@@ -275,72 +290,46 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. مولد لوحة الألوان الذكي المتوافق مع HTML ---
-    const baseColorPicker = document.getElementById('baseColorPicker');
+    // --- 9. دولاب الألوان المتحرك والسلس ---
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
-    function generatePalette(hexColor) {
+    function generateRainbowPalette() {
         if (!paletteContainer) return;
         paletteContainer.innerHTML = '';
 
-        // تحويل Hex إلى RGB
-        let r = parseInt(hexColor.slice(1, 3), 16);
-        let g = parseInt(hexColor.slice(3, 5), 16);
-        let b = parseInt(hexColor.slice(5, 7), 16);
+        const wrapper = document.createElement('div');
+        wrapper.className = 'palette-scroll-wrapper';
 
-        // توليد درجات ألوان متناسقة
-        const shades = [
-            { name: "أساسي", val: hexColor },
-            { name: "فاتح 1", val: lightenDarkenColor(hexColor, 30) },
-            { name: "فاتح 2", val: lightenDarkenColor(hexColor, 60) },
-            { name: "داكن 1", val: lightenDarkenColor(hexColor, -30) },
-            { name: "داكن 2", val: lightenDarkenColor(hexColor, -60) }
+        const track = document.createElement('div');
+        track.className = 'palette-track';
+
+        const colorsList = [
+            "#7C3AED", "#8B5CF6", "#A855F7", "#D946EF", 
+            "#EC4899", "#F43F5E", "#EF4444", "#F59E0B", 
+            "#10B981", "#06B6D4", "#3B82F6", "#6366F1"
         ];
 
-        shades.forEach(shade => {
-            const box = document.createElement('div');
-            box.style.background = shade.val;
-            box.style.padding = '15px 10px';
-            box.style.borderRadius = '10px';
-            box.style.color = '#fff';
-            box.style.cursor = 'pointer';
-            box.style.fontWeight = 'bold';
-            box.style.fontSize = '12px';
-            box.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-            box.style.transition = 'transform 0.2s';
-            box.innerHTML = `${shade.name}<br><span style="font-size:10px; opacity:0.9;">${shade.val}</span>`;
-            
-            box.addEventListener('click', () => {
-                navigator.clipboard.writeText(shade.val);
-                alert(`تم نسخ كود اللون: ${shade.val}`);
+        for (let j = 0; j < 2; j++) {
+            colorsList.forEach(colorHex => {
+                const colorCard = document.createElement('div');
+                colorCard.className = 'color-card-item';
+                colorCard.style.backgroundColor = colorHex;
+                
+                colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.4); padding: 3px 8px; border-radius: 6px;">${colorHex}</span>`;
+
+                colorCard.addEventListener('click', () => {
+                    navigator.clipboard.writeText(colorHex);
+                    alert(`تم نسخ كود اللون: ${colorHex}`);
+                });
+
+                track.appendChild(colorCard);
             });
-
-            paletteContainer.appendChild(box);
-        });
-    }
-
-    function lightenDarkenColor(col, amt) {
-        let usePound = false;
-        if (col[0] == "#") {
-            col = col.slice(1);
-            usePound = true;
         }
-        let num = parseInt(col, 16);
-        let r = (num >> 16) + amt;
-        if (r > 255) r = 255; else if (r < 0) r = 0;
-        let b = ((num >> 8) & 0x00ff) + amt;
-        if (b > 255) b = 255; else if (b < 0) b = 0;
-        let g = (num & 0x0000ff) + amt;
-        if (g > 255) g = 255; else if (g < 0) g = 0;
-        return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16).padStart(6, '0');
+
+        wrapper.appendChild(track);
+        paletteContainer.appendChild(wrapper);
     }
 
-    if (baseColorPicker) {
-        generatePalette(baseColorPicker.value);
-        baseColorPicker.addEventListener('input', (e) => {
-            generatePalette(e.target.value);
-        });
-    }
+    generateRainbowPalette();
 
 });
-            
