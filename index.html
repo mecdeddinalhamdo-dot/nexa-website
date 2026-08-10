@@ -330,7 +330,6 @@
 <a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
     <i class="fa-brands fa-whatsapp"></i>  
 </a>  
-
 <!-- زر روبوت الذكاء الاصطناعي العائم -->
 <div id="nexa-ai-bot" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
     
@@ -373,9 +372,9 @@
     </button>
 </div>
 
-<!-- كود البرمجة بلغة JavaScript -->
+<!-- دوال الجافاسكريبت الخاصة بالروبوت -->
 <script>
-const whatsappNumber = "905364391849";
+const nexaWhatsappNumber = "905364391849";
 
 function toggleChat() {
     const chatWindow = document.getElementById('chat-window');
@@ -384,6 +383,7 @@ function toggleChat() {
 
 function appendMessage(sender, text) {
     const messagesContainer = document.getElementById('chat-messages');
+    if (!messagesContainer) return;
     const msgDiv = document.createElement('div');
     
     if(sender === 'user') {
@@ -399,15 +399,14 @@ function appendMessage(sender, text) {
 function handleBotResponse(userText) {
     const lowerText = userText.toLowerCase();
     
-    // التحقق إذا كان السؤال يتعلق بالأسعار أو التكلفة
     if(lowerText.includes('سعر') || lowerText.includes('اسعار') || lowerText.includes('تكلفة') || lowerText.includes('كم') || lowerText.includes('الأسعار')) {
         setTimeout(() => {
-            const reply = `بخصوص الأسعار والتفاصيل المالية، يرجى التواصل مباشرة مع مالكي عبر الرابط التالي:<br><a href="https://wa.me/${whatsappNumber}?text=مرحباً، أستفسر عن أسعار خدمات NEXA" target="_blank" class="text-green-500 underline font-bold mt-1 inline-block">تواصل عبر واتساب 💬</a>`;
+            const reply = `بخصوص الأسعار والتفاصيل المالية، يرجى التواصل مباشرة مع مالكي عبر الرابط التالي:<br><a href="https://wa.me/${nexaWhatsappNumber}?text=مرحباً، أستفسر عن أسعار خدمات NEXA" target="_blank" class="text-green-500 underline font-bold mt-1 inline-block">تواصل عبر واتساب 💬</a>`;
             appendMessage('bot', reply);
         }, 600);
     } else {
         setTimeout(() => {
-            const reply = `شكراً لتواصلك! لمعرفة تفاصيل أكثر أو للحديث عن مشروعك، يمكنك التواصل مباشرة عبر واتساب:<br><a href="https://wa.me/${whatsappNumber}" target="_blank" class="text-green-500 underline font-bold mt-1 inline-block">محادثة واتساب 💬</a>`;
+            const reply = `شكراً لتواصلك! لمعرفة تفاصيل أكثر أو للحديث عن مشروعك، يمكنك التواصل مباشرة عبر واتساب:<br><a href="https://wa.me/${nexaWhatsappNumber}" target="_blank" class="text-green-500 underline font-bold mt-1 inline-block">محادثة واتساب 💬</a>`;
             appendMessage('bot', reply);
         }, 600);
     }
@@ -415,6 +414,7 @@ function handleBotResponse(userText) {
 
 function sendMessage() {
     const inputField = document.getElementById('user-input');
+    if (!inputField) return;
     const text = inputField.value.trim();
     if(!text) return;
     
@@ -434,8 +434,8 @@ function handleKeyPress(e) {
         sendMessage();
     }
 }
-                </script>
+            </script>
     
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>  
-                </html>
+</html>
