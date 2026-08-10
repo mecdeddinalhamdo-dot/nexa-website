@@ -373,10 +373,66 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    
     // --- 9. مولد لوحة الألوان الذكي وتطبيقه على الموقع بالكامل ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
+
+    function hexToHSL(H) {
+        let r = 0, g = 0, b = 0;
+        if (H.length == 4) {
+            r = "0x" + H[1] + H[1];
+            g = "0x" + H[2] + H[2];
+            b = "0x" + H[3] + H[3];
+        } else if (H.length == 7) {
+            r = "0x" + H[1] + H[2];
+            g = "0x" + H[3] + H[4];
+            b = "0x" + H[5] + H[6];
+        }
+        r /= 255; g /= 255; b /= 255;
+        let cmin = Math.min(r,g,b), cmax = Math.max(r,g,b), delta = cmax - cmin;
+        let h = 0, s = 0, l = 0;
+
+        if (delta == 0) h = 0;
+        else if (cmax == r) h = ((g - b) / delta) % 6;
+        else if (cmax == g) h = (b - r) / delta + 2;
+        else h = (r - g) / delta + 4;
+
+        h = Math.round(h * 60);
+        if (h < 0) h += 360;
+
+        l = (cmax + cmin) / 2;
+        s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+        s = +(s * 100).toFixed(1);
+        l = +(l * 100).toFixed(1);
+
+        return { h, s, l };
+    }
+
+    function hslToHex(h, s, l) {
+        s /= 100;
+        l /= 100;
+        let c = (1 - Math.abs(2 * l - 1)) * s,
+            x = c * (1 - Math.abs((h / 60) % 2 - 1)),
+            m = l - c/2,
+            r = 0, g = 0, b = 0;
+
+        if (0 <= h && h < 60) { r = c; g = x; b = 0; }
+        else if (60 <= h && h < 120) { r = x; g = c; b = 0; }
+        else if (120 <= h && h < 180) { r = 0; g = c; b = x; }
+        else if (180 <= h && h < 240) { r = 0; g = x; b = c; }
+        else if (240 <= h && h < 300) { r = x; g = 0; b = c; }
+        else if (300 <= h && h < 360) { r = c; g = 0; b = x; }
+
+        r = Math.round((r + m) * 255).toString(16);
+        g = Math.round((g + m) * 255).toString(16);
+        b = Math.round((b + m) * 255).toString(16);
+
+        if (r.length == 1) r = "0" + r;
+        if (g.length == 1) g = "0" + g;
+        if (b.length == 1) b = "0" + b;
+
+        return "#" + r + g + b;
+    }
 
     function applyPaletteToSite(hexColor) {
         if (!paletteContainer) return;
@@ -388,9 +444,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const primaryColor = hexColor.toUpperCase();
         const primaryDark = hslToHex(hsl.h, hsl.s, Math.max(15, hsl.l - 20));
         const primaryLight = hslToHex(hsl.h, hsl.s, Math.min(85, hsl.l + 20));
-        const accentColor = hslToHex((hsl.h + 180) % 360, hsl.s, hsl.l); // لون مكمل للتباين
+        const accentColor = hslToHex((hsl.h + 180) % 360, hsl.s, hsl.l);
 
-        // 2. تطبيق الألوان فوراً على متغيرات الـ CSS الخاصة بالموقع
+        // 2. تطبيق الألوان فوراً على متغيرات الـ CSS الخاص بالموقع
         document.documentElement.style.setProperty('--primary-color', primaryColor);
         document.documentElement.style.setProperty('--primary-dark', primaryDark);
         document.documentElement.style.setProperty('--primary-light', primaryLight);
@@ -432,11 +488,7 @@ document.addEventListener("DOMContentLoaded", () => {
             applyPaletteToSite(e.target.value);
         });
 
-        // تشغيل أولي باللون المختار
         applyPaletteToSite(baseColorPicker.value);
-    }
-    
-    
     }
 
     // --- 10. نظام تقييم النجوم وإضافة التعليقات ---
@@ -456,7 +508,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        star.addEventListener('mouseleave', () => {
+                star.addEventListener('mouseleave', () => {
             stars.forEach((s, i) => {
                 s.classList.remove('hover');
                 if (i >= window.selectedRating) {
@@ -466,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-                star.addEventListener('click', () => {
+        star.addEventListener('click', () => {
             window.selectedRating = index + 1;
             stars.forEach((s, i) => {
                 if (i < window.selectedRating) {
@@ -499,7 +551,7 @@ document.addEventListener("DOMContentLoaded", () => {
             card.innerHTML = `
                 <div class="review-stars">${starsHtml}</div>
                 <p>"${rev.comment}"</p>
-                <h4 style="color: #7c3aed; margin-top: 10px;">- ${rev.name}</h4>
+                <h4 style="color: var(--primary-color, #7c3aed); margin-top: 10px;">- ${rev.name}</h4>
             `;
             userReviewsContainer.prepend(card);
         });
@@ -507,4 +559,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.loadReviews();
 });
-            
