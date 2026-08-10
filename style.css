@@ -15,6 +15,11 @@
     --glass-border: rgba(168, 85, 247, 0.3);
     --primary-glow: #7c3aed;
     --accent-glow: #a855f7;
+
+    /* إضافات الميزات الجديدة (ألوان التدرج والحدود) */
+    --accent-cyan: #00f2fe;
+    --glow-gradient: linear-gradient(135deg, rgba(124, 58, 237, 0.6), rgba(168, 85, 247, 0.6));
+    --font-family: 'Tajawal', 'Inter', sans-serif;
 }
 
 [data-theme="dark"], html.dark {
@@ -49,8 +54,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Tajawal', 'Inter', sans-serif;
+    font-family: var(--font-family);
     scroll-behavior: smooth;
+    cursor: none; /* إخفاء مؤشر الماوس الافتراضي لتفعيل Custom Cursor */
 }
 
 body {
@@ -62,7 +68,7 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* تأثير الخلفية المضيئة بالبنفسجي حسب التمرير */
+/* تأثير الخلفية المضيئة بالبنفسجي مع شبكة خفيفة (Micro-textures Grid) */
 body::before {
     content: '';
     position: fixed;
@@ -70,7 +76,11 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(circle at 50% var(--scroll-y, 50%), rgba(124, 58, 237, 0.18) 0%, transparent 65%);
+    background: 
+        radial-gradient(circle at 50% var(--scroll-y, 50%), rgba(124, 58, 237, 0.18) 0%, transparent 65%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 30px 30px, 30px 30px;
     pointer-events: none;
     z-index: -1;
     transition: background 0.1s ease-out;
@@ -286,15 +296,38 @@ header {
     gap: 30px;
 }
 
+/* Glass Card التطوير الكامل مع تأثير الإضاءة الحدودية (Dynamic Glow Border) */
 .card, .portfolio-card, .calc-container, .palette-box, .faq-container {
+    position: relative;
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease-out, background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     padding: 40px 30px;
+    overflow: hidden;
+}
+
+/* حد زجاجي مضيء يتفعل عند تحريك الماوس فوق البطاقات */
+.card::before, .portfolio-card::before, .calc-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: var(--glow-gradient);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.card:hover::before, .portfolio-card:hover::before, .calc-container:hover::before {
+    opacity: 1;
 }
 
 .card:hover, .portfolio-card:hover {
@@ -329,7 +362,7 @@ header {
     line-height: 1.6;
 }
 
-/* Portfolio */
+/* Portfolio & 3D Tilt Effect */
 .portfolio {
     max-width: 1200px;
     margin: 0 auto;
@@ -425,7 +458,7 @@ header {
     box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
 }
 
-/* Calculator */
+/* Calculator & Interactive Sliders */
 .calculator-sec { 
     max-width: 900px; 
     margin: 0 auto; 
@@ -472,6 +505,18 @@ header {
 .calc-text { 
     font-weight: 600; 
     color: var(--text-main); 
+}
+
+/* تحسين السلايدر التفاعلي ليكون عصرياً ومطابقاً لنيون البنفسجي */
+.slider-input {
+    width: 100%;
+    height: 8px;
+    border-radius: 5px;
+    background: var(--border);
+    outline: none;
+    accent-color: var(--primary);
+    cursor: pointer;
+    margin: 10px 0;
 }
 
 .calc-result {
@@ -902,20 +947,4 @@ footer {
     100% { transform: translateX(50%); }
 }
 
-/* تنسيق إضافي لبطاقات الإحصائيات والأزرار لتناسب الوضع الداكن والفاتح */
-.stat-card {
-    background: rgba(255, 255, 255, 0.7);
-    transition: transform 0.3s ease;
-}
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
-[data-theme="dark"] .stat-card {
-    background: rgba(255, 255, 255, 0.03) !important;
-}
-
-.filter-btn:hover {
-    background: #7c3aed !important;
-    color: #fff !important;
-}
+/* تنسيق إضافي لبطاقات الإحصائيات والأزرار لتناسب الوضع الداكن والفاتح
