@@ -949,28 +949,125 @@ footer {
 
 /* تنسيق إضافي لبطاقات الإحصائيات والأزرار لتناسب الوضع الداكن والفاتح
 
-/* --- تنسيقات نظام التقييم والتعليقات --- */
+/* --- تنسيقات قسم التقييم والتعليقات المحدثة --- */
+.add-review-sec {
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    clear: both;
+}
+
+.review-box {
+    max-width: 650px;
+    margin: 0 auto 50px auto;
+    background: rgba(124, 58, 237, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: inherit;
+    font-size: 15px;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(124, 58, 237, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    color: inherit !important;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: #7c3aed;
+}
+
+/* تنسيق النجوم */
+.star-rating {
+    display: flex;
+    gap: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    direction: ltr;
+    justify-content: flex-end;
+}
+
 .star-rating .fa-star {
-    color: #ccc;
+    color: rgba(255, 255, 255, 0.3);
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .star-rating .fa-star.active,
 .star-rating .fa-star.hover {
-    color: #f59e0b; /* لون ذهبي للنجوم المحددة */
+    color: #f59e0b;
 }
 
 .star-rating .fa-star:hover {
     transform: scale(1.2);
 }
 
+/* زر إرسال التقييم */
+.btn-submit-review {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-submit-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
+
+/* شبكة عرض التقييمات */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
 .user-review-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(124, 58, 237, 0.2);
+    border-radius: 16px;
+    padding: 25px;
     text-align: right;
-    position: relative;
+    box-sizing: border-box;
 }
 
 .user-review-card .review-stars {
     color: #f59e0b;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: 16px;
 }
