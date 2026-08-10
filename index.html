@@ -330,7 +330,30 @@
 <a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
     <i class="fa-brands fa-whatsapp"></i>  
 </a>  
+<!-- زر فتح الدردشة العائم -->
+<button id="nexaChatToggle" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #7C3AED; color: white; border: none; border-radius: 50px; padding: 12px 20px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(124,58,237,0.4); display: flex; align-items: center; gap: 8px; font-family: inherit;">
+    <i class="fa-solid fa-robot"></i> مساعد NEXA الذكي
+</button>
 
+<!-- نافذة الدردشة -->
+<div id="nexaChatWindow" style="position: fixed; bottom: 80px; left: 20px; z-index: 9999; width: 340px; height: 420px; background: rgba(15, 15, 25, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(124, 58, 237, 0.4); border-radius: 16px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <!-- رأس النافذة -->
+    <div style="background: #7C3AED; color: white; padding: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+        <span>خدمة عملاء NEXA</span>
+        <button id="nexaCloseBtn" style="background: none; border: none; color: white; cursor: pointer; font-size: 16px;">✕</button>
+    </div>
+    <!-- صندوق الرسائل -->
+    <div id="nexaMessages" style="flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #fff;">
+        <div style="background: rgba(124, 58, 237, 0.25); padding: 8px 12px; border-radius: 8px; max-width: 85%;">أهلاً بك في NEXA! كيف يمكنني مساعدتك في خدماتنا وأسعارنا اليوم؟</div>
+    </div>
+    <!-- إدخال النص -->
+    <div style="padding: 10px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 5px;">
+        <input type="text" id="nexaInput" placeholder="اكتب استفسارك هنا..." style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 8px; border-radius: 8px; color: white; outline: none; font-size: 12px;">
+        <button id="nexaSendBtn" style="background: #7C3AED; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer;"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+    
+    
 <script src="script.js"></script>
 </body>  
 </html>
