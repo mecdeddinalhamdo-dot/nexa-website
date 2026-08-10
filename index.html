@@ -11,19 +11,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
     <link rel="stylesheet" href="style.css">  
     <style>  
+        /* تثبيت متغيرات الألوان وجعل الوضع النهري (الفاتح) هو الافتراضي */  
         :root {  
             --bg-color: #ffffff;  
             --text-color: #1f2937;  
         }  
 
+        /* الوضع الافتراضي (النهري/الفاتح) */  
         body {  
             background-color: var(--bg-color) !important;  
             color: var(--text-color) !important;  
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
-            padding: 0;
         }  
 
+        /* تطبيق الوضع المظلم فقط عند تفعيله يدوياً عبر الكلاس أو السمة، أو استجابة لنظام الجهاز إذا لم يكن الوضع الفاتح مفرضاً */  
         [data-theme="dark"] body, html.dark body {  
             background-color: #0f0728 !important;  
             color: #ffffff !important;  
@@ -34,6 +34,7 @@
             color: #ffffff !important;  
         }  
 
+        /* تحويل البطاقات والعناصر إلى تصميم زجاجي شفاف في الوضع المظلم فقط */  
         [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box,  
         html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box {  
             background: rgba(255, 255, 255, 0.03) !important;  
@@ -43,18 +44,31 @@
         }  
 
         @keyframes logoGlow {  
-            0%, 100% { box-shadow: 0 0 5px rgba(124, 58, 237, 0.3); border-color: rgba(124, 58, 237, 0.4); }  
-            50% { box-shadow: 0 0 15px rgba(124, 58, 237, 0.8); border-color: rgba(168, 85, 247, 1); }  
+            0% {  
+                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);  
+                border-color: rgba(124, 58, 237, 0.4);  
+            }  
+            50% {  
+                box-shadow: 0 0 15px rgba(124, 58, 237, 0.8), 0 0 25px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(124, 58, 237, 0.4);  
+                border-color: rgba(168, 85, 247, 1);  
+            }  
+            100% {  
+                box-shadow: 0 0 5px rgba(124, 58, 237, 0.3), 0 0 10px rgba(124, 58, 237, 0.2), inset 0 0 5px rgba(124, 58, 237, 0.1);  
+                border-color: rgba(124, 58, 237, 0.4);  
+            }  
         }  
 
         .glow-border {  
             border: 2px solid rgba(124, 58, 237, 0.4);  
             border-radius: 15px;  
             animation: logoGlow 3s infinite ease-in-out;  
+            transition: all 0.3s ease;  
         }  
-        
-        .faq-answer { display: none; margin-top: 10px; }
-        .faq-item.active .faq-answer { display: block; }
+
+        .glow-border-thin {  
+            border: 1px solid rgba(124, 58, 237, 0.5);  
+            animation: logoGlow 2.5s infinite ease-in-out;  
+        }  
     </style>
 </head>  
 <body>  
@@ -65,14 +79,14 @@
 <header>  
     <div class="nav-container">  
         <a href="#" class="logo">  
-            <img src="Logo (1).png" alt="NEXA Logo" onerror="this.style.display='none'">  
+            <img src="Logo (1).png" alt="NEXA Logo">  
         </a>  
         <ul class="nav-links">  
-            <li><a href="#services">خدماتنا</a></li>  
-            <li><a href="#about">من نحن</a></li>  
-            <li><a href="#portfolio">أعمالنا</a></li>  
-            <li><a href="#pricing">الأسعار</a></li>  
-            <li><a href="#faq">الأسئلة</a></li>  
+            <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>  
+            <li><a href="#about" data-i18n="nav.about">من نحن</a></li>  
+            <li><a href="#portfolio" data-i18n="nav.portfolio">أعمالنا</a></li>  
+            <li><a href="#pricing" data-i18n="nav.pricing">الأسعار</a></li>  
+            <li><a href="#faq" data-i18n="nav.faq">الأسئلة</a></li>  
         </ul>  
         <div class="nav-actions">  
             <div class="lang-selector">  
@@ -91,39 +105,39 @@
 </header>  
 
 <section class="hero">  
-    <div class="badge">✨ حلول إبداعية متكاملة</div>  
-    <h1>نصنع <span>التأثير والتألق</span> لعلامتك التجارية</h1>  
-    <p>نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>  
+    <div class="badge" data-i18n="hero.badge">✨ حلول إبداعية متكاملة</div>  
+    <h1 data-i18n="hero.title">نصنع <span>التأثير والتألق</span> لعلامتك التجارية</h1>  
+    <p data-i18n="hero.desc">نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.</p>  
 </section>  
 
 <!-- قسم الخدمات -->  
 <section id="services" class="services">  
     <div class="section-head">  
-        <h2>ماذا نقدم لك؟</h2>  
-        <p>خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر</p>  
+        <h2 data-i18n="services.title">ماذا نقدم لك؟</h2>  
+        <p data-i18n="services.subtitle">خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر</p>  
     </div>  
     <div class="grid-cards">  
         <div class="card">  
             <div class="card-icon"><i class="fa-solid fa-pen-nib"></i></div>  
-            <h3>التصميم والهوية البصرية</h3>  
-            <p>بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.</p>  
+            <h3 data-i18n="services.s1_title">التصميم والهوية البصرية</h3>  
+            <p data-i18n="services.s1_desc">بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.</p>  
         </div>  
         <div class="card">  
             <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>  
-            <h3>التسويق الرقمي</h3>  
-            <p>حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.</p>  
+            <h3 data-i18n="services.s2_title">التسويق الرقمي</h3>  
+            <p data-i18n="services.s2_desc">حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.</p>  
         </div>  
         <div class="card">  
             <div class="card-icon"><i class="fa-solid fa-code"></i></div>  
-            <h3>تطوير المواقع والتطبيقات</h3>  
-            <p>تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات.</p>  
+            <h3 data-i18n="services.s3_title">تطوير المواقع والتطبيقات</h3>  
+            <p data-i18n="services.s3_desc">تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات.</p>  
         </div>  
     </div>  
 </section>  
 
-<!-- قسم مولد الألوان الذكي -->  
+<!-- قسم توليد لوحة الألوان الذكية -->  
 <section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" style="margin-bottom: 30px;">  
+    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">  
         <h2>مولد لوحة الألوان الذكي</h2>  
         <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
     </div>  
@@ -133,6 +147,7 @@
             <label for="baseColorPicker" style="font-weight: bold;">اختر اللون الأساسي:</label>  
             <input type="color" id="baseColorPicker" value="#7c3aed" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">  
         </div>  
+          
         <div id="paletteColorsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; margin-top: 25px;"></div>  
     </div>  
 </section>  
@@ -140,19 +155,19 @@
 <!-- قسم معرض الأعمال -->  
 <section id="portfolio" class="portfolio">  
     <div class="section-head">  
-        <h2>معرض أعمالنا</h2>  
-        <p>نظرة على بعض مشاريعنا والتصاميم المبتكرة</p>  
+        <h2 data-i18n="portfolio.title">معرض أعمالنا</h2>  
+        <p data-i18n="portfolio.subtitle">نظرة على بعض مشاريعنا والتصاميم المبتكرة</p>  
     </div>  
     <div class="portfolio-grid">  
         <div class="portfolio-card tilt-card">  
             <div class="portfolio-img" onclick="openLightbox('work1.jpg', 'تصميم هوية بصرية متكاملة')">  
                 <img src="work1.jpg" alt="تصميم هوية بصرية متكاملة">  
-                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span>تكبير التصميم</span></div>  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
                 <h4>تصميم هوية بصرية متكاملة</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('تصميم هوية بصرية متكاملة')">  
-                    <i class="fa-brands fa-whatsapp"></i> <span>اطلب مثل هذا</span>  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
                 </button>  
             </div>  
         </div>  
@@ -160,12 +175,12 @@
         <div class="portfolio-card tilt-card">  
             <div class="portfolio-img" onclick="openLightbox('work2.jpg', 'حملة تسويقية واحترافية')">  
                 <img src="work2.jpg" alt="حملة تسويقية واحترافية">  
-                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span>تكبير التصميم</span></div>  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
                 <h4>حملة تسويقية واحترافية</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('حملة تسويقية واحترافية')">  
-                    <i class="fa-brands fa-whatsapp"></i> <span>اطلب مثل هذا</span>  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
                 </button>  
             </div>  
         </div>  
@@ -173,12 +188,12 @@
         <div class="portfolio-card tilt-card">  
             <div class="portfolio-img" onclick="openLightbox('work3.jpg', 'واجهة تطبيق ذكية')">  
                 <img src="work3.jpg" alt="واجهة تطبيق ذكية">  
-                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span>تكبير التصميم</span></div>  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
             </div>  
             <div class="portfolio-info">  
                 <h4>واجهة تطبيق ذكية</h4>  
                 <button class="btn-order-card" onclick="openOrderModal('واجهة تطبيق ذكية')">  
-                    <i class="fa-brands fa-whatsapp"></i> <span>اطلب مثل هذا</span>  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
                 </button>  
             </div>  
         </div>  
@@ -188,33 +203,33 @@
 <!-- حاسبة الأسعار التفاعلية -->  
 <section id="pricing" class="calculator-sec">  
     <div class="section-head">  
-        <h2>حاسبة التكلفة التقديرية</h2>  
-        <p>حدد الخدمات التي تحتاجها لتعرف التكلفة المتوقعة لمشروعك</p>  
+        <h2 data-i18n="calc.title">حاسبة التكلفة التقديرية</h2>  
+        <p data-i18n="calc.subtitle">حدد الخدمات التي تحتاجها لتعرف التكلفة المتوقعة لمشروعك</p>  
     </div>  
     <div class="calc-container">  
         <div class="calc-options">  
             <label class="calc-item">  
                 <input type="checkbox" value="50" class="calc-checkbox">  
-                <span class="calc-text">تصميم شعار احترافي ($50)</span>  
+                <span class="calc-text" data-i18n="calc.logo">تصميم شعار احترافي ($50)</span>  
             </label>  
             <label class="calc-item">  
                 <input type="checkbox" value="150" class="calc-checkbox">  
-                <span class="calc-text">هوية بصرية كاملة ($150)</span>  
+                <span class="calc-text" data-i18n="calc.identity">هوية بصرية كاملة ($150)</span>  
             </label>  
             <label class="calc-item">  
                 <input type="checkbox" value="100" class="calc-checkbox">  
-                <span class="calc-text">إدارة منصات التواصل (شهرياً - $100)</span>  
+                <span class="calc-text" data-i18n="calc.social">إدارة منصات التواصل (شهرياً - $100)</span>  
             </label>  
             <label class="calc-item">  
                 <input type="checkbox" value="300" class="calc-checkbox">  
-                <span class="calc-text">تطوير موقع تعريفي ($300)</span>  
+                <span class="calc-text" data-i18n="calc.web">تطوير موقع تعريفي ($300)</span>  
             </label>  
         </div>  
         <div class="calc-result">  
-            <h3>التكلفة الإجمالية التقديرية:</h3>  
+            <h3 data-i18n="calc.total_text">التكلفة الإجمالية التقديرية:</h3>  
             <div class="total-price">$<span id="totalPrice">0</span></div>  
             <button class="btn-order-card" onclick="orderFromCalc()" style="margin-top: 20px;">  
-                <i class="fa-brands fa-whatsapp"></i> <span>اطلب هذه الحزمة الآن</span>  
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="calc.order_btn">اطلب هذه الحزمة الآن</span>  
             </button>  
         </div>  
     </div>  
@@ -223,18 +238,18 @@
 <!-- آراء العملاء -->  
 <section class="testimonials">  
     <div class="section-head">  
-        <h2>ماذا يقول عملاؤنا؟</h2>  
+        <h2 data-i18n="testimonials.title">ماذا يقول عملاؤنا؟</h2>  
     </div>  
     <div class="grid-cards">  
         <div class="card testimonial-card">  
             <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
             <p>"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
-            <h4>- شركة الأفق</h4>  
+            <h4 data-i18n="testimonials.c1_name">- شركة الأفق</h4>  
         </div>  
         <div class="card testimonial-card">  
             <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
             <p>"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
-            <h4>- متجر كريستال</h4>  
+            <h4 data-i18n="testimonials.c2_name">- متجر كريستال</h4>  
         </div>  
     </div>  
 </section>  
@@ -242,22 +257,22 @@
 <!-- الأسئلة الشائعة -->  
 <section id="faq" class="faq-sec">  
     <div class="section-head">  
-        <h2>الأسئلة الشائعة</h2>  
+        <h2 data-i18n="faq.title">الأسئلة الشائعة</h2>  
     </div>  
     <div class="faq-container">  
-        <div class="faq-item" style="cursor: pointer;">  
+        <div class="faq-item">  
             <div class="faq-question">  
-                <span>كم يستغرق تصميم الهوية البصرية؟</span>  
+                <span data-i18n="faq.q1">كم يستغرق تصميم الهوية البصرية؟</span>  
                 <i class="fa-solid fa-chevron-down"></i>  
             </div>  
-            <div class="faq-answer"><p>عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.</p></div>  
+            <div class="faq-answer"><p data-i18n="faq.a1">عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.</p></div>  
         </div>  
-        <div class="faq-item" style="cursor: pointer;">  
+        <div class="faq-item">  
             <div class="faq-question">  
-                <span>هل تسلمون الملفات المصدرية المفتوحة؟</span>  
+                <span data-i18n="faq.q2">هل تسلمون الملفات المصدرية المفتوحة؟</span>  
                 <i class="fa-solid fa-chevron-down"></i>  
             </div>  
-            <div class="faq-answer"><p>نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.</p></div>  
+            <div class="faq-answer"><p data-i18n="faq.a2">نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.</p></div>  
         </div>  
     </div>  
 </section>  
@@ -267,10 +282,10 @@
     <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">  
         <div class="footer-brand">  
             <h3>NEXA</h3>  
-            <p>حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>  
+            <p data-i18n="footer.desc">حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>  
         </div>  
         <div>  
-            <a href="https://wa.me/905364391849" class="btn-contact" style="display: inline-block;">تواصل معنا</a>  
+            <a href="#contact" class="btn-contact" data-i18n="nav.contact" style="display: inline-block;">تواصل معنا</a>  
         </div>  
     </div>  
     <div class="footer-bottom">  
@@ -278,35 +293,33 @@
     </div>  
 </footer>  
 
-<!-- النافذة المنبثقة للصور والطلبات -->  
-<div id="glassModal" class="glass-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 99999; justify-content: center; align-items: center;">  
-    <div class="glass-modal-content" style="background: #0f0728; border: 1px solid rgba(124,58,237,0.4); border-radius: 20px; padding: 25px; width: 90%; max-width: 450px; color: #fff; position: relative;">  
-        <button class="close-modal" onclick="closeGlassModal()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer;">&times;</button>  
-        
+<!-- النافذة المنبثقة -->  
+<div id="glassModal" class="glass-modal">  
+    <div class="glass-modal-content">  
+        <button class="close-modal" onclick="closeGlassModal()">&times;</button>  
         <div id="lightboxView" class="modal-view">  
-            <div class="modal-img-container"><img id="modalImg" src="" alt="معاينة" style="width: 100%; border-radius: 12px;"></div>  
-            <div class="modal-details" style="margin-top: 15px; text-align: center;">  
+            <div class="modal-img-container"><img id="modalImg" src="" alt="معاينة"></div>  
+            <div class="modal-details">  
                 <h3 id="modalTitle">اسم التصميم</h3>  
-                <button class="btn-modal-order" onclick="switchToOrderView()" style="background: #7c3aed; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-family: 'Tajawal'; margin-top: 10px;">  
-                    <i class="fa-brands fa-whatsapp"></i> <span>اطلب تصميم مشابه الآن</span>  
+                <button class="btn-modal-order" onclick="switchToOrderView()">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.order_this">اطلب تصميم مشابه الآن</span>  
                 </button>  
             </div>  
         </div>  
-
         <div id="orderView" class="modal-view" style="display: none;">  
-            <h3>طلب تصميم سريع</h3>  
-            <p id="orderProjectName" class="order-subtitle" style="color: #a855f7; font-weight: bold;"></p>  
+            <h3 data-i18n="modal.order_title">طلب تصميم سريع</h3>  
+            <p id="orderProjectName" class="order-subtitle"></p>  
             <form id="whatsappForm" onsubmit="sendWhatsAppOrder(event)">  
-                <div class="input-group" style="margin-bottom: 15px;">  
-                    <label style="display: block; margin-bottom: 5px;">الاسم الكريم:</label>  
-                    <input type="text" id="custName" required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #7c3aed; background: rgba(255,255,255,0.1); color: #fff;">  
+                <div class="input-group">  
+                    <label data-i18n="modal.name_label">الاسم الكريم:</label>  
+                    <input type="text" id="custName" required>  
                 </div>  
-                <div class="input-group" style="margin-bottom: 15px;">  
-                    <label style="display: block; margin-bottom: 5px;">تفاصيل إضافية (اختياري):</label>  
-                    <textarea id="custDetails" rows="3" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #7c3aed; background: rgba(255,255,255,0.1); color: #fff;"></textarea>  
+                <div class="input-group">  
+                    <label data-i18n="modal.details_label">تفاصيل إضافية (اختياري):</label>  
+                    <textarea id="custDetails" rows="3"></textarea>  
                 </div>  
-                <button type="submit" class="btn-submit-order" style="width: 100%; background: #22c55e; color: #fff; border: none; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: bold; font-family: 'Tajawal';">  
-                    <i class="fa-brands fa-whatsapp"></i> <span>إرسال الطلب عبر الواتساب</span>  
+                <button type="submit" class="btn-submit-order">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.send_btn">إرسال الطلب عبر الواتساب</span>  
                 </button>  
             </form>  
         </div>  
@@ -314,53 +327,10 @@
 </div>  
 
 <!-- زر الواتساب العائم -->  
-<a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب" style="position: fixed; bottom: 25px; left: 25px; z-index: 9999; background: #22c55e; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.5); text-decoration: none;">  
+<a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
     <i class="fa-brands fa-whatsapp"></i>  
 </a>  
 
-<!-- روبوت المحادثة الذكي (NEXA Bot) -->
-<div id="nexa-ai-bot" style="position: fixed; bottom: 25px; right: 25px; z-index: 99999;">
-    
-    <!-- نافذة المحادثة -->
-    <div id="chat-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 320px; background: #0f0728; border: 2px solid #7c3aed; border-radius: 20px; box-shadow: 0 10px 30px rgba(124,58,237,0.5); overflow: hidden;">
-        
-        <!-- رأس النافذة -->
-        <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 12px 15px; color: #fff; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%;"></div>
-                <span style="font-weight: bold; font-size: 14px;">مساعد NEXA الذكي</span>
-            </div>
-            <button onclick="toggleChat()" style="background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
-        </div>
-        
-        <!-- الرسائل -->
-        <div id="chat-messages" style="padding: 15px; height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #fff; text-align: right;">
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 85%; align-self: flex-start;">
-                أهلاً بك في NEXA! أنا مساعدك الذكي، كيف يمكنني مساعدتك اليوم؟
-            </div>
-        </div>
-        
-        <!-- حقل الكتابة والأزرار -->
-        <div style="padding: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.3);">
-            <div style="margin-bottom: 8px; display: flex; gap: 5px; flex-wrap: wrap;">
-                <button onclick="sendQuickReply('ما هي خدماتكم؟')" style="background: rgba(124, 58, 237, 0.3); border: 1px solid rgba(124, 58, 237, 0.5); color: #fff; padding: 4px 8px; border-radius: 12px; font-size: 11px; cursor: pointer;">ما هي خدماتكم؟</button>
-                <button onclick="sendQuickReply('كم تبلغ الأسعار؟')" style="background: rgba(124, 58, 237, 0.3); border: 1px solid rgba(124, 58, 237, 0.5); color: #fff; padding: 4px 8px; border-radius: 12px; font-size: 11px; cursor: pointer;">كم تبلغ الأسعار؟</button>
-            </div>
-            <div style="display: flex; gap: 6px;">
-                <input type="text" id="user-input" placeholder="اكتب سؤالك هنا..." style="flex: 1; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #fff; outline: none;" onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()" style="background: #7c3aed; border: none; color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: bold;">إرسال</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- تأثير نبض الروبوت -->
-    <style>
-        @keyframes bounceRobot {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-6px) scale(1.05); }
-        }
-        .robot-btn-anim { animation: bounceRobot 2.5s infinite ease-in-out; }
-    </style>
-
-    <!-- زر الأيقونة -->
-    <button onclick="toggleChat()" clas
+<script src="script.js"></script>
+</body>  
+</html>
