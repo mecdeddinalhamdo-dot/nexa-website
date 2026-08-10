@@ -23,7 +23,7 @@
             color: var(--text-color) !important;  
         }  
 
-        /* تطبيق الوضع المظلم فقط عند تفعيله يدوياً عبر الكلاس أو السمة، أو استجابة لنظام الجهاز إذا لم يكن الوضع الفاتح مفرضاً */  
+        /* تطبيق الوضع المظلم فقط عند تفعيله يدوياً عبر الكلاس أو السمة */  
         [data-theme="dark"] body, html.dark body {  
             background-color: #0f0728 !important;  
             color: #ffffff !important;  
@@ -35,8 +35,8 @@
         }  
 
         /* تحويل البطاقات والعناصر إلى تصميم زجاجي شفاف في الوضع المظلم فقط */  
-        [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box,  
-        html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box {  
+        [data-theme="dark"] .portfolio-card, [data-theme="dark"] .card, [data-theme="dark"] .calculator-sec, [data-theme="dark"] .palette-box, [data-theme="dark"] .review-box,  
+        html.dark .portfolio-card, html.dark .card, html.dark .calculator-sec, html.dark .palette-box, html.dark .review-box {  
             background: rgba(255, 255, 255, 0.03) !important;  
             backdrop-filter: blur(12px) !important;  
             -webkit-backdrop-filter: blur(12px) !important;  
@@ -65,9 +65,16 @@
             transition: all 0.3s ease;  
         }  
 
-        .glow-border-thin {  
-            border: 1px solid rgba(124, 58, 237, 0.5);  
-            animation: logoGlow 2.5s infinite ease-in-out;  
+        /* تنسيقات نظام التقييم بالنجوم الجديد */  
+        .star-rating-input i {  
+            cursor: pointer;  
+            color: #cbd5e1;  
+            transition: color 0.2s;  
+        }  
+        .star-rating-input i.active,  
+        .star-rating-input i:hover,  
+        .star-rating-input i:hover ~ i {  
+            color: #f59e0b;  
         }  
     </style>
 </head>  
@@ -86,6 +93,7 @@
             <li><a href="#about" data-i18n="nav.about">من نحن</a></li>  
             <li><a href="#portfolio" data-i18n="nav.portfolio">أعمالنا</a></li>  
             <li><a href="#pricing" data-i18n="nav.pricing">الأسعار</a></li>  
+            <li><a href="#reviewsSection" data-i18n="nav.reviews">التقييمات</a></li>  
             <li><a href="#faq" data-i18n="nav.faq">الأسئلة</a></li>  
         </ul>  
         <div class="nav-actions">  
@@ -137,7 +145,7 @@
 
 <!-- قسم توليد لوحة الألوان الذكية -->  
 <section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
-    <div class="section-head" data-aos="fade-up" style="margin-bottom: 30px;">  
+    <div class="section-head" style="margin-bottom: 30px;">  
         <h2>مولد لوحة الألوان الذكي</h2>  
         <p>اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
     </div>  
@@ -210,46 +218,79 @@
         <div class="calc-options">  
             <label class="calc-item">  
                 <input type="checkbox" value="50" class="calc-checkbox">  
-                <span class="calc-text" data-i18n="calc.logo">تصميم شعار احترافي ($50)</span>  
+                <span class="calc-text">تصميم شعار احترافي ($50)</span>  
             </label>  
             <label class="calc-item">  
                 <input type="checkbox" value="150" class="calc-checkbox">  
-                <span class="calc-text" data-i18n="calc.identity">هوية بصرية كاملة ($150)</span>  
+                <span class="calc-text">هوية بصرية كاملة ($150)</span>  
             </label>  
             <label class="calc-item">  
                 <input type="checkbox" value="100" class="calc-checkbox">  
-                <span class="calc-text" data-i18n="calc.social">إدارة منصات التواصل (شهرياً - $100)</span>  
+                <span class="calc-text">إدارة منصات التواصل (شهرياً - $100)</span>  
             </label>  
             <label class="calc-item">  
                 <input type="checkbox" value="300" class="calc-checkbox">  
-                <span class="calc-text" data-i18n="calc.web">تطوير موقع تعريفي ($300)</span>  
+                <span class="calc-text">تطوير موقع تعريفي ($300)</span>  
             </label>  
         </div>  
         <div class="calc-result">  
-            <h3 data-i18n="calc.total_text">التكلفة الإجمالية التقديرية:</h3>  
+            <h3>التكلفة الإجمالية التقديرية:</h3>  
             <div class="total-price">$<span id="totalPrice">0</span></div>  
             <button class="btn-order-card" onclick="orderFromCalc()" style="margin-top: 20px;">  
-                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="calc.order_btn">اطلب هذه الحزمة الآن</span>  
+                <i class="fa-brands fa-whatsapp"></i> <span>اطلب هذه الحزمة الآن</span>  
             </button>  
         </div>  
     </div>  
 </section>  
 
-<!-- آراء العملاء -->  
-<section class="testimonials">  
-    <div class="section-head">  
-        <h2 data-i18n="testimonials.title">ماذا يقول عملاؤنا؟</h2>  
+<!-- قسم التقييمات وإضافة تعليق جديد (الميزة الجديدة) -->  
+<section id="reviewsSection" style="padding: 60px 20px; max-width: 900px; margin: 0 auto;">  
+    <div class="section-head" style="text-align: center; margin-bottom: 40px;">  
+        <h2>آراء وتقييمات العملاء</h2>  
+        <p>شاركنا بريكك وأضف تقييمك للموقع بالنجوم</p>  
     </div>  
-    <div class="grid-cards">  
-        <div class="card testimonial-card">  
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
-            <p>"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
-            <h4 data-i18n="testimonials.c1_name">- شركة الأفق</h4>  
+
+    <!-- نموذج إضافة تعليق وتقييم -->  
+    <div class="review-box" style="background: rgba(0,0,0,0.02); padding: 30px; border-radius: 16px; border: 1px solid rgba(124, 58, 237, 0.2); margin-bottom: 40px;">  
+        <h3 style="margin-bottom: 20px; font-size: 20px;">أضف تقييمك وتعليقك</h3>  
+        <form id="addReviewForm" onsubmit="submitUserReview(event)">  
+            <div style="margin-bottom: 15px;">  
+                <label style="display: block; margin-bottom: 8px; font-weight: 500;">تقييمك بالنجوم:</label>  
+                <div class="star-rating-input" id="starInputContainer" style="font-size: 24px; display: flex; gap: 5px;">  
+                    <i class="fa-solid fa-star active" data-value="1" onclick="setRating(1)"></i>  
+                    <i class="fa-solid fa-star active" data-value="2" onclick="setRating(2)"></i>  
+                    <i class="fa-solid fa-star active" data-value="3" onclick="setRating(3)"></i>  
+                    <i class="fa-solid fa-star active" data-value="4" onclick="setRating(4)"></i>  
+                    <i class="fa-solid fa-star active" data-value="5" onclick="setRating(5)"></i>  
+                </div>  
+            </div>  
+            <div style="margin-bottom: 15px;">  
+                <label style="display: block; margin-bottom: 8px; font-weight: 500;">اسمك الكريم:</label>  
+                <input type="text" id="reviewerName" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: transparent; color: inherit;">  
+            </div>  
+            <div style="margin-bottom: 15px;">  
+                <label style="display: block; margin-bottom: 8px; font-weight: 500;">التعليق أو الرأي:</label>  
+                <textarea id="reviewerText" rows="3" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; background: transparent; color: inherit;"></textarea>  
+            </div>  
+            <button type="submit" style="background: #7C3AED; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s;">  
+                إرسال التقييم  
+            </button>  
+        </form>  
+    </div>  
+
+    <!-- قائمة عرض التقييمات -->  
+    <div id="reviewsListContainer" style="display: grid; gap: 20px;">  
+        <!-- التقييم الافتراضي 1 -->  
+        <div class="card testimonial-card" style="padding: 20px; border-radius: 12px;">  
+            <div class="stars" style="color: #f59e0b; margin-bottom: 8px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
+            <p style="margin-bottom: 10px;">"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
+            <h4 style="font-size: 14px; opacity: 0.8;">- شركة الأفق</h4>  
         </div>  
-        <div class="card testimonial-card">  
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
-            <p>"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
-            <h4 data-i18n="testimonials.c2_name">- متجر كريستال</h4>  
+        <!-- التقييم الافتراضي 2 -->  
+        <div class="card testimonial-card" style="padding: 20px; border-radius: 12px;">  
+            <div class="stars" style="color: #f59e0b; margin-bottom: 8px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
+            <p style="margin-bottom: 10px;">"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
+            <h4 style="font-size: 14px; opacity: 0.8;">- متجر كريستال</h4>  
         </div>  
     </div>  
 </section>  
@@ -257,22 +298,22 @@
 <!-- الأسئلة الشائعة -->  
 <section id="faq" class="faq-sec">  
     <div class="section-head">  
-        <h2 data-i18n="faq.title">الأسئلة الشائعة</h2>  
+        <h2>الأسئلة الشائعة</h2>  
     </div>  
     <div class="faq-container">  
         <div class="faq-item">  
             <div class="faq-question">  
-                <span data-i18n="faq.q1">كم يستغرق تصميم الهوية البصرية؟</span>  
+                <span>كم يستغرق تصميم الهوية البصرية؟</span>  
                 <i class="fa-solid fa-chevron-down"></i>  
             </div>  
-            <div class="faq-answer"><p data-i18n="faq.a1">عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.</p></div>  
+            <div class="faq-answer"><p>عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.</p></div>  
         </div>  
         <div class="faq-item">  
             <div class="faq-question">  
-                <span data-i18n="faq.q2">هل تسلمون الملفات المصدرية المفتوحة؟</span>  
+                <span>هل تسلمون الملفات المصدرية المفتوحة؟</span>  
                 <i class="fa-solid fa-chevron-down"></i>  
             </div>  
-            <div class="faq-answer"><p data-i18n="faq.a2">نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.</p></div>  
+            <div class="faq-answer"><p>نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.</p></div>  
         </div>  
     </div>  
 </section>  
@@ -284,7 +325,7 @@
         <!-- معلومات الشركة -->
         <div class="footer-brand" style="flex: 1; min-width: 250px;">  
             <h3 style="color: #fff; font-size: 24px; margin-bottom: 10px;">NEXA</h3>  
-            <p data-i18n="footer.desc" style="color: #aaa; font-size: 14px; line-height: 1.6;">حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>  
+            <p style="color: #aaa; font-size: 14px; line-height: 1.6;">حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>  
         </div>  
 
         <!-- طرق التواصل والبريد الإلكتروني -->
@@ -312,57 +353,4 @@
             <div style="display: flex; gap: 15px; font-size: 20px;">
                 <a href="https://wa.me/905364391849" target="_blank" title="WhatsApp" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-whatsapp"></i></a>
                 <a href="https://instagram.com" target="_blank" title="Instagram" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://t.me" target="_blank" title="Telegram" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://facebook.com" target="_blank" title="Facebook" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-facebook-f"></i></a>
-            </div>
-        </div>
-
-    </div>  
-    
-    <div class="footer-bottom" style="text-align: center; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; color: #888; font-size: 13px;">  
-        <p>© 2026 NEXA. جميع الحقوق محفوظة.</p>  
-    </div>  
-</footer>
-
-<!-- النافذة المنبثقة -->  
-<div id="glassModal" class="glass-modal">  
-    <div class="glass-modal-content">  
-        <button class="close-modal" onclick="closeGlassModal()">&times;</button>  
-        <div id="lightboxView" class="modal-view">  
-            <div class="modal-img-container"><img id="modalImg" src="" alt="معاينة"></div>  
-            <div class="modal-details">  
-                <h3 id="modalTitle">اسم التصميم</h3>  
-                <button class="btn-modal-order" onclick="switchToOrderView()">  
-                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.order_this">اطلب تصميم مشابه الآن</span>  
-                </button>  
-            </div>  
-        </div>  
-        <div id="orderView" class="modal-view" style="display: none;">  
-            <h3 data-i18n="modal.order_title">طلب تصميم سريع</h3>  
-            <p id="orderProjectName" class="order-subtitle"></p>  
-            <form id="whatsappForm" onsubmit="sendWhatsAppOrder(event)">  
-                <div class="input-group">  
-                    <label data-i18n="modal.name_label">الاسم الكريم:</label>  
-                    <input type="text" id="custName" required>  
-                </div>  
-                <div class="input-group">  
-                    <label data-i18n="modal.details_label">تفاصيل إضافية (اختياري):</label>  
-                    <textarea id="custDetails" rows="3"></textarea>  
-                </div>  
-                <button type="submit" class="btn-submit-order">  
-                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.send_btn">إرسال الطلب عبر الواتساب</span>  
-                </button>  
-            </form>  
-        </div>  
-    </div>  
-</div>  
-
-<!-- زر الواتساب العائم -->  
-<a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
-    <i class="fa-brands fa-whatsapp"></i>  
-</a>  
-    
-<script src="script.js"></script>
-</body>  
-                </html>
-                                                         
+                <a href="https://t.me" target="_blank" title="Telegram" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: fle
