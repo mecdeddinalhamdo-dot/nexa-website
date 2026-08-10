@@ -330,55 +330,65 @@
 <a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
     <i class="fa-brands fa-whatsapp"></i>  
 </a>  
+<!-- زر الواتساب العائم -->
+<a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
+    <i class="fa-brands fa-whatsapp"></i>  
+</a>  
+
 <!-- زر روبوت الذكاء الاصطناعي العائم -->
-<div id="nexa-ai-bot" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
+<div id="nexa-ai-bot" style="position: fixed; bottom: 25px; right: 25px; z-index: 9999; font-family: 'Tajawal', sans-serif;">
     
     <!-- نافذة المحادثة (مخفية افتراضياً) -->
-    <div id="chat-window" class="hidden mb-4 w-80 bg-white/80 dark:bg-gray-900/85 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300">
+    <div id="chat-window" style="display: none; margin-bottom: 15px; width: 320px; background: rgba(15, 7, 40, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); overflow: hidden;">
+        
         <!-- رأس نافذة المحادثة -->
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 text-white flex justify-between items-center">
-            <div class="flex items-center space-x-2 space-x-reverse">
-                <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                <span class="font-bold text-sm">مساعد NEXA الذكي</span>
+        <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 15px; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%;"></div>
+                <span style="font-weight: bold; font-size: 14px;">مساعد NEXA الذكي</span>
             </div>
-            <button onclick="toggleChat()" class="text-white/80 hover:text-white text-lg font-bold focus:outline-none">&times;</button>
+            <button onclick="toggleChat()" style="background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
         </div>
         
         <!-- جسم المحادثة والرسائل -->
-        <div id="chat-messages" class="p-4 h-64 overflow-y-auto flex flex-col space-y-3 text-sm text-gray-800 dark:text-gray-200">
-            <div class="bg-gray-100 dark:bg-gray-800 p-3 rounded-xl rounded-br-none max-w-[85%] self-start">
+        <div id="chat-messages" style="padding: 15px; height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #fff; text-align: right;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 85%; align-self: flex-start;">
                 أهلاً بك في NEXA! أنا مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟
             </div>
         </div>
         
         <!-- حقل الكتابة والأزرار السريعة -->
-        <div class="p-3 border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-900/50">
-            <div class="flex gap-2 mb-2">
-                <button onclick="sendQuickReply('ما هي الأسعار؟')" class="text-xs bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 px-2.5 py-1 rounded-full hover:bg-blue-100 transition">كم تبلغ الأسعار؟</button>
+        <div style="padding: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.2);">
+            <div style="margin-bottom: 8px;">
+                <button onclick="sendQuickReply('كم تبلغ الأسعار؟')" style="background: rgba(124, 58, 237, 0.3); border: 1px solid rgba(124, 58, 237, 0.5); color: #fff; padding: 5px 10px; border-radius: 15px; font-size: 11px; cursor: pointer;">كم تبلغ الأسعار؟</button>
             </div>
-            <div class="flex items-center gap-2">
-                <input type="text" id="user-input" placeholder="اكتب رسالتك هنا..." class="flex-1 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 text-gray-800 dark:text-gray-200" onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()" class="bg-blue-600 text-white p-2 rounded-xl hover:bg-blue-700 transition">
-                    <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                </button>
+            <div style="display: flex; gap: 8px;">
+                <input type="text" id="user-input" placeholder="اكتب رسالتك هنا..." style="flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; padding: 8px 12px; font-size: 12px; color: #fff; outline: none;" onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()" style="background: #7c3aed; border: none; color: #fff; padding: 8px 14px; border-radius: 10px; cursor: pointer; font-size: 12px;">إرسال</button>
             </div>
         </div>
     </div>
 
     <!-- أيقونة الزر العائم -->
-    <button onclick="toggleChat()" class="relative group bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-full shadow-2xl hover:scale-105 transition-transform duration-300 focus:outline-none flex items-center justify-center">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-gray-900"></span>
+    <button onclick="toggleChat()" style="background: linear-gradient(135deg, #7c3aed, #4f46e5); border: none; color: #white; width: 55px; height: 55px; border-radius: 50%; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.3s;">
+        <i class="fa-solid fa-robot" style="font-size: 24px; color: #fff;"></i>
     </button>
 </div>
 
-<!-- دوال الجافاسكريبت الخاصة بالروبوت -->
+<!-- ملف السكريبت الأساسي للموقع -->
+<script src="script.js"></script>
+
+<!-- كود روبوت الذكاء الاصطناعي -->
 <script>
 const nexaWhatsappNumber = "905364391849";
 
 function toggleChat() {
     const chatWindow = document.getElementById('chat-window');
-    chatWindow.classList.toggle('hidden');
+    if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+        chatWindow.style.display = 'block';
+    } else {
+        chatWindow.style.display = 'none';
+    }
 }
 
 function appendMessage(sender, text) {
@@ -387,9 +397,9 @@ function appendMessage(sender, text) {
     const msgDiv = document.createElement('div');
     
     if(sender === 'user') {
-        msgDiv.className = "bg-blue-600 text-white p-3 rounded-xl rounded-bl-none max-w-[85%] self-end";
+        msgDiv.style.cssText = "background: #7c3aed; color: #fff; padding: 10px 14px; border-radius: 12px; border-bottom-left-radius: 0; max-width: 85%; align-self: flex-end;";
     } else {
-        msgDiv.className = "bg-gray-100 dark:bg-gray-800 p-3 rounded-xl rounded-br-none max-w-[85%] self-start";
+        msgDiv.style.cssText = "background: rgba(255, 255, 255, 0.1); color: #fff; padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 85%; align-self: flex-start;";
     }
     msgDiv.innerHTML = text;
     messagesContainer.appendChild(msgDiv);
@@ -401,14 +411,14 @@ function handleBotResponse(userText) {
     
     if(lowerText.includes('سعر') || lowerText.includes('اسعار') || lowerText.includes('تكلفة') || lowerText.includes('كم') || lowerText.includes('الأسعار')) {
         setTimeout(() => {
-            const reply = `بخصوص الأسعار والتفاصيل المالية، يرجى التواصل مباشرة مع مالكي عبر الرابط التالي:<br><a href="https://wa.me/${nexaWhatsappNumber}?text=مرحباً، أستفسر عن أسعار خدمات NEXA" target="_blank" class="text-green-500 underline font-bold mt-1 inline-block">تواصل عبر واتساب 💬</a>`;
+            const reply = `بخصوص الأسعار والتفاصيل المالية، يرجى التواصل مباشرة مع مالكي:<br><a href="https://wa.me/${nexaWhatsappNumber}?text=مرحباً، أستفسر عن أسعار خدمات NEXA" target="_blank" style="color: #4ade80; font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 5px;">مراسلة المالك عبر واتساب 💬</a>`;
             appendMessage('bot', reply);
-        }, 600);
+        }, 500);
     } else {
         setTimeout(() => {
-            const reply = `شكراً لتواصلك! لمعرفة تفاصيل أكثر أو للحديث عن مشروعك، يمكنك التواصل مباشرة عبر واتساب:<br><a href="https://wa.me/${nexaWhatsappNumber}" target="_blank" class="text-green-500 underline font-bold mt-1 inline-block">محادثة واتساب 💬</a>`;
+            const reply = `شكراً لتواصلك! يمكنك مناقشة تفاصيل مشروعك مباشرة مع المالك هنا:<br><a href="https://wa.me/${nexaWhatsappNumber}" target="_blank" style="color: #4ade80; font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 5px;">مراسلة المالك عبر واتساب 💬</a>`;
             appendMessage('bot', reply);
-        }, 600);
+        }, 500);
     }
 }
 
@@ -434,8 +444,7 @@ function handleKeyPress(e) {
         sendMessage();
     }
 }
-            </script>
-    
-<script src="script.js"></script>
-</body>  
+</script>
+</body>
 </html>
+    
