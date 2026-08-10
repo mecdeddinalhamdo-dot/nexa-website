@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // تكبير المؤشر عند الإشارة إلى العناصر التفاعلية
-    const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, .card, .portfolio-img, .calc-item, .faq-question, .color-card-item');
+    const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, .card, .portfolio-card, .calc-item, .faq-question, .color-card-item');
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
     });
 
     // 2. تأثير الظهور السلس عند التمرير (Scroll Reveal)
-    const revealElements = document.querySelectorAll('.card, .portfolio-card, .calc-container, .faq-item, .section-head, .stat-card');
+    const revealElements = document.querySelectorAll('.card, .portfolio-card, .calc-container, .faq-item, .section-head, .palette-box');
     revealElements.forEach(el => el.classList.add('reveal'));
 
     function handleScrollReveal() {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.addEventListener('scroll', handleScrollReveal);
-    handleScrollReveal(); // تشغيل أولي للعناصر المرئية فوراً
+    handleScrollReveal(); // تشغيل أولي فور التحميل
 
     // --- 1. تأثير خلفية الجرافيك والتصميم المتحركة ---
     const canvas = document.getElementById('purpleWindCanvas');
@@ -236,6 +236,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (glassModal) glassModal.classList.add('active');
     };
 
+    window.switchToOrderView = function() {
+        if (lightboxView) lightboxView.style.display = 'none';
+        if (orderView) orderView.style.display = 'block';
+        if (orderProjectName) orderProjectName.innerText = `الخدمة المطلوبة: ${currentProject}`;
+    };
+
     window.closeGlassModal = function() {
         if (glassModal) glassModal.classList.remove('active');
     };
@@ -372,4 +378,4 @@ document.addEventListener("DOMContentLoaded", () => {
     generateRainbowPalette();
 
 });
-                
+                            
