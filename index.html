@@ -335,7 +335,7 @@
     <i class="fa-brands fa-whatsapp"></i>  
 </a>  
 
-<!-- زر روبوت الذكاء الاصطناعي المتحرك واللافت للنظر -->
+<!-- زر روبوت الذكاء الاصطناعي المتحرك (بشكل الروبوت المخصص) -->
 <div id="nexa-ai-bot" style="position: fixed; bottom: 25px; right: 25px; z-index: 9999; font-family: 'Tajawal', sans-serif;">
     
     <!-- نافذة المحادثة (مخفية افتراضياً) -->
@@ -345,7 +345,7 @@
         <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 15px; color: #fff; display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; align-items: center; gap: 8px;">
                 <div style="width: 10px; height: 10px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e;"></div>
-                <span style="font-weight: bold; font-size: 14px;">روبوت NEXA الذكي</span>
+                <span style="font-weight: bold; font-size: 14px;">مساعد NEXA الذكي</span>
             </div>
             <button onclick="toggleChat()" style="background: none; border: none; color: #fff; font-size: 22px; cursor: pointer;">&times;</button>
         </div>
@@ -353,7 +353,7 @@
         <!-- جسم المحادثة والرسائل -->
         <div id="chat-messages" style="padding: 15px; height: 230px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #fff; text-align: right;">
             <div style="background: rgba(255, 255, 255, 0.1); padding: 10px 14px; border-radius: 12px; border-bottom-right-radius: 0; max-width: 85%; align-self: flex-start;">
-                أهلاً بك! أنا روبوت NEXA. اسألني عن خدماتنا، مميزاتنا، أو أي شيء تريده!
+                أهلاً بك في NEXA! أنا مساعدك الذكي، كيف يمكنني مساعدتك اليوم؟
             </div>
         </div>
         
@@ -370,31 +370,34 @@
         </div>
     </div>
 
-    <!-- أسلوب الحركة والنبض للروبوت لجذب الأنظار -->
+    <!-- تأثيرات حركية للتلويح ولفت الأنظار -->
     <style>
-        @keyframes robotBounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-6px) scale(1.05); }
+        @keyframes robotWave {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            20% { transform: rotate(-10deg) scale(1.05); }
+            40% { transform: rotate(10deg) scale(1.05); }
+            60% { transform: rotate(-10deg) scale(1.05); }
+            80% { transform: rotate(10deg) scale(1.05); }
         }
-        @keyframes robotPulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
+        @keyframes robotGlow {
+            0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.8); }
             70% { box-shadow: 0 0 0 15px rgba(124, 58, 237, 0); }
             100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
         }
-        .animated-robot-btn {
-            animation: robotBounce 2.5s infinite ease-in-out, robotPulseGlow 2s infinite;
+        .robot-avatar-btn {
+            animation: robotWave 3s infinite ease-in-out, robotGlow 2s infinite;
         }
     </style>
 
-    <!-- أيقونة الروبوت المتحركة واللافتة للأنظار -->
-    <button onclick="toggleChat()" class="animated-robot-btn" style="background: linear-gradient(135deg, #7c3aed, #4f46e5); border: 2px solid rgba(255,255,255,0.3); color: #fff; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative;">
-        <i class="fa-solid fa-robot" style="font-size: 26px;"></i>
-        <!-- نقطة تنبيه متحركة -->
-        <span style="position: absolute; top: 0; right: 0; width: 14px; height: 14px; background: #22c55e; border: 2px solid #fff; border-radius: 50%;"></span>
+    <!-- أيقونة الروبوت المصممة بصورة ثلاثية الأبعاد تلوح وتهتز -->
+    <button onclick="toggleChat()" class="robot-avatar-btn" style="background: #1e1b4b; border: 2px solid #7c3aed; width: 65px; height: 65px; border-radius: 50%; cursor: pointer; padding: 0; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center;">
+        <img src="robot-icon.png" alt="Robot Assistant" style="width: 100%; height: 100%; object-fit: cover;">
+        <!-- نقطة ترحيب خضراء صغيرة -->
+        <span style="position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; background: #22c55e; border: 2px solid #fff; border-radius: 50%;"></span>
     </button>
 </div>
 
-<!-- كود الاستجابة والذكاء الاصطناعي للروبوت -->
+<!-- كود تفاعل الروبوت -->
 <script>
 const nexaWhatsappNumber = "905364391849";
 
@@ -425,31 +428,27 @@ function appendMessage(sender, text) {
 function handleBotResponse(userText) {
     const lowerText = userText.toLowerCase();
     
-    // التحقق المخصص لسؤال الأسعار وتوجيهه للواتساب
     if(lowerText.includes('سعر') || lowerText.includes('اسعار') || lowerText.includes('تكلفة') || lowerText.includes('كم') || lowerText.includes('الأسعار')) {
         setTimeout(() => {
             const reply = `بخصوص الأسعار والتفاصيل المالية، يرجى التواصل مباشرة مع مالكي:<br><a href="https://wa.me/${nexaWhatsappNumber}?text=مرحباً، أستفسر عن أسعار خدمات NEXA" target="_blank" style="color: #4ade80; font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 5px;">تواصل مع المالك عبر واتساب 💬</a>`;
             appendMessage('bot', reply);
         }, 500);
     } 
-    // الرد على أسئلة الخدمات
     else if(lowerText.includes('خدمات') || lowerText.includes('خدمة') || lowerText.includes('ماذا تقدمون')) {
         setTimeout(() => {
             const reply = `نحن نقدم حلولاً إبداعية متكاملة تشمل: التصميم والهوية البصرية، التسويق الرقمي، وتطوير المواقع والتطبيقات بأعلى جودة!`;
             appendMessage('bot', reply);
         }, 500);
     }
-    // الرد على من نحن / عن الشركة
-    else if(lowerText.includes('من نحن') || lowerText.includes('شركة') || lowerText.includes('nexa')) {
+    else if(lowerText.includes('لوجو') || lowerText.includes('شعار') || lowerText.includes('تصميم')) {
         setTimeout(() => {
-            const reply = `نحن وكالة NEXA الإبداعية، نساعدك على النمو والتوسع بأساليب تسويقية وتصاميم حديثة ومبتكرة تناسب تطلعاتك.`;
+            const reply = `نحن نصمم شعارات وهوويات بصرية احترافية تناسب هوية مشروعك تماماً! هل ترغب بمساعدة أخرى؟`;
             appendMessage('bot', reply);
         }, 500);
     }
-    // الرد الافتراضي لأي سؤال آخر
     else {
         setTimeout(() => {
-            const reply = `سؤال جميل! يسعدنا مساعدتك في تحقيق أهدافك. إذا كان لديك أي استفسار آخر أو طلب خاص، يسعدنا استقبال رسالتك مباشرة عبر الواتساب:<br><a href="https://wa.me/${nexaWhatsappNumber}" target="_blank" style="color: #4ade80; font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 5px;">مراسلة المالك عبر واتساب 💬</a>`;
+            const reply = `أهلاً بك! يسعدنا مساعدتك في أي استفسار. تصفح الموقع أو أخبرنا بما تحتاجه لنلبي طلبك!`;
             appendMessage('bot', reply);
         }, 500);
     }
@@ -478,5 +477,3 @@ function handleKeyPress(e) {
     }
 }
 </script>
-
-    
