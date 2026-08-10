@@ -1,3 +1,41 @@
+// --- تعريف الدوال العالمية خارج حدث التحميل لضمان استدعائها من HTML مباشرة ---
+window.submitReview = function(e) {
+    if (e) e.preventDefault();
+    const nameInput = document.getElementById('reviewerName');
+    const commentInput = document.getElementById('reviewerComment');
+    const stars = document.querySelectorAll('.star-btn');
+
+    if (!window.selectedRating || window.selectedRating === 0) {
+        alert("يرجى اختيار عدد النجوم أولاً!");
+        return;
+    }
+
+    const newReview = {
+        name: nameInput ? nameInput.value : 'زائر',
+        rating: window.selectedRating,
+        comment: commentInput ? commentInput.value : '',
+        date: new Date().toLocaleDateString()
+    };
+
+    const savedReviews = JSON.parse(localStorage.getItem('nexa_reviews') || '[]');
+    savedReviews.push(newReview);
+    localStorage.setItem('nexa_reviews', JSON.stringify(savedReviews));
+
+    if (nameInput) nameInput.value = '';
+    if (commentInput) commentInput.value = '';
+    window.selectedRating = 0;
+
+    stars.forEach(s => {
+        s.classList.remove('active', 'fa-solid', 'hover');
+        s.classList.add('fa-regular');
+    });
+
+    if (typeof window.loadReviews === 'function') {
+        window.loadReviews();
+    }
+    alert("شكراً لك! تم إضافة تقييمك بنجاح.");
+};
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // --- 0. إضافات الميزات الجديدة (Custom Cursor + Scroll Reveal) ---
@@ -439,9 +477,9 @@ document.addEventListener("DOMContentLoaded", () => {
         generateDynamicPalette(baseColorPicker.value);
     }
 
-    // --- 10. نظام تقييم النجوم وإضافة التعليقات المكتمل ---
+    // --- 10. نظام تقييم النجوم وإضافة التعليقات ---
     const stars = document.querySelectorAll('.star-btn');
-    let selectedRating = 0;
+    window.selectedRating = 0;
 
     stars.forEach((star, index) => {
         star.addEventListener('mouseover', () => {
@@ -459,17 +497,17 @@ document.addEventListener("DOMContentLoaded", () => {
         star.addEventListener('mouseleave', () => {
             stars.forEach((s, i) => {
                 s.classList.remove('hover');
-                if (i >= selectedRating) {
+                if (i >= window.selectedRating) {
                     s.classList.remove('fa-solid');
                     s.classList.add('fa-regular');
                 }
             });
         });
 
-        star.addEventListener('click', () => {
-            selectedRating = index + 1;
+                star.addEventListener('click', () => {
+            window.selectedRating = index + 1;
             stars.forEach((s, i) => {
-                if (i < selectedRating) {
+                if (i < window.selectedRating) {
                     s.classList.add('active', 'fa-solid');
                     s.classList.remove('fa-regular');
                 } else {
@@ -480,9 +518,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // --- 11. تحميل وعرض التقييمات المحفوظة ---
     const userReviewsContainer = document.getElementById('userReviewsContainer');
 
-    function loadReviews() {
+    window.loadReviews = function() {
         if (!userReviewsContainer) return;
         const savedReviews = JSON.parse(localStorage.getItem('nexa_reviews') || '[]');
         userReviewsContainer.innerHTML = '';
@@ -502,8 +541,8 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             userReviewsContainer.prepend(card);
         });
-    }
+    };
 
-    window.submitReview = function(e) {
-        e.preventDefault();
-        const nameInput = document.getElementById('rev
+    window.loadReviews();
+});
+            
