@@ -226,14 +226,53 @@ document.addEventListener("DOMContentLoaded", () => {
         closeGlassModal();
     };
 
-    // --- 7. الحاسبة ---
+    // --- 7. حاسبة الأسعار التفاعلية بالعد السلس ---
     const calcCheckboxes = document.querySelectorAll('.calc-checkbox');
     const totalPriceEl = document.getElementById('totalPrice');
     let currentTotal = 0;
+
+    function animateValue(obj, start, end, duration) {
+        if (!obj) return;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            
+            const currentValue = Math.floor(progress * (end - start) + start);
+            obj.innerHTML = currentValue;
+
+            if (progress < 1) {
+                obj.style.transform = 'scale(1.1)';
+                obj.style.transition = 'transform 0.1s ease';
+                window.requestAnimationFrame(step);
+            } else {
+                obj.style.transform = 'scale(1)';
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
     calcCheckboxes.forEach(box => {
         box.addEventListener('change', () => {
-            currentTotal = Array.from(calcCheckboxes).filter(i => i.checked).reduce((sum, i) => sum + parseInt(i.value), 0);
-            if (totalPriceEl) totalPriceEl.innerText = currentTotal;
+            const card = box.closest('.calc-item') || box.parentElement;
+            if (box.checked) {
+                card.style.borderColor = 'var(--primary-color, #7c3aed)';
+                card.style.backgroundColor = 'rgba(124, 58, 237, 0.08)';
+            } else {
+                card.style.borderColor = '';
+                card.style.backgroundColor = '';
+            }
+
+            const newTotal = Array.from(calcCheckboxes)
+                .filter(i => i.checked)
+                .reduce((sum, i) => sum + parseInt(i.value), 0);
+            
+            if (totalPriceEl) {
+                let startValue = parseInt(totalPriceEl.innerText) || 0;
+                animateValue(totalPriceEl, startValue, newTotal, 450);
+            }
+            
+            currentTotal = newTotal;
         });
     });
 
@@ -254,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-        // --- 9. مولد لوحة الألوان الذكي وتغيير ألوان الموقع ---
+                             // --- 9. مولد لوحة الألوان الذكي وتغيير ألوان الموقع كلياً ---
     const baseColorPicker = document.getElementById('baseColorPicker');
     const paletteContainer = document.getElementById('paletteColorsContainer');
 
@@ -300,15 +339,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const primaryLight = hslToHex(hsl.h, hsl.s, Math.min(85, hsl.l + 20));
         const accentColor = hslToHex((hsl.h + 180) % 360, hsl.s, hsl.l);
 
+        // تطبيق الألوان على كافة متغيرات CSS الهيكلية
         document.documentElement.style.setProperty('--primary-color', primaryColor);
         document.documentElement.style.setProperty('--primary-dark', primaryDark);
         document.documentElement.style.setProperty('--primary-light', primaryLight);
         document.documentElement.style.setProperty('--accent-color', accentColor);
 
+        // توليد درجات اللوحة كاملة (غامق، أساسي، فاتح، ومكمل)
         const generatedColors = [
-            hslToHex(hsl.h, hsl.s, Math.max(15, hsl.l - 30)),
-            primaryDark, primaryColor, primaryLight,
-            hslToHex(hsl.h, hsl.s, Math.min(93, hsl.l + 30)), accentColor
+            hslToHex(hsl.h, hsl.s, Math.max(12, hsl.l - 35)),
+            primaryDark, 
+            primaryColor, 
+            primaryLight,
+            hslToHex(hsl.h, hsl.s, Math.min(94, hsl.l + 32)), 
+            accentColor
         ];
 
         const track = document.createElement('div');
@@ -317,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const colorCard = document.createElement('div');
             colorCard.className = 'color-card-item';
             colorCard.style.backgroundColor = colorHex;
-            colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.5); padding: 4px 8px; border-radius: 6px;">${colorHex}</span>`;
+            colorCard.innerHTML = `<span style="font-size: 11px; font-weight: bold; color: #fff; background: rgba(0,0,0,0.6); padding: 4px 8px; border-radius: 6px;">${colorHex}</span>`;
             colorCard.addEventListener('click', () => {
                 navigator.clipboard.writeText(colorHex);
                 alert(`تم نسخ كود اللون: ${colorHex}`);
@@ -360,6 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // --- 11. تحميل التقييمات ---
     const userReviewsContainer = document.getElementById('userReviewsContainer');
     window.loadReviews = function() {
         if (!userReviewsContainer) return;
@@ -383,3 +428,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.loadReviews();
 });
+                                          
