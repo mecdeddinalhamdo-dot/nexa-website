@@ -1396,3 +1396,80 @@ html.dark .logo img {
     filter: brightness(0) invert(1);
     opacity: 1;
 }
+
+/* ================================
+   NEXA - PERFORMANCE / SMOOTHNESS
+   ================================ */
+
+/* تحسين التمرير */
+html {
+    scroll-behavior: smooth;
+}
+
+/* تقليل الحركات على الأجهزة الضعيفة */
+@media (max-width: 768px) {
+
+    /* إيقاف المؤثرات الثقيلة */
+    .custom-cursor,
+    .cursor-spotlight {
+        display: none !important;
+    }
+
+    /* تخفيف الـ backdrop-filter */
+    .glass,
+    .glass-card,
+    .hero-logo-card,
+    .float-chip,
+    .ai-panel {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+
+    /* تخفيف حركة الـ Hero */
+    .hero-logo-card {
+        animation-duration: 10s !important;
+    }
+
+    /* تخفيف دوران الدوائر */
+    .hero-orbit {
+        animation-duration: 30s !important;
+    }
+
+    .orbit-one,
+    .orbit-two {
+        animation-duration: 30s !important;
+    }
+}
+
+/* الأجهزة الضعيفة */
+@media (max-width: 480px) {
+
+    .hero-orbit {
+        animation: none !important;
+        opacity: .5;
+    }
+
+    .float-chip {
+        animation: none !important;
+    }
+
+    .hero-logo-card {
+        animation: none !important;
+    }
+
+    /* منع الحركات الثقيلة */
+    * {
+        transition-duration: .2s;
+    }
+}
+
+/* احترام إعداد تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
