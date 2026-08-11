@@ -1381,3 +1381,18 @@ body::selection{background:var(--primary);color:#fff}
 .about-points{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}.about-points span{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--glass-card);font-size:12px}.about-points i{color:var(--primary)}
 .about-mark{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}.about-mark img{width:170px;height:170px;border-radius:42px;object-fit:contain;background:#fff;padding:15px;box-shadow:0 25px 55px rgba(41,45,56,.18)}.about-mark strong{font:900 30px Inter,sans-serif;letter-spacing:.08em;color:var(--nexa-dark);margin-top:16px}.about-mark small{font:800 9px Inter,sans-serif;letter-spacing:.3em;color:var(--primary)}
 @media(max-width:700px){.about-glass{grid-template-columns:1fr;padding:28px}.about-mark{order:-1}.about-mark img{width:130px;height:130px}}
+
+/* ===== تحسين شعار NEXA في الوضع الليلي ===== */
+
+[data-theme="dark"] .hero-logo-card img,
+html.dark .hero-logo-card img {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
+
+/* شعار الهيدر */
+[data-theme="dark"] .logo img,
+html.dark .logo img {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
