@@ -33,6 +33,7 @@ window.submitReview = function(e) {
     if (typeof window.loadReviews === 'function') {
         window.loadReviews();
     }
+
     alert("شكراً لك! تم إضافة تقييمك بنجاح.");
 };
 
@@ -191,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
         en: { "nav.services": "Services", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.pricing": "Pricing", "nav.faq": "FAQ", "nav.contact": "Contact Us" },
         tr: { "nav.services": "Hizmetlerimiz", "nav.about": "Hakkımızda", "nav.portfolio": "Projelerimiz", "nav.pricing": "Fiyatlar", "nav.faq": "SSS", "nav.contact": "İletişim" }
     };
+
     const langSelect = document.getElementById('langSelect');
     if (langSelect) {
         langSelect.addEventListener('change', (e) => {
@@ -444,4 +446,176 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.loadReviews();
 });
-                
+  const NEXA_PURPLE = '#6C2EFB';
+  const NEXA_DARK = '#292D38';
+
+  const translations = {
+    ar:{
+      'nav.services':'خدماتنا','nav.about':'من نحن','nav.portfolio':'أعمالنا','nav.pricing':'الأسعار','nav.faq':'الأسئلة','nav.contact':'تواصل معنا',
+      'hero.badge':'✦ Nexa Creative — حلول إبداعية متكاملة','hero.title':'نصنع التأثير والتألق لعلامتك التجارية','hero.desc':'نحوّل الأفكار إلى هويات وتجارب رقمية تترك انطباعاً لا يُنسى.','hero.start':'ابدأ مشروعك','hero.work':'شاهد أعمالنا','hero.stat1':'+ مشروع','hero.stat2':'+ هوية','hero.stat3':'% رضا',
+      'services.title':'ماذا نقدم لك؟','services.subtitle':'خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر','services.s1_title':'التصميم والهوية البصرية','services.s1_desc':'بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.','services.s2_title':'التسويق الرقمي','services.s2_desc':'حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.','services.s3_title':'تطوير المواقع والتطبيقات','services.s3_desc':'تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات.',
+      'portfolio.title':'معرض أعمالنا','portfolio.subtitle':'نظرة على بعض مشاريعنا والتصاميم المبتكرة','portfolio.zoom':'تكبير التصميم','portfolio.order_btn':'اطلب مثل هذا','portfolio.all':'الكل','portfolio.branding':'Branding','portfolio.marketing':'Marketing','portfolio.uiux':'UI/UX','portfolio.case':'عرض المشروع',
+      'calc.title':'حاسبة التكلفة التقديرية','calc.subtitle':'حدد الخدمات التي تحتاجها لتعرف التكلفة المتوقعة لمشروعك','calc.logo':'تصميم شعار احترافي ($50)','calc.identity':'هوية بصرية كاملة ($150)','calc.social':'إدارة منصات التواصل (شهرياً - $100)','calc.web':'تطوير موقع تعريفي ($300)','calc.total_text':'التكلفة الإجمالية التقديرية:','calc.order_btn':'اطلب هذه الحزمة الآن',
+      'testimonials.title':'ماذا يقول عملاؤنا؟','testimonials.c1_name':'- شركة الأفق','testimonials.c2_name':'- متجر كريستال',
+      'faq.title':'الأسئلة الشائعة','faq.q1':'كم يستغرق تصميم الهوية البصرية؟','faq.a1':'عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.','faq.q2':'هل تسلمون الملفات المصدرية المفتوحة؟','faq.a2':'نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.',
+      'footer.desc':'حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.','footer.contact':'تواصل معنا','footer.social':'تابعنا على منصات التواصل','footer.rights':'جميع الحقوق محفوظة.',
+      'about.title':'نصمم حضورك، لا مجرد صورة.','about.desc':'Nexa Creative استوديو إبداعي يركز على الهوية البصرية والتجارب الرقمية والتصميم الذي يخدم هدفاً واضحاً.','about.p1':'هوية قابلة للتوسع','about.p2':'تصميم يركز على المستخدم','about.p3':'تسليم منظم واحترافي',
+      'palette.title':'مولد لوحة الألوان الذكي','palette.subtitle':'اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً','palette.choose':'اختر اللون الأساسي:','palette.save':'حفظ اللوحة','palette.reset':'ألوان Nexa',
+      'reviews.add_title':'أضف تقييمك ورأيك','reviews.add_subtitle':'شاركونا انطباعكم عن خدماتنا لنستمر في تقديم الأفضل','reviews.name_label':'اسمك أو اسم شركتك:','reviews.name_placeholder':'أدخل اسمك هنا...','reviews.rating_label':'تقييمك:','reviews.comment_label':'تعليقك أو انطباعك:','reviews.comment_placeholder':'اكتب تعليقك هنا...','reviews.submit':'إرسال التقييم',
+      'modal.order_this':'اطلب تصميم مشابه الآن','modal.order_title':'طلب تصميم سريع','modal.name_label':'الاسم الكريم:','modal.details_label':'تفاصيل إضافية (اختياري):','modal.send_btn':'إرسال الطلب عبر الواتساب',
+      'why.title':'لماذا Nexa Creative؟','why.subtitle':'نمزج الاستراتيجية مع التصميم لنصنع حضوراً رقمياً واضحاً ومميزاً.','why.w1':'فكرة قبل الشكل','why.d1':'كل تفصيل بصري له هدف ورسالة، وليس مجرد زينة.','why.w2':'جودة بصرية عالية','why.d2':'نظام بصري متناسق يصلح للهوية والطباعة والمنصات الرقمية.','why.w3':'تنفيذ سريع ومرن','why.d3':'خطوات واضحة وتعديلات مرنة حتى تصل للنتيجة التي تريدها.','why.w4':'دعم بعد التسليم','why.d4':'نبقى قريبين منك لتسهيل استخدام ملفاتك وهويتك.',
+      'process.title':'من الفكرة إلى الإطلاق','process.subtitle':'أربع خطوات بسيطة، ونتيجة مصممة حول هدفك.','process.p1':'اكتشف','process.d1':'نفهم مشروعك وجمهورك واحتياجك الحقيقي.','process.p2':'خطط','process.d2':'نحدد الاتجاه البصري والرسالة والهيكل.','process.p3':'صمّم','process.d3':'نحوّل الخطة إلى تصميم احترافي قابل للاستخدام.','process.p4':'أطلق','process.d4':'نسلم الملفات ونجهزك للانطلاق بثقة.',
+      'compare.title':'شاهد التصميم من زاوية مختلفة','compare.subtitle':'يمكنك لاحقاً استبدال الصور بصور قبل/بعد مشاريعك الحقيقية.','compare.after':'FINAL DESIGN','compare.heading':'كل مشروع يمكن أن يتحول إلى قصة نجاح.','compare.desc':'أضف صور قبل/بعد الحقيقية لاحقاً، وسيظهر هذا القسم كعرض تفاعلي كامل بدون تغيير هوية الموقع.','compare.cta':'ابدأ مشروعاً جديداً',
+      'wizard.title':'ابنِ طلب مشروعك خلال دقيقة','wizard.subtitle':'اختر احتياجك وسنجهز لك رسالة احترافية جاهزة للإرسال عبر واتساب.','wizard.step1':'ما الخدمة التي تحتاجها؟','wizard.step2':'ما الميزانية التقريبية؟','wizard.step3':'متى تريد التسليم؟','wizard.step4':'أخبرنا عن فكرتك','wizard.week':'خلال أسبوع','wizard.two':'1 — 2 أسبوع','wizard.flex':'موعد مرن','wizard.back':'السابق','wizard.next':'التالي','wizard.send':'إرسال عبر واتساب','wizard.placeholder':'اكتب التفاصيل، رابط الحساب، اسم العلامة، أو أي ملاحظة مهمة...','wizard.name':'اسمك / اسم المشروع',
+      'reviews.summary':'آراء وتجارب العملاء تساعدنا على تطوير Nexa Creative باستمرار.',
+      'ai.subtitle':'مساعد إبداعي سريع','ai.welcome':'اكتب فكرتك وسأقترح لك الاتجاه البصري والخدمات المناسبة.','ai.placeholder':'اكتب فكرتك...','case.desc':'مشروع مختار من أعمال Nexa Creative، قابل للتوسع إلى دراسة حالة كاملة.','case.cta':'أريد مشروعاً مشابهاً'
+    },
+
+    en:{
+      'nav.services':'Services','nav.about':'About','nav.portfolio':'Portfolio','nav.pricing':'Pricing','nav.faq':'FAQ','nav.contact':'Contact',
+      'hero.badge':'✦ Nexa Creative — Complete Creative Solutions','hero.title':'We create impact and distinction for your brand','hero.desc':'We turn ideas into identities and digital experiences people remember.','hero.start':'Start a Project','hero.work':'View Our Work','hero.stat1':'+ Projects','hero.stat2':'+ Identities','hero.stat3':'% Satisfaction',
+      'services.title':'What We Do','services.subtitle':'Integrated services designed to take your project further','services.s1_title':'Branding & Visual Identity','services.s1_desc':'Complete visual identities and professional logos built around your value and goals.','services.s2_title':'Digital Marketing','services.s2_desc':'Strategic campaigns and social management designed to grow reach and sales.','services.s3_title':'Web & App Development','services.s3_desc':'Fast, responsive digital experiences built with modern technology.',
+      'portfolio.title':'Selected Work','portfolio.subtitle':'A look at selected projects and creative designs','portfolio.zoom':'View Design','portfolio.order_btn':'Order Similar','portfolio.all':'All','portfolio.branding':'Branding','portfolio.marketing':'Marketing','portfolio.uiux':'UI/UX','portfolio.case':'View Case',
+      'calc.title':'Estimated Cost Calculator','calc.subtitle':'Select the services you need to estimate your project cost','calc.logo':'Professional Logo ($50)','calc.identity':'Complete Visual Identity ($150)','calc.social':'Social Media Management (Monthly - $100)','calc.web':'Business Website ($300)','calc.total_text':'Estimated Total:','calc.order_btn':'Order This Package',
+      'testimonials.title':'What Clients Say','testimonials.c1_name':'- Horizon Company','testimonials.c2_name':'- Crystal Store',
+      'faq.title':'Frequently Asked Questions','faq.q1':'How long does branding take?','faq.a1':'Usually 5–10 business days depending on scope and revisions.','faq.q2':'Do you deliver source files?','faq.a2':'Yes. We deliver AI, PSD, PDF and PNG files as needed.',
+      'footer.desc':'Modern creative solutions that elevate your brand.','footer.contact':'Contact Us','footer.social':'Follow Us','footer.rights':'All rights reserved.',
+      'about.title':'We design your presence, not just a picture.','about.desc':'Nexa Creative is a creative studio focused on visual identity, digital experiences and purposeful design.','about.p1':'Scalable identity','about.p2':'User-focused design','about.p3':'Professional delivery',
+      'palette.title':'Smart Color Palette Generator','palette.subtitle':'Choose a base color to generate a balanced visual identity palette instantly','palette.choose':'Choose base color:','palette.save':'Save Palette','palette.reset':'Nexa Colors',
+      'reviews.add_title':'Leave a Review','reviews.add_subtitle':'Share your experience and help us keep improving','reviews.name_label':'Your name or company:','reviews.name_placeholder':'Enter your name...','reviews.rating_label':'Your rating:','reviews.comment_label':'Your comment:','reviews.comment_placeholder':'Write your comment...','reviews.submit':'Submit Review',
+      'modal.order_this':'Order a Similar Design','modal.order_title':'Quick Project Request','modal.name_label':'Your Name:','modal.details_label':'Additional Details (optional):','modal.send_btn':'Send via WhatsApp',
+      'why.title':'Why Nexa Creative?','why.subtitle':'We blend strategy and design to build a clear, distinctive digital presence.','why.w1':'Ideas Before Decoration','why.d1':'Every visual detail has a purpose and message.','why.w2':'High Visual Quality','why.d2':'A consistent system that works across digital and print.','why.w3':'Fast & Flexible','why.d3':'Clear steps and flexible revisions until it feels right.','why.w4':'Post-Delivery Support','why.d4':'We stay close to help you use your identity and files.',
+      'process.title':'From Idea to Launch','process.subtitle':'Four simple steps, designed around your goal.','process.p1':'Discover','process.d1':'We understand your project, audience and real need.','process.p2':'Plan','process.d2':'We define the visual direction, message and structure.','process.p3':'Design','process.d3':'We turn the plan into a polished, usable design.','process.p4':'Launch','process.d4':'We deliver the files and prepare you to launch.',
+      'compare.title':'See Design From Another Angle','compare.subtitle':'You can later replace these with real before/after project images.','compare.after':'FINAL DESIGN','compare.heading':'Every project can become a success story.','compare.desc':'Add real before/after images later and this section can become a full interactive showcase.','compare.cta':'Start a New Project',
+      'wizard.title':'Build Your Project Brief in One Minute','wizard.subtitle':'Choose your needs and get a professional WhatsApp-ready brief.','wizard.step1':'What service do you need?','wizard.step2':'What is your approximate budget?','wizard.step3':'When do you need delivery?','wizard.step4':'Tell us about your idea','wizard.week':'Within a week','wizard.two':'1–2 weeks','wizard.flex':'Flexible','wizard.back':'Back','wizard.next':'Next','wizard.send':'Send via WhatsApp','wizard.placeholder':'Details, account link, brand name, or anything important...','wizard.name':'Your name / project name',
+      'reviews.summary':'Client feedback helps us keep improving Nexa Creative.',
+      'ai.subtitle':'Quick creative assistant','ai.welcome':'Tell me your idea and I will suggest a visual direction and suitable services.','ai.placeholder':'Describe your idea...','case.desc':'A selected Nexa Creative project, ready to expand into a full case study.','case.cta':'I Want Something Similar'
+    },
+
+    tr:{
+      'nav.services':'Hizmetler','nav.about':'Hakkımızda','nav.portfolio':'Projeler','nav.pricing':'Fiyatlar','nav.faq':'SSS','nav.contact':'İletişim',
+      'hero.badge':'✦ Nexa Creative — Yaratıcı Çözümler','hero.title':'Markanız için etki ve fark yaratıyoruz','hero.desc':'Fikirleri unutulmaz marka kimliklerine ve dijital deneyimlere dönüştürüyoruz.','hero.start':'Proje Başlat','hero.work':'Çalışmalarımız','hero.stat1':'+ Proje','hero.stat2':'+ Kimlik','hero.stat3':'% Memnuniyet',
+      'services.title':'Ne Sunuyoruz?','services.subtitle':'Projenizi bir üst seviyeye taşıyan entegre hizmetler','services.s1_title':'Marka ve Görsel Kimlik','services.s1_desc':'Değerlerinize ve hedeflerinize uygun profesyonel logo ve kurumsal kimlik.','services.s2_title':'Dijital Pazarlama','services.s2_desc':'Erişimi ve satışları artırmak için stratejik kampanyalar ve sosyal medya yönetimi.','services.s3_title':'Web ve Uygulama','services.s3_desc':'Modern teknolojilerle hızlı ve duyarlı dijital deneyimler.',
+      'portfolio.title':'Seçili Çalışmalar','portfolio.subtitle':'Projelerimizden ve yaratıcı tasarımlarımızdan bir seçki','portfolio.zoom':'Tasarımı Gör','portfolio.order_btn':'Benzerini İste','portfolio.all':'Tümü','portfolio.branding':'Branding','portfolio.marketing':'Pazarlama','portfolio.uiux':'UI/UX','portfolio.case':'Projeyi Gör',
+      'calc.title':'Tahmini Fiyat Hesaplayıcı','calc.subtitle':'İhtiyacınız olan hizmetleri seçerek tahmini maliyeti görün','calc.logo':'Profesyonel Logo ($50)','calc.identity':'Tam Görsel Kimlik ($150)','calc.social':'Sosyal Medya Yönetimi (Aylık - $100)','calc.web':'Kurumsal Web Sitesi ($300)','calc.total_text':'Tahmini Toplam:','calc.order_btn':'Bu Paketi İste',
+      'testimonials.title':'Müşterilerimiz Ne Diyor?','testimonials.c1_name':'- Ufuk Şirketi','testimonials.c2_name':'- Crystal Mağaza',
+      'faq.title':'Sık Sorulan Sorular','faq.q1':'Kurumsal kimlik ne kadar sürer?','faq.a1':'Kapsama ve revizyonlara bağlı olarak genellikle 5–10 iş günü.','faq.q2':'Kaynak dosyaları teslim ediyor musunuz?','faq.a2':'Evet. Gerektiğinde AI, PSD, PDF ve PNG dosyalarını teslim ediyoruz.',
+      'footer.desc':'Markanızı yükselten modern yaratıcı çözümler.','footer.contact':'İletişim','footer.social':'Bizi Takip Edin','footer.rights':'Tüm hakları saklıdır.',
+      'about.title':'Sadece bir görüntü değil, güçlü bir varlık tasarlıyoruz.','about.desc':'Nexa Creative; görsel kimlik, dijital deneyim ve hedef odaklı tasarıma odaklanan yaratıcı bir stüdyodur.','about.p1':'Ölçeklenebilir kimlik','about.p2':'Kullanıcı odaklı tasarım','about.p3':'Profesyonel teslim',
+      'palette.title':'Akıllı Renk Paleti','palette.subtitle':'Temel renginizi seçin ve dengeli bir görsel kimlik paleti oluşturun','palette.choose':'Temel rengi seçin:','palette.save':'Paleti Kaydet','palette.reset':'Nexa Renkleri',
+      'reviews.add_title':'Değerlendirme Bırakın','reviews.add_subtitle':'Deneyiminizi paylaşın ve gelişmemize yardımcı olun','reviews.name_label':'Adınız veya şirketiniz:','reviews.name_placeholder':'Adınızı girin...','reviews.rating_label':'Puanınız:','reviews.comment_label':'Yorumunuz:','reviews.comment_placeholder':'Yorumunuzu yazın...','reviews.submit':'Değerlendirme Gönder',
+      'modal.order_this':'Benzer Tasarım İste','modal.order_title':'Hızlı Proje Talebi','modal.name_label':'Adınız:','modal.details_label':'Ek Detaylar (isteğe bağlı):','modal.send_btn':'WhatsApp ile Gönder',
+      'why.title':'Neden Nexa Creative?','why.subtitle':'Net ve farklı bir dijital görünüm için strateji ile tasarımı birleştiriyoruz.','why.w1':'Önce Fikir','why.d1':'Her görsel detayın bir amacı ve mesajı vardır.','why.w2':'Yüksek Görsel Kalite','why.d2':'Dijital ve baskıda çalışan tutarlı bir görsel sistem.','why.w3':'Hızlı ve Esnek','why.d3':'Net adımlar ve esnek revizyonlar.','why.w4':'Teslimat Sonrası Destek','why.d4':'Kimliğinizi ve dosyalarınızı kullanırken yanınızdayız.',
+      'process.title':'Fikirden Lansmana','process.subtitle':'Hedefinize göre tasarlanmış dört basit adım.','process.p1':'Keşfet','process.d1':'Projenizi, kitlenizi ve gerçek ihtiyacınızı anlarız.','process.p2':'Planla','process.d2':'Görsel yönü, mesajı ve yapıyı belirleriz.','process.p3':'Tasarla','process.d3':'Planı kullanılabilir profesyonel tasarıma dönüştürürüz.','process.p4':'Yayınla','process.d4':'Dosyaları teslim eder ve lansmana hazırlarız.',
+      'compare.title':'Tasarımı Farklı Bir Açıdan Görün','compare.subtitle':'Daha sonra gerçek önce/sonra görselleri ekleyebilirsiniz.','compare.after':'FINAL TASARIM','compare.heading':'Her proje bir başarı hikâyesine dönüşebilir.','compare.desc':'Gerçek önce/sonra görsellerini eklediğinizde bu alan interaktif bir vitrine dönüşebilir.','compare.cta':'Yeni Proje Başlat',
+      'wizard.title':'Proje Talebinizi Bir Dakikada Oluşturun','wizard.subtitle':'İhtiyacınızı seçin, WhatsApp için profesyonel bir mesaj hazırlayalım.','wizard.step1':'Hangi hizmete ihtiyacınız var?','wizard.step2':'Yaklaşık bütçeniz nedir?','wizard.step3':'Ne zaman teslim almak istersiniz?','wizard.step4':'Fikrinizi anlatın','wizard.week':'Bir hafta içinde','wizard.two':'1–2 hafta','wizard.flex':'Esnek','wizard.back':'Geri','wizard.next':'İleri','wizard.send':'WhatsApp ile Gönder','wizard.placeholder':'Detaylar, hesap linki, marka adı veya önemli bir not...','wizard.name':'Adınız / proje adı',
+      'reviews.summary':'Müşteri geri bildirimleri Nexa Creative’i geliştirmemize yardımcı olur.',
+      'ai.subtitle':'Hızlı yaratıcı asistan','ai.welcome':'Fikrinizi yazın; size görsel yön ve uygun hizmetleri önereyim.','ai.placeholder':'Fikrinizi anlatın...','case.desc':'Nexa Creative seçili projesi; tam bir vaka çalışmasına dönüştürülebilir.','case.cta':'Benzer Proje İstiyorum'
+    }
+  };
+
+  function applyLanguage(lang){
+    if(!translations[lang]) lang='ar';
+    root.lang=lang;
+    root.dir=lang==='ar'?'rtl':'ltr';
+    localStorage.setItem('nexa_lang',lang);
+
+    const select=$('#langSelect');
+    if(select) select.value=lang;
+
+    $$('[data-i18n]').forEach(el=>{
+      const key=el.getAttribute('data-i18n');
+      if(translations[lang][key]!==undefined)
+        el.textContent=translations[lang][key];
+    });
+
+    $$('[data-i18n-placeholder]').forEach(el=>{
+      const key=el.getAttribute('data-i18n-placeholder');
+      if(translations[lang][key]!==undefined)
+        el.placeholder=translations[lang][key];
+    });
+  }
+
+  const savedLang=localStorage.getItem('nexa_lang') || 'ar';
+  applyLanguage(savedLang);
+
+  $('#langSelect')?.addEventListener('change',e=>applyLanguage(e.target.value));
+
+  // loader
+  window.addEventListener('load',()=>{
+    setTimeout(()=>$('#pageLoader')?.classList.add('hide'),650);
+  });
+
+  // mobile menu
+  const menuBtn=$('#mobileMenuBtn');
+  const nav=$('.nav-links');
+
+  menuBtn?.addEventListener('click',()=>{
+    const open=nav?.classList.toggle('mobile-open');
+    menuBtn.setAttribute('aria-expanded',String(!!open));
+    menuBtn.innerHTML=open
+      ? '<i class="fa-solid fa-xmark"></i>'
+      : '<i class="fa-solid fa-bars"></i>';
+  });
+
+  $$('.nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>nav?.classList.remove('mobile-open'));
+  });
+
+  // portfolio filters
+  $$('.portfolio-filter').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      $$('.portfolio-filter').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter=btn.dataset.filter;
+
+      $$('.portfolio-card').forEach(card=>{
+        card.classList.toggle(
+          'is-hidden',
+          filter!=='all' && card.dataset.category!==filter
+        );
+      });
+    });
+  });
+
+  // smooth counters
+  const counters=$$('.counter');
+
+  const counterObs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting || entry.target.dataset.done) return;
+
+      entry.target.dataset.done='1';
+
+      const target=Number(entry.target.dataset.target||0);
+      let start=0;
+      const duration=1200;
+      const t0=performance.now();
+
+      const tick=t=>{
+        const p=Math.min((t-t0)/duration,1);
+
+        start=Math.floor(
+          (1-Math.pow(1-p,3))*target
+        );
+
+        entry.target.textContent=start;
+
+        if(p<1)
+          requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    });
+  },{threshold:.55});
+
+  counters.forEach(c=>counterObs.observe(c));
+
+  // back-to-top
+  const topBtn=$('#backToTop');
+
+  window.addEventListener(
+    'scroll',
+    ()=>topBtn?.classList.toggle('show',scrollY>650),
+    {passive:true});
