@@ -902,8 +902,8 @@ footer {
 /* تصميم زر الواتساب العائم */
 .whatsapp-float {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
+    bottom: 25px;
+    left: 25px;
     background-color: #25d366;
     color: #ffffff;
     width: 60px;
