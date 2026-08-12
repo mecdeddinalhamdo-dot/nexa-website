@@ -1397,3 +1397,42 @@ html.dark .logo img {
     opacity: 1;
 }
 
+/* حاوية أزرار التواصل والمساعد */
+.floating-actions {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* زر الواتساب + المساعد */
+.floating-actions > * {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    top: auto !important;
+}
+
+/* على الكمبيوتر */
+@media (min-width: 769px) {
+    .floating-actions {
+        right: 30px;
+        bottom: 30px;
+        gap: 16px;
+    }
+}
+
+/* على الموبايل */
+@media (max-width: 768px) {
+    .floating-actions {
+        right: 18px;
+        bottom: 18px;
+        gap: 12px;
+    }
+}
