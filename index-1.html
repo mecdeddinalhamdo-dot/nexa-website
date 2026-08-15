@@ -1,0 +1,607 @@
+<!DOCTYPE html>  
+<html lang="ar" dir="rtl">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="color-scheme" content="light dark">  
+    <title>Nexa Creative — Creative Design & Digital Experiences</title>
+    <meta name="description" content="Nexa Creative — تصميم الهوية البصرية، المواقع، UI/UX والتسويق الرقمي بأسلوب إبداعي حديث.">
+    <meta name="theme-color" content="#6C2EFB">
+
+    <!-- SEO -->
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://nexa-website-chi.vercel.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nexa-website-chi.vercel.app/">
+    <meta property="og:title" content="Nexa Creative — Creative Design & Digital Experiences">
+    <meta property="og:description" content="Nexa Creative — تصميم الهوية البصرية، المواقع، UI/UX والتسويق الرقمي بأسلوب إبداعي حديث.">
+    <meta property="og:image" content="https://nexa-website-chi.vercel.app/Logo%20(1).png">
+    <meta property="og:image:alt" content="Nexa Creative Logo">
+    <meta property="og:site_name" content="Nexa Creative">
+    <meta property="og:locale" content="ar_AR">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nexa Creative — Creative Design & Digital Experiences">
+    <meta name="twitter:description" content="Nexa Creative — تصميم الهوية البصرية، المواقع، UI/UX والتسويق الرقمي بأسلوب إبداعي حديث.">
+    <meta name="twitter:image" content="https://nexa-website-chi.vercel.app/Logo%20(1).png">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>  
+    <script>
+        // Nexa Creative: الوضع النهاري هو الافتراضي، مع احترام الوضع المحفوظ سابقًا
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('nexa_theme');
+                document.documentElement.setAttribute('data-theme', savedTheme === 'dark' ? 'dark' : 'light');
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css">  
+<link rel="icon" type="image/png" href="favicon-nexa.png">
+<link rel="apple-touch-icon" href="favicon-nexa.png">
+<meta name="google-site-verification" content="Dfq3WUDvUzzjn2tElMLy4NmoVY22bQ9aEWOqh7widXQ" />
+  
+</head>  
+<body>
+<div class="page-loader" id="pageLoader"><div class="loader-logo"><img src="Logo (1).png" alt="Nexa Creative"></div><div class="loader-bar"><span></span></div><small>NEXA CREATIVE</small></div>
+
+        
+<div id="scrollProgressBar"></div>  
+<canvas id="purpleWindCanvas"></canvas>  
+
+<!-- الهيدر العلوي -->  
+<header>  
+    <div class="nav-container">  
+        <a href="#" class="logo">  
+            <img src="Logo (1).png" alt="Nexa Creative Logo">
+  
+        </a>  
+        <ul class="nav-links">  
+            <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>  
+            <li><a href="#about" data-i18n="nav.about">من نحن</a></li>  
+            <li><a href="#portfolio" data-i18n="nav.portfolio">أعمالنا</a></li>  
+            <li><a href="#pricing" data-i18n="nav.pricing">الأسعار</a></li>  
+            <li><a href="#faq" data-i18n="nav.faq">الأسئلة</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">تواصل معنا</a></li>  
+        </ul>  
+        <div class="nav-actions">  
+            <div class="lang-selector">  
+                <i class="fa-solid fa-globe"></i>  
+                <select id="langSelect">  
+                    <option value="ar">العربية</option>  
+                    <option value="en">English</option>  
+                    <option value="tr">Türkçe</option>  
+                </select>  
+            </div> 
+<a href="identity.html" class="identity-nav-link">
+    هويتنا
+</a>
+            
+            <button class="theme-toggle-btn" id="themeToggle" title="تغيير المظهر">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>  
+        </div>  
+    </div>  
+</header>  
+
+    
+<section class="glass-hero-section premium-hero" id="home">
+    <div class="hero-content">
+        <div class="badge" data-i18n="hero.badge">✦ Nexa Creative — حلول إبداعية متكاملة</div>
+        <h1 data-i18n="hero.title">نصنع <span>التأثير والتألق</span> لعلامتك التجارية</h1>
+        <p data-i18n="hero.desc">نحوّل الأفكار إلى هويات وتجارب رقمية تترك انطباعاً لا يُنسى.</p>
+        <div class="hero-actions">
+            <a href="#project" class="premium-btn primary magnetic" data-i18n="hero.start">ابدأ مشروعك <i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#portfolio" class="premium-btn ghost magnetic" data-i18n="hero.work">شاهد أعمالنا <i class="fa-solid fa-arrow-down"></i></a>
+        </div>
+        <div class="hero-proof">
+            <div><strong class="counter" data-target="25">0</strong><span data-i18n="hero.stat1">+ مشروع</span></div>
+            <div><strong class="counter" data-target="15">0</strong><span data-i18n="hero.stat2">+ هوية</span></div>
+            <div><strong class="counter" data-target="98">0</strong><span data-i18n="hero.stat3">% رضا</span></div>
+        </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+        <div class="hero-orbit orbit-one"></div>
+        <div class="hero-orbit orbit-two"></div>
+        <div class="hero-logo-card">
+            <img src="Logo (1).png" alt="">
+            <span>NEXA</span>
+            <small>CREATIVE STUDIO</small>
+        </div>
+        <div class="float-chip chip-one"><i class="fa-solid fa-pen-nib"></i> Branding</div>
+        <div class="float-chip chip-two"><i class="fa-solid fa-code"></i> Digital</div>
+        <div class="float-chip chip-three"><i class="fa-solid fa-wand-magic-sparkles"></i> Creative</div>
+    </div>
+</section>
+
+<div class="service-marquee" aria-label="Nexa Creative services">
+    <div class="marquee-track">
+        <span>BRANDING</span><b>✦</b><span>LOGO DESIGN</span><b>✦</b><span>UI/UX</span><b>✦</b><span>WEB DESIGN</span><b>✦</b><span>SOCIAL MEDIA</span><b>✦</b><span>MOTION</span><b>✦</b>
+        <span>BRANDING</span><b>✦</b><span>LOGO DESIGN</span><b>✦</b><span>UI/UX</span><b>✦</b><span>WEB DESIGN</span><b>✦</b><span>SOCIAL MEDIA</span><b>✦</b><span>MOTION</span><b>✦</b>
+    </div>
+</div>
+
+<section class="why-nexa">
+    <div class="section-head">
+        <span class="eyebrow">NEXA STANDARD</span>
+        <h2 data-i18n="why.title">لماذا Nexa Creative؟</h2>
+        <p data-i18n="why.subtitle">نمزج الاستراتيجية مع التصميم لنصنع حضوراً رقمياً واضحاً ومميزاً.</p>
+    </div>
+    <div class="why-grid">
+        <article class="why-card"><span>01</span><i class="fa-solid fa-lightbulb"></i><h3 data-i18n="why.w1">فكرة قبل الشكل</h3><p data-i18n="why.d1">كل تفصيل بصري له هدف ورسالة، وليس مجرد زينة.</p></article>
+        <article class="why-card"><span>02</span><i class="fa-solid fa-gem"></i><h3 data-i18n="why.w2">جودة بصرية عالية</h3><p data-i18n="why.d2">نظام بصري متناسق يصلح للهوية والطباعة والمنصات الرقمية.</p></article>
+        <article class="why-card"><span>03</span><i class="fa-solid fa-bolt"></i><h3 data-i18n="why.w3">تنفيذ سريع ومرن</h3><p data-i18n="why.d3">خطوات واضحة وتعديلات مرنة حتى تصل للنتيجة التي تريدها.</p></article>
+        <article class="why-card"><span>04</span><i class="fa-solid fa-headset"></i><h3 data-i18n="why.w4">دعم بعد التسليم</h3><p data-i18n="why.d4">نبقى قريبين منك لتسهيل استخدام ملفاتك وهويتك.</p></article>
+    </div>
+</section>
+
+<section class="process-sec">
+    <div class="section-head">
+        <span class="eyebrow">THE PROCESS</span>
+        <h2 data-i18n="process.title">من الفكرة إلى الإطلاق</h2>
+        <p data-i18n="process.subtitle">أربع خطوات بسيطة، ونتيجة مصممة حول هدفك.</p>
+    </div>
+    <div class="process-grid">
+        <div class="process-step"><div class="step-num">01</div><i class="fa-solid fa-compass"></i><h3 data-i18n="process.p1">اكتشف</h3><p data-i18n="process.d1">نفهم مشروعك وجمهورك واحتياجك الحقيقي.</p></div>
+        <div class="process-line"></div>
+        <div class="process-step"><div class="step-num">02</div><i class="fa-solid fa-layer-group"></i><h3 data-i18n="process.p2">خطط</h3><p data-i18n="process.d2">نحدد الاتجاه البصري والرسالة والهيكل.</p></div>
+        <div class="process-line"></div>
+        <div class="process-step"><div class="step-num">03</div><i class="fa-solid fa-pen-ruler"></i><h3 data-i18n="process.p3">صمّم</h3><p data-i18n="process.d3">نحوّل الخطة إلى تصميم احترافي قابل للاستخدام.</p></div>
+        <div class="process-line"></div>
+        <div class="process-step"><div class="step-num">04</div><i class="fa-solid fa-rocket"></i><h3 data-i18n="process.p4">أطلق</h3><p data-i18n="process.d4">نسلم الملفات ونجهزك للانطلاق بثقة.</p></div>
+    </div>
+</section>
+
+    
+<!-- قسم الخدمات -->  
+<section id="services" class="services">  
+    <div class="section-head">  
+        <h2 data-i18n="services.title">ماذا نقدم لك؟</h2>  
+        <p data-i18n="services.subtitle">خدمات متكاملة مصممة لنقل مشروعك لمستوى آخر</p>  
+    </div>  
+    <div class="grid-cards">  
+        <div class="card">  
+            <div class="card-icon"><i class="fa-solid fa-pen-nib"></i></div>  
+            <h3 data-i18n="services.s1_title">التصميم والهوية البصرية</h3>  
+            <p data-i18n="services.s1_desc">بناء هوية بصرية كاملة وشعارات احترافية تعبر عن قيمة وهدف عملك.</p>  
+        </div>  
+        <div class="card">  
+            <div class="card-icon"><i class="fa-solid fa-bullhorn"></i></div>  
+            <h3 data-i18n="services.s2_title">التسويق الرقمي</h3>  
+            <p data-i18n="services.s2_desc">حملات إعلانية مدروسة وإدارة حسابات التواصل لزيادة المبيعات والانتشار.</p>  
+        </div>  
+        <div class="card">  
+            <div class="card-icon"><i class="fa-solid fa-code"></i></div>  
+            <h3 data-i18n="services.s3_title">تطوير المواقع والتطبيقات</h3>  
+            <p data-i18n="services.s3_desc">تطوير مواقع إلكترونية سريعة ومتجاوبة مع كافة الشاشات وأحدث التقنيات.</p>  
+        </div>  
+    </div>  
+</section>  
+
+<section id="about" class="about-nexa">
+    <div class="about-glass">
+        <div class="about-copy">
+            <span class="eyebrow">ABOUT NEXA</span>
+            <h2 data-i18n="about.title">نصمم حضورك، لا مجرد صورة.</h2>
+            <p data-i18n="about.desc">Nexa Creative استوديو إبداعي يركز على الهوية البصرية والتجارب الرقمية والتصميم الذي يخدم هدفاً واضحاً.</p>
+            <div class="about-points">
+                <span><i class="fa-solid fa-check"></i><b data-i18n="about.p1">هوية قابلة للتوسع</b></span>
+                <span><i class="fa-solid fa-check"></i><b data-i18n="about.p2">تصميم يركز على المستخدم</b></span>
+                <span><i class="fa-solid fa-check"></i><b data-i18n="about.p3">تسليم منظم واحترافي</b></span>
+            </div>
+        </div>
+        <div class="about-mark">
+            <img src="Logo (1).png" alt="Nexa Creative">
+            <strong>NEXA</strong><small>CREATIVE</small>
+        </div>
+    </div>
+</section>
+
+<!-- قسم توليد لوحة الألوان الذكية -->  
+<section class="palette-generator-sec" style="padding: 60px 20px; text-align: center;">  
+    <div class="section-head" style="margin-bottom: 30px;">  
+        <h2 data-i18n="palette.title">مولد لوحة الألوان الذكي</h2>  
+        <p data-i18n="palette.subtitle">اختر لونك الأساسي لتوليد درجات هوية بصرية متناسقة لمشروعك فوراً</p>  
+    </div>  
+      
+    <div class="palette-box" style="max-width: 600px; margin: 0 auto; background: rgba(0, 0, 0, 0.02); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(124, 58, 237, 0.2);">  
+        <div style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 15px;">  
+            <label for="baseColorPicker" style="font-weight: bold;" data-i18n="palette.choose">اختر اللون الأساسي:</label>  
+            <input type="color" id="baseColorPicker" value="#6c2efb" style="width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; background: none;">  
+        </div>  
+          
+        <div id="paletteColorsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; margin-top: 25px;"></div>
+        <div class="palette-actions">
+            <button type="button" id="savePaletteBtn" class="palette-action-btn"><i class="fa-solid fa-bookmark"></i> <span data-i18n="palette.save">حفظ اللوحة</span></button>
+            <button type="button" id="resetPaletteBtn" class="palette-action-btn"><i class="fa-solid fa-rotate-left"></i> <span data-i18n="palette.reset">ألوان Nexa</span></button>
+        </div>  
+    </div>  
+</section>  
+  
+<!-- قسم معرض الأعمال -->  
+<section id="portfolio" class="portfolio">  
+    <div class="section-head">
+        <span class="eyebrow">SELECTED WORK</span>
+        <h2 data-i18n="portfolio.title">معرض أعمالنا</h2>
+        <p data-i18n="portfolio.subtitle">نظرة على بعض مشاريعنا والتصاميم المبتكرة</p>
+    </div>
+    <div class="portfolio-filters" role="tablist" aria-label="Portfolio filters">
+        <button class="portfolio-filter active" data-filter="all" data-i18n="portfolio.all">الكل</button>
+        <button class="portfolio-filter" data-filter="branding" data-i18n="portfolio.branding">Branding</button>
+        <button class="portfolio-filter" data-filter="marketing" data-i18n="portfolio.marketing">Marketing</button>
+        <button class="portfolio-filter" data-filter="uiux" data-i18n="portfolio.uiux">UI/UX</button>
+    </div>
+    <div class="portfolio-grid">
+        <div class="portfolio-card tilt-card" data-category="branding">  
+            <div class="portfolio-img" onclick="openLightbox('work1.jpg', 'تصميم هوية بصرية متكاملة')">  
+                <img src="work1.jpg" alt="تصميم هوية بصرية متكاملة">  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
+            </div>  
+            <div class="portfolio-info">  
+                <h4>تصميم هوية بصرية متكاملة</h4>  
+                <button class="btn-order-card" onclick="openOrderModal('تصميم هوية بصرية متكاملة')">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
+                </button>
+                <button class="case-study-btn" onclick="openCaseStudy(this)" data-image="work1.jpg" data-title="تصميم هوية بصرية متكاملة" data-category="Branding">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="portfolio.case">عرض المشروع</span>
+                </button>
+            </div>
+        </div>  
+
+        <div class="portfolio-card tilt-card" data-category="marketing">
+            <div class="portfolio-img" onclick="openLightbox('work2.jpg', 'حملة تسويقية واحترافية')">  
+                <img src="work2.jpg" alt="حملة تسويقية واحترافية">  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
+            </div>  
+            <div class="portfolio-info">  
+                <h4>حملة تسويقية واحترافية</h4>  
+                <button class="btn-order-card" onclick="openOrderModal('حملة تسويقية واحترافية')">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
+                </button>
+                <button class="case-study-btn" onclick="openCaseStudy(this)" data-image="work2.jpg" data-title="حملة تسويقية واحترافية" data-category="Marketing">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="portfolio.case">عرض المشروع</span>
+                </button>
+            </div>
+        </div>  
+
+        <div class="portfolio-card tilt-card" data-category="uiux">
+            <div class="portfolio-img" onclick="openLightbox('work3.jpg', 'واجهة تطبيق ذكية')">  
+                <img src="work3.jpg" alt="واجهة تطبيق ذكية">  
+                <div class="zoom-overlay"><i class="fa-solid fa-expand"></i><span data-i18n="portfolio.zoom">تكبير التصميم</span></div>  
+            </div>  
+            <div class="portfolio-info">  
+                <h4>واجهة تطبيق ذكية</h4>  
+                <button class="btn-order-card" onclick="openOrderModal('واجهة تطبيق ذكية')">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="portfolio.order_btn">اطلب مثل هذا</span>  
+                </button>
+                <button class="case-study-btn" onclick="openCaseStudy(this)" data-image="work3.jpg" data-title="واجهة تطبيق ذكية" data-category="UI/UX">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="portfolio.case">عرض المشروع</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>  
+
+<!-- حاسبة الأسعار التفاعلية -->  
+<section id="pricing" class="calculator-sec">  
+    <div class="section-head">  
+        <h2 data-i18n="calc.title">حاسبة التكلفة التقديرية</h2>  
+        <p data-i18n="calc.subtitle">حدد الخدمات التي تحتاجها لتعرف التكلفة المتوقعة لمشروعك</p>  
+    </div>  
+    <div class="calc-container">  
+        <div class="calc-options">  
+            <label class="calc-item">  
+                <input type="checkbox" value="50" class="calc-checkbox">  
+                <span class="calc-text" data-i18n="calc.logo">تصميم شعار احترافي ($50)</span>  
+            </label>  
+            <label class="calc-item">  
+                <input type="checkbox" value="150" class="calc-checkbox">  
+                <span class="calc-text" data-i18n="calc.identity">هوية بصرية كاملة ($150)</span>  
+            </label>  
+            <label class="calc-item">  
+                <input type="checkbox" value="100" class="calc-checkbox">  
+                <span class="calc-text" data-i18n="calc.social">إدارة منصات التواصل (شهرياً - $100)</span>  
+            </label>  
+            <label class="calc-item">  
+                <input type="checkbox" value="300" class="calc-checkbox">  
+                <span class="calc-text" data-i18n="calc.web">تطوير موقع تعريفي ($300)</span>  
+            </label>  
+        </div>  
+        <div class="calc-result">  
+            <h3 data-i18n="calc.total_text">التكلفة الإجمالية التقديرية:</h3>  
+            <div class="total-price">$<span id="totalPrice">0</span></div>  
+            <button class="btn-order-card" onclick="orderFromCalc()" style="margin-top: 20px;">  
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="calc.order_btn">اطلب هذه الحزمة الآن</span>  
+            </button>  
+        </div>  
+    </div>  
+</section>  
+<!-- قسم إضافة تقييم وتعليق جديد -->
+<section class="review-summary">
+    <div><strong id="averageRating">5.0</strong><span>/ 5</span></div>
+    <div class="summary-stars">★★★★★</div>
+    <p data-i18n="reviews.summary">آراء وتجارب العملاء تساعدنا على تطوير Nexa Creative باستمرار.</p>
+</section>
+
+<section id="add-review" class="add-review-sec">
+    <div class="section-head">
+        <h2 data-i18n="reviews.add_title">أضف تقييمك ورأيك</h2>
+        <p data-i18n="reviews.add_subtitle">شاركونا انطباعكم عن خدماتنا لنستمر في تقديم الأفضل</p>
+    </div>
+
+    <div class="review-box">
+        <form id="reviewForm" onsubmit="submitReview(event)">
+            <!-- حقل الاسم -->
+            <div class="form-group">
+                <label for="reviewerName" data-i18n="reviews.name_label">اسمك أو اسم شركتك:</label>
+                <input type="text" id="reviewerName" required placeholder="أدخل اسمك هنا..." data-i18n-placeholder="reviews.name_placeholder">
+            </div>
+
+            <!-- تحديد النجوم -->
+            <div class="form-group">
+                <label data-i18n="reviews.rating_label">تقييمك:</label>
+                <div class="star-rating">
+                    <i class="fa-star fa-regular star-btn" data-value="1"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="2"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="3"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="4"></i>
+                    <i class="fa-star fa-regular star-btn" data-value="5"></i>
+                </div>
+            </div>
+
+            <!-- حقل التعليق -->
+            <div class="form-group">
+                <label for="reviewerComment" data-i18n="reviews.comment_label">تعليقك أو انطباعك:</label>
+                <textarea id="reviewerComment" rows="4" required placeholder="اكتب تعليقك هنا..." data-i18n-placeholder="reviews.comment_placeholder"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit-review">
+                <i class="fa-solid fa-paper-plane"></i> <span data-i18n="reviews.submit">إرسال التقييم</span>
+            </button>
+        </form>
+    </div>
+
+    <!-- مكان عرض التعليقات المضافة حديثاً -->
+    <div id="userReviewsContainer" class="reviews-grid">
+        <!-- ستظهر تعليقات المستخدمين هنا تلقائياً -->
+    </div>
+</section>
+    
+<!-- مقارنة بصرية اختيارية -->
+<section class="comparison-sec">
+    <div class="section-head">
+        <span class="eyebrow">VISUAL SHOWCASE</span>
+        <h2 data-i18n="compare.title">شاهد التصميم من زاوية مختلفة</h2>
+        <p data-i18n="compare.subtitle">يمكنك لاحقاً استبدال الصور بصور قبل/بعد مشاريعك الحقيقية.</p>
+    </div>
+    <div class="comparison-card">
+        <div class="comparison-media">
+            <img src="work1.jpg" alt="Nexa Creative project">
+            <div class="comparison-label" data-i18n="compare.after">FINAL DESIGN</div>
+        </div>
+        <div class="comparison-copy">
+            <span class="eyebrow">CASE STUDY READY</span>
+            <h3 data-i18n="compare.heading">كل مشروع يمكن أن يتحول إلى قصة نجاح.</h3>
+            <p data-i18n="compare.desc">أضف صور قبل/بعد الحقيقية لاحقاً، وسيظهر هذا القسم كعرض تفاعلي كامل بدون تغيير هوية الموقع.</p>
+            <a href="#project" class="premium-btn primary magnetic" data-i18n="compare.cta">ابدأ مشروعاً جديداً <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+    </div>
+</section>
+
+<section id="project" class="project-wizard-sec">
+    <div class="section-head">
+        <span class="eyebrow">START A PROJECT</span>
+        <h2 data-i18n="wizard.title">ابنِ طلب مشروعك خلال دقيقة</h2>
+        <p data-i18n="wizard.subtitle">اختر احتياجك وسنجهز لك رسالة احترافية جاهزة للإرسال عبر واتساب.</p>
+    </div>
+    <div class="wizard-shell">
+        <div class="wizard-progress"><span class="wizard-dot active">1</span><i></i><span class="wizard-dot">2</span><i></i><span class="wizard-dot">3</span><i></i><span class="wizard-dot">4</span></div>
+        <form id="projectWizard">
+            <div class="wizard-step active" data-step="1">
+                <h3 data-i18n="wizard.step1">ما الخدمة التي تحتاجها؟</h3>
+                <div class="wizard-options">
+                    <label><input type="radio" name="service" value="Branding" checked><span><i class="fa-solid fa-pen-nib"></i> Branding</span></label>
+                    <label><input type="radio" name="service" value="Logo"><span><i class="fa-solid fa-bezier-curve"></i> Logo</span></label>
+                    <label><input type="radio" name="service" value="UI/UX"><span><i class="fa-solid fa-mobile-screen-button"></i> UI/UX</span></label>
+                    <label><input type="radio" name="service" value="Web Design"><span><i class="fa-solid fa-globe"></i> Web Design</span></label>
+                    <label><input type="radio" name="service" value="Social Media"><span><i class="fa-solid fa-hashtag"></i> Social Media</span></label>
+                </div>
+            </div>
+            <div class="wizard-step" data-step="2">
+                <h3 data-i18n="wizard.step2">ما الميزانية التقريبية؟</h3>
+                <div class="wizard-options budget-options">
+                    <label><input type="radio" name="budget" value="$50 - $150" checked><span>$50 — $150</span></label>
+                    <label><input type="radio" name="budget" value="$150 - $300"><span>$150 — $300</span></label>
+                    <label><input type="radio" name="budget" value="$300 - $600"><span>$300 — $600</span></label>
+                    <label><input type="radio" name="budget" value="$600+"><span>$600+</span></label>
+                </div>
+            </div>
+            <div class="wizard-step" data-step="3">
+                <h3 data-i18n="wizard.step3">متى تريد التسليم؟</h3>
+                <div class="wizard-options budget-options">
+                    <label><input type="radio" name="timeline" value="خلال أسبوع" checked><span data-i18n="wizard.week">خلال أسبوع</span></label>
+                    <label><input type="radio" name="timeline" value="1 - 2 أسبوع"><span data-i18n="wizard.two">1 — 2 أسبوع</span></label>
+                    <label><input type="radio" name="timeline" value="مرن"><span data-i18n="wizard.flex">موعد مرن</span></label>
+                </div>
+            </div>
+            <div class="wizard-step" data-step="4">
+                <h3 data-i18n="wizard.step4">أخبرنا عن فكرتك</h3>
+                <textarea id="wizardDetails" rows="5" placeholder="اكتب التفاصيل، رابط الحساب، اسم العلامة، أو أي ملاحظة مهمة..." data-i18n-placeholder="wizard.placeholder"></textarea>
+                <input id="wizardName" type="text" placeholder="اسمك / اسم المشروع" data-i18n-placeholder="wizard.name">
+            </div>
+            <div class="wizard-actions">
+                <button type="button" class="wizard-prev" disabled data-i18n="wizard.back">السابق</button>
+                <button type="button" class="wizard-next premium-btn primary" data-i18n="wizard.next">التالي</button>
+                <button type="submit" class="wizard-submit premium-btn primary"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="wizard.send">إرسال عبر واتساب</span></button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- آراء العملاء -->  
+<section class="testimonials">  
+    <div class="section-head">  
+        <h2 data-i18n="testimonials.title">ماذا يقول عملاؤنا؟</h2>  
+    </div>  
+    <div class="grid-cards">  
+        <div class="card testimonial-card">  
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
+            <p>"عمل احترافي جداً! الهوية البصرية التي صمموها لنا لفتت أنظار جميع عملائنا الجدد."</p>  
+            <h4 data-i18n="testimonials.c1_name">- شركة الأفق</h4>  
+        </div>  
+        <div class="card testimonial-card">  
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>  
+            <p>"سرعة في التنفيذ وتجاوب رائع مع التعديلات، أنصح بالتعامل معهم بشدة لتطوير المواقع."</p>  
+            <h4 data-i18n="testimonials.c2_name">- متجر كريستال</h4>  
+        </div>  
+    </div>  
+</section>  
+
+<!-- الأسئلة الشائعة -->  
+<section id="faq" class="faq-sec">  
+    <div class="section-head">  
+        <h2 data-i18n="faq.title">الأسئلة الشائعة</h2>  
+    </div>  
+    <div class="faq-container">  
+        <div class="faq-item">  
+            <div class="faq-question">  
+                <span data-i18n="faq.q1">كم يستغرق تصميم الهوية البصرية؟</span>  
+                <i class="fa-solid fa-chevron-down"></i>  
+            </div>  
+            <div class="faq-answer"><p data-i18n="faq.a1">عادة ما يستغرق الأمر من 5 إلى 10 أيام عمل حسب حجم التفاصيل والتعديلات المطلوبة.</p></div>  
+        </div>  
+        <div class="faq-item">  
+            <div class="faq-question">  
+                <span data-i18n="faq.q2">هل تسلمون الملفات المصدرية المفتوحة؟</span>  
+                <i class="fa-solid fa-chevron-down"></i>  
+            </div>  
+            <div class="faq-answer"><p data-i18n="faq.a2">نعم بالتأكيد! نقوم بتسليم كافة الملفات بصيغ (AI, PSD, PDF, PNG) لتتمكن من استخدامها بسهولة.</p></div>  
+        </div>  
+    </div>  
+</section>  
+
+<!-- الفوتر -->  
+<footer id="contact" style="background: rgba(15, 7, 40, 0.95); padding: 50px 20px 20px; border-top: 1px solid rgba(124, 58, 237, 0.2);">  
+    <div class="footer-container" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px;">  
+        
+        <!-- معلومات الشركة -->
+        <div class="footer-brand" style="flex: 1; min-width: 250px;">  
+            <h3 style="color: #fff; font-size: 24px; margin-bottom: 10px;">Nexa Creative</h3>  
+            <p data-i18n="footer.desc" style="color: #aaa; font-size: 14px; line-height: 1.6;">حلول إبداعية وعصرية ترفع علامتك التجارية لأعلى النجوم.</p>  
+        </div>  
+
+      
+        <!-- طرق التواصل والبريد الإلكتروني -->
+        <div class="footer-contact-info" style="flex: 1; min-width: 250px;">
+            <h4 style="color: #fff; font-size: 18px; margin-bottom: 15px;" data-i18n="footer.contact">تواصل معنا</h4>
+            
+            <p style="margin-bottom: 12px; font-size: 14px;">
+                <a href="mailto:magdalhamdo176@gmail.com" style="color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-envelope" style="color: #7C3AED;"></i> 
+                    <span>magdalhamdo176@gmail.com</span>
+                </a>
+            </p>
+            
+            <p style="margin-bottom: 12px; font-size: 14px;">
+                <a href="https://wa.me/905364391849" target="_blank" style="color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-phone" style="color: #7C3AED;"></i> 
+                    <span dir="ltr">+90 536 439 1849</span>
+                </a>
+            </p>
+        </div>
+
+        <!-- أزرار وسائل التواصل الاجتماعي -->
+        <div class="footer-social" style="flex: 1; min-width: 250px;">
+            <h4 style="color: #fff; font-size: 18px; margin-bottom: 15px;" data-i18n="footer.social">تابعنا على منصات التواصل</h4>
+            <div style="display: flex; gap: 15px; font-size: 20px;">
+                <a href="https://wa.me/905364391849" target="_blank" title="WhatsApp" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://instagram.com" target="_blank" title="Instagram" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me" target="_blank" title="Telegram" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://facebook.com" target="_blank" title="Facebook" style="color: #fff; background: rgba(124, 58, 237, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s;"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+        </div>
+
+    </div>  
+    
+    <div class="footer-bottom" style="text-align: center; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; color: #888; font-size: 13px;">  
+        <p>© 2026 Nexa Creative. <span data-i18n="footer.rights">جميع الحقوق محفوظة.</span></p>  
+    </div>  
+</footer>
+
+<!-- Nexa Creative AI -->
+<button class="ai-fab magnetic" id="aiFab" aria-label="Nexa Creative AI"><i class="fa-solid fa-wand-magic-sparkles"></i><span>NEXA AI</span></button>
+<aside class="ai-panel" id="aiPanel" aria-hidden="true">
+    <div class="ai-head"><div><strong>NEXA AI</strong><small data-i18n="ai.subtitle">مساعد إبداعي سريع</small></div><button id="aiClose">&times;</button></div>
+    <div class="ai-messages" id="aiMessages"><div class="ai-bubble bot" data-i18n="ai.welcome">اكتب فكرتك وسأقترح لك الاتجاه البصري والخدمات المناسبة.</div></div>
+    <div class="ai-suggestions">
+        <button data-prompt="أريد هوية بصرية لمطعم عصري">مطعم</button>
+        <button data-prompt="أريد هوية لمتجر أزياء">أزياء</button>
+        <button data-prompt="أريد موقعاً احترافياً لشركتي">موقع</button>
+    </div>
+    <form id="aiForm"><input id="aiInput" autocomplete="off" placeholder="اكتب فكرتك..." data-i18n-placeholder="ai.placeholder"><button><i class="fa-solid fa-paper-plane"></i></button></form>
+</aside>
+
+<!-- Case Study Modal -->
+<div class="case-modal" id="caseModal" aria-hidden="true">
+    <div class="case-modal-inner">
+        <button class="case-close" id="caseClose">&times;</button>
+        <div class="case-image"><img id="caseImage" src="" alt=""></div>
+        <div class="case-content"><span id="caseCategory" class="eyebrow"></span><h3 id="caseTitle"></h3><p data-i18n="case.desc">مشروع مختار من أعمال Nexa Creative، قابل للتوسع إلى دراسة حالة كاملة.</p><div class="case-tags"><span>Strategy</span><span>Design</span><span>Delivery</span></div><a href="#project" class="premium-btn primary magnetic" data-i18n="case.cta">أريد مشروعاً مشابهاً</a></div>
+    </div>
+</div>
+
+<!-- النافذة المنبثقة -->  
+<div id="glassModal" class="glass-modal">  
+    <div class="glass-modal-content">  
+        <button class="close-modal" onclick="closeGlassModal()">&times;</button>  
+        <div id="lightboxView" class="modal-view">  
+            <div class="modal-img-container"><img id="modalImg" src="" alt="معاينة"></div>  
+            <div class="modal-details">  
+                <h3 id="modalTitle">اسم التصميم</h3>  
+                <button class="btn-modal-order" onclick="switchToOrderView()">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.order_this">اطلب تصميم مشابه الآن</span>  
+                </button>  
+            </div>  
+        </div>  
+        <div id="orderView" class="modal-view" style="display: none;">  
+            <h3 data-i18n="modal.order_title">طلب تصميم سريع</h3>  
+            <p id="orderProjectName" class="order-subtitle"></p>  
+            <form id="whatsappForm" onsubmit="sendWhatsAppOrder(event)">  
+                <div class="input-group">  
+                    <label data-i18n="modal.name_label">الاسم الكريم:</label>  
+                    <input type="text" id="custName" required>  
+                </div>  
+                <div class="input-group">  
+                    <label data-i18n="modal.details_label">تفاصيل إضافية (اختياري):</label>  
+                    <textarea id="custDetails" rows="3"></textarea>  
+                </div>  
+                <button type="submit" class="btn-submit-order">  
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="modal.send_btn">إرسال الطلب عبر الواتساب</span>  
+                </button>  
+            </form>  
+        </div>  
+    </div>  
+</div>  
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<!-- زر الواتساب العائم -->  
+<a href="https://wa.me/905364391849" class="whatsapp-float" target="_blank" title="مراسلة NEXA عبر واتساب">  
+    <i class="fa-brands fa-whatsapp"></i>  
+</a>  
+    
+<script src="script.js"></script>
+</body>  
+        </html>
+        
