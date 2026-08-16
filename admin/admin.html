@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <title>NEXA Creative — لوحة التحكم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <div class="brand-mark">N</div>
+            <h1>NEXA Creative</h1>
+            <p>لوحة الإدارة الخاصة</p>
+
+            <form id="loginForm" autocomplete="off">
+                <label for="username">اسم المستخدم</label>
+                <input id="username" type="text" placeholder="اسم المستخدم" required>
+
+                <label for="password">كلمة المرور</label>
+                <input id="password" type="password" placeholder="كلمة المرور" required>
+
+                <button type="submit">دخول إلى لوحة التحكم</button>
+                <div id="loginError" class="login-error"></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard" class="dashboard hidden">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-mark small">N</div>
+                <div>
+                    <strong>NEXA</strong>
+                    <span>Creative</span>
+                </div>
+            </div>
+
+            <nav>
+                <button class="nav-item active" data-section="overview">الرئيسية</button>
+                <button class="nav-item" data-section="content">محتوى الموقع</button>
+                <button class="nav-item" data-section="portfolio">معرض الأعمال</button>
+                <button class="nav-item" data-section="messages">الرسائل</button>
+                <button class="nav-item" data-section="settings">الإعدادات</button>
+            </nav>
+
+            <button id="logoutBtn" class="logout">تسجيل الخروج</button>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div>
+                    <span class="eyebrow">ADMIN PANEL</span>
+                    <h2 id="sectionTitle">الرئيسية</h2>
+                </div>
+                <a class="view-site" href="../" target="_blank" rel="noopener">عرض الموقع ↗</a>
+            </header>
+
+            <section id="overview" class="section active-section">
+                <div class="stats">
+                    <article class="stat-card">
+                        <span>زيارات الموقع</span>
+                        <strong id="visitsCount">0</strong>
+                        <small>إحصاء تجريبي — يحتاج Backend للبيانات الحقيقية</small>
+                    </article>
+                    <article class="stat-card">
+                        <span>الأعمال</span>
+                        <strong id="portfolioCount">0</strong>
+                        <small>محفوظة محلياً حالياً</small>
+                    </article>
+                    <article class="stat-card">
+                        <span>الرسائل</span>
+                        <strong id="messagesCount">0</strong>
+                        <small>محفوظة محلياً حالياً</small>
+                    </article>
+                </div>
+
+                <div class="panel">
+                    <h3>مرحباً بك في لوحة NEXA</h3>
+                    <p>هذه واجهة لوحة التحكم. يمكنك استخدامها لإدارة البيانات المحفوظة في المتصفح. لتصبح الإدارة مشتركة بين الأجهزة وآمنة فعلياً، يجب ربطها بقاعدة بيانات ونظام مصادقة على الخادم.</p>
+                </div>
+            </section>
+
+            <section id="content" class="section">
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h3>محتوى الموقع</h3>
+                            <p>تعديل البيانات الأساسية التي ستستخدمها الواجهة الأمامية.</p>
+                        </div>
+                        <button id="saveContent" class="primary">حفظ التغييرات</button>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field full">
+                            <label>العنوان الرئيسي</label>
+                            <input id="siteTitle" type="text">
+                        </div>
+                        <div class="field full">
+                            <label>الوصف</label>
+                            <textarea id="siteDescription" rows="5"></textarea>
+                        </div>
+                        <div class="field">
+                            <label>رقم الهاتف</label>
+                            <input id="phone" type="text">
+                        </div>
+                        <div class="field">
+                            <label>البريد الإلكتروني</label>
+                            <input id="email" type="email">
+                        </div>
+                        <div class="field">
+                            <label>رابط واتساب</label>
+                            <input id="whatsapp" type="url">
+                        </div>
+                        <div class="field">
+                            <label>رابط إنستغرام</label>
+                            <input id="instagram" type="url">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="portfolio" class="section">
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h3>معرض الأعمال</h3>
+                            <p>إضافة أعمال جديدة وإدارتها.</p>
+                        </div>
+                        <button id="addPortfolio" class="primary">+ إضافة عمل</button>
+                    </div>
+                    <div id="portfolioList" class="portfolio-list"></div>
+                </div>
+            </section>
+
+            <section id="messages" class="section">
+                <div class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h3>الرسائل</h3>
+                            <p>الرسائل المخزنة في لوحة التحكم.</p>
+                        </div>
+                        <button id="clearMessages" class="danger-outline">حذف الكل</button>
+                    </div>
+                    <div id="messagesList" class="messages-list"></div>
+                </div>
+            </section>
+
+            <section id="settings" class="section">
+                <div class="panel">
+                    <h3>الإعدادات</h3>
+                    <div class="settings-row">
+                        <div>
+                            <strong>الوضع الداكن للوحة</strong>
+                            <span>تغيير مظهر لوحة الإدارة فقط.</span>
+                        </div>
+                        <button id="themeBtn" class="secondary">تبديل الوضع</button>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <strong>مسح بيانات اللوحة المحلية</strong>
+                            <span>يحذف البيانات المحفوظة في هذا المتصفح فقط.</span>
+                        </div>
+                        <button id="clearData" class="danger">مسح البيانات</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="portfolioModal" class="modal hidden">
+        <div class="modal-card">
+            <button id="closeModal" class="modal-close">×</button>
+            <h3>إضافة عمل جديد</h3>
+            <label>اسم العمل</label>
+            <input id="projectName" type="text" placeholder="مثال: هوية بصرية">
+            <label>رابط الصورة</label>
+            <input id="projectImage" type="url" placeholder="https://...">
+            <label>التصنيف</label>
+            <input id="projectCategory" type="text" placeholder="Graphic Design">
+            <button id="saveProject" class="primary full-btn">حفظ العمل</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="admin.js"></script>
+</body>
+</html>
